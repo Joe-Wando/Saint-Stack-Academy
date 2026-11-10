@@ -16,3 +16,13 @@ saint-stack-cours-l1-l2/
 saint-stack-cours-l1-l2.zip
 lot1-L1-S1/
 lot1-L1-S1.zip
+
+# Consignes de travail (prompts), jamais versionnées
+PROMPT-*.md
+PROMPT*.md
+
+# Fichiers d'éditeur et de système
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
