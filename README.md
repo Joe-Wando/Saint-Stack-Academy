@@ -41,7 +41,14 @@ docker compose up -d --build
 | Admin | tous les cours, y compris les cours privés | Accueil, Licence, Parcours, Catalogue, Mes cours, Statistiques |
 | Apprenant | tous les cours publics | Accueil (son niveau), Licence, Parcours, Catalogue, Mon profil |
 
-Les statistiques de l'admin sont agrégées et anonymes : aucune liste nominative d'apprenants.
+L'admin dispose d'une section **Administration** (`/admin`) : tableau de bord, utilisateurs (avec leur photo et leur avancement), fiche de chaque compte (suspension, rôle, vérification, suppression), statistiques des cours, messages reçus et « Mes cours ». Chaque action sur un compte est enregistrée dans un journal. C'est annoncé aux apprenants dans la page `/confidentialite` (loi sénégalaise n° 2008-12), qu'ils acceptent à l'inscription.
+
+## Profil, photos et contact
+
+- **Profil** (`/profil`) : l'évolution de chacun (activité sur 12 semaines, quiz, compétences, jalons, notes), ses informations et sa photo, la sécurité du compte (mot de passe, adresse e-mail, export de ses données en JSON, suppression).
+- **Photos de profil** : JPEG, PNG ou WebP de 2 Mo au plus, vérifiées par leur contenu, recadrées en 512 × 512 et converties en WebP sans métadonnées. Elles sont stockées dans le volume Docker `uploads` (`UPLOADS_DIR`, par défaut `/data/uploads`) : un `docker compose down` ne les efface pas, contrairement à `docker compose down -v`.
+- **Contact** (`/contact`) : les coordonnées affichées se modifient dans `web/src/lib/contact.ts`. Les messages arrivent dans `/admin/messages`, et en copie par e-mail si le SMTP est configuré.
+- **Recharger les cours** : après avoir modifié `content/`, le bouton « Recharger les cours » de `/admin/cours` relit les fichiers sans redémarrer l'API.
 
 ## Ajouter ou modifier un cours
 
