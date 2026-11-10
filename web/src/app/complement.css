@@ -209,3 +209,15 @@ input.sr:focus-visible + * , label.btn:has(+ input.sr:focus-visible) { outline: 
 .bienvenue-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .bienvenue-nav .btn.primary { margin-left: auto; }
 .photo-reglage { border-radius: 50%; object-fit: cover; }
+
+/* Coloration syntaxique (rehype-highlight) sur le fond sombre des blocs de code.
+   Toutes les couleurs dépassent 7:1 sur #1D1B2E. */
+.hljs { color: #EDEBFA; background: transparent; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-section, .hljs-name { color: #C9BDFF; }
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-meta .hljs-string, .hljs-template-tag { color: #A6E3B8; }
+.hljs-number, .hljs-symbol, .hljs-bullet, .hljs-attr, .hljs-attribute, .hljs-variable, .hljs-template-variable { color: #F7C98A; }
+.hljs-comment, .hljs-quote, .hljs-deletion { color: #A9A6C4; font-style: italic; }
+.hljs-title, .hljs-title.function_, .hljs-function .hljs-title, .hljs-selector-id, .hljs-selector-class { color: #93CCFF; }
+.hljs-type, .hljs-built_in, .hljs-class .hljs-title, .hljs-title.class_, .hljs-meta, .hljs-params { color: #F5ABCB; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 700; }

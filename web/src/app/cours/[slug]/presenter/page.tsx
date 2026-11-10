@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { plugins } from '@/components/Markdown';
 import Shell from '@/components/Shell';
 import { api, capitale, Cours, dureeH } from '@/lib/api';
 import { Diapositive, illustration, infoDomaine, plan, styleDomaine } from '@/lib/domaines';
@@ -35,7 +35,7 @@ function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n:
   } else if (d.type === 'contenu') {
     surtitre = d.titre;
     titre = d.sousTitre ?? d.titre;
-    corps = <ReactMarkdown remarkPlugins={[remarkGfm]}>{d.blocs.join('\n\n')}</ReactMarkdown>;
+    corps = <ReactMarkdown {...plugins}>{d.blocs.join('\n\n')}</ReactMarkdown>;
   } else if (d.type === 'question') {
     surtitre = `Quiz · question ${d.numero} sur ${d.total}`;
     titre = 'À toi de répondre';

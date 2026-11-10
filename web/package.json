@@ -8,12 +8,14 @@
     "start": "next start -p 3000"
   },
   "dependencies": {
+    "highlight.js": "11.11.2",
     "next": "15.5.29",
     "react": "19.1.10",
     "react-dom": "19.1.10",
     "react-is": "19.1.1",
     "react-markdown": "10.1.0",
     "recharts": "3.9.2",
+    "rehype-highlight": "7.0.2",
     "remark-gfm": "4.0.1"
   },
   "devDependencies": {

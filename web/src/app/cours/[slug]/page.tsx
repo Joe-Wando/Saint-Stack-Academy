@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import Shell from '@/components/Shell';
 import Quiz from '@/components/Quiz';
+import Markdown from '@/components/Markdown';
 import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
 import { ancreUe } from '@/lib/licence';
 import { chapitres, estCorrection, illustration, infoDomaine, styleDomaine } from '@/lib/domaines';
@@ -33,9 +32,6 @@ function parcoursDOrigine() {
   try { return sessionStorage.getItem('ssa-parcours') ?? ''; } catch { return ''; }
 }
 
-function Markdown({ texte }: { texte: string }) {
-  return <div className="prose"><ReactMarkdown remarkPlugins={[remarkGfm]}>{texte}</ReactMarkdown></div>;
-}
 
 function Contenu({ slug }: { slug: string }) {
   const [cours, setCours] = useState<Cours | null>(null);

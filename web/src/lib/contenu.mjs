@@ -3,6 +3,15 @@
 
 /** Les domaines du programme, avec leurs couleurs et leur description. */
 export const DOMAINES = [
+  // Fondamentaux de L1 et L2
+  { cle: 'programmation', nom: 'Programmation', noms: ['Programmation'], fond: '#EDE7FB', texte: '#4A2E8F', accent: '#6B4BC8',
+    description: 'Langage C, structures de données, Java et Python : apprendre à programmer et à concevoir.' },
+  { cle: 'mathematiques', nom: 'Mathématiques', noms: ['Mathématiques'], fond: '#E5EEFD', texte: '#163E7A', accent: '#2F64C0',
+    description: 'Logique, ensembles, algèbre de Boole, arithmétique et dénombrement pour l’informatique.' },
+  { cle: 'materiel', nom: 'Matériel et architecture', noms: ['Matériel et architecture'], fond: '#E0F4F1', texte: '#0B5148', accent: '#16857A',
+    description: 'Binaire, composants, montage, diagnostic et maintenance des ordinateurs.' },
+  { cle: 'competences', nom: 'Métiers et compétences', noms: ['Métiers et compétences'], fond: '#FCEBDD', texte: '#7A3A0C', accent: '#B85C1A',
+    description: 'Métiers, communication, anglais, bureautique, stage et soutenance.' },
   { cle: 'systemes', nom: 'Systèmes', noms: ['Systèmes', 'Systèmes et outils'], fond: '#E1F5EE', texte: '#085041', accent: '#0F6E56',
     description: 'Linux, réseaux, Windows Server, Active Directory et scripts : le socle de toute infrastructure.' },
   { cle: 'devops', nom: 'DevOps', noms: ['DevOps'], fond: '#EEEDFE', texte: '#3C3489', accent: '#534AB7',
@@ -23,7 +32,10 @@ export const DOMAINES = [
     description: 'AWS et les services gérés : héberger et faire grandir ses applications.' },
 ];
 
-export const ORDRE_DOMAINES = ['systemes', 'devops', 'tests', 'securite', 'projet', 'web', 'bdd', 'data', 'cloud'];
+export const ORDRE_DOMAINES = [
+  'programmation', 'mathematiques', 'materiel', 'competences', // les fondamentaux de L1, en tête
+  'systemes', 'devops', 'tests', 'securite', 'projet', 'web', 'bdd', 'data', 'cloud',
+];
 
 const sansAccent = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 
