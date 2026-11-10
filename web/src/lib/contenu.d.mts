@@ -14,3 +14,9 @@ export function estCorrection(titre: string): boolean;
 export function blocs(corps: string): string[];
 export function poidsBloc(bloc: string): number;
 export function diapos(chapitre: Chapitre, lignesMax?: number): Diapo[];
+export type Diapositive =
+  | { type: 'couverture' }
+  | { type: 'objectifs'; objectifs: string[] }
+  | ({ type: 'contenu' } & Diapo)
+  | { type: 'question'; numero: number; total: number; question: string; choix: string[] };
+export function plan(cours: { titre: string; domaine: string; contenu: string; objectifs?: string[]; quiz?: { question: string; choix: string[] }[] }): Diapositive[];

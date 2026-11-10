@@ -122,3 +122,18 @@ export function diapos(chapitre, lignesMax = LIGNES_PAR_DIAPO) {
   }
   return res.filter((d) => d.blocs.length || d.sousTitre).map(({ titre, sousTitre, blocs: bl }) => ({ titre, sousTitre, blocs: bl }));
 }
+
+/**
+ * Plan complet d'une présentation, identique à l'écran et dans le PowerPoint :
+ * couverture, objectifs, diapositives de contenu (sans les corrections), une diapositive par question du quiz.
+ * `cours` : { titre, domaine, contenu, objectifs[], quiz[{ question, choix[] }] }.
+ */
+export function plan(cours) {
+  const res = [{ type: 'couverture' }, { type: 'objectifs', objectifs: cours.objectifs ?? [] }];
+  for (const ch of chapitres(cours.contenu)) {
+    if (estCorrection(ch.titre)) continue;
+    for (const d of diapos(ch)) res.push({ type: 'contenu', ...d });
+  }
+  (cours.quiz ?? []).forEach((q, i) => res.push({ type: 'question', numero: i + 1, total: cours.quiz.length, question: q.question, choix: q.choix }));
+  return res;
+}
