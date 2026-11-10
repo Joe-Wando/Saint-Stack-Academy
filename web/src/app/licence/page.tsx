@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ShellOuvert } from '@/components/Shell';
+import { Souligne } from '@/components/Decor';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { slugsDe } from '@/lib/licence';
@@ -19,7 +20,7 @@ function Contenu({ connecte }: { connecte: boolean }) {
     <>
       <section className="hero">
         <p className="eyebrow">Licence</p>
-        <h1>La licence, semestre par semestre</h1>
+        <h1>La licence, <Souligne>semestre par semestre</Souligne></h1>
         <p className="muted">Chaque niveau est découpé en semestres, puis en unités d’enseignement (UE). Les cours sont rangés dans l’ordre conseillé.</p>
       </section>
       <div className="grandes-cartes">

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { CSSProperties } from 'react';
 import Shell from '@/components/Shell';
+import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
 import { api, capitale, dureeH, indexer, libelleNiveau, MonNiveau, pourcent, Progression, ResumeCours, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
@@ -48,7 +49,7 @@ function Contenu({ u }: { u: Utilisateur }) {
   return (
     <>
       <section className="bonjour">
-        <h1>Bonjour {u.nom.split(' ')[0]}</h1>
+        <h1>Bonjour <Souligne>{u.nom.split(' ')[0]}</Souligne></h1>
         <p className="date">{libelleNiveau(u, mon.option?.titre)}{u.etablissement ? ` · ${u.etablissement}` : ''}</p>
       </section>
 

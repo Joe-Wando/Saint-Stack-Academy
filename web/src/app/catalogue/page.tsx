@@ -2,6 +2,7 @@
 
 import { CSSProperties, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
+import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
 import { api, capitale, DIFFICULTES, indexer, pourcent, progressionSiConnecte, ResumeCours } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
@@ -32,7 +33,7 @@ function Contenu({ connecte }: { connecte: boolean }) {
     <>
       <section className="hero">
         <p className="eyebrow">Catalogue</p>
-        <h1>Les cours, domaine par domaine</h1>
+        <h1>Les cours, <Souligne>domaine par domaine</Souligne></h1>
         <p className="muted">{tous.length} cours répartis en {nbDomaines} domaines. Chaque cours se lit une notion à la fois.</p>
       </section>
 

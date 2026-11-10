@@ -7,6 +7,7 @@ import EnTetePublic from '@/components/EnTetePublic';
 import PiedDePage from '@/components/PiedDePage';
 import CarteCours from '@/components/CarteCours';
 import PhotoFondateur from '@/components/PhotoFondateur';
+import { Macaron, Souligne, Vague } from '@/components/Decor';
 import { api, Referentiel, ResumeCours, session } from '@/lib/api';
 import { infoDomaine } from '@/lib/domaines';
 import { CONTACT } from '@/lib/contact';
@@ -58,11 +59,11 @@ export default function AccueilPublic() {
           <div className="hero-accueil-in">
             <div className="hero-texte">
               <p className="eyebrow">Plateforme d’apprentissage en informatique</p>
-              <h1>Apprends l’informatique à ton rythme, de la L1 aux métiers.</h1>
+              <h1>Apprends l’informatique <Souligne>à ton rythme</Souligne>, de la L1 aux métiers.</h1>
               <p className="hero-sous">Des cours clairs, une notion à la fois, avec exercices corrigés, quiz et suivi de ta progression.</p>
               <div className="bandeau-actions">
-                <Link href="/inscription" className="btn primary">Commencer gratuitement</Link>
-                <Link href="/catalogue" className="btn">Voir les cours</Link>
+                <Link href="/inscription" className="btn soleil">Commencer gratuitement</Link>
+                <Link href="/catalogue" className="btn contour-clair">Voir les cours</Link>
               </div>
               {ref && (
                 <dl className="hero-chiffres">
@@ -84,7 +85,9 @@ export default function AccueilPublic() {
                 <div className="bar sm"><span style={{ width: '37.5%' }} /></div>
               </div>
             </div>
+            <Macaron className="hero-macaron">Gratuit, à ton rythme</Macaron>
           </div>
+          <Vague />
         </section>
 
         <div className="page">
@@ -119,14 +122,14 @@ export default function AccueilPublic() {
           {apercu.length > 0 && (
             <section aria-labelledby="t-apercu">
               <div className="section-head"><h2 id="t-apercu" className="titre-section" style={{ margin: 0 }}>Un aperçu du catalogue</h2><Link href="/catalogue">Voir tout le catalogue →</Link></div>
-              <div className="grille">{apercu.map((c) => <CarteCours key={c.slug} cours={c} anonyme />)}</div>
+              <div className="grille scotch">{apercu.map((c) => <CarteCours key={c.slug} cours={c} anonyme />)}</div>
             </section>
           )}
 
           <section className="appel">
             <h2>Prêt à commencer ?</h2>
             <p>L’inscription est gratuite. Indique ton niveau, et tes cours recommandés t’attendent.</p>
-            <Link href="/inscription" className="btn primary">Créer mon compte</Link>
+            <Link href="/inscription" className="btn soleil">Créer mon compte</Link>
           </section>
         </div>
       </main>

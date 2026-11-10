@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
+import { Souligne } from '@/components/Decor';
 import Onglets from '@/components/Onglets';
 import CarteCertification, { TYPES_CERTIF } from '@/components/CarteCertification';
 import { api, Certifications, Referentiel, Utilisateur } from '@/lib/api';
@@ -28,7 +29,7 @@ function Contenu({ u }: { u: Utilisateur | null }) {
     <>
       <section className="hero">
         <p className="eyebrow">Certifications</p>
-        <h1>Les certifications à viser, niveau par niveau</h1>
+        <h1>Les certifications à viser, <Souligne>niveau par niveau</Souligne></h1>
         <p className="muted">Des badges gratuits pour valider les bases, puis des certifications reconnues par les recruteurs.</p>
       </section>
 

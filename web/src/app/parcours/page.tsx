@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ShellOuvert } from '@/components/Shell';
+import { Souligne } from '@/components/Decor';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
@@ -24,7 +25,7 @@ function Contenu() {
     <>
       <section className="hero">
         <p className="eyebrow">Parcours métiers</p>
-        <h1>Vise un métier, cours après cours</h1>
+        <h1>Vise un <Souligne>métier</Souligne>, cours après cours</h1>
         <p className="muted">Chaque parcours est une suite de cours dans l’ordre conseillé. Un même cours peut servir à plusieurs parcours.</p>
       </section>
       <div className="grandes-cartes">

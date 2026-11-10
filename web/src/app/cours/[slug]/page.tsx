@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Shell from '@/components/Shell';
+import { Vague } from '@/components/Decor';
 import Quiz from '@/components/Quiz';
 import Markdown from '@/components/Markdown';
 import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
@@ -151,6 +152,7 @@ function Contenu({ slug }: { slug: string }) {
           </div>
           <div className="banniere-img"><img src={illustration(cours.domaine)} alt="" width={960} height={540} /></div>
         </div>
+        <Vague />
       </header>
 
       <div className="page page-cours">
