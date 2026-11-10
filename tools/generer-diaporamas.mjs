@@ -1,5 +1,5 @@
 // Génère un PowerPoint 16:9 par cours : web/public/diaporamas/<slug>.pptx
-// Utilisation : npm run diaporamas            (les 63 cours)
+// Utilisation : npm run diaporamas            (tous les cours publics)
 //               node tools/generer-diaporamas.mjs g01-1-terminal-linux s04-2-sql-fenetres-cte
 //               node tools/generer-diaporamas.mjs --apercu <dossier> <slug…>   (aperçus PNG de la mise en page)
 //
@@ -20,7 +20,8 @@ const SORTIE = path.join(RACINE, 'web/public/diaporamas');
 const ILLUS = path.join(RACINE, 'web/public/illustrations');
 
 const AUTEUR = 'Olivier Jonathan DIPO WANDO';
-const PISTES = { groupe: 'Séance de groupe', solo: 'Parcours solo', complement: 'Complément' };
+const dureeH = (m) => { const h = Math.floor(m / 60), r = m % 60; return h ? `${h} h${r ? ` ${String(r).padStart(2, '0')}` : ''}` : `${r} min`; };
+const capitale = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const LETTRES = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 // ---------------------------------------------------------------------------
@@ -398,11 +399,11 @@ async function genererPptx(cours, pages, fichier) {
       const hT = hauteurLignes(lt.length, 36);
       const hTotal = 0.35 + 0.25 + hT + 0.25 + 0.35 + 0.35 + 0.4;
       let y = Math.max(0.6, (H - hTotal) / 2);
-      slide.addText(`${PISTES[cours.piste] ?? cours.piste} · Semaine ${cours.semaine}`.toUpperCase(), { ...base(T.sur, { bold: true, color: accent, charSpacing: 1.5 }), x, y, w: wTxt, h: 0.3 });
+      slide.addText(dom.nom.toUpperCase(), { ...base(T.sur, { bold: true, color: accent, charSpacing: 1.5 }), x, y, w: wTxt, h: 0.3 });
       y += 0.55;
       slide.addText(cours.titre, { ...base(36, { bold: true, color: hex(dom.texte) }), x, y, w: wTxt, h: hT });
       y += hT + 0.25;
-      slide.addText(`${dom.nom} · ${cours.duree} min · niveau ${cours.niveau}`, { ...base(T.corps, { color: hex(dom.texte) }), x, y, w: wTxt, h: 0.32 });
+      slide.addText(`${dureeH(Number(cours.duree) || 120)} · ${capitale(String(cours.difficulte ?? cours.niveau ?? 'bases'))}`, { ...base(T.corps, { color: hex(dom.texte) }), x, y, w: wTxt, h: 0.32 });
       y += 0.6;
       slide.addShape('line', { x, y, w: 1.2, h: 0, line: { color: hex(dom.texte), width: 1.5 } });
       slide.addText(AUTEUR, { ...base(14, { bold: true, color: hex(dom.texte) }), x, y: y + 0.15, w: wTxt, h: 0.3 });
@@ -476,9 +477,16 @@ if (!fichiers.length) { console.error('Aucun cours trouvé.'); process.exit(1); 
 fs.mkdirSync(SORTIE, { recursive: true });
 if (!Object.keys(polices).length) console.warn('Polices Calibri/Consolas introuvables : mesure du texte par estimation.');
 
-let totalDiapos = 0, debordements = 0;
+let totalDiapos = 0, debordements = 0, prives = 0, produits = 0;
 for (const f of fichiers) {
   const { data, content } = matter(fs.readFileSync(path.join(COURS, f), 'utf8'));
+  // Les cours privés ne sont pas publiés : pas de PowerPoint (et on retire un ancien fichier).
+  if (data.visibilite === 'prive') {
+    const ancien = path.join(SORTIE, `${data.slug ?? f.replace(/.md$/, '')}.pptx`);
+    if (fs.existsSync(ancien)) fs.unlinkSync(ancien);
+    prives++;
+    continue;
+  }
   const cours = { ...data, slug: data.slug ?? f.replace(/\.md$/, ''), contenu: content, objectifs: data.objectifs ?? [], quiz: data.quiz ?? [] };
   const pages = paginer(cours);
   // contrôle : aucun élément ne doit descendre sous la limite du contenu
@@ -489,6 +497,7 @@ for (const f of fichiers) {
   await genererPptx(cours, pages, path.join(SORTIE, `${cours.slug}.pptx`));
   if (apercu) pages.forEach((p, k) => fs.writeFileSync(path.join(apercu, `${cours.slug}-${String(k + 1).padStart(2, '0')}.png`), new Resvg(apercuSvg(cours, p, k, pages.length), { font: { loadSystemFonts: true } }).render().asPng()));
   totalDiapos += pages.length;
+  produits++;
   console.log(`${cours.slug}.pptx : ${pages.length} diapositives`);
 }
-console.log(`\n${fichiers.length} fichiers PowerPoint, ${totalDiapos} diapositives au total, dans web/public/diaporamas/.${debordements ? ` ${debordements} débordement(s) signalé(s).` : ''}`);
+console.log(`\n${produits} fichiers PowerPoint (${prives} cours privé${prives > 1 ? 's' : ''} ignoré${prives > 1 ? 's' : ''}), ${totalDiapos} diapositives au total, dans web/public/diaporamas/.${debordements ? ` ${debordements} débordement(s) signalé(s).` : ''}`);
