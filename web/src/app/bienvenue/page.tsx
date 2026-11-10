@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import Shell from '@/components/Shell';
@@ -26,7 +25,9 @@ function Icone({ n }: { n: number }) {
 
 function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) {
   const router = useRouter();
-  const [ecran, setEcran] = useState(0);
+  // L'écran en cours est gardé pendant la session : un retour arrière ramène au même écran.
+  const [ecran, setEcranBrut] = useState(() => { try { return Number(sessionStorage.getItem('ssa-bienvenue-ecran')) || 0; } catch { return 0; } });
+  const setEcran = (f: (x: number) => number) => setEcranBrut((x) => { const n = f(x); try { sessionStorage.setItem('ssa-bienvenue-ecran', String(n)); } catch { /* stockage indisponible */ } return n; });
   const [mon, setMon] = useState<MonNiveau | null>(null);
   const [niveau, setNiveau] = useState<Niveau | ''>(u.niveau ?? '');
   const [option, setOption] = useState(u.optionL3 ?? '');
@@ -44,6 +45,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) 
       const r = await api<{ jeton: string; utilisateur: Utilisateur }>('/auth/moi', { method: 'PATCH', body: JSON.stringify({ bienvenueVue: true }) });
       if (session()) enregistrerSession({ jeton: r.jeton, utilisateur: { ...r.utilisateur, bienvenueVue: true } });
     } catch { /* on continue quand même */ }
+    try { sessionStorage.removeItem('ssa-bienvenue-ecran'); } catch { /* stockage indisponible */ }
     router.replace(vers);
   }
 
@@ -143,7 +145,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) 
                 <div className="grille-certifs">{certifs.map((e) => <CarteCertification key={e.nom} e={e} />)}</div>
               </>
             ) : <p className="muted">Choisis un niveau pour voir les certifications adaptées.</p>}
-            <p><Link href="/certifications">Voir toutes les certifications</Link></p>
+            <p><a href="/certifications" target="_blank" rel="noopener">Voir toutes les certifications<span className="sr"> (nouvel onglet)</span> ↗</a></p>
           </>
         )}
 
