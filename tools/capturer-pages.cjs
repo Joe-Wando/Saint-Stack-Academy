@@ -39,6 +39,8 @@ function trouver(rep) {
       await page.goto(t.url, { waitUntil: 'networkidle0', timeout: 45000 });
       // Attendre la fin des « Chargement… » des pages client.
       await page.waitForFunction(() => !/Chargement…/.test(document.body.innerText), { timeout: 15000 }).catch(() => {});
+      // Maquette : CSS ajouté à la page avant la capture, sans toucher au site.
+      if (t.css) await page.addStyleTag({ content: t.css });
       await page.evaluate(() => document.fonts && document.fonts.ready);
       if (t.defiler) await page.evaluate((y) => window.scrollTo(0, y), t.defiler);
       await new Promise((r) => setTimeout(r, 400));
