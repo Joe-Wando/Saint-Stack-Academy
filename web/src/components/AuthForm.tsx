@@ -26,9 +26,14 @@ export default function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }
 
   return (
     <main className="auth">
+      <aside className="auth-art">
+        <img src="/illustrations/devops.svg" alt="" width={960} height={540} />
+        <p>Apprendre les outils du métier, une notion à la fois, ensemble.</p>
+      </aside>
+      <div className="auth-col">
       <div className="auth-card">
-        <div className="brand big"><span className="logo">SS</span>Saint Stack Academy</div>
-        <h1>{mode === 'connexion' ? 'Connexion' : 'Créer mon compte'}</h1>
+        <div className="brand"><span className="logo" aria-hidden="true">SS</span>Saint Stack Academy</div>
+        <h1>{mode === 'connexion' ? 'Bon retour parmi nous' : 'Créer ton compte'}</h1>
         <form onSubmit={soumettre} className="form">
           {mode === 'inscription' && (
             <label htmlFor="nom">Nom complet<input id="nom" name="nom" required autoComplete="name" /></label>
@@ -48,6 +53,7 @@ export default function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }
             ? <>Pas encore de compte ? <Link href="/inscription">Crée-le avec ton code d'invitation</Link></>
             : <>Déjà inscrit ? <Link href="/connexion">Connecte-toi</Link></>}
         </p>
+      </div>
       </div>
     </main>
   );
