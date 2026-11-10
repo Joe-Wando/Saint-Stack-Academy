@@ -1,12 +1,16 @@
 ---
 slug: s05-3-dbt
 titre: dbt, transformer les données en SQL comme du code
-piste: solo
-semaine: 5
-date: 2026-12-11
 domaine: Data
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 9 }
+ordre: 1
+prerequis_cours: [s04-2-sql-fenetres-cte]
+visibilite: public
 objectifs:
   - Expliquer la place de dbt dans une architecture ELT
   - Créer un projet dbt connecté à PostgreSQL et le configurer (profiles.yml, dbt_project.yml)

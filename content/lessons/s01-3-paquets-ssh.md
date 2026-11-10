@@ -1,12 +1,16 @@
 ---
 slug: s01-3-paquets-ssh
 titre: Linux, gestion des paquets, SSH et clés
-piste: solo
-semaine: 1
-date: 2026-11-13
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 4 }
+ordre: 3
+prerequis_cours: [s01-1-linux-droits]
+visibilite: public
 objectifs:
   - Installer, mettre à jour et supprimer des logiciels avec apt
   - Expliquer le rôle d'un dépôt de paquets et de sa signature

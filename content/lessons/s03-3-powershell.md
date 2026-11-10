@@ -1,12 +1,16 @@
 ---
 slug: s03-3-powershell
 titre: PowerShell, objets, pipeline et automatisation de l'administration
-piste: solo
-semaine: 3
-date: 2026-11-27
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 11 }
+ordre: 9
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer la différence fondamentale entre PowerShell (objets) et Bash (texte)
   - Trouver une commande et son aide avec Get-Command, Get-Help et Get-Member

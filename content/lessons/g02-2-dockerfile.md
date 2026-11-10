@@ -1,12 +1,16 @@
 ---
 slug: g02-2-dockerfile
 titre: Construire ses images avec un Dockerfile
-piste: groupe
-semaine: 2
-date: 2026-11-17
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S4, ue: "Virtualisation et cloud" }
+parcours:
+  - { parcours: devops, ordre: 5 }
+ordre: 2
+prerequis_cours: [g02-1-docker-images-conteneurs]
+visibilite: public
 objectifs:
   - Écrire un Dockerfile avec FROM, WORKDIR, COPY, RUN, ENV, EXPOSE, CMD
   - Construire une image avec docker build et la taguer

@@ -1,12 +1,16 @@
 ---
 slug: s04-1-sql-jointures-agregats
 titre: SQL pour la data, jointures et agrégats
-piste: solo
-semaine: 4
-date: 2026-12-01
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 3 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Créer une base d'exemple PostgreSQL et l'explorer
   - Combiner des tables avec INNER JOIN, LEFT JOIN et les jointures multiples

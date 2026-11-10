@@ -1,12 +1,16 @@
 ---
 slug: c01-windows-partages-ntfs
-titre: "Complément : partages réseau et droits NTFS sous Windows Server"
-piste: complement
-semaine: 3
-date: 2026-11-26
+titre: "Partages réseau et droits NTFS sous Windows Server"
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 12 }
+ordre: 8
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Distinguer les permissions de partage (SMB) et les permissions NTFS
   - Calculer les droits effectifs d'un utilisateur selon ses groupes

@@ -1,12 +1,16 @@
 ---
 slug: g03-3-gitlab-ci
 titre: GitLab CI/CD, stages, jobs, runners et registre
-piste: groupe
-semaine: 3
-date: 2026-11-26
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Intégration et déploiement continus", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 10 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Décrire l'organisation d'un pipeline GitLab (stages, jobs, runners)
   - Écrire un fichier .gitlab-ci.yml avec image, script, rules, cache et artifacts

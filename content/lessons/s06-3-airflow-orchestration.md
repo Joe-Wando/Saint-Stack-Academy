@@ -1,12 +1,16 @@
 ---
 slug: s06-3-airflow-orchestration
 titre: Airflow en pratique, orchestrer l'ETL et dbt de bout en bout
-piste: solo
-semaine: 6
-date: 2026-12-18
 domaine: Data
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 12 }
+ordre: 4
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Orchestrer dans un même DAG une extraction Python, un contrôle qualité et dbt
   - Gérer connexions, variables et secrets sans les écrire dans le code

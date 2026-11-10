@@ -1,12 +1,16 @@
 ---
 slug: c06-express-graphql
-titre: "Complément : Express en profondeur et introduction à GraphQL"
-piste: complement
-semaine: 6
-date: 2026-12-17
+titre: "Express en profondeur et introduction à GraphQL"
 domaine: Développement web
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S4, ue: "Développement back-end" }
+parcours:
+  - { parcours: web, ordre: 9 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Structurer une API Express (routeurs, middlewares, gestion centralisée des erreurs)
   - Valider les entrées avec un schéma (Zod) et documenter l'API (OpenAPI)

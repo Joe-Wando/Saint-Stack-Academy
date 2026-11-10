@@ -1,12 +1,16 @@
 ---
 slug: s04-3-python-pandas-matplotlib
 titre: Python pour la data, pandas et Matplotlib
-piste: solo
-semaine: 4
-date: 2026-12-04
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 6 }
+ordre: 4
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Créer un environnement Python isolé et un notebook Jupyter
   - Charger des données (CSV, base PostgreSQL) dans un DataFrame et les explorer

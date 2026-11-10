@@ -1,12 +1,16 @@
 ---
 slug: s01-1-linux-droits
 titre: Linux, utilisateurs, groupes et droits d'accès
-piste: solo
-semaine: 1
-date: 2026-11-10
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 2 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Lire la ligne de droits produite par ls -l
   - Modifier les droits avec chmod, en notation symbolique et en notation octale

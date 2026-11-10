@@ -1,12 +1,16 @@
 ---
 slug: c03-helm
-titre: "Complément : écrire son propre chart Helm"
-piste: complement
-semaine: 5
-date: 2026-12-07
+titre: "Écrire son propre chart Helm"
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 15 }
+ordre: 7
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Décrire la structure d'un chart (Chart.yaml, values.yaml, templates/)
   - Paramétrer des manifestes avec les gabarits Go (.Values, .Release, fonctions, conditions, boucles)

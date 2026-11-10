@@ -1,12 +1,17 @@
 ---
 slug: g07-2-sql-agregats-jointures
 titre: SQL, agrégats, GROUP BY et jointures
-piste: groupe
-semaine: 7
-date: 2026-12-22
 domaine: Bases de données
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
+parcours:
+  - { parcours: web, ordre: 11 }
+  - { parcours: data, ordre: 2 }
+ordre: 4
+prerequis_cours: [g07-1-sql-select]
+visibilite: public
 objectifs:
   - Calculer des statistiques avec COUNT, SUM, AVG, MIN et MAX
   - Regrouper avec GROUP BY et filtrer les groupes avec HAVING

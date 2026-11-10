@@ -1,12 +1,16 @@
 ---
 slug: g04-3-kubernetes-multi-services-helm
 titre: Kubernetes, application multi-services, stockage persistant et introduction à Helm
-piste: groupe
-semaine: 4
-date: 2026-12-03
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 14 }
+ordre: 5
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Déployer une application complète (base, API, frontend) dans un namespace
   - Rendre des données persistantes avec PersistentVolumeClaim et StatefulSet

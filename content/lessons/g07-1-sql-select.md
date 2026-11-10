@@ -1,12 +1,17 @@
 ---
 slug: g07-1-sql-select
 titre: SQL, interroger une base avec SELECT
-piste: groupe
-semaine: 7
-date: 2026-12-21
 domaine: Bases de données
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
+parcours:
+  - { parcours: web, ordre: 10 }
+  - { parcours: data, ordre: 1 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce qu'est une base de données relationnelle (tables, lignes, colonnes, clés)
   - Lancer PostgreSQL et s'y connecter avec psql ou un client graphique

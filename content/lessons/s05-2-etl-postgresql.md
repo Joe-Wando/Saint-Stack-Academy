@@ -1,12 +1,16 @@
 ---
 slug: s05-2-etl-postgresql
 titre: Construire un pipeline ETL en Python vers PostgreSQL
-piste: solo
-semaine: 5
-date: 2026-12-09
 domaine: Data
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 8 }
+ordre: 6
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Distinguer ETL et ELT et choisir l'un ou l'autre
   - Extraire des données depuis un CSV, une API et une base PostgreSQL

@@ -1,12 +1,17 @@
 ---
 slug: g02-4-docker-compose-hub
 titre: Docker Compose et Docker Hub
-piste: groupe
-semaine: 2
-date: 2026-11-20
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+  - { niveau: L3, semestre: S6, ue: "Livraison des applications", option: developpement-logiciel }
+parcours:
+  - { parcours: devops, ordre: 7 }
+ordre: 2
+prerequis_cours: [g02-3-docker-volumes-reseaux]
+visibilite: public
 objectifs:
   - Décrire une application multi-conteneurs dans un fichier compose.yaml
   - Lancer, arrêter, reconstruire et observer la pile avec docker compose

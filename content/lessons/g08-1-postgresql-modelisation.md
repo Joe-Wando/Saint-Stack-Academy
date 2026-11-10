@@ -1,12 +1,16 @@
 ---
 slug: g08-1-postgresql-modelisation
 titre: PostgreSQL, modéliser et normaliser une base de données
-piste: groupe
-semaine: 8
-date: 2026-12-28
 domaine: Bases de données
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
+parcours:
+  - { parcours: web, ordre: 12 }
+ordre: 5
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Passer d'un besoin métier à un modèle entité-association (entités, attributs, cardinalités)
   - Traduire le modèle en tables (clés primaires, étrangères, tables d'association)

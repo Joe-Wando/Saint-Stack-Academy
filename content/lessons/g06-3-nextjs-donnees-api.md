@@ -1,12 +1,16 @@
 ---
 slug: g06-3-nextjs-donnees-api
 titre: Next.js, données, Route Handlers et Server Actions
-piste: groupe
-semaine: 6
-date: 2026-12-17
 domaine: Développement web
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Développement web avancé", option: developpement-logiciel }
+parcours:
+  - { parcours: web, ordre: 8 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Charger des données dans un composant serveur avec async/await
   - Choisir entre rendu statique, dynamique et revalidation (cache)

@@ -1,12 +1,16 @@
 ---
 slug: g03-4-jenkins
 titre: Jenkins, pipelines déclaratifs et intégration avec GitHub
-piste: groupe
-semaine: 3
-date: 2026-11-27
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Intégration et déploiement continus", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 11 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Installer Jenkins avec Docker et le configurer au premier lancement
   - Écrire un Jenkinsfile déclaratif (agent, stages, steps, post)

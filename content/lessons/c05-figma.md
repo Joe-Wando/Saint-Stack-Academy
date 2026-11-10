@@ -1,12 +1,16 @@
 ---
 slug: c05-figma
-titre: "Complément : maquetter une interface avec Figma"
-piste: complement
-semaine: 6
-date: 2026-12-14
+titre: "Maquetter une interface avec Figma"
 domaine: Développement web
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L2, semestre: S3, ue: "Développement front-end et infographie" }
+parcours:
+  - { parcours: web, ordre: 4 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Situer la maquette dans le cycle de conception (wireframe, maquette, prototype)
   - Maîtriser les bases de Figma (frames, formes, texte, calques, contraintes)

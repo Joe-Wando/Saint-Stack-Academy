@@ -1,12 +1,16 @@
 ---
 slug: s07-2-spark
 titre: Apache Spark, traitement distribué avec PySpark
-piste: solo
-semaine: 7
-date: 2026-12-23
 domaine: Data
 duree: 150
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 15 }
+ordre: 5
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer quand et pourquoi passer de pandas à un moteur distribué
   - Décrire l'architecture de Spark (driver, executors, partitions, cluster manager)

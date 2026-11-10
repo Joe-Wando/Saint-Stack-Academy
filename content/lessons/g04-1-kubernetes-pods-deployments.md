@@ -1,12 +1,16 @@
 ---
 slug: g04-1-kubernetes-pods-deployments
 titre: Kubernetes, architecture, Pods et Deployments
-piste: groupe
-semaine: 4
-date: 2026-11-30
 domaine: DevOps
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 12 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce qu'apporte un orchestrateur par rapport à Docker Compose
   - Décrire l'architecture d'un cluster (plan de contrôle, nœuds, kubelet)

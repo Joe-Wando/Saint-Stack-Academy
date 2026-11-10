@@ -1,12 +1,16 @@
 ---
 slug: s08-1-kafka-bigquery-snowflake
 titre: Découverte, Kafka, BigQuery et Snowflake
-piste: solo
-semaine: 8
-date: 2026-12-29
 domaine: Data
 duree: 150
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 16 }
+ordre: 6
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Distinguer traitement par lots (batch) et traitement en flux (streaming)
   - Décrire Kafka (topics, partitions, producteurs, consommateurs, groupes, offsets) et le faire tourner localement

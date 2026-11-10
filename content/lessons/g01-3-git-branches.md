@@ -1,12 +1,17 @@
 ---
 slug: g01-3-git-branches
 titre: Git, dépôts, commits, branches et fusion
-piste: groupe
-semaine: 1
-date: 2026-11-12
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
+parcours:
+  - { parcours: devops, ordre: 2 }
+  - { parcours: web, ordre: 2 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer les trois zones de Git, à savoir le répertoire de travail, l'index et le dépôt
   - Créer des commits atomiques avec un message conventionnel

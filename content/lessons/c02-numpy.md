@@ -1,12 +1,16 @@
 ---
 slug: c02-numpy
-titre: "Complément : NumPy, le calcul numérique en Python"
-piste: complement
-semaine: 4
-date: 2026-12-03
+titre: "NumPy, le calcul numérique en Python"
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 5 }
+ordre: 3
+prerequis_cours: [s04-3-python-pandas-matplotlib]
+visibilite: public
 objectifs:
   - Créer des tableaux NumPy et connaître leurs attributs (shape, dtype, ndim)
   - Indexer, découper et filtrer avec des masques booléens

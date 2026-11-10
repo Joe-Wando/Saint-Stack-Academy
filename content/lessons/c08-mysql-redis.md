@@ -1,12 +1,16 @@
 ---
 slug: c08-mysql-redis
-titre: "Complément : MySQL face à PostgreSQL, et Redis en profondeur"
-piste: complement
-semaine: 8
-date: 2026-12-28
+titre: "MySQL face à PostgreSQL, et Redis en profondeur"
 domaine: Bases de données
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Développement web avancé", option: developpement-logiciel }
+parcours:
+  - { parcours: data, ordre: 20 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Installer MySQL, créer une base et un utilisateur avec des droits limités
   - Repérer les différences de syntaxe et de comportement entre MySQL et PostgreSQL

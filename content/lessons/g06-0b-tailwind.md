@@ -1,12 +1,16 @@
 ---
 slug: g06-0b-tailwind
 titre: Tailwind CSS, styler avec des classes utilitaires
-piste: groupe
-semaine: 6
-date: 2026-12-13
 domaine: Développement web
 duree: 90
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Développement front-end et infographie" }
+parcours:
+  - { parcours: web, ordre: 5 }
+ordre: 2
+prerequis_cours: [g06-0a-react]
+visibilite: public
 objectifs:
   - Expliquer l'approche utilitaire de Tailwind et la comparer à Bootstrap
   - Installer Tailwind CSS 4 dans un projet Vite et React

@@ -1,12 +1,15 @@
 ---
 slug: g07-3-sql-sousrequetes-vues-fenetres
 titre: SQL, sous-requêtes, CTE, vues et fonctions de fenêtrage
-piste: groupe
-semaine: 7
-date: 2026-12-24
 domaine: Bases de données
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Bases de données avancées" }
+parcours: []
+ordre: 1
+prerequis_cours: [g07-2-sql-agregats-jointures]
+visibilite: public
 objectifs:
   - Écrire des sous-requêtes dans WHERE, FROM et SELECT, avec IN et EXISTS
   - Structurer une requête longue avec WITH (CTE)

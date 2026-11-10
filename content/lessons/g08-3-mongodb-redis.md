@@ -1,12 +1,16 @@
 ---
 slug: g08-3-mongodb-redis
 titre: NoSQL, MongoDB et Redis
-piste: groupe
-semaine: 8
-date: 2026-12-31
 domaine: Bases de données
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S5, ue: "Bases de données avancées" }
+parcours:
+  - { parcours: data, ordre: 19 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Situer les familles NoSQL (document, clé-valeur, colonnes, graphe) par rapport au relationnel
   - Manipuler des documents MongoDB (insertOne, find, updateOne, deleteOne) avec des filtres et des projections

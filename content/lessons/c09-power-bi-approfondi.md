@@ -1,12 +1,16 @@
 ---
 slug: c09-power-bi-approfondi
-titre: "Complément : Power BI approfondi, DAX avancé, performance et gouvernance"
-piste: complement
-semaine: 8
-date: 2026-12-31
+titre: "Power BI approfondi, DAX avancé, performance et gouvernance"
 domaine: Data
 duree: 150
-niveau: opérationnel
+difficulte: opérationnel
+licence:
+  - { niveau: L3, semestre: S6, ue: "Décisionnel et IA", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 14 }
+ordre: 3
+prerequis_cours: [s07-1-power-bi]
+visibilite: public
 objectifs:
   - Maîtriser contexte de ligne, contexte de filtre et transition de contexte
   - Écrire des mesures avancées avec variables, itérateurs (SUMX, RANKX) et manipulation du contexte

@@ -1,12 +1,17 @@
 ---
 slug: g03-2-github-actions-image
 titre: GitHub Actions, tests, matrice, secrets et publication d'une image Docker
-piste: groupe
-semaine: 3
-date: 2026-11-24
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Intégration et déploiement continus", option: reseaux-systemes-cloud }
+  - { niveau: L3, semestre: S6, ue: "Livraison des applications", option: developpement-logiciel }
+parcours:
+  - { parcours: devops, ordre: 9 }
+ordre: 1
+prerequis_cours: [g03-1-github-actions-workflow, g02-4-docker-compose-hub]
+visibilite: public
 objectifs:
   - Tester sur plusieurs versions avec une matrice
   - Enchaîner des jobs avec needs et partager des fichiers avec les artefacts

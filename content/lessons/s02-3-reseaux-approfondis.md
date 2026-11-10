@@ -1,12 +1,16 @@
 ---
 slug: s02-3-reseaux-approfondis
 titre: Réseaux approfondis, sous-réseaux, routage, pare-feu et diagnostic
-piste: solo
-semaine: 2
-date: 2026-11-20
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S4, ue: "Réseaux et sécurité" }
+parcours:
+  - { parcours: systemes, ordre: 8 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Découper un réseau en sous-réseaux avec la notation CIDR
   - Lire une table de routage et expliquer le rôle de la passerelle par défaut

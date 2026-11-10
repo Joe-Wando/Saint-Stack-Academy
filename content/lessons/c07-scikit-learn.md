@@ -1,12 +1,16 @@
 ---
 slug: c07-scikit-learn
-titre: "Complément : apprentissage supervisé avec scikit-learn"
-piste: complement
-semaine: 7
-date: 2026-12-21
+titre: "Apprentissage supervisé avec scikit-learn"
 domaine: Data
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Décisionnel et IA", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 17 }
+ordre: 1
+prerequis_cours: [s04-3-python-pandas-matplotlib]
+visibilite: public
 objectifs:
   - Distinguer régression et classification, et formuler un problème d'apprentissage supervisé
   - Séparer les données en apprentissage et test, et éviter la fuite de données

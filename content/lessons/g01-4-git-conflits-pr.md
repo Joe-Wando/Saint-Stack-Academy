@@ -1,12 +1,17 @@
 ---
 slug: g01-4-git-conflits-pr
 titre: Git, conflits, pull requests et revue de code
-piste: groupe
-semaine: 1
-date: 2026-11-13
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
+parcours:
+  - { parcours: devops, ordre: 3 }
+  - { parcours: web, ordre: 3 }
+ordre: 2
+prerequis_cours: [g01-3-git-branches]
+visibilite: public
 objectifs:
   - Expliquer pourquoi un conflit survient et lire ses marqueurs
   - Résoudre un conflit à la main puis terminer la fusion

@@ -1,12 +1,16 @@
 ---
 slug: s06-2-airflow-bases
 titre: Apache Airflow, les bases de l'orchestration
-piste: solo
-semaine: 6
-date: 2026-12-16
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 11 }
+ordre: 3
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce qu'est un orchestrateur et pourquoi cron ne suffit plus
   - Décrire l'architecture d'Airflow (scheduler, webserver, executor, base de métadonnées)

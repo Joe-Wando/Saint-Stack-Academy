@@ -1,12 +1,16 @@
 ---
 slug: g05-4-jest
 titre: Tests unitaires avec Jest
-piste: groupe
-semaine: 5
-date: 2026-12-11
 domaine: Qualité et tests
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
+parcours:
+  - { parcours: web, ordre: 14 }
+ordre: 3
+prerequis_cours: [g05-2-postman]
+visibilite: public
 objectifs:
   - Situer les tests unitaires dans la pyramide des tests
   - Écrire des tests Jest lisibles avec describe, test et expect (structure AAA)

@@ -1,12 +1,16 @@
 ---
 slug: g02-1-docker-images-conteneurs
 titre: Docker, images et conteneurs
-piste: groupe
-semaine: 2
-date: 2026-11-16
 domaine: DevOps
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L2, semestre: S4, ue: "Virtualisation et cloud" }
+parcours:
+  - { parcours: devops, ordre: 4 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer le problème que résout Docker (« ça marche sur ma machine »)
   - Distinguer une image d'un conteneur, et un conteneur d'une machine virtuelle

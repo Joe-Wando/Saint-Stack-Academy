@@ -1,12 +1,16 @@
 ---
 slug: g03-1-github-actions-workflow
 titre: Intégration continue avec GitHub Actions, premier workflow
-piste: groupe
-semaine: 3
-date: 2026-11-23
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
+parcours:
+  - { parcours: devops, ordre: 8 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer l'intégration continue (CI), la livraison continue et le déploiement continu (CD)
   - Décrire la structure d'un workflow GitHub Actions (événements, jobs, étapes, runners)

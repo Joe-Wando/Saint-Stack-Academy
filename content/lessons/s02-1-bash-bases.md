@@ -1,12 +1,16 @@
 ---
 slug: s02-1-bash-bases
 titre: Bash, variables, conditions, boucles et fonctions
-piste: solo
-semaine: 2
-date: 2026-11-17
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 5 }
+ordre: 4
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Écrire et exécuter un script Bash avec un shebang
   - Utiliser des variables, des arguments ($1, $@, $#) et la substitution de commande

@@ -1,12 +1,17 @@
 ---
 slug: g02-3-docker-volumes-reseaux
 titre: Docker, volumes, réseaux et dockerisation d'une API
-piste: groupe
-semaine: 2
-date: 2026-11-19
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+  - { niveau: L3, semestre: S6, ue: "Livraison des applications", option: developpement-logiciel }
+parcours:
+  - { parcours: devops, ordre: 6 }
+ordre: 1
+prerequis_cours: [g02-2-dockerfile]
+visibilite: public
 objectifs:
   - Rendre des données persistantes avec un volume nommé
   - Utiliser un bind mount pour développer sans reconstruire l'image

@@ -1,12 +1,16 @@
 ---
 slug: s06-1-dbt-tests-doc
 titre: dbt, tests, documentation, snapshots et intégration continue
-piste: solo
-semaine: 6
-date: 2026-12-15
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Pipelines et big data", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 10 }
+ordre: 2
+prerequis_cours: [s05-3-dbt]
+visibilite: public
 objectifs:
   - Déclarer les tests génériques (unique, not_null, accepted_values, relationships)
   - Écrire des tests singuliers et des tests unitaires de modèles

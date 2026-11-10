@@ -1,12 +1,16 @@
 ---
 slug: s05-1-modelisation-oltp-olap
 titre: Modélisation des données, OLTP, OLAP et schéma en étoile
-piste: solo
-semaine: 5
-date: 2026-12-08
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 7 }
+ordre: 5
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Distinguer un système transactionnel (OLTP) d'un système analytique (OLAP)
   - Expliquer le rôle d'un entrepôt de données et de l'architecture médaillon

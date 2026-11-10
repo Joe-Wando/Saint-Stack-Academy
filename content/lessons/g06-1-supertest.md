@@ -1,12 +1,16 @@
 ---
 slug: g06-1-supertest
 titre: Tests d'intégration d'API avec Supertest
-piste: groupe
-semaine: 6
-date: 2026-12-14
 domaine: Qualité et tests
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
+parcours:
+  - { parcours: web, ordre: 15 }
+ordre: 4
+prerequis_cours: [g05-4-jest, g05-2-postman]
+visibilite: public
 objectifs:
   - Distinguer test unitaire et test d'intégration
   - Rendre une application Express ou NestJS testable (séparer app et serveur)

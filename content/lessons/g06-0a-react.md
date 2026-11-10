@@ -1,12 +1,16 @@
 ---
 slug: g06-0a-react
 titre: React, composants, props, état et routes
-piste: groupe
-semaine: 6
-date: 2026-12-13
 domaine: Développement web
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S3, ue: "Développement front-end et infographie" }
+parcours:
+  - { parcours: web, ordre: 6 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce qu'est React, une bibliothèque, et le rôle du DOM virtuel
   - Créer un projet React et TypeScript avec Vite

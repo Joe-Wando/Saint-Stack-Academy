@@ -1,12 +1,16 @@
 ---
 slug: s03-2-active-directory-gpo
 titre: Active Directory, domaine, utilisateurs, groupes et stratégies de groupe
-piste: solo
-semaine: 3
-date: 2026-11-25
 domaine: Systèmes
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 10 }
+ordre: 7
+prerequis_cours: [s03-1-windows-dns-dhcp]
+visibilite: public
 objectifs:
   - Expliquer ce qu'est un annuaire et le rôle d'Active Directory Domain Services
   - Distinguer domaine, forêt, unité d'organisation, contrôleur de domaine

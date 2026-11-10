@@ -1,12 +1,16 @@
 ---
 slug: g06-2-nextjs-pages-routage
 titre: Next.js, pages, layouts et routage (App Router)
-piste: groupe
-semaine: 6
-date: 2026-12-15
 domaine: Développement web
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Développement web avancé", option: developpement-logiciel }
+parcours:
+  - { parcours: web, ordre: 7 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce que Next.js ajoute à React (rendu serveur, routage par fichiers, optimisations)
   - Créer un projet Next.js avec TypeScript et Tailwind

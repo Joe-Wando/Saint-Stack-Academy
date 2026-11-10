@@ -1,12 +1,16 @@
 ---
 slug: g08-2-postgresql-index-transactions
 titre: PostgreSQL, index, transactions et sauvegardes
-piste: groupe
-semaine: 8
-date: 2026-12-29
 domaine: Bases de données
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Bases de données avancées" }
+parcours:
+  - { parcours: data, ordre: 18 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Lire un plan d'exécution avec EXPLAIN ANALYZE
   - Créer les bons index (B-tree, composite, unique, partiel) et en connaître le coût

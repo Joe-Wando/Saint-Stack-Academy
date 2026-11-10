@@ -1,12 +1,16 @@
 ---
 slug: g04-2-kubernetes-services-config
 titre: Kubernetes, Services, Ingress, ConfigMaps et Secrets
-piste: groupe
-semaine: 4
-date: 2026-12-01
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 13 }
+ordre: 4
+prerequis_cours: [g04-1-kubernetes-pods-deployments]
+visibilite: public
 objectifs:
   - Exposer des Pods avec un Service (ClusterIP, NodePort, LoadBalancer)
   - Expliquer le rôle des labels et sélecteurs dans le routage du trafic

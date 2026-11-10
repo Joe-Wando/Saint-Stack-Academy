@@ -1,12 +1,16 @@
 ---
 slug: s04-2-sql-fenetres-cte
 titre: SQL avancé, CTE et fonctions de fenêtrage
-piste: solo
-semaine: 4
-date: 2026-12-02
 domaine: Data
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Ingénierie des données", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 4 }
+ordre: 2
+prerequis_cours: [s04-1-sql-jointures-agregats]
+visibilite: public
 objectifs:
   - Découper une requête complexe en étapes lisibles avec WITH (CTE)
   - Expliquer la différence entre un agrégat GROUP BY et une fonction de fenêtrage

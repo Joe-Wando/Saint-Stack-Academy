@@ -1,12 +1,17 @@
 ---
 slug: c04-ansible
-titre: "Complément : automatiser la configuration des serveurs avec Ansible"
-piste: complement
-semaine: 5
-date: 2026-12-10
+titre: "Automatiser la configuration des serveurs avec Ansible"
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 16 }
+  - { parcours: systemes, ordre: 13 }
+ordre: 8
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer la gestion de configuration et le principe d'idempotence
   - Décrire un inventaire, un module, une tâche, un playbook

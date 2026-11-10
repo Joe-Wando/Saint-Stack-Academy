@@ -1,12 +1,17 @@
 ---
 slug: g01-1-terminal-linux
 titre: Le terminal Linux, se déplacer et manipuler des fichiers
-piste: groupe
-semaine: 1
-date: 2026-11-09
 domaine: Systèmes et outils
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L1, semestre: S2, ue: "Systèmes d'exploitation" }
+parcours:
+  - { parcours: devops, ordre: 1 }
+  - { parcours: systemes, ordre: 1 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer ce qu'est un shell et pourquoi les métiers DevOps l'utilisent tous les jours
   - Lire et écrire un chemin absolu et un chemin relatif

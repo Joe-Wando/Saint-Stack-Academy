@@ -1,12 +1,16 @@
 ---
 slug: g05-2-postman
 titre: Tester une API avec Postman
-piste: groupe
-semaine: 5
-date: 2026-12-08
 domaine: Qualité et tests
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S4, ue: "Développement back-end" }
+parcours:
+  - { parcours: web, ordre: 13 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Envoyer des requêtes GET, POST, PUT, DELETE avec paramètres, en-têtes et corps JSON
   - Organiser ses requêtes en collections et utiliser des environnements et des variables

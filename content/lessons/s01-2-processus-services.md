@@ -1,12 +1,16 @@
 ---
 slug: s01-2-processus-services
 titre: Linux, processus, services systemd et journaux
-piste: solo
-semaine: 1
-date: 2026-11-11
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 3 }
+ordre: 2
+prerequis_cours: [s01-1-linux-droits]
+visibilite: public
 objectifs:
   - Lister et surveiller les processus avec ps, top et htop
   - Envoyer un signal à un processus avec kill, en distinguant SIGTERM et SIGKILL

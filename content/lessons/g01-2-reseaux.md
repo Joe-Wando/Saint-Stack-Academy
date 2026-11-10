@@ -1,12 +1,17 @@
 ---
 slug: g01-2-reseaux
 titre: Les réseaux pour développeurs, IP, ports, DNS et HTTP
-piste: groupe
-semaine: 1
-date: 2026-11-10
 domaine: Systèmes et outils
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L1, semestre: S2, ue: "Maintenance et réseaux" }
+parcours:
+  - { parcours: web, ordre: 1 }
+  - { parcours: systemes, ordre: 7 }
+ordre: 1
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Décrire ce qui se passe entre la saisie d'une URL et l'affichage de la page
   - Distinguer une adresse IP, un port et un nom de domaine

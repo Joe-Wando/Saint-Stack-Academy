@@ -1,12 +1,17 @@
 ---
 slug: g04-4-prometheus-grafana
 titre: Supervision avec Prometheus et Grafana
-piste: groupe
-semaine: 4
-date: 2026-12-04
 domaine: DevOps
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Conteneurs, orchestration et automatisation", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: devops, ordre: 17 }
+  - { parcours: systemes, ordre: 14 }
+ordre: 6
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer les trois piliers de l'observabilité (métriques, journaux, traces)
   - Décrire le fonctionnement de Prometheus (collecte, séries temporelles, exporters)

@@ -1,12 +1,16 @@
 ---
 slug: s07-1-power-bi
 titre: Power BI, du modèle en étoile au tableau de bord
-piste: solo
-semaine: 7
-date: 2026-12-22
 domaine: Data
 duree: 150
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S6, ue: "Décisionnel et IA", option: big-data-ia }
+parcours:
+  - { parcours: data, ordre: 13 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Connecter Power BI Desktop à PostgreSQL et choisir entre Import et DirectQuery
   - Préparer les données avec Power Query (types, colonnes, étapes appliquées)

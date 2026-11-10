@@ -1,12 +1,16 @@
 ---
 slug: s02-2-script-cron
 titre: Bash en pratique, script de sauvegarde et planification avec cron
-piste: solo
-semaine: 2
-date: 2026-11-18
 domaine: Systèmes
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 6 }
+ordre: 5
+prerequis_cours: [s02-1-bash-bases]
+visibilite: public
 objectifs:
   - Écrire un script de sauvegarde complet (archivage, horodatage, rotation, journal)
   - Gérer les erreurs proprement avec trap et des codes de sortie

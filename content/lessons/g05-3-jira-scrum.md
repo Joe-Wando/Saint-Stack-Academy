@@ -1,12 +1,17 @@
 ---
 slug: g05-3-jira-scrum
 titre: Scrum en pratique avec Jira
-piste: groupe
-semaine: 5
-date: 2026-12-10
 domaine: Gestion de projet
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
+parcours:
+  - { parcours: devops, ordre: 19 }
+  - { parcours: web, ordre: 18 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer les valeurs agiles et le cadre Scrum (rôles, événements, artefacts)
   - Rédiger des user stories avec critères d'acceptation et les estimer en points

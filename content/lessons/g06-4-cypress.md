@@ -1,12 +1,16 @@
 ---
 slug: g06-4-cypress
 titre: Tests de bout en bout avec Cypress
-piste: groupe
-semaine: 6
-date: 2026-12-18
 domaine: Qualité et tests
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
+parcours:
+  - { parcours: web, ordre: 16 }
+ordre: 5
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Expliquer le rôle et les limites des tests de bout en bout (E2E)
   - Installer Cypress et écrire un premier scénario (visit, get, click, type, should)

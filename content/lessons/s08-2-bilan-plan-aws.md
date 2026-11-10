@@ -1,12 +1,14 @@
 ---
 slug: s08-2-bilan-plan-aws
 titre: Bilan des huit semaines et plan de préparation AWS Cloud Practitioner
-piste: solo
-semaine: 8
-date: 2026-12-30
 domaine: Cloud
 duree: 150
-niveau: bases
+difficulte: bases
+licence: []
+parcours: []
+ordre: 1
+prerequis_cours: []
+visibilite: prive
 objectifs:
   - Faire le bilan de ses compétences par domaine avec une grille objective
   - Constituer un portfolio à partir des projets réalisés

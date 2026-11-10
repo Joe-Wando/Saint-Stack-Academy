@@ -1,12 +1,16 @@
 ---
 slug: s03-1-windows-dns-dhcp
 titre: Windows Server, installation, rôles DNS et DHCP
-piste: solo
-semaine: 3
-date: 2026-11-24
 domaine: Systèmes
 duree: 120
-niveau: découverte
+difficulte: découverte
+licence:
+  - { niveau: L3, semestre: S5, ue: "Administration des systèmes", option: reseaux-systemes-cloud }
+parcours:
+  - { parcours: systemes, ordre: 9 }
+ordre: 6
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Installer Windows Server 2022 dans une machine virtuelle et le configurer (nom, IP fixe)
   - Expliquer la notion de rôle et de fonctionnalité, et utiliser le Gestionnaire de serveur

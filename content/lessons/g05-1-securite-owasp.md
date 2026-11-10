@@ -1,12 +1,17 @@
 ---
 slug: g05-1-securite-owasp
 titre: Sécurité des applications web, OWASP Top 10
-piste: groupe
-semaine: 5
-date: 2026-12-07
 domaine: Sécurité
 duree: 120
-niveau: bases
+difficulte: bases
+licence:
+  - { niveau: L2, semestre: S4, ue: "Réseaux et sécurité" }
+parcours:
+  - { parcours: devops, ordre: 18 }
+  - { parcours: web, ordre: 17 }
+ordre: 2
+prerequis_cours: []
+visibilite: public
 objectifs:
   - Présenter l'OWASP et les grandes catégories du Top 10
   - Reconnaître et corriger une injection SQL et une faille XSS
