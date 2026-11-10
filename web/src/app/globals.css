@@ -246,6 +246,7 @@ textarea:focus, .form input:focus { border-color: var(--p); }
 
 /* Quiz */
 .quiz { box-shadow: none; padding: 0; border: 0; margin: 0; }
+.chapitre .quiz > h2 { display: none; }  /* le chapitre porte déjà le titre « Quiz » */
 .quiz fieldset { border: 1px solid var(--ligne); border-radius: 12px; margin: 0 0 1rem; padding: .8rem 1.1rem 1rem; min-width: 0; }
 .quiz fieldset.ok { border-color: var(--succes); background: #F6FBF9; }
 .quiz fieldset.ko { border-color: #D88A3A; background: #FFFAF3; }
