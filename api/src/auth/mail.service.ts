@@ -36,6 +36,26 @@ export class MailService {
       'Tu as demandé à changer ton mot de passe. Pour en choisir un nouveau, ouvre ce lien :', lien, 'Choisir un nouveau mot de passe', 'Ce lien est valable 1 heure.');
   }
 
+  async changementEmail(email: string, nom: string, jeton: string) {
+    const lien = `${config.webUrl}/confirmer-email?jeton=${encodeURIComponent(jeton)}`;
+    await this.envoyer(email, `Confirme ta nouvelle adresse ${NOM}`, nom,
+      'Tu as demandé à utiliser cette adresse pour ton compte. Pour confirmer, ouvre ce lien :', lien, 'Confirmer cette adresse', 'Ce lien est valable 24 heures.');
+  }
+
+  /** Copie d'un message de contact à l'admin. Sans SMTP, rien n'est envoyé : le message reste dans l'administration. */
+  async copieContact(m: { nom: string; email: string; sujet: string; message: string }) {
+    if (!this.transport || !config.adminEmail) return;
+    try {
+      await this.transport.sendMail({
+        from: config.smtp.from, to: config.adminEmail, replyTo: m.email,
+        subject: `[${NOM}] ${m.sujet} · ${m.nom}`,
+        text: `Message reçu depuis la page Contact.\n\nDe : ${m.nom} <${m.email}>\nSujet : ${m.sujet}\n\n${m.message}\n\nRéponds directement à cet e-mail, ou consulte ${config.webUrl}/admin/messages`,
+      });
+    } catch (e) {
+      this.logger.error(`Échec de la copie du message de contact : ${(e as Error).message}`);
+    }
+  }
+
   private async envoyer(a: string, sujet: string, nom: string, intro: string, lien: string, bouton: string, validite: string) {
     const ignorer = "Si tu n'es pas à l'origine de cette demande, ignore ce message.";
     const texte = `Bonjour ${nom},\n\n${intro}\n${lien}\n\n${validite}\n${ignorer}\n\n${NOM}`;

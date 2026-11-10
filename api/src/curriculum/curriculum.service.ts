@@ -91,6 +91,15 @@ export class CurriculumService {
     return this.ref;
   }
 
+  /** Relit content/ (cours et référentiel) sans redémarrer l'API. */
+  recharger() {
+    this.cache = null;
+    this.ref = null;
+    const cours = this.tous();
+    this.referentielBrut();
+    return { cours: cours.length, prives: cours.filter((c) => c.visibilite === 'prive').length };
+  }
+
   optionsL3() {
     return this.referentielBrut().niveaux.find((n) => n.code === 'L3')?.options ?? [];
   }

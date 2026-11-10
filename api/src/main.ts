@@ -13,6 +13,10 @@ import { CurriculumService } from './curriculum/curriculum.service';
 import { CurriculumController } from './curriculum/curriculum.controller';
 import { ProgressController } from './progress/progress.controller';
 import { AdminController } from './admin/admin.controller';
+import { EvolutionService } from './evolution/evolution.service';
+import { MoiController, PhotosController } from './moi/moi.controller';
+import { PhotoService } from './moi/photo.service';
+import { ContactController } from './contact/contact.controller';
 
 @Controller()
 class SanteController {
@@ -21,8 +25,8 @@ class SanteController {
 }
 
 @Module({
-  controllers: [SanteController, AuthController, CurriculumController, ProgressController, AdminController],
-  providers: [DbService, AuthService, MailService, AuthGuard, SessionFacultativeGuard, LimiteGuard, CurriculumService],
+  controllers: [SanteController, AuthController, CurriculumController, ProgressController, AdminController, MoiController, PhotosController, ContactController],
+  providers: [DbService, AuthService, MailService, AuthGuard, SessionFacultativeGuard, LimiteGuard, CurriculumService, EvolutionService, PhotoService],
 })
 class AppModule {}
 

@@ -64,6 +64,49 @@ export class DbService implements OnModuleInit, OnModuleDestroy {
         ordre          int NOT NULL,
         PRIMARY KEY (utilisateur_id, cours)
       );
+
+      -- Complément : profil, photo, suspension, consentement, changement d'adresse
+      ALTER TABLE utilisateurs ADD COLUMN IF NOT EXISTS photo text;
+      ALTER TABLE utilisateurs ADD COLUMN IF NOT EXISTS suspendu boolean NOT NULL DEFAULT false;
+      ALTER TABLE utilisateurs ADD COLUMN IF NOT EXISTS confidentialite_acceptee_le timestamptz;
+      ALTER TABLE jetons_email ADD COLUMN IF NOT EXISTS nouvel_email text;
+      ALTER TABLE jetons_email DROP CONSTRAINT IF EXISTS jetons_email_type_check;
+      ALTER TABLE jetons_email ADD CONSTRAINT jetons_email_type_check
+        CHECK (type IN ('verification', 'reinitialisation', 'changement_email'));
+
+      -- Historique : ce qui a été fait, avec sa date (jamais ce qui « devrait » être fait)
+      CREATE TABLE IF NOT EXISTS activites (
+        id             bigserial PRIMARY KEY,
+        utilisateur_id int NOT NULL REFERENCES utilisateurs(id) ON DELETE CASCADE,
+        cours          text NOT NULL,
+        type           text NOT NULL CHECK (type IN ('cours_commence', 'chapitre_lu', 'cours_termine', 'quiz')),
+        detail         jsonb,
+        cree_le        timestamptz NOT NULL DEFAULT now()
+      );
+      CREATE INDEX IF NOT EXISTS idx_activites_utilisateur ON activites (utilisateur_id, cree_le);
+      -- Un chapitre n'est compté qu'une fois par cours
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_activites_chapitre_unique
+        ON activites (utilisateur_id, cours, ((detail->>'chapitre'))) WHERE type = 'chapitre_lu';
+
+      CREATE TABLE IF NOT EXISTS messages (
+        id             serial PRIMARY KEY,
+        nom            text NOT NULL,
+        email          text NOT NULL,
+        sujet          text NOT NULL,
+        message        text NOT NULL,
+        cree_le        timestamptz NOT NULL DEFAULT now(),
+        lu             boolean NOT NULL DEFAULT false,
+        utilisateur_id int NULL REFERENCES utilisateurs(id) ON DELETE SET NULL
+      );
+
+      CREATE TABLE IF NOT EXISTS journal_admin (
+        id        bigserial PRIMARY KEY,
+        admin_id  int NULL REFERENCES utilisateurs(id) ON DELETE SET NULL,
+        action    text NOT NULL,
+        cible     text,
+        detail    jsonb,
+        cree_le   timestamptz NOT NULL DEFAULT now()
+      );
     `);
     if (config.adminEmail) {
       // Le compte de l'admin existe déjà : il est considéré comme vérifié.

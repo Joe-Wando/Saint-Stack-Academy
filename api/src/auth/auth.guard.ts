@@ -14,11 +14,15 @@ export const Moi = createParamDecorator((_: unknown, ctx: ExecutionContext): Uti
 export class AuthGuard implements CanActivate {
   constructor(private readonly auth: AuthService, private readonly reflector: Reflector) {}
 
-  canActivate(ctx: ExecutionContext): boolean {
+  async canActivate(ctx: ExecutionContext): Promise<boolean> {
     const req = ctx.switchToHttp().getRequest();
     const entete: string = req.headers['authorization'] ?? '';
     if (!entete.startsWith('Bearer ')) throw new UnauthorizedException('Connexion requise.');
-    req.utilisateur = this.auth.verifier(entete.slice(7));
+    const u = this.auth.verifier(entete.slice(7));
+    // Un compte supprimé ou suspendu voit son jeton refusé dès la requête suivante ; le rôle vient de la base.
+    const etat = await this.auth.etatCompte(u.id);
+    if (!etat) throw new UnauthorizedException('Session expirée, reconnecte-toi.');
+    req.utilisateur = { ...u, role: etat.role };
     const roles = this.reflector.getAllAndOverride<Role[]>(ROLES, [ctx.getHandler(), ctx.getClass()]);
     if (roles?.length && !roles.includes(req.utilisateur.role)) throw new ForbiddenException("Réservé à l'administrateur.");
     return true;
@@ -30,11 +34,15 @@ export class AuthGuard implements CanActivate {
 export class SessionFacultativeGuard implements CanActivate {
   constructor(private readonly auth: AuthService) {}
 
-  canActivate(ctx: ExecutionContext): boolean {
+  async canActivate(ctx: ExecutionContext): Promise<boolean> {
     const req = ctx.switchToHttp().getRequest();
     const entete: string = req.headers['authorization'] ?? '';
     if (entete.startsWith('Bearer ')) {
-      try { req.utilisateur = this.auth.verifier(entete.slice(7)); } catch { req.utilisateur = undefined; }
+      try {
+        const u = this.auth.verifier(entete.slice(7));
+        const etat = await this.auth.etatCompte(u.id);
+        req.utilisateur = etat ? { ...u, role: etat.role } : undefined;
+      } catch { req.utilisateur = undefined; }
     }
     return true;
   }

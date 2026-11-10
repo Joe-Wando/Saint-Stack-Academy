@@ -19,6 +19,11 @@ export class AuthController {
     return this.auth.verifierEmail(jeton);
   }
 
+  @Get('confirmer-email')
+  confirmerEmail(@Query('jeton') jeton: string) {
+    return this.auth.confirmerEmail(jeton);
+  }
+
   @Post('renvoyer-verification')
   @HttpCode(200)
   @UseGuards(LimiteGuard)

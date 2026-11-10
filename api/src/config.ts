@@ -12,6 +12,8 @@ export const config = {
   adminEmail: (env('ADMIN_EMAIL') || env('FORMATEUR_EMAIL')).toLowerCase(),
   contentDir: process.env.CONTENT_DIR ?? path.resolve(__dirname, '..', '..', 'content'),
   corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
+  /** Dossier des photos de profil (un volume Docker en production). */
+  uploadsDir: env('UPLOADS_DIR') || '/data/uploads',
   /** Adresse publique du site web : sert à construire les liens envoyés par e-mail. */
   webUrl: (env('WEB_URL') || 'http://localhost:3000').replace(/\/+$/, ''),
   smtp: {
