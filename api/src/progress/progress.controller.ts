@@ -21,7 +21,7 @@ export class ProgressController {
   @Post('progression/:slug')
   async statut(@Param('slug') slug: string, @Body() b: { statut: string }, @Moi() u: Utilisateur) {
     if (!STATUTS.includes(b.statut)) throw new BadRequestException('Statut inconnu.');
-    this.curriculum.un(slug, u.role); // vérifie que le cours existe et est accessible
+    this.curriculum.un(slug, u); // vérifie que le cours existe et est accessible (404 sinon)
     await this.db.query(
       `INSERT INTO progression (utilisateur_id, cours, statut) VALUES ($1, $2, $3)
        ON CONFLICT (utilisateur_id, cours) DO UPDATE SET statut = EXCLUDED.statut, maj_le = now()`,
@@ -32,7 +32,7 @@ export class ProgressController {
   @Post('progression/:slug/quiz')
   async quiz(@Param('slug') slug: string, @Body() b: { reponses: number[] }, @Moi() u: Utilisateur) {
     if (!Array.isArray(b.reponses)) throw new BadRequestException('Réponses manquantes.');
-    const res = this.curriculum.corriger(slug, u.role, b.reponses);
+    const res = this.curriculum.corriger(slug, u, b.reponses);
     await this.db.query(
       `INSERT INTO progression (utilisateur_id, cours, statut, quiz_score, quiz_total, quiz_essais) VALUES ($1, $2, 'en_cours', $3, $4, 1)
        ON CONFLICT (utilisateur_id, cours) DO UPDATE SET

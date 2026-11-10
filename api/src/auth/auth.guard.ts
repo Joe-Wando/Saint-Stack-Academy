@@ -3,12 +3,13 @@ import { Reflector } from '@nestjs/core';
 import { AuthService, Role, Utilisateur } from './auth.service';
 
 export const ROLES = 'roles';
-/** Restreint une route à certains rôles, par exemple @Roles('formateur'). */
+/** Restreint une route à certains rôles, par exemple @Roles('admin'). */
 export const Roles = (...roles: Role[]) => SetMetadata(ROLES, roles);
 
-/** Récupère l'utilisateur connecté dans un contrôleur. */
+/** Récupère l'utilisateur connecté dans un contrôleur (undefined sur une route publique sans session). */
 export const Moi = createParamDecorator((_: unknown, ctx: ExecutionContext): Utilisateur => ctx.switchToHttp().getRequest().utilisateur);
 
+/** Exige une session valide (et le rôle demandé par @Roles, vérifié côté serveur). */
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly auth: AuthService, private readonly reflector: Reflector) {}
@@ -19,7 +20,22 @@ export class AuthGuard implements CanActivate {
     if (!entete.startsWith('Bearer ')) throw new UnauthorizedException('Connexion requise.');
     req.utilisateur = this.auth.verifier(entete.slice(7));
     const roles = this.reflector.getAllAndOverride<Role[]>(ROLES, [ctx.getHandler(), ctx.getClass()]);
-    if (roles?.length && !roles.includes(req.utilisateur.role)) throw new ForbiddenException('Réservé au formateur.');
+    if (roles?.length && !roles.includes(req.utilisateur.role)) throw new ForbiddenException("Réservé à l'administrateur.");
+    return true;
+  }
+}
+
+/** Session facultative : les routes publiques reconnaissent l'admin s'il est connecté. */
+@Injectable()
+export class SessionFacultativeGuard implements CanActivate {
+  constructor(private readonly auth: AuthService) {}
+
+  canActivate(ctx: ExecutionContext): boolean {
+    const req = ctx.switchToHttp().getRequest();
+    const entete: string = req.headers['authorization'] ?? '';
+    if (entete.startsWith('Bearer ')) {
+      try { req.utilisateur = this.auth.verifier(entete.slice(7)); } catch { req.utilisateur = undefined; }
+    }
     return true;
   }
 }

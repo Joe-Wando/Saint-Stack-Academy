@@ -1,15 +1,18 @@
 import 'reflect-metadata';
 import { Controller, Get, Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { config } from './config';
 import { DbService } from './db/db.service';
 import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
+import { MailService } from './auth/mail.service';
+import { AuthGuard, SessionFacultativeGuard } from './auth/auth.guard';
+import { LimiteGuard } from './auth/limite.guard';
 import { AuthController } from './auth/auth.controller';
 import { CurriculumService } from './curriculum/curriculum.service';
 import { CurriculumController } from './curriculum/curriculum.controller';
 import { ProgressController } from './progress/progress.controller';
-import { FormateurController } from './formateur/formateur.controller';
+import { AdminController } from './admin/admin.controller';
 
 @Controller()
 class SanteController {
@@ -18,13 +21,15 @@ class SanteController {
 }
 
 @Module({
-  controllers: [SanteController, AuthController, CurriculumController, ProgressController, FormateurController],
-  providers: [DbService, AuthService, AuthGuard, CurriculumService],
+  controllers: [SanteController, AuthController, CurriculumController, ProgressController, AdminController],
+  providers: [DbService, AuthService, MailService, AuthGuard, SessionFacultativeGuard, LimiteGuard, CurriculumService],
 })
 class AppModule {}
 
 async function demarrer() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  // Derrière un reverse proxy (Caddy, Traefik), l'adresse IP du client vient de X-Forwarded-For.
+  app.set('trust proxy', 1);
   app.enableCors({ origin: config.corsOrigin.split(',').map((s) => s.trim()) });
   app.setGlobalPrefix('api');
   await app.listen(config.port);

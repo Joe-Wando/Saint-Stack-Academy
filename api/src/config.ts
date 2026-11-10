@@ -1,18 +1,28 @@
 import * as path from 'path';
 
+const env = (cle: string) => (process.env[cle] ?? '').trim();
+
 /** Configuration lue dans les variables d'environnement (voir .env.example). */
 export const config = {
   port: Number(process.env.PORT ?? 4000),
+  production: process.env.NODE_ENV === 'production',
   databaseUrl: process.env.DATABASE_URL ?? 'postgres://academy:academy@localhost:5432/academy',
   jwtSecret: process.env.JWT_SECRET ?? 'change-moi-en-production',
-  /** Code à donner aux amis pour qu'ils puissent créer leur compte apprenant. */
-  inviteCode: process.env.INVITE_CODE ?? 'SAINTSTACK2026',
-  /** Adresse e-mail du formateur : le compte créé avec cette adresse reçoit le rôle formateur. */
-  formateurEmail: (process.env.FORMATEUR_EMAIL ?? '').toLowerCase(),
+  /** Le compte créé avec cette adresse reçoit le rôle admin. FORMATEUR_EMAIL reste accepté (ancien nom). */
+  adminEmail: (env('ADMIN_EMAIL') || env('FORMATEUR_EMAIL')).toLowerCase(),
   contentDir: process.env.CONTENT_DIR ?? path.resolve(__dirname, '..', '..', 'content'),
   corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
+  /** Adresse publique du site web : sert à construire les liens envoyés par e-mail. */
+  webUrl: (env('WEB_URL') || 'http://localhost:3000').replace(/\/+$/, ''),
+  smtp: {
+    host: env('SMTP_HOST'),
+    port: Number(env('SMTP_PORT') || 587),
+    user: env('SMTP_USER'),
+    pass: env('SMTP_PASS'),
+    from: env('SMTP_FROM') || 'Saint Stack Academy <no-reply@localhost>',
+  },
 };
 
-if (process.env.NODE_ENV === 'production' && config.jwtSecret === 'change-moi-en-production') {
+if (config.production && config.jwtSecret === 'change-moi-en-production') {
   throw new Error('JWT_SECRET doit être défini en production.');
 }

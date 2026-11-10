@@ -21,8 +21,16 @@ services:
       PORT: 4000
       DATABASE_URL: postgres://academy:${DB_PASSWORD}@db:5432/academy
       JWT_SECRET: ${JWT_SECRET:?Définir JWT_SECRET dans .env}
-      INVITE_CODE: ${INVITE_CODE:?Définir INVITE_CODE dans .env}
-      FORMATEUR_EMAIL: ${FORMATEUR_EMAIL:?Définir FORMATEUR_EMAIL dans .env}
+      # Le compte créé avec cette adresse devient admin (FORMATEUR_EMAIL reste accepté)
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      FORMATEUR_EMAIL: ${FORMATEUR_EMAIL:-}
+      # Sans SMTP_HOST, les liens de vérification sont écrits dans le journal (docker compose logs api)
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-Saint Stack Academy <no-reply@localhost>}
+      WEB_URL: ${WEB_URL:-http://localhost:3000}
       CONTENT_DIR: /content
       CORS_ORIGIN: ${WEB_URL:-http://localhost:3000}
     volumes:
