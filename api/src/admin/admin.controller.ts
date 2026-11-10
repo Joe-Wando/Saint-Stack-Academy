@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Put, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard, Moi, Roles } from '../auth/auth.guard';
 import { Utilisateur } from '../auth/auth.service';
 import { CurriculumService } from '../curriculum/curriculum.service';
@@ -7,14 +7,70 @@ import { DbService } from '../db/db.service';
 /** Options L3 dont les cours préremplissent « Mes cours » au premier accès. */
 const OPTIONS_PREREMPLIES = ['big-data-ia', 'reseaux-systemes-cloud'];
 
-/** Administration : statistiques agrégées et espace personnel « Mes cours ». */
+/** Administration : statistiques, liste des utilisateurs et espace personnel « Mes cours ». */
 @Controller('admin')
 @UseGuards(AuthGuard)
 @Roles('admin')
 export class AdminController {
   constructor(private readonly db: DbService, private readonly curriculum: CurriculumService) {}
 
-  /** Données agrégées et anonymes uniquement : aucune liste nominative. */
+  /**
+   * Liste des comptes, avec leur avancement. Recherche sur le nom ou l'e-mail, filtres par niveau,
+   * par vérification et par rôle, tri, pagination par 25. Réservé à l'admin (vérifié côté serveur).
+   */
+  @Get('utilisateurs')
+  async utilisateurs(
+    @Query('q') q = '', @Query('niveau') niveau = '', @Query('verifie') verifie = '', @Query('role') role = '',
+    @Query('tri') tri = 'inscription', @Query('page') page = '1',
+  ) {
+    const conditions: string[] = [];
+    const params: unknown[] = [];
+    const ajouter = (sql: string, v: unknown) => { params.push(v); conditions.push(sql.replace('?', `$${params.length}`)); };
+    const recherche = String(q).trim().slice(0, 100);
+    if (recherche) {
+      // Les caractères spéciaux de LIKE (% _ \) sont échappés : on cherche le texte tel quel.
+      params.push(`%${recherche.replace(/[%_\\]/g, (c) => `\\${c}`)}%`);
+      conditions.push(`(u.nom ILIKE $${params.length} OR u.email ILIKE $${params.length})`);
+    }
+    if (niveau === 'aucun') conditions.push('u.niveau IS NULL');
+    else if (['L1', 'L2', 'L3', 'autre'].includes(String(niveau))) ajouter('u.niveau = ?', niveau);
+    if (verifie === 'oui') conditions.push('u.email_verifie');
+    if (verifie === 'non') conditions.push('NOT u.email_verifie');
+    if (role === 'admin' || role === 'apprenant') ajouter('u.role = ?', role);
+    const ou = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+    const ordre = {
+      inscription: 'u.cree_le DESC',
+      activite: 'derniere_activite DESC NULLS LAST, u.cree_le DESC',
+      nom: 'lower(u.nom) ASC',
+      termines: 'termines DESC, u.nom ASC',
+    }[String(tri)] ?? 'u.cree_le DESC';
+    const parPage = 25;
+    const p = Math.max(1, Number.parseInt(String(page), 10) || 1);
+
+    const [{ total }] = await this.db.query<{ total: number }>(`SELECT count(*)::int AS total FROM utilisateurs u ${ou}`, params);
+    const lignes = await this.db.query(
+      `SELECT u.id, u.nom, u.email, u.role, u.niveau, u.option_l3 AS "optionL3", u.etablissement,
+              u.email_verifie AS "emailVerifie", u.cree_le AS "inscritLe",
+              count(p.cours) FILTER (WHERE p.statut IN ('en_cours', 'termine'))::int AS commences,
+              count(p.cours) FILTER (WHERE p.statut = 'termine')::int AS termines,
+              round(avg(100.0 * p.quiz_score / NULLIF(p.quiz_total, 0)))::int AS "moyenneQuiz",
+              max(p.maj_le) AS derniere_activite
+       FROM utilisateurs u LEFT JOIN progression p ON p.utilisateur_id = u.id
+       ${ou}
+       GROUP BY u.id
+       ORDER BY ${ordre}
+       LIMIT ${parPage} OFFSET ${(p - 1) * parPage}`, params);
+    const optionsL3 = this.curriculum.optionsL3();
+    return {
+      total, page: p, parPage, pages: Math.max(1, Math.ceil(total / parPage)),
+      utilisateurs: lignes.map(({ derniere_activite, ...l }) => ({
+        ...l, derniereActivite: derniere_activite,
+        optionTitre: optionsL3.find((o) => o.code === l.optionL3)?.titre ?? null,
+      })),
+    };
+  }
+
+  /** Données agrégées et anonymes. La liste nominative est dans GET /admin/utilisateurs. */
   @Get('statistiques')
   async statistiques() {
     const [comptes] = await this.db.query<{ inscrits: number; verifies: number }>(

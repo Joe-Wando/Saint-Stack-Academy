@@ -74,7 +74,7 @@ export default function Shell({ children, nu = false, plein = false, admin = fal
     { href: '/licence', label: 'Licence' },
     { href: '/parcours', label: 'Parcours métiers' },
     { href: '/catalogue', label: 'Catalogue' },
-    ...(u.role === 'admin' ? [{ href: '/admin/mes-cours', label: 'Mes cours' }, { href: '/admin/statistiques', label: 'Statistiques' }] : []),
+    ...(u.role === 'admin' ? [{ href: '/admin/mes-cours', label: 'Mes cours' }, { href: '/admin/utilisateurs', label: 'Utilisateurs' }, { href: '/admin/statistiques', label: 'Statistiques' }] : []),
   ];
 
   return (

@@ -151,3 +151,19 @@
   .ma-liste li > .statut, .ma-liste-actions { grid-column: 2; justify-self: start; }
 }
 .profil { max-width: 640px; }
+
+/* Menu : sept liens pour l'admin, défilant plutôt que débordant */
+.nav { overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.nav::-webkit-scrollbar { display: none; }
+@media (max-width: 1180px) and (min-width: 761px) { .nav a { padding: 0 .55rem; font-size: .92rem; } }
+
+/* Administration : utilisateurs */
+.filtres-admin { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); gap: .8rem; align-items: end; }
+.filtres-admin label { display: grid; gap: .3rem; font-size: .9rem; font-weight: 600; }
+.filtres-admin .champ { max-width: none; }
+@media (max-width: 860px) { .filtres-admin { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .filtres-admin label:first-child { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .filtres-admin { grid-template-columns: minmax(0, 1fr); } }
+select.champ { appearance: auto; }
+.personne { display: flex; gap: .7rem; align-items: flex-start; min-width: 220px; }
+.personne .avatar { margin-top: .1rem; }
+.pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1rem; }
