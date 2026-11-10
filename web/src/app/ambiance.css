@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Ambiance Saint Stack : le violet reste la couleur principale ;
+   l'encre (bleu nuit violacé), le ciel et le soleil sont des accents discrets.
+   Contrastes vérifiés : blanc sur encre 15,4:1 · violet sur papier 6,4:1 · encre sur soleil 12,1:1.
+   ========================================================================== */
+:root {
+  --encre: #211F4D;
+  --encre-2: #2C2A66;
+  --ciel: #3BA7DB;
+  --ciel-clair: #DDF0FB;
+  --soleil: #FCE38A;
+  --papier: #F8F6F1;
+  --fond: var(--papier);
+  --rayon: 18px;
+  --ombre: 0 1px 2px rgba(33, 31, 77, .05), 0 6px 18px rgba(33, 31, 77, .05);
+  --ombre-forte: 0 8px 18px rgba(33, 31, 77, .10), 0 18px 36px rgba(33, 31, 77, .10);
+  font-family: var(--police-texte), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+body { background: var(--papier); font-family: var(--police-texte), system-ui, sans-serif; }
+
+/* Titres et éléments de marque : police d'affichage */
+h1, h2, h3, .brand, .btn, .eyebrow, .nav a, .chipbtn, .onglet, .tag, .chiffre .v, .cc-titre, .etape, .numero,
+.titre-section, .dom-tete h2, .h-dom, .d-titre, .grande-carte-corps h2, .admin-menu a {
+  font-family: var(--police-titre), var(--police-texte), system-ui, sans-serif;
+}
+h1, h2 { letter-spacing: -.015em; }
+h1 { font-weight: 800; }
+.eyebrow { letter-spacing: .1em; color: var(--p); }
+.main { font-family: var(--police-main), cursive; }
+
+/* Logo : coin arrondi, petite étincelle soleil */
+.logo { border-radius: 12px; position: relative; box-shadow: 0 4px 12px rgba(83, 74, 183, .28); }
+.logo::after { content: ""; position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; border-radius: 50%; background: var(--soleil); border: 2px solid #fff; }
+
+/* Boutons en pilule */
+.btn { border-radius: 999px; padding: .62rem 1.25rem; letter-spacing: .005em; transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease; }
+.btn.sm { padding: .42rem .9rem; }
+.btn.primary { box-shadow: 0 6px 16px rgba(83, 74, 183, .28); }
+.btn.primary:hover, .btn:hover { transform: translateY(-1px); }
+.btn:disabled:hover { transform: none; }
+.btn.soleil { background: var(--soleil); border-color: var(--soleil); color: var(--encre); }
+.btn.soleil:hover { background: #fff; border-color: #fff; color: var(--encre); }
+.btn.contour-clair { background: transparent; border: 2px solid rgba(255, 255, 255, .7); color: #fff; }
+.btn.contour-clair:hover { background: rgba(255, 255, 255, .12); color: #fff; border-color: #fff; }
+
+/* Cartes de cours légèrement inclinées, qui se redressent au survol (jamais dans les tableaux) */
+.grille > .cc:nth-child(4n + 1) { rotate: -.5deg; }
+.grille > .cc:nth-child(4n + 2) { rotate: .4deg; }
+.grille > .cc:nth-child(4n + 3) { rotate: -.3deg; }
+.grille > .cc:nth-child(4n + 4) { rotate: .6deg; }
+.cc { transition: transform .2s ease, box-shadow .2s ease, rotate .2s ease; }
+.grille > .cc:hover { rotate: 0deg; transform: translateY(-4px); }
+.cc-vide { rotate: 0deg !important; }
+.cc .tag.dom { border-radius: 999px; }
+/* Morceau de scotch soleil sur les cartes mises en avant (accueil public) */
+.scotch > .cc, .offre { position: relative; overflow: visible; }
+.scotch > .cc::before, .offre::before {
+  content: ""; position: absolute; top: -9px; left: 50%; width: 74px; height: 20px; translate: -50% 0; rotate: -4deg;
+  background: var(--soleil); opacity: .85; border-radius: 2px; box-shadow: 0 1px 2px rgba(0, 0, 0, .08); z-index: 2;
+}
+.scotch > .cc .cc-img, .offre img { border-radius: var(--rayon) var(--rayon) 0 0; }
+.offre:nth-child(odd) { rotate: -.6deg; }
+.offre:nth-child(even) { rotate: .5deg; }
+.offre { transition: rotate .2s ease, transform .2s ease, box-shadow .2s ease; }
+.offre:hover { rotate: 0deg; transform: translateY(-4px); }
+
+/* Décors */
+.vague { display: block; width: 100%; height: 44px; color: var(--papier); }
+@media (min-width: 760px) { .vague { height: 70px; } }
+.vague-haut { rotate: 180deg; }
+.souligne { position: relative; display: inline-block; white-space: nowrap; }
+.souligne svg { position: absolute; left: -2%; bottom: -.32em; width: 104%; height: .42em; overflow: visible; }
+.souligne path { fill: none; stroke: var(--ciel); stroke-width: 5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.macaron { position: relative; display: grid; place-items: center; width: 132px; height: 132px; rotate: -10deg; }
+.macaron svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.macaron-fond { fill: var(--soleil); }
+.macaron-cercle { fill: none; stroke: var(--encre); stroke-width: 1.2; stroke-dasharray: 3 3; opacity: .5; }
+.macaron span { position: relative; padding: 0 20%; text-align: center; font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: .74rem; line-height: 1.15; text-transform: uppercase; color: var(--encre); }
+.etincelles { width: 46px; height: 46px; color: var(--soleil); }
+.etincelles path { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .macaron { animation: flotter 6s ease-in-out infinite; }
+  @keyframes flotter { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cc, .offre, .btn { transition: none; }
+  .grille > .cc:hover, .offre:hover, .btn:hover { transform: none; }
+}
+
+/* Pied de page couleur encre, avec une vague au-dessus */
+.pied { background: var(--encre); color: #C9C5EE; border-top: 0; margin-top: 0; }
+.pied-vague { color: var(--encre); background: var(--papier); margin-top: 3rem; line-height: 0; }
+.pied-vague .vague { color: var(--encre); }
+.pied .brand { color: #fff; }
+.pied nav a { color: #B9B3F5; font-weight: 600; }
+.pied nav a:hover { color: #fff; }
+.pied .muted { color: #C9C5EE; }
+
+/* Accueil public : bandeau encre */
+.hero-accueil { background: radial-gradient(120% 90% at 85% 10%, var(--encre-2) 0%, var(--encre) 55%, #181640 100%); color: #EDEBFA; position: relative; }
+.hero-accueil-in { padding-bottom: 1.5rem; }
+.hero-texte h1 { color: #fff; }
+.hero-texte .eyebrow { color: var(--soleil); }
+.hero-sous { color: #D6D3F3; }
+.hero-chiffres dd { color: #fff; }
+.hero-chiffres dt { color: #C9C5EE; }
+.portrait-forme { background: linear-gradient(140deg, var(--p) 0%, var(--encre-2) 100%); opacity: .9; }
+.portrait { border-color: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, .18), 0 18px 40px rgba(0, 0, 0, .35); }
+.carte-flottante { color: var(--texte); }
+.hero-macaron { position: absolute; right: 2%; bottom: 8%; z-index: 2; }
+@media (max-width: 900px) { .hero-macaron { position: static; margin: 1.4rem auto 0; } }
+.hero-accueil .vague { color: var(--papier); margin-top: .5rem; }
+.appel { background: var(--encre); border-radius: 28px; position: relative; overflow: hidden; }
+.appel::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: var(--p); opacity: .35; }
+.appel h2, .appel p, .appel .btn { position: relative; z-index: 1; }
+
+/* Connexion et inscription : colonne encre */
+.auth-art { background: radial-gradient(110% 80% at 20% 0%, var(--encre-2), var(--encre)); color: #EDEBFA; }
+.auth-photo { border-color: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, .15); }
+.auth-citation blockquote { color: #fff; font-family: var(--police-main), cursive; font-style: normal; font-size: 1.9rem; line-height: 1.25; }
+.auth-citation figcaption { color: #C9C5EE; }
+.auth-puces li { background: rgba(255, 255, 255, .1); color: #fff; border: 1px solid rgba(255, 255, 255, .2); }
+.auth-puces li::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--soleil); margin-right: .45rem; vertical-align: middle; }
+@media (max-width: 860px) { .auth-art { background: var(--papier); } }
+
+/* Titres de page : un petit filet soleil sous le sur-titre */
+.hero .eyebrow::after { content: ""; display: block; width: 34px; height: 4px; margin-top: .35rem; border-radius: 99px; background: var(--soleil); }
+
+/* Bannière de cours et en-têtes de domaine : coins plus doux, vague en bas de la bannière */
+.banniere { position: relative; }
+.banniere .vague { position: absolute; left: 0; right: 0; bottom: -1px; height: 26px; color: var(--papier); }
+@media (min-width: 760px) { .banniere .vague { height: 40px; } }
+.banniere-in { padding-bottom: 2.6rem; }
+.dom-tete, .grande-carte, .card, .chiffre, .certif, .bloc, .ue, .reprendre { border-radius: var(--rayon); }
+
+/* Le mot du fondateur : citation manuscrite */
+.mot-fondateur blockquote { font-family: var(--police-main), cursive; font-style: normal; font-size: 1.55rem; line-height: 1.35; color: var(--encre); }
+.mot-fondateur { border: 0; background: linear-gradient(135deg, #fff 0%, var(--p-clair) 100%); }
+
+/* Accueil connecté : la carte « Reprendre » avec un liseré soleil */
+.reprendre { border: 0; box-shadow: var(--ombre-forte); position: relative; }
+.reprendre::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--soleil); border-radius: var(--rayon) 0 0 var(--rayon); z-index: 1; }

@@ -1,0 +1,1028 @@
+{
+  "c01-windows-partages-ntfs": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 12
+      }
+    ]
+  },
+  "c02-numpy": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 5
+      }
+    ]
+  },
+  "c03-helm": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 15
+      }
+    ]
+  },
+  "c04-ansible": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 16
+      },
+      {
+        "parcours": "systemes",
+        "ordre": 13
+      }
+    ]
+  },
+  "c05-figma": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Développement front-end et infographie"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 5
+      }
+    ]
+  },
+  "c06-express-graphql": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Développement back-end"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 11
+      }
+    ]
+  },
+  "c07-scikit-learn": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Décisionnel et IA",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 17
+      }
+    ]
+  },
+  "c08-mysql-redis": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Développement web avancé",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 20
+      }
+    ]
+  },
+  "c09-power-bi-approfondi": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Décisionnel et IA",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 14
+      }
+    ]
+  },
+  "g01-1-terminal-linux": {
+    "licence": [
+      {
+        "niveau": "L1",
+        "semestre": "S2",
+        "ue": "Systèmes d'exploitation"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 1
+      },
+      {
+        "parcours": "systemes",
+        "ordre": 1
+      }
+    ]
+  },
+  "g01-2-reseaux": {
+    "licence": [
+      {
+        "niveau": "L1",
+        "semestre": "S2",
+        "ue": "Maintenance et réseaux"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 1
+      },
+      {
+        "parcours": "systemes",
+        "ordre": 7
+      }
+    ]
+  },
+  "g01-3-git-branches": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Bases de données et versionnement"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 2
+      },
+      {
+        "parcours": "web",
+        "ordre": 2
+      }
+    ]
+  },
+  "g01-4-git-conflits-pr": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Bases de données et versionnement"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 3
+      },
+      {
+        "parcours": "web",
+        "ordre": 3
+      }
+    ]
+  },
+  "g02-1-docker-images-conteneurs": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Virtualisation et cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 4
+      }
+    ]
+  },
+  "g02-2-dockerfile": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Virtualisation et cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 5
+      }
+    ]
+  },
+  "g02-3-docker-volumes-reseaux": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      },
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Livraison des applications",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 6
+      }
+    ]
+  },
+  "g02-4-docker-compose-hub": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      },
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Livraison des applications",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 7
+      }
+    ]
+  },
+  "g03-1-github-actions-workflow": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Génie logiciel et qualité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 8
+      }
+    ]
+  },
+  "g03-2-github-actions-image": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Intégration et déploiement continus",
+        "option": "reseaux-systemes-cloud"
+      },
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Livraison des applications",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 9
+      }
+    ]
+  },
+  "g03-3-gitlab-ci": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Intégration et déploiement continus",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 10
+      }
+    ]
+  },
+  "g03-4-jenkins": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Intégration et déploiement continus",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 11
+      }
+    ]
+  },
+  "g04-1-kubernetes-pods-deployments": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 12
+      }
+    ]
+  },
+  "g04-2-kubernetes-services-config": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 13
+      }
+    ]
+  },
+  "g04-3-kubernetes-multi-services-helm": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 14
+      }
+    ]
+  },
+  "g04-4-prometheus-grafana": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Conteneurs, orchestration et automatisation",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 17
+      },
+      {
+        "parcours": "systemes",
+        "ordre": 14
+      }
+    ]
+  },
+  "g05-1-securite-owasp": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Réseaux et sécurité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 18
+      },
+      {
+        "parcours": "web",
+        "ordre": 19
+      }
+    ]
+  },
+  "g05-2-postman": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Développement back-end"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 15
+      }
+    ]
+  },
+  "g05-3-jira-scrum": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Génie logiciel et qualité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "devops",
+        "ordre": 19
+      },
+      {
+        "parcours": "web",
+        "ordre": 20
+      }
+    ]
+  },
+  "g05-4-jest": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Génie logiciel et qualité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 16
+      }
+    ]
+  },
+  "g06-0a-react": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Développement front-end et infographie"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 6
+      }
+    ]
+  },
+  "g06-0b-tailwind": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Développement front-end et infographie"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 7
+      }
+    ]
+  },
+  "g06-1-supertest": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Génie logiciel et qualité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 17
+      }
+    ]
+  },
+  "g06-2-nextjs-pages-routage": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Développement web avancé",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 8
+      }
+    ]
+  },
+  "g06-3-nextjs-donnees-api": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Développement web avancé",
+        "option": "developpement-logiciel"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 9
+      }
+    ]
+  },
+  "g06-4-cypress": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Génie logiciel et qualité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 18
+      }
+    ]
+  },
+  "g07-1-sql-select": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Bases de données et versionnement"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 12
+      },
+      {
+        "parcours": "data",
+        "ordre": 1
+      }
+    ]
+  },
+  "g07-2-sql-agregats-jointures": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Bases de données et versionnement"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 13
+      },
+      {
+        "parcours": "data",
+        "ordre": 2
+      }
+    ]
+  },
+  "g07-3-sql-sousrequetes-vues-fenetres": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Bases de données avancées"
+      }
+    ],
+    "parcours": []
+  },
+  "g08-1-postgresql-modelisation": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S3",
+        "ue": "Bases de données et versionnement"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "web",
+        "ordre": 14
+      }
+    ]
+  },
+  "g08-2-postgresql-index-transactions": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Bases de données avancées"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 18
+      }
+    ]
+  },
+  "g08-3-mongodb-redis": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Bases de données avancées"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 19
+      }
+    ]
+  },
+  "s01-1-linux-droits": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 2
+      }
+    ]
+  },
+  "s01-2-processus-services": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 3
+      }
+    ]
+  },
+  "s01-3-paquets-ssh": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 4
+      }
+    ]
+  },
+  "s02-1-bash-bases": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 5
+      }
+    ]
+  },
+  "s02-2-script-cron": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 6
+      }
+    ]
+  },
+  "s02-3-reseaux-approfondis": {
+    "licence": [
+      {
+        "niveau": "L2",
+        "semestre": "S4",
+        "ue": "Réseaux et sécurité"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 8
+      }
+    ]
+  },
+  "s03-1-windows-dns-dhcp": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 9
+      }
+    ]
+  },
+  "s03-2-active-directory-gpo": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 10
+      }
+    ]
+  },
+  "s03-3-powershell": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Administration des systèmes",
+        "option": "reseaux-systemes-cloud"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "systemes",
+        "ordre": 11
+      }
+    ]
+  },
+  "s04-1-sql-jointures-agregats": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 3
+      }
+    ]
+  },
+  "s04-2-sql-fenetres-cte": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 4
+      }
+    ]
+  },
+  "s04-3-python-pandas-matplotlib": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 6
+      }
+    ]
+  },
+  "s05-1-modelisation-oltp-olap": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 7
+      }
+    ]
+  },
+  "s05-2-etl-postgresql": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S5",
+        "ue": "Ingénierie des données",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 8
+      }
+    ]
+  },
+  "s05-3-dbt": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 9
+      }
+    ]
+  },
+  "s06-1-dbt-tests-doc": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 10
+      }
+    ]
+  },
+  "s06-2-airflow-bases": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 11
+      }
+    ]
+  },
+  "s06-3-airflow-orchestration": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 12
+      }
+    ]
+  },
+  "s07-1-power-bi": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Décisionnel et IA",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 13
+      }
+    ]
+  },
+  "s07-2-spark": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 15
+      }
+    ]
+  },
+  "s08-1-kafka-bigquery-snowflake": {
+    "licence": [
+      {
+        "niveau": "L3",
+        "semestre": "S6",
+        "ue": "Pipelines et big data",
+        "option": "big-data-ia"
+      }
+    ],
+    "parcours": [
+      {
+        "parcours": "data",
+        "ordre": 16
+      }
+    ]
+  },
+  "s08-2-bilan-plan-aws": {
+    "licence": [],
+    "parcours": [],
+    "visibilite": "prive"
+  }
+}

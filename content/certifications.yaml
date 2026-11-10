@@ -1,0 +1,64 @@
+# Certifications et badges recommandés, par niveau. Fichier lu par l'API (GET /certifications).
+# type : badge (badge numérique de fin de cours, gratuit), certificat (certificat de plateforme, gratuit ou par aide financière),
+#        certification (examen officiel surveillé, payant, valable dans l'industrie)
+# cout : gratuit | aide-financiere | payant (montant indicatif en USD, à vérifier sur le site officiel)
+# Dernière vérification : novembre 2026. Les offres évoluent : chaque fiche renvoie à la source officielle.
+
+niveaux:
+  L1:
+    intro: >
+      En L1, on vise des badges gratuits qui valident les fondamentaux : matériel, systèmes, réseaux, premiers langages.
+      Les certifications payantes sont facultatives à ce stade.
+    elements:
+      - { nom: "Computer Hardware Basics", organisme: Cisco Networking Academy, type: badge, cout: gratuit, ue: "Architecture des ordinateurs et maintenance", lien: "https://www.netacad.com/courses/computer-hardware-basics" }
+      - { nom: "Operating Systems Basics", organisme: Cisco Networking Academy, type: badge, cout: gratuit, ue: "Systèmes d'exploitation", lien: "https://www.netacad.com/courses/operating-systems-basics" }
+      - { nom: "Networking Basics", organisme: Cisco Networking Academy, type: badge, cout: gratuit, ue: "Maintenance et réseaux", prepare: "CCST Networking", lien: "https://www.netacad.com/courses/networking-basics" }
+      - { nom: "Introduction to Cybersecurity", organisme: Cisco Networking Academy, type: badge, cout: gratuit, ue: "Découverte de l'informatique et de ses métiers", lien: "https://www.netacad.com/courses/introduction-to-cybersecurity" }
+      - { nom: "Python Essentials 1", organisme: "Cisco Networking Academy et OpenEDG Python Institute", type: badge, cout: gratuit, ue: "Algorithmique et programmation 1", prepare: "PCEP", lien: "https://www.netacad.com/courses/python-essentials-1" }
+      - { nom: "JavaScript Essentials 1", organisme: "Cisco Networking Academy et OpenEDG JS Institute", type: badge, cout: gratuit, ue: "Programmation web", prepare: "JSE", lien: "https://www.netacad.com/courses/javascript-essentials-1" }
+      - { nom: "Responsive Web Design", organisme: freeCodeCamp, type: certificat, cout: gratuit, ue: "Programmation web", lien: "https://www.freecodecamp.org/learn" }
+      - { nom: "CCST IT Support ou CCST Networking", organisme: Cisco (examen Certiport), type: certification, cout: "payant (environ 125 USD)", facultatif: true, lien: "https://www.cisco.com/site/us/en/learn/training-certifications/certifications/support-technician/index.html" }
+      - { nom: "PCEP, Certified Entry-Level Python Programmer", organisme: OpenEDG Python Institute, type: certification, cout: payant, facultatif: true, lien: "https://pythoninstitute.org/pcep" }
+
+  L2:
+    intro: >
+      En L2, on approfondit : programmation, bases de données, web et réseaux. On peut viser une première certification
+      officielle reconnue, en profitant des réductions étudiantes.
+    elements:
+      - { nom: "Python Essentials 2", organisme: "Cisco Networking Academy et OpenEDG", type: badge, cout: gratuit, ue: "Langages et programmation orientée objet", prepare: "PCAP", lien: "https://www.netacad.com/courses/python-essentials-2" }
+      - { nom: "JavaScript Essentials 2", organisme: "Cisco Networking Academy et OpenEDG", type: badge, cout: gratuit, ue: "Développement front-end et infographie", lien: "https://www.netacad.com/courses/javascript-essentials-2" }
+      - { nom: "CCNA : Introduction to Networks (ITN) puis Switching, Routing and Wireless Essentials (SRWE)", organisme: Cisco Networking Academy (via une académie partenaire), type: badge, cout: "gratuit en académie", ue: "Réseaux et sécurité", prepare: "CCNA 200-301" }
+      - { nom: "Network Defense, ou parcours Junior Cybersecurity Analyst", organisme: Cisco Networking Academy, type: badge, cout: gratuit, ue: "Réseaux et sécurité", lien: "https://www.netacad.com/catalogs/learn" }
+      - { nom: "JavaScript Algorithms and Data Structures · Front End Development Libraries · Back End Development and APIs · Relational Database", organisme: freeCodeCamp, type: certificat, cout: gratuit, ue: "Développement front-end / back-end" }
+      - { nom: "Azure Fundamentals (AZ-900) ou AWS Cloud Practitioner : la formation", organisme: "Microsoft Learn / AWS Skill Builder", type: certificat, cout: "formation gratuite, examen payant", ue: "Virtualisation et cloud" }
+      - { nom: "GitHub Foundations", organisme: GitHub, type: certification, cout: "payant (réduction possible avec GitHub Education)", facultatif: true, ue: "Bases de données et versionnement" }
+      - { nom: "Google IT Support Professional Certificate", organisme: "Google (Coursera)", type: certificat, cout: aide-financiere, facultatif: true }
+      - { nom: "PCAP, Certified Associate Python Programmer", organisme: OpenEDG Python Institute, type: certification, cout: payant, facultatif: true }
+
+  L3:
+    intro: >
+      En L3, les certifications dépendent de l'option. Les détails seront complétés option par option.
+    options:
+      big-data-ia:
+        - { nom: "Introduction to Data Science · Data Analytics Essentials", organisme: Cisco Networking Academy, type: badge, cout: gratuit }
+        - { nom: "IBM Data Science ou Google Data Analytics Professional Certificate", organisme: Coursera, type: certificat, cout: aide-financiere }
+        - { nom: "Databricks Certified Data Engineer Associate", organisme: Databricks, type: certification, cout: payant }
+        - { nom: "PL-300 Power BI Data Analyst", organisme: Microsoft, type: certification, cout: payant }
+      reseaux-systemes-cloud:
+        - { nom: "CCNA : Enterprise Networking, Security and Automation (ENSA)", organisme: Cisco Networking Academy, type: badge, cout: "gratuit en académie", prepare: "CCNA 200-301 (réduction NetAcad)" }
+        - { nom: "CCNA 200-301", organisme: Cisco (Pearson VUE), type: certification, cout: "payant (environ 300 USD, réduction NetAcad possible)" }
+        - { nom: "CyberOps Associate", organisme: Cisco Networking Academy, type: badge, cout: gratuit, prepare: "CBROPS" }
+        - { nom: "Linux Essentials", organisme: LPI, type: certification, cout: payant }
+        - { nom: "AWS Certified Cloud Practitioner, puis Solutions Architect Associate", organisme: AWS, type: certification, cout: payant }
+      developpement-logiciel:
+        - { nom: "Meta Front-End ou Back-End Developer Professional Certificate", organisme: "Meta (Coursera)", type: certificat, cout: aide-financiere }
+        - { nom: "DevNet Associate (cours)", organisme: Cisco Networking Academy, type: badge, cout: gratuit, prepare: "DEVASC" }
+        - { nom: "Full Stack Developer", organisme: freeCodeCamp, type: certificat, cout: gratuit }
+        - { nom: "AWS Certified Developer Associate", organisme: AWS, type: certification, cout: payant }
+
+conseils:
+  - "Un badge de cours prouve que tu as suivi et réussi un cours ; une certification officielle se passe en examen surveillé et a plus de poids auprès des recruteurs."
+  - "Cisco Networking Academy : les cours en autonomie et leurs badges sont gratuits. Les cours CCNA se suivent en général via une académie partenaire (école, université)."
+  - "Les étudiants qui réussissent certains cours NetAcad peuvent obtenir une réduction sur l'examen CCNA, CyberOps Associate ou DevNet Associate."
+  - "Coursera : le contenu est consultable gratuitement ; le certificat est payant, mais une aide financière peut le rendre gratuit."
+  - "Ajoute chaque badge à ton profil LinkedIn et à ton CV, avec le lien de vérification (Credly)."
