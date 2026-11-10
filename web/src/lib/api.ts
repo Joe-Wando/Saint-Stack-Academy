@@ -2,22 +2,48 @@
 
 export const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
 
-export type Role = 'formateur' | 'apprenant';
-export interface Utilisateur { id: number; nom: string; email: string; role: Role }
-export type Piste = 'groupe' | 'solo' | 'complement';
-export interface ResumeCours {
-  slug: string; titre: string; piste: Piste; semaine: number; date: string; domaine: string;
-  duree: number; niveau: string; objectifs: string[]; prerequis: string[]; referentiels: string[]; nbQuestions: number;
+export type Role = 'admin' | 'apprenant';
+export type Niveau = 'L1' | 'L2' | 'L3' | 'autre';
+export interface Utilisateur {
+  id: number; nom: string; email: string; role: Role;
+  niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string;
 }
-export interface Cours extends Omit<ResumeCours, 'nbQuestions'> { contenu: string; quiz: { question: string; choix: string[] }[] }
+export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
+export interface ResumeCours {
+  slug: string; titre: string; domaine: string; duree: number; difficulte: string; ordre: number;
+  objectifs: string[]; nbQuestions: number; visibilite: 'public' | 'prive';
+  licence: PlaceLicence[]; parcours: { parcours: string; ordre: number }[];
+}
+export type Emplacement =
+  | ({ type: 'licence'; optionTitre: string | null; suivant: { slug: string; titre: string } | null } & PlaceLicence)
+  | { type: 'parcours'; code: string; titre: string; etape: number; total: number; suivant: { slug: string; titre: string } | null };
+export interface Cours {
+  slug: string; titre: string; domaine: string; duree: number; difficulte: string; ordre: number; visibilite: 'public' | 'prive';
+  objectifs: string[]; prerequis: string[]; referentiels: string[];
+  prerequisCours: { slug: string; titre: string }[];
+  emplacements: Emplacement[];
+  contenu: string; quiz: { question: string; choix: string[] }[];
+}
 export interface Progression { cours: string; statut: 'a_faire' | 'en_cours' | 'termine'; quizScore: number | null; quizTotal: number | null; quizEssais: number }
 
-const CLE = 'ssa-session';
+export interface UeRef { titre: string; cours: ResumeCours[] }
+export interface SemestreRef { code: string; ues: UeRef[] }
+export interface Referentiel {
+  niveaux: { code: string; titre: string; semestres: SemestreRef[]; troncCommun: SemestreRef[]; options: { code: string; titre: string; semestres: SemestreRef[] }[] }[];
+  parcours: { code: string; titre: string; domaine: string; cours: (ResumeCours & { etape: number })[] }[];
+}
+export interface MonNiveau {
+  niveau: string | null; option: { code: string; titre: string } | null; titre: string | null;
+  ues: { niveau: string; semestre: string; ue: string; option: string | null; cours: ResumeCours[] }[];
+}
 
-export function session(): { jeton: string; utilisateur: Utilisateur } | null {
+const CLE = 'ssa-session';
+type Session = { jeton: string; utilisateur: Utilisateur };
+
+export function session(): Session | null {
   try { return JSON.parse(localStorage.getItem(CLE) ?? 'null'); } catch { return null; }
 }
-export function enregistrerSession(s: { jeton: string; utilisateur: Utilisateur }) {
+export function enregistrerSession(s: Session) {
   try { localStorage.setItem(CLE, JSON.stringify(s)); } catch { /* navigation privée */ }
 }
 export function deconnecter() {
@@ -34,25 +60,31 @@ export async function api<T>(chemin: string, options: RequestInit = {}): Promise
   });
   if (res.status === 401 && s) { deconnecter(); throw new Error('Session expirée.'); }
   const corps = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(Array.isArray(corps.message) ? corps.message.join(' ') : corps.message ?? 'Erreur réseau.');
+  if (!res.ok) {
+    const e = new Error(Array.isArray(corps.message) ? corps.message.join(' ') : corps.message ?? 'Erreur réseau.') as Error & { statut?: number };
+    e.statut = res.status;
+    throw e;
+  }
   return corps as T;
 }
 
-export const PISTES: Record<Piste, string> = { groupe: 'Séance de groupe', solo: 'Parcours solo', complement: 'Complément' };
 export const STATUTS = { a_faire: 'À faire', en_cours: 'En cours', termine: 'Terminé' } as const;
+export const NIVEAUX: Record<Niveau, string> = { L1: 'Licence 1', L2: 'Licence 2', L3: 'Licence 3', autre: 'Autre parcours' };
+export const DIFFICULTES = ['découverte', 'bases', 'opérationnel'] as const;
+export const capitale = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export function dateFr(iso: string) {
-  const d = new Date(iso + 'T12:00:00');
-  return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
-}
-export function aujourdHui() {
-  return new Date().toISOString().slice(0, 10);
-}
-export function dateCourte(iso: string) {
-  return new Date(iso + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
-}
 /** Durée en heures : 120 → « 2 h », 90 → « 1 h 30 ». */
 export function dureeH(minutes: number) {
   const h = Math.floor(minutes / 60), m = minutes % 60;
   return h ? `${h} h${m ? ` ${String(m).padStart(2, '0')}` : ''}` : `${m} min`;
 }
+
+/** Libellé du niveau d'un utilisateur : « Licence 3 · Big Data et intelligence artificielle ». */
+export function libelleNiveau(u: Pick<Utilisateur, 'niveau' | 'optionL3'>, optionTitre?: string | null) {
+  if (!u.niveau) return 'Niveau à préciser';
+  return u.niveau === 'L3' && optionTitre ? `${NIVEAUX.L3} · ${optionTitre}` : NIVEAUX[u.niveau];
+}
+
+/** Index de la progression par slug. */
+export const indexer = (prog: Progression[]) => new Map(prog.map((p) => [p.cours, p]));
+export const pourcent = (n: number, d: number) => (d ? Math.round((100 * n) / d) : 0);

@@ -7,7 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Shell from '@/components/Shell';
 import Quiz from '@/components/Quiz';
-import { api, Cours, dateFr, dureeH, PISTES, Progression, STATUTS } from '@/lib/api';
+import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
+import { ancreUe } from '@/lib/licence';
 import { chapitres, estCorrection, illustration, infoDomaine, styleDomaine } from '@/lib/domaines';
 
 type Etape = { type: 'objectifs' | 'section' | 'correction' | 'quiz'; titre: string; corps: string };
@@ -19,6 +20,19 @@ function ecrireLocal(cle: string, v: number) {
   try { localStorage.setItem(cle, String(v)); } catch { /* navigation privée */ }
 }
 
+/** Lien d'un emplacement : « L2 · S3 · Bases de données… » ou « Parcours Data engineer · étape 3 ». */
+function lienEmplacement(e: Emplacement) {
+  if (e.type === 'licence') {
+    return { href: `/licence/${e.niveau}#${ancreUe(e.semestre, e.ue)}`, texte: `${e.niveau} · ${e.semestre} · ${e.ue}${e.optionTitre ? ` (option ${e.optionTitre})` : ''}` };
+  }
+  return { href: `/parcours/${e.code}`, texte: `Parcours ${e.titre} · étape ${e.etape}` };
+}
+
+/** Parcours d'où l'on vient (mémorisé par la page du parcours), pour conseiller le cours suivant. */
+function parcoursDOrigine() {
+  try { return sessionStorage.getItem('ssa-parcours') ?? ''; } catch { return ''; }
+}
+
 function Markdown({ texte }: { texte: string }) {
   return <div className="prose"><ReactMarkdown remarkPlugins={[remarkGfm]}>{texte}</ReactMarkdown></div>;
 }
@@ -26,6 +40,7 @@ function Markdown({ texte }: { texte: string }) {
 function Contenu({ slug }: { slug: string }) {
   const [cours, setCours] = useState<Cours | null>(null);
   const [prog, setProg] = useState<Progression | null>(null);
+  const [toutes, setToutes] = useState<Progression[]>([]);
   const [progChargee, setProgChargee] = useState(false);
   const [actif, setActif] = useState(0);
   const [plusLoin, setPlusLoin] = useState(0);
@@ -40,7 +55,7 @@ function Contenu({ slug }: { slug: string }) {
   const chargerProg = useCallback(async () => {
     const l = await api<Progression[]>('/progression');
     const p = l.find((x) => x.cours === slug) ?? null;
-    setProg(p); setProgChargee(true);
+    setProg(p); setToutes(l); setProgChargee(true);
     return p;
   }, [slug]);
 
@@ -109,6 +124,13 @@ function Contenu({ slug }: { slug: string }) {
   const avance = termine ? 100 : Math.round((100 * plusLoin) / n);
   const dom = infoDomaine(cours.domaine);
   const e = etapes[actif];
+  const statutDe = (s: string) => toutes.find((p) => p.cours === s)?.statut ?? 'a_faire';
+  const aFaireAvant = cours.prerequisCours.filter((p) => statutDe(p.slug) !== 'termine');
+  // Cours suivant conseillé : dans le parcours d'où l'on vient, sinon dans la même UE, sinon dans un parcours.
+  const origine = parcoursDOrigine();
+  const suivant = cours.emplacements.find((x) => x.type === 'parcours' && x.code === origine)?.suivant
+    ?? cours.emplacements.find((x) => x.type === 'licence' && x.suivant)?.suivant
+    ?? cours.emplacements.find((x) => x.suivant)?.suivant ?? null;
 
   return (
     <div style={styleDomaine(cours.domaine)}>
@@ -116,9 +138,13 @@ function Contenu({ slug }: { slug: string }) {
         <div className="banniere-in">
           <div>
             <Link href={`/catalogue#${dom.cle}`} className="retour">← {dom.nom}</Link>
-            <p className="meta">{PISTES[cours.piste]} · Semaine {cours.semaine} · {dateFr(cours.date)}</p>
+            {cours.emplacements.length > 0 && (
+              <ul className="emplacements" aria-label="Où trouver ce cours">
+                {cours.emplacements.map((x, i) => { const l = lienEmplacement(x); return <li key={i}><Link href={l.href}>{l.texte}</Link></li>; })}
+              </ul>
+            )}
             <h1>{cours.titre}</h1>
-            <p className="meta" style={{ marginTop: 0 }}>{dureeH(cours.duree)} · niveau {cours.niveau} · {n} chapitres</p>
+            <p className="meta" style={{ marginTop: 0 }}>{dureeH(cours.duree)} · {capitale(cours.difficulte)} · {n} chapitres{cours.visibilite === 'prive' ? ' · cours privé' : ''}</p>
             <div className="banniere-actions">
               <Link href={`/cours/${slug}/presenter`} className="btn primary">Présenter</Link>
               <a href={`/diaporamas/${slug}.pptx`} download className="btn">Télécharger le PowerPoint</a>
@@ -157,6 +183,21 @@ function Contenu({ slug }: { slug: string }) {
                   <ul className="coches">
                     {cours.objectifs.map((o, i) => <li key={i}><span className="coche" aria-hidden="true">✓</span><span>{o}</span></li>)}
                   </ul>
+                  {cours.prerequisCours.length > 0 && (
+                    <div className="encadre">
+                      <h3>Cours à connaître avant</h3>
+                      <ul className="prerequis">
+                        {cours.prerequisCours.map((p) => (
+                          <li key={p.slug}><Link href={`/cours/${p.slug}`}>{p.titre}</Link> <span className={`statut ${statutDe(p.slug)}`}>{STATUTS[statutDe(p.slug)]}</span></li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {aFaireAvant.length > 0 && (
+                    <div className="conseil" role="note">
+                      <strong>Conseil :</strong> commence par {aFaireAvant.length > 1 ? 'les cours' : 'le cours'} {aFaireAvant.map((p, i) => <span key={p.slug}>{i ? ' et ' : ''}<Link href={`/cours/${p.slug}`}>« {p.titre} »</Link></span>)}. Ce cours s’appuie dessus.
+                    </div>
+                  )}
                   <div className="encadre">
                     <h3>Prérequis</h3>
                     {cours.prerequis.length ? <ul>{cours.prerequis.map((p, i) => <li key={i}>{p}</li>)}</ul> : <p className="small" style={{ margin: 0 }}>Aucun : ce cours peut être suivi directement.</p>}
@@ -185,9 +226,15 @@ function Contenu({ slug }: { slug: string }) {
                   {prog?.quizTotal ? <p className="small">Meilleur score : <strong>{prog.quizScore}/{prog.quizTotal}</strong> ({prog.quizEssais} essai{prog.quizEssais > 1 ? 's' : ''})</p> : null}
                   <div className="fin">
                     {termine
-                      ? <><strong>✓ Cours terminé. Bravo !</strong><Link href="/tableau-de-bord" className="btn">Retour à l’accueil</Link></>
+                      ? <><strong>✓ Cours terminé. Bravo !</strong><Link href="/accueil" className="btn">Retour à l’accueil</Link></>
                       : <><strong>Tu as fini ce cours ?</strong><button className="btn primary" onClick={() => terminer().catch(() => {})}>Marquer comme terminé</button></>}
                   </div>
+                  {suivant && (
+                    <Link href={`/cours/${suivant.slug}`} className="suivant-conseille">
+                      <span className="small muted">Cours suivant conseillé</span>
+                      <strong>{suivant.titre} →</strong>
+                    </Link>
+                  )}
                 </>
               )}
 

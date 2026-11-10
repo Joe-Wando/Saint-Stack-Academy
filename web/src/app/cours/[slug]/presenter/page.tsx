@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Shell from '@/components/Shell';
-import { api, Cours, dureeH, PISTES } from '@/lib/api';
+import { api, capitale, Cours, dureeH } from '@/lib/api';
 import { Diapositive, illustration, infoDomaine, plan, styleDomaine } from '@/lib/domaines';
 
 const AUTEUR = 'Olivier Jonathan DIPO WANDO';
@@ -18,9 +18,9 @@ function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n:
     return (
       <div className="d-couverture">
         <div className="d-couverture-txt">
-          <span className="tag">{PISTES[cours.piste]} · Semaine {cours.semaine}</span>
+          <span className="tag">{dom.nom}</span>
           <h1>{cours.titre}</h1>
-          <p className="d-info">{dom.nom} · {dureeH(cours.duree)} · niveau {cours.niveau}</p>
+          <p className="d-info">{dureeH(cours.duree)} · {capitale(cours.difficulte)}</p>
           <p className="d-auteur">{AUTEUR}</p>
         </div>
         <div className="d-couverture-img"><img src={illustration(cours.domaine)} alt="" width={960} height={540} /></div>
@@ -30,7 +30,7 @@ function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n:
   let surtitre = cours.titre, titre = '', corps = null;
   if (d.type === 'objectifs') {
     surtitre = 'Objectifs';
-    titre = 'À la fin de cette séance, tu sauras';
+    titre = 'À la fin de ce cours, tu sauras';
     corps = <ul className="d-coches">{d.objectifs.map((o, k) => <li key={k}><span className="coche" aria-hidden="true">✓</span><span>{o}</span></li>)}</ul>;
   } else if (d.type === 'contenu') {
     surtitre = d.titre;
