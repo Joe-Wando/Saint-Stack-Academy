@@ -11,6 +11,13 @@ profil="${TMPDIR:-/tmp}/ssa-edge-profil-$$"
 trap 'rm -rf "$profil" 2>/dev/null || true' EXIT
 verifier() { case "$1" in http://localhost:3000/*|http://localhost:3000) ;; *) echo "Adresse refusée : $1" >&2; exit 2 ;; esac; }
 
+#   tools/capturer.sh --pages <travaux.json> <dossier où puppeteer-core est installé>   plusieurs captures fiables
+#   (les adresses sont vérifiées une par une par tools/capturer-pages.cjs)
+if [ "${1:-}" = "--pages" ]; then
+  node "$(dirname "$0")/capturer-pages.cjs" "${3:?dossier puppeteer}" "${2:?travaux.json}"
+  exit $?
+fi
+
 if [ "${1:-}" = "--lighthouse" ]; then
   url="${2:?url}"; rapport="${3:?rapport json}"; forme="${4:-mobile}"; verifier "$url"
   cli="${5:?dossier lighthouse}/node_modules/lighthouse/cli/index.js"
@@ -23,5 +30,5 @@ fi
 
 url="${1:?url}"; sortie="${2:?fichier png}"; largeur="${3:-1366}"; hauteur="${4:-900}"; verifier "$url"
 timeout 60 "$edge" --headless=new --disable-gpu --hide-scrollbars --no-first-run --user-data-dir="$profil" \
-  --window-size="$largeur,$hauteur" --screenshot="$sortie" "$url" 2>&1 | tail -5 || true
+  --force-prefers-reduced-motion --virtual-time-budget=6000 --window-size="$largeur,$hauteur" --screenshot="$sortie" "$url" 2>&1 | tail -5 || true
 test -s "$sortie" && echo "$sortie"
