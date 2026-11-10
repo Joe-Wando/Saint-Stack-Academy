@@ -18,7 +18,7 @@ objectifs:
   - Gérer des identifiants dans le magasin Credentials
   - Situer Jenkins par rapport à GitHub Actions et GitLab CI
 prerequis:
-  - Séances GitHub Actions et GitLab CI
+  - Cours « Intégration continue avec GitHub Actions, premier workflow » et « GitLab CI/CD, stages, jobs, runners et registre »
   - Docker installé
 referentiels:
   - Certified Jenkins Engineer (CJE, CloudBees), domaines « Pipelines » et « CI/CD »
@@ -78,7 +78,7 @@ Au premier lancement, sur `http://localhost:8080` :
 2. On choisit *Install suggested plugins* (Git, Pipeline, Credentials…).
 3. On crée le compte administrateur.
 
-Le volume `jenkins_home` conserve toute la configuration : c'est la leçon de la semaine 2 qui s'applique.
+Le volume `jenkins_home` conserve toute la configuration : c'est la leçon du cours « Docker, volumes, réseaux et dockerisation d'une API » qui s'applique.
 
 ## Le Jenkinsfile déclaratif
 
@@ -178,7 +178,7 @@ Ce sont les étapes de ta fiche de configuration :
 4. **Pipeline** : choisir *Definition*, puis *Pipeline script from SCM*, avec SCM Git, l'URL du dépôt, la branche `*/main` et le chemin `Jenkinsfile`.
 5. Côté GitHub, dans *Settings*, puis *Webhooks* : renseigner `http://<adresse-jenkins>/github-webhook/`, avec le type de contenu `application/json`.
 
-Jenkins doit être **joignable depuis Internet** pour recevoir le webhook. En local, on utilise un tunnel (ngrok, Cloudflare Tunnel), ou à défaut l'interrogation périodique *Poll SCM* (`H/5 * * * *`, la syntaxe cron de la semaine 2).
+Jenkins doit être **joignable depuis Internet** pour recevoir le webhook. En local, on utilise un tunnel (ngrok, Cloudflare Tunnel), ou à défaut l'interrogation périodique *Poll SCM* (`H/5 * * * *`, la syntaxe cron du cours « Bash en pratique, script de sauvegarde et planification avec cron »).
 
 Pour construire **toutes les branches** et les pull requests, on crée plutôt un job **Multibranch Pipeline**.
 
@@ -201,7 +201,7 @@ Pour construire **toutes les branches** et les pull requests, on crée plutôt u
 1. Écris le `Jenkinsfile` de ton API : installation, lint et tests en parallèle, puis la construction de l'image seulement sur `main`.
 2. Ajoute l'identifiant `dockerhub` et un stage `Publier`.
 3. Ajoute `junit 'rapports/*.xml'` dans `post always` pour afficher les résultats des tests. Configure ton outil de test pour produire du JUnit XML.
-4. Compare sur ta feuille : nombre de lignes, temps de mise en place et maintenance, entre ce Jenkinsfile et le workflow GitHub Actions de mardi.
+4. Compare sur ta feuille : nombre de lignes, temps de mise en place et maintenance, entre ce Jenkinsfile et le workflow GitHub Actions (voir le cours « GitHub Actions, tests, matrice, secrets et publication d'une image Docker »).
 
 ## Correction
 

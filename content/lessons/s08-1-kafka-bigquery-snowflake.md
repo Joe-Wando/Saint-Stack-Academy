@@ -18,7 +18,7 @@ objectifs:
   - Charger et interroger des données dans BigQuery (bac à sable gratuit)
   - Situer Snowflake (séparation stockage et calcul, warehouses, time travel) et choisir entre ces outils
 prerequis:
-  - Semaines 4 à 7 du parcours solo (SQL, ETL, dbt, Airflow, Spark)
+  - Les cours du parcours Data engineer : SQL, ETL, dbt, Airflow et Spark
 referentiels:
   - Confluent Certified Developer for Apache Kafka (CCDAK), domaines « Fundamentals » et « Producers and Consumers »
   - Google Cloud Professional Data Engineer, domaine « Storing the data » (BigQuery)
@@ -48,12 +48,12 @@ quiz:
 
 ## Le paysage
 
-Ton parcours a construit une chaîne **batch** : chaque nuit, un ETL, dbt et Power BI. Cette séance ouvre deux portes :
+Ton parcours a construit une chaîne **batch** : chaque nuit, un ETL, dbt et Power BI. Ce cours ouvre deux portes :
 
 - **le temps réel** : traiter les événements dès qu'ils arrivent, avec **Kafka** ;
 - **les entrepôts cloud** : **BigQuery** et **Snowflake**, où de nombreuses entreprises ont migré leurs données.
 
-C'est une séance de **découverte**. L'objectif est de comprendre les concepts, de faire tourner un premier exemple et de savoir quand utiliser quoi.
+C'est un cours de **découverte**. L'objectif est de comprendre les concepts, de faire tourner un premier exemple et de savoir quand utiliser quoi.
 
 ## Batch ou streaming
 
@@ -184,7 +184,7 @@ Exemple chiffré : une table de 500 Go a 40 colonnes de taille comparable. Une r
 
 1. On lance Kafka, avec un producteur de paiements et deux groupes consommateurs (fraude et archivage dans un fichier).
 2. On ouvre le bac à sable BigQuery, on lance une requête sur un jeu public et on observe le volume scanné.
-3. On charge le CSV de la boutique dans BigQuery, puis on y exécute les requêtes de la semaine 7, sans modification.
+3. On charge le CSV de la boutique dans BigQuery, puis on y exécute les requêtes (voir le cours « SQL, agrégats, GROUP BY et jointures »), sans modification.
 4. On fait une visite guidée de l'interface Snowflake : warehouses, time travel.
 
 ## Exercice guidé

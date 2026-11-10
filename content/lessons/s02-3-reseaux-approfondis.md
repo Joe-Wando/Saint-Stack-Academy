@@ -18,7 +18,7 @@ objectifs:
   - Configurer un pare-feu avec ufw selon le principe du moindre accès
   - Diagnostiquer avec traceroute, ss, tcpdump et nc
 prerequis:
-  - Séance « Les réseaux pour développeurs »
+  - Cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP »
 referentiels:
   - CompTIA Network+ (N10-009), domaines 1 « Networking Concepts », 4 « Network Security » et 5 « Troubleshooting »
   - Cisco CCNA 200-301, domaine 1 « Network Fundamentals »

@@ -18,7 +18,7 @@ objectifs:
   - Diagnostiquer et optimiser un modèle (VertiPaq, Performance Analyzer, DAX Studio)
   - "Gouverner : RLS dynamique, actualisation incrémentielle, déploiement par environnements"
 prerequis:
-  - Séance solo « Power BI, du modèle en étoile au tableau de bord »
+  - Cours « Power BI, du modèle en étoile au tableau de bord »
 referentiels:
   - Microsoft PL-300 « Power BI Data Analyst » (niveau avancé des domaines « Model » et « Deploy and maintain »)
   - Microsoft DP-600 « Fabric Analytics Engineer » (modélisation sémantique et optimisation)

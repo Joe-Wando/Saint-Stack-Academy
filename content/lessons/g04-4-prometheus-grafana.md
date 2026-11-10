@@ -19,7 +19,7 @@ objectifs:
   - Instrumenter une API Node pour exposer ses métriques
   - Construire un tableau de bord Grafana et définir une alerte utile
 prerequis:
-  - Semaine 2 (Docker Compose) ; Kubernetes de la semaine 4
+  - Cours « Docker Compose et Docker Hub » et cours Kubernetes
 referentiels:
   - CNCF Prometheus Certified Associate (PCA), domaines « Observability Concepts », « PromQL », « Instrumentation » et « Alerting »
   - Google, Site Reliability Engineering, chapitre 6 « Monitoring Distributed Systems » (les quatre signaux d'or)
@@ -258,7 +258,7 @@ commandes.inc({ moyen_paiement: 'wave' });
 ```
 
 Question 5 : la moyenne est trompeuse. **1 requête sur 100 prend 4 secondes ou plus**. Sur 100 000 requêtes par jour, cela fait au moins 1 000 expériences très lentes. Il faut chercher la cause :
-- une requête SQL sans index (semaine 8) ;
+- une requête SQL sans index (voir le cours « PostgreSQL, index, transactions et sauvegardes ») ;
 - un appel externe lent ;
 - le ramasse-miettes de Node.
 

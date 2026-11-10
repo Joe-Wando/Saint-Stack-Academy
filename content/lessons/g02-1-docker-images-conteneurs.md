@@ -18,7 +18,7 @@ objectifs:
   - Publier un port, passer des variables d'environnement et nommer un conteneur
   - Gérer le cycle de vie d'un conteneur (lister, arrêter, redémarrer, supprimer, logs, exec)
 prerequis:
-  - Séances « Le terminal Linux » et « Les réseaux pour développeurs »
+  - Cours « Le terminal Linux, se déplacer et manipuler des fichiers » et « Les réseaux pour développeurs, IP, ports, DNS et HTTP »
   - Docker Desktop (Windows ou macOS) ou Docker Engine (Linux) installé
 referentiels:
   - Chapitres DIT 4 « Introduction sur Docker » et 5 « Prise en main de Docker »
@@ -44,7 +44,7 @@ quiz:
   - question: "Que devient ce que tu as écrit dans un conteneur quand tu le supprimes avec docker rm ?"
     choix: ["C'est conservé dans l'image", "C'est perdu, sauf si c'était dans un volume", "C'est envoyé sur Docker Hub", "C'est sauvegardé dans /tmp"]
     reponse: 1
-    explication: "La couche d'écriture d'un conteneur disparaît avec lui. Pour garder des données (une base, par exemple), on utilise un volume, vu jeudi."
+    explication: "La couche d'écriture d'un conteneur disparaît avec lui. Pour garder des données (une base, par exemple), on utilise un volume (voir le cours « Docker, volumes, réseaux et dockerisation d'une API »)."
 ---
 
 ## Le problème
@@ -151,7 +151,7 @@ docker stats                   # processeur et mémoire de chaque conteneur
 docker system prune            # faire le ménage (conteneurs arrêtés, images orphelines)
 ```
 
-Tu retrouves les notions de la séance solo sur les processus : un conteneur a un processus principal, et `docker stop` lui envoie un signal.
+Tu retrouves les notions du cours « Linux, processus, services systemd et journaux » : un conteneur a un processus principal, et `docker stop` lui envoie un signal.
 
 ## Démonstration
 
@@ -217,7 +217,7 @@ docker exec pg-test psql -U postgres -c "SELECT * FROM eleves"   # 4. relation "
 docker image ls postgres
 ```
 
-Questions 3 et 4 : arrêter un conteneur garde sa couche d'écriture, mais le **supprimer** la détruit. Un nouveau conteneur repart de l'image vierge. Il faudra un volume pour garder les données (jeudi). En réalité, l'image postgres crée un volume anonyme automatiquement, mais il n'est pas réutilisé par le nouveau conteneur.
+Questions 3 et 4 : arrêter un conteneur garde sa couche d'écriture, mais le **supprimer** la détruit. Un nouveau conteneur repart de l'image vierge. Il faudra un volume pour garder les données (voir le cours « Docker, volumes, réseaux et dockerisation d'une API »). En réalité, l'image postgres crée un volume anonyme automatiquement, mais il n'est pas réutilisé par le nouveau conteneur.
 
 Question 5 : environ 430 Mo contre 270 Mo. Alpine est une distribution Linux minimale (environ 8 Mo de base), alors que l'image par défaut repose sur Debian.
 
@@ -225,4 +225,4 @@ Question 5 : environ 430 Mo contre 270 Mo. Alpine est une distribution Linux min
 
 - *Play with Docker* (labs.play-with-docker.com) : un terrain de jeu Docker dans le navigateur, sans installation.
 - `docker run --memory 256m --cpus 0.5` limite les ressources d'un conteneur grâce aux cgroups.
-- Demain, on construit **nos propres** images avec un Dockerfile.
+- Cours suivant conseillé : « Construire ses images avec un Dockerfile » : on y construit **nos propres** images.

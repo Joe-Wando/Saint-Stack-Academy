@@ -18,7 +18,7 @@ objectifs:
   - Utiliser Redis pour la limitation de débit, les sessions, le pub/sub et les files de tâches
   - Configurer la persistance de Redis (RDB, AOF) et l'éviction mémoire
 prerequis:
-  - Séances PostgreSQL ; MongoDB et Redis (le 31 décembre, ou en avance)
+  - Cours PostgreSQL ; « NoSQL, MongoDB et Redis »
 referentiels:
   - Oracle MySQL 8.0 Database Developer (1Z0-909), bases
   - Redis University RU101 « Introduction to Redis Data Structures » et RU102JS « Redis for JavaScript Developers »
@@ -93,7 +93,7 @@ ON DUPLICATE KEY UPDATE quantite = quantite + VALUES(quantite);
 
 ## Partie 2 : Redis en profondeur
 
-La séance du 31 décembre présente Redis comme cache. Ce complément explore ses **structures** et ses **usages avancés**.
+Le cours « NoSQL, MongoDB et Redis » présente Redis comme cache. Ce cours explore ses **structures** et ses **usages avancés**.
 
 | Structure | Commandes clés | Usage typique |
 |---|---|---|
@@ -106,7 +106,7 @@ La séance du 31 décembre présente Redis comme cache. Ce complément explore s
 
 ### La limitation de débit (*rate limiting*)
 
-C'est l'algorithme à **fenêtre fixe** : au plus 5 tentatives de connexion par minute et par adresse IP, la protection de la séance OWASP du 7 décembre.
+C'est l'algorithme à **fenêtre fixe** : au plus 5 tentatives de connexion par minute et par adresse IP, la protection vue dans le cours « Sécurité des applications web, OWASP Top 10 ».
 
 ```js
 async function autoriser(ip) {
@@ -156,7 +156,7 @@ Exemple : 9 000 succès et 1 000 échecs donnent un taux de succès de 9 000 / 1
 
 ## Démonstration
 
-1. On lance MySQL, on crée la base `boutique` avec un utilisateur limité, puis on porte les tables et requêtes de la semaine 7 en notant chaque différence.
+1. On lance MySQL, on crée la base `boutique` avec un utilisateur limité, puis on porte les tables et requêtes des cours SQL (voir le cours « SQL, agrégats, GROUP BY et jointures ») en notant chaque différence.
 2. Avec Redis, on met en place la limitation de débit sur la route de connexion de l'API, et on la teste avec une boucle `curl`.
 3. On crée un classement des produits les plus vus avec un ensemble trié.
 4. On démontre Pub/Sub entre deux terminaux.
@@ -164,7 +164,7 @@ Exemple : 9 000 succès et 1 000 échecs donnent un taux de succès de 9 000 / 1
 
 ## Exercice guidé
 
-1. Écris en MySQL la table `clients` de la semaine 7 et la requête « chiffre d'affaires livré par client ». Quelles lignes as-tu dû modifier par rapport à PostgreSQL ?
+1. Écris en MySQL la table `clients` (voir le cours « SQL, interroger une base avec SELECT ») et la requête « chiffre d'affaires livré par client ». Quelles lignes as-tu dû modifier par rapport à PostgreSQL ?
 2. Dans `redis-cli`, simule un classement : Awa (74 000), Ibrahima (70 000), Fatou (67 000), puis ajoute 10 000 à Fatou. Affiche le top 3 avec les scores.
 
 ## Exercice autonome

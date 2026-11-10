@@ -18,7 +18,7 @@ objectifs:
   - Externaliser la configuration avec une ConfigMap
   - Gérer des données sensibles avec un Secret et en connaître les limites
 prerequis:
-  - Séance « Kubernetes, architecture, Pods et Deployments »
+  - Cours « Kubernetes, architecture, Pods et Deployments »
 referentiels:
   - CNCF CKAD, domaines « Services and Networking » et « Application Environment, Configuration and Security »
   - CNCF KCNA, domaine « Kubernetes Fundamentals »
@@ -48,7 +48,7 @@ quiz:
 
 ## Le problème
 
-Hier, nos 3 Pods d'API tournaient, mais :
+Dans le cours « Kubernetes, architecture, Pods et Deployments », nos 3 Pods d'API tournaient, mais :
 
 - chaque Pod a une IP qui **change** à chaque recréation : impossible de la donner aux clients ;
 - personne, en dehors du cluster, ne peut les joindre ;
@@ -86,7 +86,7 @@ spec:
 | **NodePort** | chaque nœud, sur un port de 30000 à 32767 | tests, labo |
 | **LoadBalancer** | Internet, via un répartiteur de charge du cloud | exposer un service en production dans le cloud |
 
-**Le DNS interne** : un Pod joint le Service par son **nom**, `boutique-api`, ou depuis un autre namespace par `boutique-api.<namespace>.svc.cluster.local`. C'est le même principe que le réseau Docker de la semaine 2.
+**Le DNS interne** : un Pod joint le Service par son **nom**, `boutique-api`, ou depuis un autre namespace par `boutique-api.<namespace>.svc.cluster.local`. C'est le même principe que le réseau Docker (voir le cours « Docker, volumes, réseaux et dockerisation d'une API »).
 
 Pour tester en local sans exposer quoi que ce soit : `kubectl port-forward svc/boutique-api 8080:80`, puis `curl localhost:8080`.
 
@@ -115,7 +115,7 @@ spec:
             backend: { service: { name: boutique-web, port: { number: 80 } } }
 ```
 
-En local, on ajoute `127.0.0.1 boutique.local` dans `/etc/hosts`, comme on l'a vu en semaine 1.
+En local, on ajoute `127.0.0.1 boutique.local` dans `/etc/hosts`, comme on l'a vu dans le cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP ».
 
 ## Les ConfigMaps
 
@@ -176,7 +176,7 @@ Modifier une ConfigMap ne redémarre **pas** les Pods qui l'utilisent en variabl
 
 ## Démonstration
 
-1. On reprend le Deployment d'hier et on lui ajoute un Service ClusterIP.
+1. On reprend le Deployment du cours précédent et on lui ajoute un Service ClusterIP.
 2. On teste depuis un Pod temporaire : `kubectl run test --rm -it --image=alpine -- wget -qO- boutique-api/sante`.
 3. On ajoute la ConfigMap et le Secret, puis on vérifie les variables avec `kubectl exec <pod> -- env | grep -E "NODE_ENV|DATABASE"`.
 4. On installe ingress-nginx sur kind, on crée l'Ingress, et `curl http://boutique.local/api/sante` répond.
@@ -212,4 +212,4 @@ Exercice autonome :
 
 - Les *NetworkPolicies* sont le pare-feu entre Pods : par exemple, seule l'API peut joindre la base.
 - cert-manager obtient automatiquement des certificats Let's Encrypt pour les Ingress.
-- Jeudi : une application multi-services complète, avec une base persistante, et Helm pour la packager.
+- Cours suivant conseillé : « Kubernetes, application multi-services, stockage persistant et introduction à Helm ».

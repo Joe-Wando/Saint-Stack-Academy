@@ -19,7 +19,7 @@ objectifs:
   - Utiliser variables, gabarits Jinja2, handlers et rôles
   - Protéger les secrets avec Ansible Vault
 prerequis:
-  - Séances solo de la semaine 1 (Linux, SSH, paquets) et de la semaine 2 (Bash)
+  - Cours Linux (droits, processus, paquets et SSH) et « Bash, variables, conditions, boucles et fonctions »
 referentiels:
   - Red Hat Certified Engineer (RHCE, EX294), consacré à l'automatisation avec Ansible
   - Documentation Ansible, « Getting started » et « Playbook guide »
@@ -214,7 +214,7 @@ Le fichier est **chiffré** (AES-256). On peut le commiter dans Git, mais **jama
 2. On écrit le playbook nginx, on lance `--check --diff`, puis l'exécution réelle : `changed=5`.
 3. On relance : `changed=0`, ce qui prouve l'idempotence.
 4. On modifie le titre du site : seul le fichier change, et le handler recharge nginx.
-5. On transforme le playbook en rôle, puis on ajoute un rôle `commun` (paquets de base, utilisateur `deploy` avec sa clé SSH, durcissement de SSH vu en semaine 1).
+5. On transforme le playbook en rôle, puis on ajoute un rôle `commun` (paquets de base, utilisateur `deploy` avec sa clé SSH, durcissement de SSH vu dans le cours « Linux, gestion des paquets, SSH et clés »).
 
 ## Exercice guidé
 
@@ -276,7 +276,7 @@ Exercice autonome, l'extrait clé du rôle `commun` :
   notify: Recharger ssh
 ```
 
-`validate` reprend la bonne pratique de la séance SSH : vérifier la configuration **avant** de l'appliquer, pour ne pas se retrouver exclu du serveur.
+`validate` reprend la bonne pratique du cours « Linux, gestion des paquets, SSH et clés » : vérifier la configuration **avant** de l'appliquer, pour ne pas se retrouver exclu du serveur.
 
 ## Pour aller plus loin
 

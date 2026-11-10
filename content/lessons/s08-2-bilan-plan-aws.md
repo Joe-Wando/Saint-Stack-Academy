@@ -16,7 +16,7 @@ objectifs:
   - Relier chaque notion déjà vue (Linux, réseaux, Docker, bases de données, supervision) à son service AWS
   - Établir un plan de préparation de 4 semaines avec des ressources fiables
 prerequis:
-  - L'ensemble des séances des semaines 1 à 8
+  - Les cours des parcours DevOps, Systèmes et Data
 referentiels:
   - AWS Certified Cloud Practitioner (CLF-C02), guide officiel de l'examen
   - AWS Well-Architected Framework (6 piliers)
@@ -41,7 +41,7 @@ quiz:
   - question: "Quel est le bon réflexe avec le compte root d'AWS ?"
     choix: ["L'utiliser au quotidien", "Activer la MFA, ne pas créer de clé d'accès et utiliser des utilisateurs ou rôles IAM pour le travail courant", "Partager son mot de passe avec l'équipe", "Le supprimer"]
     reponse: 1
-    explication: "Moindre privilège, comme sudo sous Linux (semaine 1) et les comptes d'administration séparés dans Active Directory (semaine 3)."
+    explication: "Moindre privilège, comme sudo sous Linux et les comptes d'administration séparés dans Active Directory."
 ---
 
 ## Faire le point
@@ -58,7 +58,7 @@ Pour chaque domaine, note ton niveau selon la même échelle que la plateforme :
 | **Bases** | je réalise seul l'exercice autonome, en cherchant dans la documentation |
 | **Opérationnel** | je l'applique à un projet nouveau, et je l'explique à quelqu'un d'autre |
 
-| Domaine | Séances | Mon niveau | Preuve (projet, dépôt) |
+| Domaine | Cours | Mon niveau | Preuve (projet, dépôt) |
 |---|---|---|---|
 | Linux et Bash | droits, processus, SSH, scripts, cron | | |
 | Réseaux | IP, DNS, HTTP, CIDR, pare-feu | | |
@@ -72,7 +72,7 @@ Pour chaque domaine, note ton niveau selon la même échelle que la plateforme :
 
 Le tableau de bord de la plateforme affiche ton avancement et tes moyennes aux quiz **par domaine**. Compare-les à ton ressenti : un écart important (« je me sens Opérationnel, mais j'ai 55 % aux quiz ») indique une notion à revoir.
 
-**La méthode de consolidation** : pour chaque domaine en dessous de « Bases », refais l'exercice autonome **sans** la correction, puis explique-le **à voix haute** à tes amis du groupe. Enseigner reste le meilleur moyen d'apprendre.
+**La méthode de consolidation** : pour chaque domaine en dessous de « Bases », refais l'exercice autonome **sans** la correction, puis explique-le **à voix haute** à quelqu'un d'autre. Enseigner reste le meilleur moyen d'apprendre.
 
 ## Le portfolio
 
@@ -80,7 +80,7 @@ Un recruteur regarde **ce que tu as construit**. Trois projets bien présentés 
 
 1. **La chaîne data complète** : de l'ETL Python à PostgreSQL, puis dbt (avec ses tests), orchestré par Airflow, jusqu'à Power BI. Fournis un schéma d'architecture, un README et une capture du tableau de bord.
 2. **L'application conteneurisée avec CI/CD** : une API et sa base avec Docker Compose, des tests (Jest, Supertest), GitHub Actions qui publie l'image, un déploiement Kubernetes et une supervision Grafana.
-3. **Saint Stack Academy** : la plateforme que tu utilises (Next.js, NestJS, PostgreSQL), avec tes contributions.
+3. **Une application web complète** : un frontend Next.js, une API NestJS et une base PostgreSQL, avec authentification et tests.
 
 **Un bon README** contient :
 
@@ -116,20 +116,20 @@ Exemple chiffré : sur 50 questions notées, la sécurité en représente enviro
 
 | Ce que tu as appris | Équivalent AWS |
 |---|---|
-| Serveur Linux, SSH (semaine 1) | **EC2** (machines virtuelles), paires de clés |
-| Réseaux, CIDR, pare-feu `ufw` (semaine 2) | **VPC**, sous-réseaux publics et privés, **Security Groups**, NACL |
+| Serveur Linux, SSH | **EC2** (machines virtuelles), paires de clés |
+| Réseaux, CIDR, pare-feu `ufw` | **VPC**, sous-réseaux publics et privés, **Security Groups**, NACL |
 | DNS (semaines 1 et 3) | **Route 53** |
 | Utilisateurs, groupes, moindre privilège (semaines 1 et 3) | **IAM** (utilisateurs, groupes, rôles, politiques), MFA |
 | Sauvegardes et règle 3-2-1 (semaines 2 et 8) | **S3** (stockage d'objets, classes de stockage), AWS Backup |
-| Docker et registre (semaine 2) | **ECR**, **ECS** et **Fargate** |
-| Kubernetes (semaine 4) | **EKS** |
-| Prometheus, Grafana, alertes (semaine 4) | **CloudWatch** (métriques, journaux, alarmes), **CloudTrail** (audit) |
-| PostgreSQL, sauvegardes, haute disponibilité (semaine 8) | **RDS**, **Aurora**, Multi-AZ |
-| Redis (semaine 8) | **ElastiCache** |
-| MongoDB, NoSQL (semaine 8) | **DynamoDB** |
+| Docker et registre | **ECR**, **ECS** et **Fargate** |
+| Kubernetes | **EKS** |
+| Prometheus, Grafana, alertes | **CloudWatch** (métriques, journaux, alarmes), **CloudTrail** (audit) |
+| PostgreSQL, sauvegardes, haute disponibilité | **RDS**, **Aurora**, Multi-AZ |
+| Redis | **ElastiCache** |
+| MongoDB, NoSQL | **DynamoDB** |
 | Entrepôt, Spark, Kafka (semaines 7 et 8) | **Redshift**, **EMR**, **MSK** ; **Athena** pour interroger S3 en SQL |
-| CI/CD (semaine 3) | CodePipeline, CodeBuild |
-| Script planifié (semaine 2) | **Lambda** et EventBridge |
+| CI/CD | CodePipeline, CodeBuild |
+| Script planifié | **Lambda** et EventBridge |
 
 ### Les notions spécifiques au cloud
 
@@ -163,7 +163,7 @@ Il est prévu pour janvier, à environ 1 h par jour, en parallèle des cours du 
 
 1. On parcourt ensemble la grille d'auto-évaluation, avec les statistiques de ton espace sur la plateforme.
 2. On crée un compte AWS en suivant les règles de sécurité : MFA sur le root, utilisateur IAM, alerte de budget.
-3. On lance une EC2 Ubuntu, on s'y connecte en SSH avec la clé de la semaine 1, on y installe Docker, on y lance l'API boutique, puis on supprime tout.
+3. On lance une EC2 Ubuntu, on s'y connecte en SSH avec la clé créée dans le cours « Linux, gestion des paquets, SSH et clés », on y installe Docker, on y lance l'API boutique, puis on supprime tout.
 
 ## Exercice guidé
 
@@ -181,7 +181,7 @@ Associe chaque besoin au bon service AWS :
 2. Rédige le README de ton projet data principal en suivant le modèle ci-dessus.
 3. Planifie dans ton calendrier les 4 semaines de préparation AWS, avec la date visée pour l'examen.
 4. Crée ton compte AWS en appliquant les quatre règles de sécurité, et envoie une capture de l'alerte de budget.
-5. Rédige, en 10 lignes, l'architecture AWS de la plateforme Saint Stack Academy : où iraient le frontend, l'API, la base, les sauvegardes et la supervision ?
+5. Rédige, en 10 lignes, l'architecture AWS d'une plateforme de cours en ligne : où iraient le frontend, l'API, la base, les sauvegardes et la supervision ?
 
 ## Correction
 

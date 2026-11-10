@@ -18,7 +18,7 @@ objectifs:
   - Charger de façon idempotente et incrémentale dans PostgreSQL (upsert, filigrane)
   - Structurer le pipeline en fonctions, journaliser, paramétrer et le dockeriser
 prerequis:
-  - Séances « Python pour la data » et « Modélisation des données »
+  - Cours « Python pour la data, pandas et Matplotlib » et « Modélisation des données, OLTP, OLAP et schéma en étoile »
 referentiels:
   - Databricks Certified Data Engineer Associate, domaines « ELT with Spark SQL and Python » et « Incremental Data Processing »
   - Google Cloud Professional Data Engineer, domaine « Ingesting and processing the data »
@@ -59,7 +59,7 @@ ELT :  Extraire ──▶ Charger (brut, dans l'entrepôt) ──▶ Transformer
 | Données brutes conservées ? | souvent non | oui (couche bronze) |
 | Quand le choisir ? | transformations complexes, données sensibles à masquer avant le chargement | entrepôt puissant, équipe à l'aise en SQL |
 
-Aujourd'hui, on écrit un pipeline **Python** qui extrait, contrôle et charge la couche **bronze et silver**. Vendredi, **dbt** construira la couche **gold** (l'étoile d'hier) en SQL. C'est l'architecture ELT moderne.
+Ici, on écrit un pipeline **Python** qui extrait, contrôle et charge la couche **bronze et silver**. Ensuite, **dbt** construit la couche **gold** (l'étoile du cours précédent) en SQL (voir le cours « dbt, transformer les données en SQL comme du code »). C'est l'architecture ELT moderne.
 
 ## Le projet
 
@@ -180,7 +180,7 @@ def charger_commandes(df, url_cible: str):
 ```
 
 - **Idempotent** : relancer le pipeline sur le même fichier met à jour les lignes **sans doublon**, grâce à la clé primaire et à `ON CONFLICT`.
-- **Transactionnel** : en cas d'erreur au milieu, rien n'est chargé. On en reparle en semaine 8.
+- **Transactionnel** : en cas d'erreur au milieu, rien n'est chargé. On en reparle dans le cours « PostgreSQL, index, transactions et sauvegardes ».
 - **Incrémental** : pour les tables sources volumineuses, on ne lit que ce qui a changé depuis la dernière exécution, grâce à un **filigrane** (*watermark*).
 
 ```python
@@ -240,7 +240,7 @@ Construis le pipeline complet du projet `etl-boutique` :
 2. Transformation : normalisation, conversion des devises, jointure avec `clients` pour ajouter la ville.
 3. Contrôle qualité avec quarantaine des lignes invalides dans `silver.rejets`, avec une colonne `raison`.
 4. Chargement idempotent, et chargement incrémental des clients avec un filigrane.
-5. Dockerisation, puis planification quotidienne avec cron (semaine 2).
+5. Dockerisation, puis planification quotidienne avec cron (voir le cours « Bash en pratique, script de sauvegarde et planification avec cron »).
 6. Une preuve d'idempotence : le même nombre de lignes après deux exécutions identiques.
 
 ## Correction
@@ -284,4 +284,4 @@ Le contrôle de l'idempotence : `SELECT COUNT(*) FROM silver.lignes_commande` do
 
 - **Great Expectations** et **Soda** sont des outils dédiés aux contrôles de qualité des données.
 - **Airbyte** propose des centaines de connecteurs d'extraction prêts à l'emploi : c'est le « EL » de l'ELT.
-- Vendredi : **dbt** transforme la couche silver en étoile gold, avec des tests et de la documentation.
+- Cours suivant conseillé : « dbt, transformer les données en SQL comme du code » : **dbt** transforme la couche silver en étoile gold, avec des tests et de la documentation.

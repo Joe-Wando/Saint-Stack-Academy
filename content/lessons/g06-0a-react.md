@@ -22,7 +22,7 @@ prerequis:
   - HTML, CSS et JavaScript (fonctions fléchées, map, déstructuration)
   - Node.js installé
 referentiels:
-  - Cours « Introduction à React » de M. Harouna Soumaré (Software and DevOps engineer), base de cette séance
+  - Cours « Introduction à React » de M. Harouna Soumaré (Software and DevOps engineer), base de ce cours
   - Documentation officielle react.dev, sections « Learn » et « Reference »
   - Meta Front-End Developer Professional Certificate, cours « React Basics »
 quiz:
@@ -48,7 +48,7 @@ quiz:
     explication: "Le tableau de dépendances vide signifie que l'effet ne dépend de rien : il ne s'exécute qu'après le premier affichage. C'est le cas typique d'un appel à une API."
 ---
 
-> Cette séance reprend le cours « Introduction à React » de **M. Harouna Soumaré**, que je remercie. Les exemples ont été complétés et mis à jour pour React 19, Vite et TypeScript.
+> Ce cours reprend le cours « Introduction à React » de **M. Harouna Soumaré**, que je remercie. Les exemples ont été complétés et mis à jour pour React 19, Vite et TypeScript.
 
 ## Qu'est-ce que React ?
 
@@ -85,7 +85,7 @@ React garde en mémoire une copie légère de cet arbre, le **DOM virtuel**. Qua
 - **Composants réutilisables** : un bouton, une carte produit ou un menu s'écrivent une fois et servent partout.
 - **Interfaces interactives** : les likes, la recherche instantanée, les paniers se mettent à jour sans rechargement.
 - **JSX** : on écrit un balisage proche du HTML directement dans le JavaScript.
-- **Écosystème** : React Router, Tailwind CSS, Material UI, Next.js (dès mardi) et React Native pour le mobile.
+- **Écosystème** : React Router, Tailwind CSS, Material UI, Next.js (voir le cours « Next.js, pages, layouts et routage (App Router) ») et React Native pour le mobile.
 
 ## Installer un projet avec Vite
 
@@ -174,7 +174,7 @@ Il y a trois approches courantes :
 
 1. Un fichier CSS importé dans le composant : `import './Carte.css'`.
 2. Les **CSS Modules** : `import s from './Carte.module.css'`, puis `className={s.carte}`. Les classes sont isolées du reste de l'application.
-3. **Tailwind CSS**, qui fait l'objet de la séance suivante.
+3. **Tailwind CSS**, qui fait l'objet du cours suivant, « Tailwind CSS, styler avec des classes utilitaires ».
 
 ## L'état avec useState
 
@@ -340,4 +340,4 @@ Le point clé est la dépendance `[id]` : sans elle, passer de l'utilisateur 1 �
 
 - Les exercices de react.dev/learn, notamment « Thinking in React » et « Tic-Tac-Toe ».
 - `useContext` sert à partager un état (thème, utilisateur connecté) sans passer de props à chaque niveau.
-- Mardi, Next.js ajoute à React le rendu côté serveur, le routage par fichiers et les API routes.
+- Cours suivant conseillé : « Next.js, pages, layouts et routage (App Router) » : Next.js ajoute à React le rendu côté serveur, le routage par fichiers et les API routes.

@@ -18,7 +18,7 @@ objectifs:
   - Utiliser les agrégations par axe et les statistiques de base
   - Faire les opérations d'algèbre linéaire utiles en data (produit matriciel, transposée)
 prerequis:
-  - Bases de Python ; séance « Python pour la data, pandas et Matplotlib »
+  - Bases de Python ; cours « Python pour la data, pandas et Matplotlib »
 referentiels:
   - Documentation officielle NumPy, « NumPy user guide »
   - Python Institute PCAP (bases du langage)
@@ -206,7 +206,7 @@ Z = (N - N.mean(axis=0)) / N.std(axis=0)     # broadcasting : (30, 5) − (5,)
 Z.mean(axis=0).round(10), Z.std(axis=0)      # ≈ [0 0 0 0 0] et [1 1 1 1 1]
 ```
 
-Le centrage-réduction est exactement ce que fait `StandardScaler` dans scikit-learn (complément du 21 décembre).
+Le centrage-réduction est exactement ce que fait `StandardScaler` dans scikit-learn (voir le cours « Apprentissage supervisé avec scikit-learn »).
 
 ## Pour aller plus loin
 

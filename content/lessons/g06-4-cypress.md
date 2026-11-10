@@ -18,7 +18,7 @@ objectifs:
   - Préparer l'état (cy.request, fixtures, intercept) et factoriser avec des commandes personnalisées
   - Exécuter les tests sans interface en CI et exploiter captures et vidéos
 prerequis:
-  - Séances Next.js et la pyramide des tests (Jest, Supertest)
+  - Cours Next.js et la pyramide des tests (Jest, Supertest)
 referentiels:
   - ISTQB CTFL v4.0, section 2.2 (test système et test d'acceptation)
   - ISTQB Certified Tester Test Automation Engineer (CTAL-TAE)
@@ -192,11 +192,11 @@ npx cypress run                    # sans interface, toutes les specs
         with: { name: captures-cypress, path: cypress/screenshots }
 ```
 
-En cas d'échec, Cypress enregistre une **capture** au moment de l'erreur et une **vidéo** du scénario. On les télécharge comme artefacts (semaine 3).
+En cas d'échec, Cypress enregistre une **capture** au moment de l'erreur et une **vidéo** du scénario. On les télécharge comme artefacts (voir le cours « Intégration continue avec GitHub Actions, premier workflow »).
 
 ## Démonstration
 
-Sur la boutique Next.js de jeudi :
+Sur la boutique Next.js (voir le cours « Next.js, données, Route Handlers et Server Actions ») :
 
 1. On ajoute des attributs `data-cy`.
 2. Un scénario « parcourir le catalogue ».
@@ -206,7 +206,7 @@ Sur la boutique Next.js de jeudi :
 
 ## Exercice guidé
 
-Sur la plateforme Saint Stack Academy, lancée en local, écris le scénario « un apprenant passe un quiz » :
+Sur une application de quiz en ligne de ton choix, lancée en local (ou la boutique Next.js), écris le scénario « un utilisateur passe un quiz » :
 
 1. Il se connecte en passant par le **formulaire**.
 2. Il ouvre le programme, puis le cours « Le terminal Linux ».
@@ -215,7 +215,7 @@ Sur la plateforme Saint Stack Academy, lancée en local, écris le scénario « 
 
 ## Exercice autonome
 
-Pour le mini-projet « annuaire » du groupe :
+Pour le mini-projet « annuaire » :
 
 1. Un scénario d'inscription d'un membre : succès, puis pseudo déjà pris (message d'erreur).
 2. Un scénario de recherche dans la liste.

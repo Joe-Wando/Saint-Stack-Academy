@@ -18,7 +18,7 @@ objectifs:
   - Calculer des cumuls, des moyennes mobiles et des évolutions avec SUM OVER, LAG et LEAD
   - Écrire une CTE récursive simple (hiérarchie, calendrier)
 prerequis:
-  - Séance « SQL pour la data, jointures et agrégats » (même base d'exemple)
+  - Cours « SQL pour la data, jointures et agrégats » (même base d'exemple)
 referentiels:
   - ISO/IEC 9075 (SQL:2003, fonctions de fenêtrage)
   - Databricks Certified Data Engineer Associate, domaine « ELT with Spark SQL and Python »
@@ -56,7 +56,7 @@ Les questions d'analyse réelles sont rarement simples :
 
 Avec `GROUP BY` seul, ces questions demandent des sous-requêtes illisibles. Les **CTE** et les **fonctions de fenêtrage** les résolvent proprement. On les rencontre partout en data engineering : dbt, Spark SQL, BigQuery.
 
-On reprend la base d'hier (clients, produits, commandes, lignes).
+On reprend la base du cours précédent (clients, produits, commandes, lignes).
 
 ## Les CTE : nommer les étapes
 
@@ -80,7 +80,7 @@ FROM par_client pc JOIN clients c ON c.id = pc.client_id
 ORDER BY pc.total DESC;
 ```
 
-La requête se lit **de haut en bas**, comme un pipeline. C'est exactement le style des modèles **dbt** de la semaine 5.
+La requête se lit **de haut en bas**, comme un pipeline. C'est exactement le style des modèles **dbt** (voir le cours « dbt, transformer les données en SQL comme du code »).
 
 ## Les fonctions de fenêtrage
 
@@ -151,7 +151,7 @@ SELECT mois, ca,
 FROM mensuel ORDER BY mois;
 ```
 
-**L'exemple chiffré**, avec la base d'hier :
+**L'exemple chiffré**, avec la base du cours précédent :
 - octobre : commande 1 (39 000) et commande 2 (35 000), soit **74 000** ;
 - novembre : commande 4 (67 000) et commande 6 (70 000), soit **137 000** ;
 - le cumul de novembre vaut 211 000 ;
@@ -242,4 +242,4 @@ Question 3 : sans fenêtrage, il faut une sous-requête corrélée qui calcule l
 
 - `QUALIFY`, dans BigQuery, Snowflake et Databricks, filtre directement sur une fonction de fenêtrage, sans CTE.
 - Les exercices « Window Functions » du site pgexercises.com.
-- Vendredi : la même analyse en Python avec pandas, puis des graphiques avec Matplotlib.
+- Cours suivant conseillé : « Python pour la data, pandas et Matplotlib » : la même analyse en Python, puis des graphiques.

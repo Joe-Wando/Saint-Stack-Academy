@@ -18,7 +18,7 @@ objectifs:
   - Installer et configurer le rôle DNS (zone directe, zone inverse, enregistrements A, CNAME, PTR)
   - Vérifier le fonctionnement depuis un client avec ipconfig et nslookup
 prerequis:
-  - Séances « Les réseaux pour développeurs » et « Réseaux approfondis »
+  - Cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP » et « Réseaux approfondis, sous-réseaux, routage, pare-feu et diagnostic »
   - VirtualBox ou Hyper-V, 8 Go de RAM et 60 Go de disque libres
 referentiels:
   - Microsoft AZ-800 « Administering Windows Server Hybrid Core Infrastructure », domaines « Manage Windows Servers » et « Implement and manage on-premises networking »
@@ -49,7 +49,7 @@ quiz:
 
 ## Pourquoi Windows Server ?
 
-La majorité des entreprises gèrent leurs postes de travail avec **Windows Server** : les comptes utilisateurs, les imprimantes, les partages de fichiers, les mises à jour. Un administrateur système, et souvent un DevOps dans une entreprise « hybride », doit savoir mettre en place les **services réseau de base**. Aujourd'hui : **DHCP**, qui distribue les adresses, et **DNS**, qui traduit les noms. Demain : **Active Directory**, qui en dépend.
+La majorité des entreprises gèrent leurs postes de travail avec **Windows Server** : les comptes utilisateurs, les imprimantes, les partages de fichiers, les mises à jour. Un administrateur système, et souvent un DevOps dans une entreprise « hybride », doit savoir mettre en place les **services réseau de base**. Ce cours traite **DHCP**, qui distribue les adresses, et **DNS**, qui traduit les noms. Le cours suivant traite **Active Directory**, qui en dépend.
 
 ## Le laboratoire
 
@@ -122,7 +122,7 @@ Add-DhcpServerv4Reservation -ScopeId 192.168.10.0 -IPAddress 192.168.10.150 -Cli
 
 ## Le DNS
 
-Le DNS côté serveur reprend les notions de la séance « Réseaux » de la semaine 1 :
+Le DNS côté serveur reprend les notions du cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP » :
 
 - une **zone de recherche directe** `labo.local` traduit les noms en IP (enregistrements `A`, `CNAME`, `MX`) ;
 - une **zone de recherche inversée** `10.168.192.in-addr.arpa` traduit les IP en noms (enregistrements `PTR`) ;
@@ -136,7 +136,7 @@ Add-DnsServerResourceRecordCName -ZoneName labo.local -Name intranet -HostNameAl
 Add-DnsServerForwarder -IPAddress 1.1.1.1, 8.8.8.8
 ```
 
-Demain, Active Directory créera automatiquement sa propre zone, **intégrée à AD** et répliquée.
+Dans le cours « Active Directory, domaine, utilisateurs, groupes et stratégies de groupe », Active Directory crée automatiquement sa propre zone, **intégrée à AD** et répliquée.
 
 ## La vérification côté client
 
@@ -192,4 +192,4 @@ Exercice autonome, question 3 : une adresse en `169.254.x.x` est une adresse **A
 
 - Le *basculement DHCP* (*failover*) répartit une étendue entre deux serveurs pour la haute disponibilité.
 - Windows Admin Center offre une interface web d'administration moderne.
-- Demain : promotion du serveur en **contrôleur de domaine** Active Directory.
+- Cours suivant conseillé : « Active Directory, domaine, utilisateurs, groupes et stratégies de groupe » : promotion du serveur en **contrôleur de domaine**.

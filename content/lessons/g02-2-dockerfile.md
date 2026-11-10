@@ -18,7 +18,7 @@ objectifs:
   - Réduire la taille d'une image avec une image de base légère, .dockerignore et le multi-stage
   - Appliquer les bonnes pratiques de sécurité (utilisateur non root, pas de secret dans l'image)
 prerequis:
-  - Séance « Docker, images et conteneurs »
+  - Cours « Docker, images et conteneurs »
 referentiels:
   - Chapitre DIT 6 « Utilisation de Dockerfile »
   - Docker Certified Associate (DCA), domaine « Image Creation, Management and Registry »
@@ -49,7 +49,7 @@ quiz:
 
 ## L'idée
 
-Hier, on utilisait des images toutes faites (nginx, postgres). Aujourd'hui, on fabrique **l'image de notre propre application**. Un **Dockerfile** est un fichier texte qui contient la **recette** : les étapes pour construire l'image, de la même façon à chaque fois.
+Dans le cours « Docker, images et conteneurs », on utilisait des images toutes faites (nginx, postgres). Ici, on fabrique **l'image de notre propre application**. Un **Dockerfile** est un fichier texte qui contient la **recette** : les étapes pour construire l'image, de la même façon à chaque fois.
 
 ```
 Dockerfile ──docker build──▶ Image ──docker run──▶ Conteneur
@@ -279,4 +279,4 @@ __pycache__
 
 - `docker buildx build --platform linux/amd64,linux/arm64` construit une image pour plusieurs processeurs (serveurs Intel, Mac M1 à M4).
 - Les images *distroless* de Google ne contiennent même pas de shell : leur surface d'attaque est minimale.
-- Jeudi : volumes, réseaux et la dockerisation d'une API avec sa base de données.
+- Cours suivant conseillé : « Docker, volumes, réseaux et dockerisation d'une API ».

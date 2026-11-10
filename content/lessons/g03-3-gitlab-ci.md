@@ -18,7 +18,7 @@ objectifs:
   - Construire et publier une image dans le registre de conteneurs de GitLab
   - Comparer GitLab CI et GitHub Actions
 prerequis:
-  - Séances GitHub Actions de la semaine 3
+  - Cours « Intégration continue avec GitHub Actions, premier workflow » et « GitHub Actions, tests, matrice, secrets et publication d'une image Docker »
   - Un compte gitlab.com
 referentiels:
   - GitLab Certified CI/CD Associate, domaines « Pipelines », « Jobs », « Variables » et « Runners »
@@ -49,7 +49,7 @@ quiz:
 
 ## Pourquoi apprendre aussi GitLab ?
 
-De nombreuses entreprises, banques et administrations, surtout en Europe et en Afrique francophone, utilisent **GitLab**, souvent hébergé sur leurs propres serveurs. GitLab réunit en un seul outil le code, les tickets, la CI/CD, le registre d'images et la sécurité. Les concepts restent ceux d'hier ; seule la syntaxe change.
+De nombreuses entreprises, banques et administrations, surtout en Europe et en Afrique francophone, utilisent **GitLab**, souvent hébergé sur leurs propres serveurs. GitLab réunit en un seul outil le code, les tickets, la CI/CD, le registre d'images et la sécurité. Les concepts restent ceux de GitHub Actions ; seule la syntaxe change.
 
 ## L'organisation d'un pipeline
 
@@ -253,4 +253,4 @@ Question 2 : depuis une branche non protégée, `echo "${CLE_API:-vide}"` affich
 
 - `include:` réutilise des modèles, comme les gabarits *Auto DevOps* ou les analyses de sécurité SAST de GitLab.
 - `needs:` permet, comme sur GitHub, de lancer un job sans attendre la fin du stage précédent : c'est le pipeline en graphe orienté (DAG).
-- Demain : Jenkins, l'outil historique de la CI, encore très présent en entreprise.
+- Cours suivant conseillé : « Jenkins, pipelines déclaratifs et intégration avec GitHub » : l'outil historique de la CI, encore très présent en entreprise.

@@ -18,7 +18,7 @@ objectifs:
   - Créer utilisateurs, groupes et unités d'organisation selon la méthode AGDLP
   - Créer et appliquer une stratégie de groupe (GPO), puis vérifier avec gpresult
 prerequis:
-  - Séance « Windows Server, installation, rôles DNS et DHCP »
+  - Cours « Windows Server, installation, rôles DNS et DHCP »
 referentiels:
   - Microsoft AZ-800, domaine « Deploy and manage AD DS in on-premises and cloud environments »
   - Microsoft SC-300 (Microsoft Entra ID), pour la suite dans le cloud
@@ -67,7 +67,7 @@ L'authentification repose sur **Kerberos** (des tickets) et l'interrogation de l
 
 ## Créer le domaine
 
-Sur SRV01, dont l'IP fixe et le DNS ont été configurés hier :
+Sur SRV01, dont l'IP fixe et le DNS ont été configurés (voir le cours « Windows Server, installation, rôles DNS et DHCP ») :
 
 ```powershell
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
@@ -83,7 +83,7 @@ Ce qui se passe :
 
 ## Joindre un poste au domaine
 
-Sur CLI01, dont le **DNS doit pointer vers le DC** (`192.168.10.10`, ce que fournit l'option DHCP d'hier) :
+Sur CLI01, dont le **DNS doit pointer vers le DC** (`192.168.10.10`, ce que fournit l'option DHCP du cours précédent) :
 
 ```powershell
 Add-Computer -DomainName labo.local -Credential LABO\Administrateur -Restart
@@ -161,7 +161,7 @@ gpresult /r          # les GPO réellement appliquées à l'utilisateur et à l'
 
 ## Exercice autonome
 
-1. Crée 20 utilisateurs à partir d'un fichier CSV (`Prenom,Nom,Service`), chacun dans l'OU de son service. Indice : `Import-Csv` et une boucle. On le reverra vendredi en PowerShell.
+1. Crée 20 utilisateurs à partir d'un fichier CSV (`Prenom,Nom,Service`), chacun dans l'OU de son service. Indice : `Import-Csv` et une boucle. On le reverra en PowerShell (voir le cours « PowerShell, objets, pipeline et automatisation de l'administration »).
 2. Applique AGDLP à un partage `\\SRV01\Ventes` : groupe global `GG_Commerciaux`, groupe de domaine local `DL_Ventes_Modif` avec la permission Modifier sur le dossier.
 3. Une GPO liée au domaine impose un fond d'écran bleu, une GPO liée à l'OU `Ventes` un fond d'écran vert. Lequel voit un commercial ? Et un directeur ? Justifie avec LSDOU.
 
@@ -197,6 +197,6 @@ Question 3 : un commercial voit le fond **vert**. La GPO de l'OU s'applique apr�
 
 ## Pour aller plus loin
 
-- Le complément « Partages et droits NTFS » (26 novembre) approfondit les permissions de fichiers.
+- Le cours « Partages réseau et droits NTFS sous Windows Server » approfondit les permissions de fichiers.
 - Microsoft Entra Connect synchronise un AD local avec Entra ID : c'est l'identité hybride.
-- Vendredi : PowerShell, pour automatiser toute cette administration.
+- Cours suivant conseillé : « PowerShell, objets, pipeline et automatisation de l'administration », pour automatiser toute cette administration.

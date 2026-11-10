@@ -18,7 +18,7 @@ objectifs:
   - Relier les modèles avec ref() et source() et lire le graphe de dépendances (DAG)
   - Choisir la matérialisation adaptée (view, table, incremental)
 prerequis:
-  - Séances « SQL avancé, CTE et fonctions de fenêtrage », « Modélisation des données » et « Pipeline ETL »
+  - Cours « SQL avancé, CTE et fonctions de fenêtrage », « Modélisation des données, OLTP, OLAP et schéma en étoile » et « Construire un pipeline ETL en Python vers PostgreSQL »
 referentiels:
   - dbt Analytics Engineering Certification (dbt Labs), domaines « Developing dbt models » et « Managing data pipelines »
   - "Documentation dbt, « Best practice guides : How we structure our dbt projects »"
@@ -120,7 +120,7 @@ models/
 version: 2
 sources:
   - name: boutique
-    schema: silver                 # la sortie du pipeline ETL de mercredi
+    schema: silver                 # la sortie du pipeline ETL du cours précédent
     tables:
       - name: lignes_commande
         loaded_at_field: charge_le
@@ -231,8 +231,8 @@ Exemple chiffré : une table de 50 millions de lignes reçoit 100 000 nouvelles 
 ## Exercice autonome
 
 1. Branche dbt sur la sortie de ton pipeline ETL (schéma `silver`).
-2. Construis toute l'étoile de la séance de mardi : `dim_date` (avec une macro ou le paquet `dbt_utils`), `dim_clients`, `dim_produits` et `fct_ventes` en incrémental.
-3. Ajoute un mart `mart_ca_mensuel` : le chiffre d'affaires par mois et par catégorie, avec l'évolution en % calculée par `LAG` (semaine 4).
+2. Construis toute l'étoile du cours « Modélisation des données, OLTP, OLAP et schéma en étoile » : `dim_date` (avec une macro ou le paquet `dbt_utils`), `dim_clients`, `dim_produits` et `fct_ventes` en incrémental.
+3. Ajoute un mart `mart_ca_mensuel` : le chiffre d'affaires par mois et par catégorie, avec l'évolution en % calculée par `LAG` (voir le cours « SQL avancé, CTE et fonctions de fenêtrage »).
 4. Écris une macro `montant_ttc(colonne, taux=18)` qui applique la TVA de 18 %, et utilise-la.
 5. Versionne le projet dans Git, en vérifiant que `profiles.yml` n'est **pas** dans le dépôt.
 
@@ -270,5 +270,5 @@ La vérification : un montant de 10 000 donne 10 000 × 1,18 = **11 800**.
 ## Pour aller plus loin
 
 - `dbt_utils` et `dbt_expectations` sont des paquets de macros et de tests prêts à l'emploi (`packages.yml`, puis `dbt deps`).
-- Les *snapshots* dbt implémentent automatiquement les dimensions SCD de type 2 vues mardi.
-- Mardi prochain : les tests et la documentation dbt, puis l'intégration en CI.
+- Les *snapshots* dbt implémentent automatiquement les dimensions SCD de type 2 (voir le cours « Modélisation des données, OLTP, OLAP et schéma en étoile »).
+- Cours suivant conseillé : « dbt, tests, documentation, snapshots et intégration continue ».

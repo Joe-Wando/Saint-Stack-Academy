@@ -18,7 +18,7 @@ objectifs:
   - Historiser une dimension avec un snapshot (SCD de type 2)
   - Exécuter dbt build en CI avec un environnement séparé
 prerequis:
-  - Séance « dbt, transformer les données en SQL comme du code »
+  - Cours « dbt, transformer les données en SQL comme du code »
 referentiels:
   - dbt Analytics Engineering Certification, domaines « Testing », « Documentation » et « Deploying »
   - DAMA-DMBOK 2, chapitre « Data Quality »
@@ -137,7 +137,7 @@ unit_tests:
         - { client_id: 3, region: 'Autre' }
 ```
 
-On retrouve la logique des tests Jest du 11 décembre, appliquée au SQL : les **tests de données** vérifient les données réelles, les **tests unitaires** vérifient le code.
+On retrouve la logique des tests Jest (voir le cours « Tests unitaires avec Jest »), appliquée au SQL : les **tests de données** vérifient les données réelles, les **tests unitaires** vérifient le code.
 
 ## La documentation
 
@@ -160,7 +160,7 @@ SELECT * FROM {{ source('boutique', 'clients') }}
 {% endsnapshot %}
 ```
 
-À chaque `dbt snapshot`, dbt compare la source avec la dernière version enregistrée. Si la `ville` a changé, il **ferme** l'ancienne ligne (`dbt_valid_to` reçoit la date du jour) et **ajoute** une nouvelle ligne. C'est exactement le SCD de type 2 vu le 8 décembre.
+À chaque `dbt snapshot`, dbt compare la source avec la dernière version enregistrée. Si la `ville` a changé, il **ferme** l'ancienne ligne (`dbt_valid_to` reçoit la date du jour) et **ajoute** une nouvelle ligne. C'est exactement le SCD de type 2 (voir le cours « Modélisation des données, OLTP, OLAP et schéma en étoile »).
 
 | client_id | ville | dbt_valid_from | dbt_valid_to |
 |---|---|---|---|
@@ -199,7 +199,7 @@ En entreprise, on utilise `--select state:modified+` pour ne reconstruire que le
 
 ## Démonstration
 
-1. On ajoute les tests YAML au projet de vendredi, puis `dbt test` : tout passe.
+1. On ajoute les tests YAML au projet du cours précédent, puis `dbt test` : tout passe.
 2. On insère dans la source une vente avec un `client_id` inexistant : le test `relationships` **échoue**, et dbt affiche la requête de diagnostic.
 3. On écrit le test de réconciliation du chiffre d'affaires.
 4. On crée un snapshot, on modifie la ville de Moussa, on relance `dbt snapshot` et on observe deux lignes.
@@ -251,4 +251,4 @@ Exercice autonome, question 6, un exemple de contrat :
 
 - `dbt-expectations` propose plus de 50 tests prêts à l'emploi : distributions, formats, volumes.
 - Les **contrats de modèle** dbt (`contract: enforced: true`) imposent les types et les noms des colonnes.
-- Demain : Airflow, pour orchestrer l'ETL Python et dbt chaque nuit.
+- Cours suivant conseillé : « Apache Airflow, les bases de l'orchestration » : orchestrer l'ETL Python et dbt chaque nuit.

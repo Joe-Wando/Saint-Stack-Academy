@@ -19,8 +19,8 @@ objectifs:
   - Construire une image Docker et la publier sur GitHub Container Registry ou Docker Hub
   - Lancer un service PostgreSQL pour les tests d'intégration
 prerequis:
-  - Séance « Intégration continue avec GitHub Actions, premier workflow »
-  - Séance « Docker Compose et Docker Hub »
+  - Cours « Intégration continue avec GitHub Actions, premier workflow »
+  - Cours « Docker Compose et Docker Hub »
 referentiels:
   - GitHub Actions (certification GitHub), domaines 1, 3 « Author and maintain actions » et 4 « Manage GitHub Actions in the enterprise » (secrets)
   - Documentation GitHub, « Publishing Docker images »
@@ -50,7 +50,7 @@ quiz:
 
 ## L'objectif du jour
 
-Hier, notre workflow testait le code. Aujourd'hui, on construit un **vrai pipeline**, dont le schéma est le suivant :
+Dans le cours « Intégration continue avec GitHub Actions, premier workflow », notre workflow testait le code. Ici, on construit un **vrai pipeline**, dont le schéma est le suivant :
 
 ```
 push ou PR ──▶ [ tests ×3 versions ] ──▶ [ build image ] ──▶ [ push registre ]  (uniquement sur main)
@@ -125,7 +125,7 @@ Chaque job tourne sur une machine **neuve**. Les **artefacts** sont la façon de
       - run: npm ci && npm run test:integration
 ```
 
-Les connaissances de la semaine 2 servent directement : image, variables d'environnement, ports et healthcheck.
+Les connaissances des cours Docker servent directement : image, variables d'environnement, ports et healthcheck.
 
 ## Les secrets
 
@@ -215,7 +215,7 @@ jobs:
 | `needs: tests` | pas d'image si les tests échouent |
 | `if: github.event_name == 'push'` | on ne se connecte au registre que sur `main` |
 | `metadata-action` | génère des tags : `sha-a3f9c21`, et `latest` sur la branche principale |
-| `cache-from/to: gha` | réutilise les couches Docker d'une exécution à l'autre, comme le cache vu en semaine 2 |
+| `cache-from/to: gha` | réutilise les couches Docker d'une exécution à l'autre, comme le cache vu dans le cours « Construire ses images avec un Dockerfile » |
 
 L'image apparaît dans l'onglet **Packages** du dépôt. On la récupère avec `docker pull ghcr.io/<pseudo>/<depot>:sha-a3f9c21`.
 
@@ -223,14 +223,14 @@ Pour Docker Hub, on remplace `registry` et les identifiants par les secrets, et 
 
 ## Démonstration
 
-1. On applique ce workflow à l'API boutique, avec le Dockerfile de la semaine 2.
+1. On applique ce workflow à l'API boutique, avec le Dockerfile (voir le cours « Construire ses images avec un Dockerfile »).
 2. Une PR : les tests et la **construction** de l'image passent, mais rien n'est publié.
 3. La fusion sur `main` : l'image est poussée sur ghcr.io avec deux tags.
 4. Sur un autre poste, `docker pull` puis `docker run` : l'API tourne. On vient de faire de la **livraison continue**.
 
 ## Exercice guidé
 
-1. Ajoute une matrice Node 20 et 22 au workflow d'hier.
+1. Ajoute une matrice Node 20 et 22 au workflow du cours « Intégration continue avec GitHub Actions, premier workflow ».
 2. Crée un secret `MESSAGE_SECRET` et affiche-le dans une étape. Que montre le journal ?
 3. Ajoute un job `resume` qui dépend des tests et affiche « Tous les tests sont passés ».
 

@@ -17,7 +17,7 @@ objectifs:
   - Classer et numéroter avec ROW_NUMBER et RANK, éventuellement par groupe
   - Calculer un cumul et comparer à la ligne précédente avec SUM OVER et LAG
 prerequis:
-  - Séance « SQL, agrégats, GROUP BY et jointures » (même base)
+  - Cours « SQL, agrégats, GROUP BY et jointures » (même base)
 referentiels:
   - Oracle Database SQL Certified Associate (1Z0-071), domaines « Using Subqueries » et « Managing Views »
   - ISO/IEC 9075 (SQL:2003, fonctions de fenêtrage)
@@ -51,7 +51,7 @@ Certaines questions demandent un calcul **en deux temps**. « Quels produits son
 
 D'autres questions demandent de **classer** ou de **cumuler** sans perdre le détail des lignes : « le produit le plus cher **de chaque** catégorie », « le cumul du chiffre d'affaires mois après mois ». Ce sont les **fonctions de fenêtrage**.
 
-On reprend la base de la boutique, la même que mardi.
+On reprend la base de la boutique, la même que dans le cours précédent.
 
 ## Les sous-requêtes
 

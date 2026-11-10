@@ -18,8 +18,8 @@ objectifs:
   - Écrire des tests automatiques sur les réponses (statut, temps, contenu, schéma)
   - Exécuter une collection en ligne de commande avec Newman dans une CI
 prerequis:
-  - Séance « Les réseaux pour développeurs » (HTTP)
-  - Une API qui tourne en local (boutique ou Saint Stack Academy)
+  - Cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP » (HTTP)
+  - Une API qui tourne en local (par exemple l'API boutique)
 referentiels:
   - ISTQB Certified Tester Foundation Level (CTFL v4.0), chapitre 4 « Test Analysis and Design »
   - Postman API Fundamentals Student Expert
@@ -51,7 +51,7 @@ quiz:
 
 Tu as construit une API. Avant même d'avoir un frontend, il faut pouvoir l'**appeler**, l'**explorer** et vérifier qu'elle se comporte comme prévu, y compris quand on lui envoie n'importe quoi. Postman est l'outil le plus répandu pour cela. Il sert aussi de **documentation vivante**, partagée avec l'équipe frontend ou mobile.
 
-> `curl` (semaine 1) fait la même chose en ligne de commande. Postman ajoute l'organisation, les variables, les tests et le partage.
+> `curl` (voir le cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP ») fait la même chose en ligne de commande. Postman ajoute l'organisation, les variables, les tests et le partage.
 
 Des alternatives libres existent : **Bruno** et **Insomnia**, ou les fichiers `.http` de VS Code.
 
@@ -72,13 +72,13 @@ La réponse affiche le **statut**, le **temps**, la **taille**, le **corps** et 
 Une **collection** regroupe les requêtes d'une API, rangées en dossiers :
 
 ```
-Saint Stack Academy API
+API Cours en ligne
 ├── Auth
 │   ├── Inscription
 │   ├── Connexion
 │   └── Moi
-├── Programme
-│   ├── Liste du programme
+├── Cours
+│   ├── Liste des cours
 │   └── Détail d'un cours
 └── Progression
     ├── Ma progression
@@ -120,13 +120,12 @@ pm.test("Répond en moins de 500 ms", () => pm.expect(pm.response.responseTime).
 pm.test("Renvoie une liste de cours", () => {
   const cours = pm.response.json();
   pm.expect(cours).to.be.an("array").that.is.not.empty;
-  pm.expect(cours[0]).to.have.all.keys("slug", "titre", "piste", "semaine", "date", "domaine",
-    "duree", "niveau", "objectifs", "prerequis", "referentiels", "nbQuestions");
+  pm.expect(cours[0]).to.include.all.keys("slug", "titre", "domaine", "duree", "difficulte", "nbQuestions");
 });
 
-pm.test("Un apprenant ne voit que les séances de groupe", () => {
+pm.test("Un apprenant ne voit aucun cours privé", () => {
   const cours = pm.response.json();
-  pm.expect(cours.every(c => c.piste === "groupe")).to.be.true;
+  pm.expect(cours.every(c => c.visibilite !== "prive")).to.be.true;
 });
 ```
 
@@ -163,7 +162,7 @@ npm install -g newman
 newman run saint-stack.postman_collection.json -e local.postman_environment.json --reporters cli,junit
 ```
 
-Dans GitHub Actions (semaine 3) :
+Dans GitHub Actions (voir le cours « Intégration continue avec GitHub Actions, premier workflow ») :
 
 ```yaml
       - run: docker compose up -d --wait        # l'API et sa base
@@ -172,12 +171,12 @@ Dans GitHub Actions (semaine 3) :
 
 ## Démonstration
 
-Sur l'API de la plateforme Saint Stack Academy, lancée en local :
+Sur l'API d'une plateforme de cours en ligne, lancée en local :
 
 1. On crée l'environnement `local` et la collection, avec trois dossiers.
 2. Inscription puis connexion : le jeton est enregistré automatiquement.
-3. On fait des tests sur `/programme` : statut, temps et filtre par rôle.
-4. Les cas d'erreur : 401 sans jeton, 403 pour un apprenant sur `/formateur/apercu`, 404 pour un cours inexistant.
+3. On fait des tests sur `/cours` : statut, temps et filtre par rôle.
+4. Les cas d'erreur : 401 sans jeton, 403 pour un apprenant sur `/admin/statistiques`, 404 pour un cours inexistant ou privé.
 5. On exporte la collection et on l'exécute avec Newman.
 
 ## Exercice guidé
@@ -224,4 +223,4 @@ Exercice autonome, l'enchaînement : dans la requête de création, `pm.collecti
 
 - Postman peut importer une spécification **OpenAPI** (Swagger) et générer la collection automatiquement. NestJS produit ce fichier avec `@nestjs/swagger`.
 - Les **Mock Servers** simulent une API qui n'existe pas encore, pour que le frontend avance en parallèle.
-- Jeudi : Jira et Scrum ; vendredi : les tests automatisés dans le code avec Jest.
+- Cours suivants conseillés : « Scrum en pratique avec Jira » et « Tests unitaires avec Jest ».

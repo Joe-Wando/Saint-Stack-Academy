@@ -18,7 +18,7 @@ objectifs:
   - Créer un partage sécurisé selon AGDLP, en interface graphique et en PowerShell
   - Activer l'énumération basée sur l'accès et les clichés instantanés
 prerequis:
-  - Séances solo « Active Directory » et « PowerShell »
+  - Cours « Active Directory, domaine, utilisateurs, groupes et stratégies de groupe » et « PowerShell, objets, pipeline et automatisation de l'administration »
 referentiels:
   - Microsoft AZ-800, domaine « Manage storage and file services »
   - CompTIA Server+ (SK0-005), domaine 3 « Security and Disaster Recovery »
@@ -79,7 +79,7 @@ Utilisateur ──réseau──▶ [ Permissions de PARTAGE (SMB) ] ──▶ [ 
 ## La bonne pratique Microsoft
 
 - Côté **partage** : on met `Utilisateurs authentifiés` en **Contrôle total**, ou au moins en Modifier.
-- Côté **NTFS** : on gère **tous** les droits fins, selon la méthode **AGDLP** de la séance du 25 novembre.
+- Côté **NTFS** : on gère **tous** les droits fins, selon la méthode **AGDLP** (voir le cours « Active Directory, domaine, utilisateurs, groupes et stratégies de groupe »).
 
 Ainsi, il n'y a qu'**un seul endroit** pour raisonner sur les droits.
 

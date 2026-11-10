@@ -18,7 +18,7 @@ objectifs:
   - Écrire des mesures DAX essentielles (SUM, DIVIDE, CALCULATE, intelligence temporelle)
   - Concevoir un rapport lisible et le publier dans le service Power BI
 prerequis:
-  - Séances « Modélisation des données » et « dbt » (le schéma en étoile gold)
+  - Cours « Modélisation des données, OLTP, OLAP et schéma en étoile » et « dbt, transformer les données en SQL comme du code » (le schéma en étoile gold)
   - Power BI Desktop (gratuit, Windows ; sous macOS ou Linux, utiliser une VM Windows)
 referentiels:
   - Microsoft PL-300 « Power BI Data Analyst », domaines « Prepare the data », « Model the data », « Visualize and analyze the data » et « Deploy and maintain assets »
@@ -88,7 +88,7 @@ Dans *Transformer les données*, chaque action devient une **étape appliquée**
 
 ## Le modèle
 
-Dans la **vue Modèle**, on obtient l'étoile de la séance du 8 décembre :
+Dans la **vue Modèle**, on obtient l'étoile du cours « Modélisation des données, OLTP, OLAP et schéma en étoile » :
 
 ```
 dim_date ──1───*── fct_ventes ──*───1── dim_produits
@@ -185,7 +185,7 @@ La structure type de la page « Ventes » :
 
 ## Exercice autonome
 
-Construis le rapport « Pilotage des ventes » sur ta couche gold (ou sur le jeu de données Superstore de la semaine 4) :
+Construis le rapport « Pilotage des ventes » sur ta couche gold (ou sur le jeu de données Superstore (voir le cours « SQL pour la data, jointures et agrégats »)) :
 
 1. **Page 1, Synthèse** : 4 cartes, une courbe du CA mensuel avec le cumul, des barres par catégorie et des segments.
 2. **Page 2, Clients** : le top 10, la répartition par région et le panier moyen par région.
@@ -204,7 +204,7 @@ CA par client = DIVIDE ( [CA], [Nb clients actifs] )
 Gamme = IF ( dim_produits[prix_catalogue] >= 20000, "Premium", "Standard" )
 ```
 
-La vérification : il y a 3 clients actifs (Awa, Fatou, Ibrahima), donc **CA par client** = 211 000 / 3 ≈ **70 333**. C'est la même valeur que la moyenne des totaux calculée en SQL le 24 décembre.
+La vérification : il y a 3 clients actifs (Awa, Fatou, Ibrahima), donc **CA par client** = 211 000 / 3 ≈ **70 333**. C'est la même valeur que la moyenne des totaux calculée en SQL (voir le cours « SQL pour la data, jointures et agrégats »).
 
 Exercice autonome, l'évolution en % et le piège du premier mois : pour octobre, il n'y a pas de mois précédent. `DIVIDE` renvoie alors un résultat vide au lieu d'une erreur ou d'un « infini ». Le visuel affiche un tiret, ce qui est le comportement attendu.
 
@@ -212,6 +212,6 @@ Le rôle RLS se définit dans *Modélisation*, puis *Gérer les rôles*, avec un
 
 ## Pour aller plus loin
 
-- Le complément **Power BI approfondi** du 31 décembre traite du DAX avancé, des groupes de calcul, de l'optimisation avec DAX Studio et des paramètres de champ.
+- Le cours « Power BI approfondi, DAX avancé, performance et gouvernance » traite du DAX avancé, des groupes de calcul, de l'optimisation avec DAX Studio et des paramètres de champ.
 - La certification **PL-300** est un objectif accessible après ce parcours, et très demandé.
-- Demain : Spark, quand les données ne tiennent plus sur une seule machine.
+- Cours suivant conseillé : « Apache Spark, traitement distribué avec PySpark » : quand les données ne tiennent plus sur une seule machine.

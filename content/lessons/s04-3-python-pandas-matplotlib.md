@@ -19,7 +19,7 @@ objectifs:
   - Produire des graphiques lisibles avec Matplotlib et les exporter
 prerequis:
   - Bases de Python (variables, listes, dictionnaires, fonctions)
-  - Séances SQL de la semaine
+  - Cours « SQL pour la data, jointures et agrégats » et « SQL avancé, CTE et fonctions de fenêtrage »
 referentiels:
   - Python Institute PCEP et PCAP (bases du langage)
   - Databricks Certified Data Engineer Associate (manipulation de données)
@@ -135,7 +135,7 @@ pivot = livrees.pivot_table(index="mois", columns="categorie", values="montant",
 livrees["cumul_client"] = livrees.groupby("client")["montant"].cumsum()
 ```
 
-**La vérification chiffrée** : *Vêtements* donne 141 000, comme dans la séance SQL de mardi. Pour *Accessoires* livrés : bracelets (3 × 5 000 = 15 000) et sac de la commande 4 (25 000), soit **40 000**. Par rapport à l'objectif de 30 000, cela fait **133,3 %**.
+**La vérification chiffrée** : *Vêtements* donne 141 000, comme dans le cours « SQL pour la data, jointures et agrégats ». Pour *Accessoires* livrés : bracelets (3 × 5 000 = 15 000) et sac de la commande 4 (25 000), soit **40 000**. Par rapport à l'objectif de 30 000, cela fait **133,3 %**.
 
 ## Matplotlib
 
@@ -166,7 +166,7 @@ Les règles d'un graphique lisible : un titre qui dit **ce qu'on doit retenir**,
 
 ## Démonstration
 
-Dans un notebook, on charge la base de la semaine, on reproduit les trois analyses SQL de mardi et mercredi (CA par catégorie, top client, évolution mensuelle), on vérifie que les résultats sont identiques, puis on produit deux graphiques exportés en PNG.
+Dans un notebook, on charge la base des cours SQL, on reproduit leurs trois analyses (CA par catégorie, top client, évolution mensuelle), on vérifie que les résultats sont identiques, puis on produit deux graphiques exportés en PNG.
 
 ## Exercice guidé
 
@@ -212,6 +212,6 @@ Exercice autonome : la correction dépend du fichier choisi. Les points vérifi�
 
 ## Pour aller plus loin
 
-- Le complément **NumPy** (3 décembre) présente la bibliothèque de calcul qui sert de moteur à pandas.
+- Le cours « NumPy, le calcul numérique en Python » présente la bibliothèque de calcul qui sert de moteur à pandas.
 - **Polars** est une alternative récente à pandas, beaucoup plus rapide sur de gros volumes.
 - La semaine prochaine : modéliser les données (OLTP et OLAP) puis construire un ETL vers PostgreSQL.

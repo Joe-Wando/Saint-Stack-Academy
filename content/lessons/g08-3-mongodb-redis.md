@@ -18,7 +18,7 @@ objectifs:
   - Utiliser Redis pour le cache, les compteurs et l'expiration (TTL)
   - Choisir la bonne base selon le besoin
 prerequis:
-  - Séances SQL et PostgreSQL ; Docker
+  - Cours SQL et PostgreSQL ; Docker
 referentiels:
   - MongoDB Associate Developer (certification MongoDB), domaines « CRUD », « Data Modeling » et « Aggregation »
   - Redis University, RU101 « Introduction to Redis Data Structures »
@@ -150,7 +150,7 @@ db.commandes.aggregate([
 
 Pour la commande d'exemple, la chemise rapporte 2 × 12 000 = 24 000 et le bracelet 3 × 5 000 = 15 000.
 
-**Les index** existent aussi, avec la même logique que PostgreSQL mardi : `db.produits.createIndex({ categorie: 1, prix: -1 })`, puis on vérifie avec `.explain("executionStats")`.
+**Les index** existent aussi, avec la même logique que PostgreSQL (voir le cours « PostgreSQL, index, transactions et sauvegardes ») : `db.produits.createIndex({ categorie: 1, prix: -1 })`, puis on vérifie avec `.explain("executionStats")`.
 
 ## Redis
 
@@ -198,7 +198,7 @@ Exemple chiffré : 1 000 lectures par minute d'un même produit. Sans cache, la 
 | Données structurées, relations, transactions (commandes, paiements, comptes) | **PostgreSQL** |
 | Structure variable, documents lus d'un bloc, développement rapide | **MongoDB** (ou une colonne `jsonb` dans PostgreSQL) |
 | Cache, sessions, compteurs, classements, files simples | **Redis** |
-| Analyse sur de gros volumes | un entrepôt (BigQuery, Snowflake), voir la séance solo du 29 décembre |
+| Analyse sur de gros volumes | un entrepôt (BigQuery, Snowflake), voir le cours « Découverte, Kafka, BigQuery et Snowflake » |
 
 Le **théorème CAP** dit qu'en cas de coupure réseau, un système distribué choisit entre **cohérence** (refuser de répondre plutôt que répondre faux) et **disponibilité** (répondre, quitte à donner une donnée périmée).
 
@@ -206,9 +206,9 @@ Beaucoup d'applications combinent plusieurs bases : PostgreSQL et Redis, c'est l
 
 ## Démonstration
 
-1. On lance MongoDB et Redis avec Docker Compose (révision de la semaine 2).
+1. On lance MongoDB et Redis avec Docker Compose (révision du cours « Docker Compose et Docker Hub »).
 2. On fait le CRUD du catalogue MongoDB avec des produits de structures différentes.
-3. On écrit le pipeline d'agrégation du CA par produit et on le compare au SQL de la semaine 7.
+3. On écrit le pipeline d'agrégation du CA par produit et on le compare au SQL (voir le cours « SQL, agrégats, GROUP BY et jointures »).
 4. On ajoute un cache Redis devant l'API boutique, puis on mesure le temps de réponse avant et après avec `curl -w "%{time_total}"`.
 
 ## Exercice guidé
@@ -248,5 +248,5 @@ Exercice autonome :
 ## Pour aller plus loin
 
 - **MongoDB Atlas** propose un cluster gratuit dans le cloud.
-- Le complément **MySQL et Redis** (28 décembre) approfondit Redis : persistance, publication et abonnement, Streams.
-- **Le bilan du parcours de groupe** : en 8 semaines, vous avez couvert le terminal, les réseaux, Git, Docker, la CI/CD, Kubernetes, la supervision, la sécurité, les tests, Next.js, SQL, PostgreSQL et NoSQL. C'est le socle d'un développeur DevOps. En janvier, viennent le mobile et le cloud.
+- Le cours « MySQL face à PostgreSQL, et Redis en profondeur » approfondit Redis : persistance, publication et abonnement, Streams.
+- **Le bilan** : le terminal, les réseaux, Git, Docker, la CI/CD, Kubernetes, la supervision, la sécurité, les tests, Next.js, SQL, PostgreSQL et NoSQL forment le socle d'un développeur DevOps. Le mobile et le cloud en sont la suite logique.

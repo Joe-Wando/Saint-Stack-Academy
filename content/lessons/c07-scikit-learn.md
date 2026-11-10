@@ -18,7 +18,7 @@ objectifs:
   - Évaluer un classifieur (matrice de confusion, accuracy, précision, rappel, F1) et un régresseur (MAE, RMSE, R²)
   - Comparer plusieurs modèles par validation croisée et choisir des hyperparamètres
 prerequis:
-  - Compléments NumPy ; séance « Python pour la data, pandas et Matplotlib »
+  - Cours « NumPy, le calcul numérique en Python » et « Python pour la data, pandas et Matplotlib »
   - Cours DIT « Introduction ML, Classification » (Abdoul Wahab Diallo)
 referentiels:
   - "Cours DIT « Introduction ML, Classification » et « Intro ML » (L2) : notations TP, TN, FP, FN"

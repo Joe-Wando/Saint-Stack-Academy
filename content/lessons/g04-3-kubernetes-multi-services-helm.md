@@ -18,7 +18,7 @@ objectifs:
   - Comprendre le rôle de Helm (chart, values, release) et installer un chart existant
   - Mettre à l'échelle automatiquement avec un HorizontalPodAutoscaler
 prerequis:
-  - Séances Kubernetes des 30 novembre et 1er décembre
+  - Cours « Kubernetes, architecture, Pods et Deployments » et « Kubernetes, Services, Ingress, ConfigMaps et Secrets »
 referentiels:
   - CNCF CKAD, domaines « Application Design and Build » et « Application Deployment » (Helm, Kustomize)
   - CNCF KCNA, domaine « Cloud Native Application Delivery »
@@ -172,7 +172,7 @@ helm rollback ma-base 1 -n boutique
 helm uninstall ma-base -n boutique
 ```
 
-En **une commande**, on obtient un PostgreSQL avec StatefulSet, Service, Secret, PVC et sondes, configuré selon les bonnes pratiques. Le complément du 7 décembre montre comment écrire **son propre** chart.
+En **une commande**, on obtient un PostgreSQL avec StatefulSet, Service, Secret, PVC et sondes, configuré selon les bonnes pratiques. Le cours « Écrire son propre chart Helm » montre comment écrire **son propre** chart.
 
 ## Démonstration
 
@@ -232,4 +232,4 @@ Exercice autonome :
 
 - **Argo CD** applique la démarche GitOps : le cluster se synchronise automatiquement sur le dossier `k8s/` du dépôt Git.
 - Les *Operators* (CloudNativePG, par exemple) gèrent une base de données comme le ferait un administrateur : sauvegardes, réplication, bascule.
-- Demain : surveiller tout cela avec Prometheus et Grafana.
+- Cours suivant conseillé : « Supervision avec Prometheus et Grafana ».

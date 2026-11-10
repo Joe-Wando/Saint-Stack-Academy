@@ -19,7 +19,7 @@ objectifs:
   - Séparer la configuration dans un fichier .env
   - Taguer et publier une image sur Docker Hub, puis la récupérer ailleurs
 prerequis:
-  - Séance « Docker, volumes, réseaux et dockerisation d'une API »
+  - Cours « Docker, volumes, réseaux et dockerisation d'une API »
   - Un compte Docker Hub
 referentiels:
   - Document DIT « Architecture CI/CD avec Docker Compose, déploiement mono-repo et multi-repo »
@@ -50,7 +50,7 @@ quiz:
 
 ## L'idée
 
-Hier, faire tourner l'API et sa base demandait cinq commandes longues : un réseau, un volume, et deux `docker run` avec de nombreuses options. Une seule faute de frappe et rien ne marche.
+Dans le cours « Docker, volumes, réseaux et dockerisation d'une API », faire tourner l'API et sa base demandait cinq commandes longues : un réseau, un volume, et deux `docker run` avec de nombreuses options. Une seule faute de frappe et rien ne marche.
 
 **Docker Compose** décrit toute l'application (services, réseaux, volumes, variables) dans **un fichier YAML**, et une seule commande la lance. C'est de l'**infrastructure décrite par du code** : le fichier est versionné dans Git, relu en pull request et identique pour toute l'équipe.
 
@@ -173,11 +173,11 @@ Le document DIT sur l'architecture CI/CD distingue deux organisations :
 | Avantage | simple, un seul pipeline, changements atomiques | équipes indépendantes, versions séparées |
 | Inconvénient | le dépôt grossit | il faut coordonner les versions |
 
-Le projet Saint Stack Academy est un mono-repo : `api/`, `web/` et `content/`.
+Beaucoup de projets sont organisés en mono-repo, par exemple : `api/`, `web/` et `content/`.
 
 ## Démonstration
 
-1. On transforme l'API boutique d'hier en projet Compose : `api/` (le code et le Dockerfile), `web/` (un `index.html` qui appelle l'API), puis `compose.yaml` et `.env`.
+1. On transforme l'API boutique du cours précédent en projet Compose : `api/` (le code et le Dockerfile), `web/` (un `index.html` qui appelle l'API), puis `compose.yaml` et `.env`.
 2. `docker compose up -d --build`, puis `docker compose ps` : `db` passe à `healthy`, et ensuite seulement `api` démarre.
 3. On ajoute un produit, puis `docker compose down` et `up -d` : les données sont toujours là.
 4. On fait `docker compose down -v` et `up -d` : la base est vide. On comprend le rôle de `-v`.

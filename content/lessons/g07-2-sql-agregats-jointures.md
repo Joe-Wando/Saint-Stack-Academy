@@ -19,7 +19,7 @@ objectifs:
   - Enchaîner plusieurs jointures pour répondre à une question métier
   - Connaître l'ordre logique d'exécution d'une requête
 prerequis:
-  - Séance « SQL, interroger une base avec SELECT »
+  - Cours « SQL, interroger une base avec SELECT »
 referentiels:
   - Oracle Database SQL Certified Associate (1Z0-071), domaines « Reporting Aggregated Data » et « Displaying Data from Multiple Tables »
   - ISO/IEC 9075 (norme SQL)
@@ -49,12 +49,12 @@ quiz:
 
 ## L'idée
 
-Hier, chaque requête renvoyait des lignes **une par une**. Le gérant pose maintenant de **vraies** questions :
+Dans le cours « SQL, interroger une base avec SELECT », chaque requête renvoyait des lignes **une par une**. Le gérant pose maintenant de **vraies** questions :
 
 - « **Combien** de produits par catégorie ? » : ce sont les **agrégats**.
 - « **Qui** a commandé **quoi** ? » : ce sont les **jointures**, car l'information est répartie dans plusieurs tables.
 
-On ajoute au jeu de données d'hier les commandes et leurs lignes :
+On ajoute au jeu de données du cours précédent les commandes et leurs lignes :
 
 ```sql
 CREATE TABLE commandes (id serial PRIMARY KEY, client_id int REFERENCES clients(id), date_cmd date NOT NULL, statut text);
@@ -246,7 +246,7 @@ LEFT JOIN produits p ON p.id = l.produit_id
 GROUP BY c.nom ORDER BY total DESC;
 ```
 
-Question 3 : le **Pagne tissé**, ajouté hier, n'a jamais été commandé lui non plus.
+Question 3 : le **Pagne tissé**, ajouté dans le cours précédent, n'a jamais été commandé lui non plus.
 
 Question 5 : le chiffre d'affaires livré vaut 74 000 + 137 000 = 211 000, réparti sur 4 commandes livrées. Le panier moyen est donc 211 000 / 4 = **52 750 FCFA**.
 
@@ -254,4 +254,4 @@ Question 5 : le chiffre d'affaires livré vaut 74 000 + 137 000 = 211 000, répa
 
 - `RIGHT JOIN` et `FULL JOIN` existent aussi ; en pratique, on réécrit presque toujours un `RIGHT JOIN` en `LEFT JOIN` en inversant les tables.
 - `COUNT(DISTINCT ...)` compte les valeurs différentes.
-- Jeudi : sous-requêtes, vues et fonctions de fenêtrage, pour classer et cumuler.
+- Cours suivant conseillé : « SQL, sous-requêtes, CTE, vues et fonctions de fenêtrage » : classer et cumuler.

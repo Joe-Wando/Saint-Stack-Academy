@@ -18,7 +18,7 @@ objectifs:
   - Écrire un schéma GraphQL (types, Query, Mutation) et ses résolveurs avec Apollo Server
   - Choisir entre REST et GraphQL selon le contexte
 prerequis:
-  - Séances Docker (API boutique), OWASP, Supertest
+  - Cours Docker (API boutique), « Sécurité des applications web, OWASP Top 10 » et « Tests d'intégration d'API avec Supertest »
 referentiels:
   - OpenJS Node.js Application Developer (JSNAD)
   - GraphQL Specification (graphql.org)
@@ -48,7 +48,7 @@ quiz:
 
 ## Express en profondeur
 
-L'API boutique de la semaine 2 tenait dans un fichier. Une vraie API se **structure**.
+L'API boutique (voir le cours « Docker, volumes, réseaux et dockerisation d'une API ») tenait dans un fichier. Une vraie API se **structure**.
 
 ```
 src/

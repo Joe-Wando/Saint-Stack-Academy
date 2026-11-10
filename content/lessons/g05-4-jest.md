@@ -19,7 +19,7 @@ objectifs:
   - Mesurer la couverture et intégrer les tests en CI, en pratiquant le TDD
 prerequis:
   - JavaScript ou TypeScript (fonctions, async/await)
-  - Séance « Tester une API avec Postman »
+  - Cours « Tester une API avec Postman »
 referentiels:
   - ISTQB CTFL v4.0, chapitres 2 « Testing Throughout the SDLC » et 4 « Test Analysis and Design »
   - Documentation officielle Jest
@@ -51,7 +51,7 @@ quiz:
 
 Postman vérifie l'API **de l'extérieur**, requête par requête. Les **tests unitaires** vérifient chaque **fonction** du code, en quelques millisecondes, à chaque modification. Ils servent à :
 
-- détecter une régression **avant** la fusion, grâce à la CI de la semaine 3 ;
+- détecter une régression **avant** la fusion, grâce à la CI (voir le cours « Intégration continue avec GitHub Actions, premier workflow ») ;
 - **modifier sans peur** : on peut réécrire une fonction et savoir immédiatement si on a cassé quelque chose ;
 - **documenter** : un test décrit précisément le comportement attendu.
 
@@ -63,11 +63,11 @@ Postman vérifie l'API **de l'extérieur**, requête par requête. Les **tests u
          ▲▲▲▲▲▲▲ Unitaires (Jest)       nombreux, rapides, isolés
 ```
 
-| Niveau | Teste | Vitesse | Séance |
+| Niveau | Teste | Vitesse | Cours |
 |---|---|---|---|
 | Unitaire | une fonction ou une classe isolée | quelques ms | aujourd'hui |
-| Intégration | plusieurs modules ensemble (API et base) | quelques centaines de ms | Supertest, lundi |
-| De bout en bout (E2E) | l'application complète, dans un navigateur | plusieurs secondes | Cypress, vendredi 18 |
+| Intégration | plusieurs modules ensemble (API et base) | quelques centaines de ms | Supertest |
+| De bout en bout (E2E) | l'application complète, dans un navigateur | plusieurs secondes | Cypress |
 
 ## Installer Jest
 
@@ -218,7 +218,7 @@ Pour imposer un seuil en CI, dans `jest.config.js` : `coverageThreshold: { globa
 
 ## Démonstration
 
-En TDD, en direct, on développe `calculerNiveau(termines, total, moyenneQuiz)`, la règle des niveaux de la plateforme Saint Stack Academy : Découverte, Bases, Opérationnel.
+En TDD, en direct, on développe `calculerNiveau(termines, total, moyenneQuiz)`, la règle des niveaux d'une plateforme de cours : Découverte, Bases, Opérationnel.
 
 1. On écrit les tests des seuils : 50 % des cours et 60 % aux quiz, puis 90 % et 80 %.
 2. On écrit le code minimal pour que les tests passent.
@@ -282,4 +282,4 @@ Exercice autonome, question 5, les tests à écrire en premier :
 
 - **Vitest** a une syntaxe compatible avec Jest et est plus rapide dans les projets Vite.
 - Les tests par mutation (Stryker) modifient ton code pour vérifier que tes tests détectent bien les changements.
-- Lundi : Supertest, pour tester l'API entière avec une vraie base de données.
+- Cours suivant conseillé : « Tests d'intégration d'API avec Supertest » : tester l'API entière avec une vraie base de données.

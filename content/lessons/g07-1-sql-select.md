@@ -19,7 +19,7 @@ objectifs:
   - Trier, limiter et dédoublonner les résultats
   - Utiliser les opérateurs LIKE, IN, BETWEEN, IS NULL et les fonctions de texte et de date courantes
 prerequis:
-  - Séance « Le terminal Linux » ; Docker (semaine 2)
+  - Cours « Le terminal Linux, se déplacer et manipuler des fichiers » ; Docker (voir le cours « Docker Compose et Docker Hub »)
 referentiels:
   - ISO/IEC 9075 (norme SQL)
   - Oracle Database SQL Certified Associate (1Z0-071), domaines « Restricting and Sorting Data » et « Single-Row Functions »
@@ -213,5 +213,5 @@ Question 6, deux erreurs : `= NULL` est toujours faux, il faut `IS NULL`. Et les
 ## Pour aller plus loin
 
 - Le site **pgexercises.com** propose des dizaines d'exercices SELECT corrigés, sur une base de club de sport.
-- `EXPLAIN` montre comment PostgreSQL exécute une requête. On l'étudie avec les index le 29 décembre.
-- Demain : compter, additionner et regrouper (agrégats), et relier plusieurs tables (jointures).
+- `EXPLAIN` montre comment PostgreSQL exécute une requête. On l'étudie avec les index dans le cours « PostgreSQL, index, transactions et sauvegardes ».
+- Cours suivant conseillé : « SQL, agrégats, GROUP BY et jointures » : compter, regrouper et relier plusieurs tables.

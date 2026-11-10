@@ -18,7 +18,7 @@ objectifs:
   - Créer des utilisateurs et des groupes, et utiliser sudo à bon escient
   - Expliquer umask, le setgid sur un dossier et le sticky bit
 prerequis:
-  - Séance « Le terminal Linux »
+  - Cours « Le terminal Linux, se déplacer et manipuler des fichiers »
 referentiels:
   - LPI Linux Essentials (010-160), thème 5 « Sécurité et droits sur les fichiers »
   - LPIC-1 (101-500), objectif 104.5 « Gérer les permissions et la propriété des fichiers »

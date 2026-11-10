@@ -19,7 +19,7 @@ objectifs:
   - Dockeriser une API Node qui se connecte à PostgreSQL
   - Configurer une application par variables d'environnement (méthode « 12 facteurs »)
 prerequis:
-  - Séance « Construire ses images avec un Dockerfile »
+  - Cours « Construire ses images avec un Dockerfile »
 referentiels:
   - Chapitre DIT 5 « Prise en main de Docker » (option -v)
   - Docker Certified Associate (DCA), domaines « Storage and Volumes » et « Networking »
@@ -49,7 +49,7 @@ quiz:
 
 ## Deux problèmes à résoudre
 
-Lundi, tu as constaté que les données de PostgreSQL **disparaissaient** avec le conteneur. Et une API seule ne sert à rien : elle doit **parler** à sa base de données. Aujourd'hui on règle ces deux problèmes : la **persistance**, avec les volumes, et la **communication**, avec les réseaux.
+Dans le cours « Docker, images et conteneurs », tu as constaté que les données de PostgreSQL **disparaissaient** avec le conteneur. Et une API seule ne sert à rien : elle doit **parler** à sa base de données. Ce cours règle ces deux problèmes : la **persistance**, avec les volumes, et la **communication**, avec les réseaux.
 
 ## Les volumes
 
@@ -86,7 +86,7 @@ docker volume rm pgdata           # supprime le volume, et donc les données
 docker run --rm -v pgdata:/donnees -v $(pwd):/sauvegarde alpine tar czf /sauvegarde/pgdata.tgz -C /donnees .
 ```
 
-Pour une base de données, `pg_dump` reste la méthode propre (semaine 8).
+Pour une base de données, `pg_dump` reste la méthode propre (voir le cours « PostgreSQL, index, transactions et sauvegardes »).
 
 ## Les réseaux
 
@@ -150,7 +150,7 @@ app.get('/sante', (req, res) => res.send('ok'));
 app.listen(process.env.PORT ?? 3000);
 ```
 
-La requête utilise des **paramètres** `$1, $2` et non une concaténation de chaînes : c'est la protection contre l'injection SQL, qu'on approfondira en semaine 5.
+La requête utilise des **paramètres** `$1, $2` et non une concaténation de chaînes : c'est la protection contre l'injection SQL, qu'on approfondit dans le cours « Sécurité des applications web, OWASP Top 10 ».
 
 ```bash
 docker network create boutique-net
@@ -254,5 +254,5 @@ Seul le conteneur `api` est remplacé : `db` et son volume restent intacts.
 
 ## Pour aller plus loin
 
-- Ces commandes `docker run` deviennent longues et fragiles. Demain, **Docker Compose** décrit tout cela dans un seul fichier.
-- Les *secrets* Docker (Swarm) et Kubernetes (semaine 4) gèrent les mots de passe plus proprement que des variables d'environnement.
+- Ces commandes `docker run` deviennent longues et fragiles. Cours suivant conseillé : « Docker Compose et Docker Hub » : **Docker Compose** décrit tout cela dans un seul fichier.
+- Les *secrets* Docker (Swarm) et Kubernetes (voir le cours « Kubernetes, Services, Ingress, ConfigMaps et Secrets ») gèrent les mots de passe plus proprement que des variables d'environnement.

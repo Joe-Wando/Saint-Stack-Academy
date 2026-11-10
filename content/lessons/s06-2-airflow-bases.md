@@ -18,7 +18,7 @@ objectifs:
   - Comprendre la planification (schedule, start_date, catchup, logical date)
   - Utiliser l'interface pour lancer, suivre, relancer et lire les journaux des tâches
 prerequis:
-  - Séances « Bash en pratique, cron » et « Pipeline ETL en Python »
+  - Cours « Bash en pratique, script de sauvegarde et planification avec cron » et « Construire un pipeline ETL en Python vers PostgreSQL »
   - Docker Compose
 referentiels:
   - Astronomer Certification for Apache Airflow Fundamentals
@@ -44,15 +44,15 @@ quiz:
   - question: "Pourquoi une tâche Airflow doit-elle être idempotente ?"
     choix: ["Pour être plus rapide", "Parce qu'Airflow peut la relancer (retries, relance manuelle) : la relancer ne doit pas dupliquer les données", "C'est une obligation de Python", "Pour l'interface"]
     reponse: 1
-    explication: "On retrouve le principe du pipeline ETL du 9 décembre : upsert, ou suppression de la partition du jour avant rechargement."
+    explication: "On retrouve le principe du cours « Construire un pipeline ETL en Python vers PostgreSQL » : upsert, ou suppression de la partition du jour avant rechargement."
 ---
 
 ## Pourquoi un orchestrateur ?
 
 Chaque nuit, notre chaîne data doit :
 
-1. extraire les commandes (le script Python du 9 décembre) ;
-2. **ensuite** lancer `dbt build` (le 11 et le 15 décembre) ;
+1. extraire les commandes (le script Python (voir le cours « Construire un pipeline ETL en Python vers PostgreSQL »)) ;
+2. **ensuite** lancer `dbt build` (voir le cours « dbt, transformer les données en SQL comme du code ») ;
 3. **ensuite** rafraîchir le tableau de bord ;
 4. **et** prévenir quelqu'un si une étape échoue.
 
@@ -114,7 +114,7 @@ L'interface est sur `http://localhost:8080`, avec les identifiants de laboratoir
 
 > **Version.** Ce cours utilise **Airflow 2.10**, encore très répandu en entreprise. Airflow 3 (2025) garde les mêmes concepts. Deux choses changent : les imports deviennent `from airflow.sdk import dag, task`, et le rattrapage se lance avec `airflow backfill create`. Les fichiers de `dags/` sont détectés automatiquement après quelques secondes.
 
-Il faut au moins 4 Go de RAM disponibles pour Docker. On retrouve la semaine 2 : un fichier Compose, plusieurs services, des volumes.
+Il faut au moins 4 Go de RAM disponibles pour Docker. On retrouve le cours « Docker Compose et Docker Hub » : un fichier Compose, plusieurs services, des volumes.
 
 ## Le premier DAG (API TaskFlow)
 
@@ -164,7 +164,7 @@ Le calcul de la tâche `total` : 12 000 + 5 000 + 35 000 = **52 000 FCFA**, visi
 | Valeur de `schedule` | Signification |
 |---|---|
 | `"@daily"` | tous les jours à minuit |
-| `"0 2 * * *"` | tous les jours à 2 h (syntaxe cron de la semaine 2) |
+| `"0 2 * * *"` | tous les jours à 2 h (voir le cours « Bash en pratique, script de sauvegarde et planification avec cron ») |
 | `"@hourly"`, `"@weekly"` | toutes les heures, toutes les semaines |
 | `None` | uniquement à la main ou par déclenchement externe |
 
@@ -199,7 +199,7 @@ En ligne de commande : `docker compose exec airflow-scheduler airflow dags test 
 ## Exercice autonome
 
 1. Écris le DAG `rapport_quotidien`, planifié chaque jour à 6 h, sans rattrapage :
-   - une tâche lit dans la base de la semaine 4 le nombre de commandes et le chiffre d'affaires livré de la journée `{{ ds }}` ;
+   - une tâche lit dans la base de la boutique (voir le cours « SQL pour la data, jointures et agrégats ») le nombre de commandes et le chiffre d'affaires livré de la journée `{{ ds }}` ;
    - une tâche écrit le résultat dans une table `rapports_quotidiens (jour, nb_commandes, ca)`, de façon **idempotente** ;
    - une tâche affiche un résumé.
 2. Ajoute `retries=3` avec un délai de 2 minutes.
@@ -248,4 +248,4 @@ Question 4 : si la tâche est relancée (une relance automatique ou un *Clear*),
 
 - Les **Connections** et **Variables** d'Airflow stockent identifiants et paramètres en dehors du code des DAG.
 - **Dagster** et **Prefect** sont des alternatives modernes, centrées sur les données plutôt que sur les tâches.
-- Vendredi : un vrai pipeline orchestré, avec l'ETL Python, dbt, les capteurs (*sensors*) et les alertes.
+- Cours suivant conseillé : « Airflow en pratique, orchestrer l'ETL et dbt de bout en bout » : un vrai pipeline orchestré, avec l'ETL Python, dbt, les capteurs (*sensors*) et les alertes.

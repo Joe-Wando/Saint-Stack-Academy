@@ -222,4 +222,4 @@ Remarque pour la question 3 : `grep -c " 404 " acces.log` donne le même résult
 - `find . -name "*.js"` : trouver des fichiers par leur nom.
 - `history | grep docker` : retrouver une ancienne commande.
 - Le jeu en ligne *OverTheWire Bandit* (niveaux 0 à 10) entraîne exactement ces commandes.
-- La séance solo de demain aborde les droits (`chmod`, `chown`) et les utilisateurs.
+- Cours suivant conseillé : « Linux, utilisateurs, groupes et droits d'accès », qui aborde les droits (`chmod`, `chown`) et les utilisateurs.

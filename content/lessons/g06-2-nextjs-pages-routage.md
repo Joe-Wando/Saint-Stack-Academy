@@ -18,7 +18,7 @@ objectifs:
   - Naviguer avec Link et useRouter, et gérer les pages 404 et de chargement
   - Distinguer composants serveur et composants client
 prerequis:
-  - Séances « React » et « Tailwind CSS » (13 décembre)
+  - Cours « React, composants, props, état et routes » et « Tailwind CSS, styler avec des classes utilitaires »
 referentiels:
   - Documentation officielle Next.js (App Router)
   - Meta Front-End Developer Professional Certificate, cours « Advanced React »
@@ -48,13 +48,13 @@ quiz:
 
 ## Ce que Next.js ajoute à React
 
-React (le 13 décembre) est une **bibliothèque** d'interface. Pour une vraie application, il manque :
+React (voir le cours « React, composants, props, état et routes ») est une **bibliothèque** d'interface. Pour une vraie application, il manque :
 
 - **le routage**, qu'on gérait avec React Router ;
 - **le rendu côté serveur** : avec une SPA React, le navigateur reçoit une page vide puis attend le JavaScript, ce qui ralentit l'affichage et nuit au référencement ;
 - **la récupération des données**, **les API**, **l'optimisation des images**, **le déploiement**.
 
-**Next.js**, développé par Vercel, est un **framework** React qui fournit tout cela. La plateforme Saint Stack Academy est d'ailleurs construite avec Next.js 15.
+**Next.js**, développé par Vercel, est un **framework** React qui fournit tout cela.
 
 | | React avec Vite (SPA) | Next.js |
 |---|---|---|
@@ -100,7 +100,7 @@ src/app/
 | `loading.tsx` | interface affichée pendant le chargement |
 | `error.tsx` | interface affichée en cas d'erreur (composant client) |
 | `not-found.tsx` | page 404 |
-| `route.ts` | API (jeudi) |
+| `route.ts` | API (voir le cours « Next.js, données, Route Handlers et Server Actions ») |
 
 ## Pages et layouts
 
@@ -205,7 +205,7 @@ export default function BoutonPanier() {
 
 **La bonne pratique** : garder la page en composant serveur, et n'isoler en composant client que les **petites parties interactives** (bouton, formulaire, filtre).
 
-> Les pages de la plateforme Saint Stack Academy sont des composants **client**, parce qu'elles lisent la session dans `localStorage`. Une évolution consisterait à passer la session dans un cookie, pour faire le rendu côté serveur.
+> Beaucoup d'applications font de leurs pages des composants **client**, parce qu'elles lisent la session dans `localStorage`. Une évolution consisterait à passer la session dans un cookie, pour faire le rendu côté serveur.
 
 ## Démonstration
 
@@ -222,7 +222,7 @@ export default function BoutonPanier() {
 
 ## Exercice autonome
 
-Construis la structure du site de ton mini-projet de groupe (l'annuaire défini dans Jira jeudi dernier) :
+Construis la structure du site de ton mini-projet (l'annuaire défini dans Jira, (voir le cours « Scrum en pratique avec Jira »)) :
 
 1. `/` (accueil), `/membres` (liste), `/membres/[pseudo]` (profil), `/a-propos`.
 2. Un layout racine avec la navigation, et le lien actif surligné.
@@ -267,4 +267,4 @@ export function LienNav({ href, children }: { href: string; children: React.Reac
 
 - Les **routes parallèles** (`@modal`) et les **routes d'interception** permettent d'afficher un produit dans une fenêtre modale tout en gardant une URL partageable.
 - `next/image` optimise automatiquement les images (formats modernes, tailles adaptées, chargement différé).
-- Jeudi : charger des données côté serveur, les mettre en cache, et créer des API avec les Route Handlers et les Server Actions.
+- Cours suivant conseillé : « Next.js, données, Route Handlers et Server Actions » : charger des données côté serveur, les mettre en cache, et créer des API avec les Route Handlers et les Server Actions.

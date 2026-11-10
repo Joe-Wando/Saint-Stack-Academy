@@ -18,7 +18,7 @@ objectifs:
   - Comprendre l'évaluation paresseuse (transformations, actions, DAG, shuffle)
   - Écrire en Parquet partitionné et utiliser Spark SQL
 prerequis:
-  - Séances « Python pour la data » et « SQL avancé »
+  - Cours « Python pour la data, pandas et Matplotlib » et « SQL avancé, CTE et fonctions de fenêtrage »
   - Java 17 et Python 3.10 ou plus (ou Docker)
 referentiels:
   - Databricks Certified Associate Developer for Apache Spark, domaines « Spark Architecture » et « Spark DataFrame API »
@@ -125,7 +125,7 @@ par_categorie.show()
 | `df.merge(clients, on="client_id")` | `df.join(clients, "client_id", "left")` |
 | `df.sort_values("ca")` | `df.orderBy("ca")` |
 
-**Les fonctions de fenêtrage**, comme en SQL (semaine 4) :
+**Les fonctions de fenêtrage**, comme en SQL (voir le cours « SQL avancé, CTE et fonctions de fenêtrage ») :
 
 ```python
 from pyspark.sql.window import Window
@@ -185,7 +185,7 @@ Cela produit `lac/silver/ventes/annee=2026/mois_num=12/part-0000.parquet`, et ai
 
 ## Exercice guidé
 
-À partir du fichier `ventes.csv` de la boutique (exporté depuis la vue `ventes_detaillees` de la séance du 24 décembre) :
+À partir du fichier `ventes.csv` de la boutique (exporté depuis la vue `ventes_detaillees` (voir le cours « SQL pour la data, jointures et agrégats »)) :
 
 1. Charge-le dans un DataFrame Spark et affiche son schéma.
 2. Calcule le CA livré par client, trié par ordre décroissant.

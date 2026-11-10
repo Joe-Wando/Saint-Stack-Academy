@@ -18,7 +18,7 @@ objectifs:
   - Tester l'authentification, les droits et les erreurs
   - Isoler les tests avec une base de test et un état connu, puis les lancer en CI
 prerequis:
-  - Séances « Tests unitaires avec Jest » et « Tester une API avec Postman »
+  - Cours « Tests unitaires avec Jest » et « Tester une API avec Postman »
 referentiels:
   - ISTQB CTFL v4.0, section 2.2 « Test Levels » (test d'intégration de composants et de systèmes)
   - Documentation Supertest et NestJS, « Testing »
@@ -48,7 +48,7 @@ quiz:
 
 ## Où se situe Supertest ?
 
-Jest (vendredi dernier) testait des **fonctions isolées** avec des mocks. Postman testait l'API **à la main**, de l'extérieur. **Supertest** se place entre les deux : il envoie de vraies requêtes HTTP à ton application **depuis le code de test**, et ces requêtes traversent toutes les couches (routes, validation, services, **base réelle**). Les tests sont automatisés, rapides, et exécutés à chaque push en CI.
+Jest (voir le cours « Tests unitaires avec Jest ») testait des **fonctions isolées** avec des mocks. Postman testait l'API **à la main**, de l'extérieur. **Supertest** se place entre les deux : il envoie de vraies requêtes HTTP à ton application **depuis le code de test**, et ces requêtes traversent toutes les couches (routes, validation, services, **base réelle**). Les tests sont automatisés, rapides, et exécutés à chaque push en CI.
 
 ```
 Test Supertest ──HTTP──▶ [ Route ] ─▶ [ Validation ] ─▶ [ Service ] ─▶ [ PostgreSQL de test ]
@@ -88,7 +88,7 @@ const { creerApp } = require('./app');
 creerApp(new Pool({ connectionString: process.env.DATABASE_URL })).listen(3000);
 ```
 
-L'application reçoit le `pool` en paramètre : c'est de l'**injection de dépendances**, comme vendredi dernier.
+L'application reçoit le `pool` en paramètre : c'est de l'**injection de dépendances**, comme avec Jest.
 
 ## Le premier test
 
@@ -149,7 +149,7 @@ Supertest enchaîne `.get/.post/.put/.delete`, `.send(corps)`, `.set(en-tête, v
 
 ## Tester l'authentification et les droits
 
-Ce sont les tests les plus **importants** en sécurité : la catégorie A01 de l'OWASP, vue le 7 décembre.
+Ce sont les tests les plus **importants** en sécurité : la catégorie A01 de l'OWASP (voir le cours « Sécurité des applications web, OWASP Top 10 »).
 
 ```js
 async function jetonPour(email, role) {
@@ -191,7 +191,7 @@ Le dossier `test/` d'un projet NestJS contient déjà un exemple, `app.e2e-spec.
 
 En local, on lance une base jetable : `docker run -d --name pg-test -e POSTGRES_PASSWORD=test -p 5435:5432 postgres:16-alpine`, puis on définit `DATABASE_URL_TEST=postgres://postgres:test@localhost:5435/postgres`.
 
-En CI, c'est le `services: postgres` de GitHub Actions, vu le 24 novembre.
+En CI, c'est le `services: postgres` de GitHub Actions (voir le cours « GitHub Actions, tests, matrice, secrets et publication d'une image Docker »).
 
 **Les règles d'isolation :**
 
@@ -258,4 +258,4 @@ Exercice autonome, question 5, les optimisations possibles :
 
 - **Testcontainers** démarre automatiquement un conteneur PostgreSQL depuis le code de test.
 - Les tests de **contrat** (Pact) vérifient que le frontend et l'API s'entendent sur le format des échanges.
-- Demain : Next.js, pour construire le frontend que Cypress testera vendredi.
+- Cours suivant conseillé : « Next.js, pages, layouts et routage (App Router) », pour construire le frontend que Cypress testera ensuite.

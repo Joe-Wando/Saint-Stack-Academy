@@ -18,7 +18,7 @@ objectifs:
   - Écrire un script avec variables, conditions, boucles, fonctions et gestion d'erreurs
   - Automatiser une tâche AD à partir d'un CSV et exporter un rapport
 prerequis:
-  - Séances « Bash » et « Active Directory »
+  - Cours « Bash, variables, conditions, boucles et fonctions » et « Active Directory, domaine, utilisateurs, groupes et stratégies de groupe »
 referentiels:
   - Microsoft AZ-800, compétences PowerShell transverses
   - Microsoft Learn, parcours « PowerShell for beginners »
@@ -248,5 +248,5 @@ Le point clé : `foreach` **renvoie** les objets créés dans la boucle, que l'o
 ## Pour aller plus loin
 
 - *Pester*, le framework de tests de PowerShell, permet de tester ses scripts comme du code applicatif.
-- *Desired State Configuration* (DSC) décrit l'état voulu d'un serveur, à la manière d'Ansible (complément du 10 décembre).
+- *Desired State Configuration* (DSC) décrit l'état voulu d'un serveur, à la manière d'Ansible (voir le cours « Automatiser la configuration des serveurs avec Ansible »).
 - PowerShell 7 sous Linux : `sudo snap install powershell --classic`.

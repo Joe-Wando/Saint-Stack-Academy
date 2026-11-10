@@ -18,7 +18,7 @@ objectifs:
   - Générer une paire de clés ed25519 et s'authentifier sans mot de passe
   - Copier des fichiers avec scp ou rsync, et sécuriser le serveur SSH
 prerequis:
-  - Séances « Linux, utilisateurs, groupes et droits d'accès » et « Les réseaux pour développeurs »
+  - Cours « Linux, utilisateurs, groupes et droits d'accès » et « Les réseaux pour développeurs, IP, ports, DNS et HTTP »
 referentiels:
   - LPIC-1 (101-500), objectif 102.4 « Utiliser le gestionnaire de paquets Debian »
   - LPIC-1 (102-500), objectif 110.3 « Sécuriser les données avec le chiffrement »

@@ -144,7 +144,7 @@ Jira (Atlassian) est l'outil de gestion de projet agile le plus utilisé en entr
 project = SSA AND sprint in openSprints() AND assignee = currentUser() AND status != Done
 ```
 
-**La Definition of Done** de notre groupe, par exemple :
+**La Definition of Done** d'une équipe, par exemple :
 
 - [ ] le code est relu et approuvé dans une PR ;
 - [ ] les tests sont écrits et passent, et la CI est verte ;
@@ -158,10 +158,10 @@ project = SSA AND sprint in openSprints() AND assignee = currentUser() AND statu
 
 ## Démonstration
 
-On crée le projet Jira **SSA** (Saint Stack Academy) :
+On crée le projet Jira **SSA** pour une plateforme de cours en ligne :
 
 1. Un Epic « Tableau de bord », découpé en 4 stories avec leurs critères d'acceptation.
-2. Un Planning Poker en groupe.
+2. Un Planning Poker en équipe.
 3. Un sprint d'une semaine.
 4. On relie Jira au dépôt GitHub, puis une branche `feature/SSA-3-...` apparaît dans le ticket.
 
@@ -171,9 +171,9 @@ Rédige trois user stories pour une application de réservation de terrains de f
 
 ## Exercice autonome
 
-En groupe, avec un Product Owner désigné et le formateur dans le rôle de Scrum Master :
+En équipe de 3 à 5 personnes (camarades de classe, collègues), avec un Product Owner et un Scrum Master désignés :
 
-1. Choisissez un mini-projet commun, par exemple un annuaire des membres du groupe en Next.js.
+1. Choisissez un mini-projet commun, par exemple un annuaire des membres de l'équipe en Next.js.
 2. Créez le projet Jira, 2 Epics et au moins 8 stories estimées.
 3. Fixez une Definition of Done.
 4. Planifiez un sprint d'une semaine selon votre capacité réelle (4 soirées de 2 h).

@@ -18,7 +18,7 @@ objectifs:
   - Modifier des données avec un formulaire et une Server Action, puis rafraîchir l'affichage
   - Valider les entrées et gérer les variables d'environnement côté serveur et côté client
 prerequis:
-  - Séance « Next.js, pages, layouts et routage »
+  - Cours « Next.js, pages, layouts et routage (App Router) »
 referentiels:
   - Documentation officielle Next.js, sections « Data Fetching », « Caching » et « Route Handlers »
   - OWASP ASVS 4.0, chapitre V5 « Validation, Sanitization and Encoding »
@@ -48,7 +48,7 @@ quiz:
 
 ## L'objectif
 
-Mardi, nos pages affichaient des données écrites **en dur**. Aujourd'hui, on les lit dans une **vraie base de données**, on crée une **API** consommable par une application mobile, et on **modifie** les données avec des formulaires, le tout dans un seul projet Next.js.
+Dans le cours « Next.js, pages, layouts et routage (App Router) », nos pages affichaient des données écrites **en dur**. Ici, on les lit dans une **vraie base de données**, on crée une **API** consommable par une application mobile, et on **modifie** les données avec des formulaires, le tout dans un seul projet Next.js.
 
 ```
 Navigateur ──▶ Page (composant serveur) ──▶ PostgreSQL       (lecture)
@@ -89,7 +89,7 @@ export default async function Produits() {
 }
 ```
 
-Il n'y a ni `useEffect`, ni état de chargement à gérer à la main, ni API intermédiaire : le HTML arrive **déjà rempli**. Le fichier `loading.tsx` de mardi s'affiche pendant la requête.
+Il n'y a ni `useEffect`, ni état de chargement à gérer à la main, ni API intermédiaire : le HTML arrive **déjà rempli**. Le fichier `loading.tsx` du cours précédent s'affiche pendant la requête.
 
 Pour une **API externe**, c'est la même chose avec `fetch` :
 
@@ -142,7 +142,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
 }
 ```
 
-Tout ce qui a été vu cette semaine s'applique : requêtes paramétrées (OWASP), codes de statut (semaine 1), tests Postman et Supertest.
+Tout ce qui a été vu dans les cours précédents s'applique : requêtes paramétrées (OWASP), codes de statut HTTP, tests Postman et Supertest.
 
 ## Les Server Actions : modifier les données depuis un formulaire
 
@@ -191,7 +191,7 @@ Seules les variables qui commencent par `NEXT_PUBLIC_` sont intégrées au JavaS
 
 ## Démonstration
 
-1. On relie `boutique-web` à la base PostgreSQL de la semaine 2, lancée avec Docker Compose.
+1. On relie `boutique-web` à la base PostgreSQL (voir le cours « Docker Compose et Docker Hub »), lancée avec Docker Compose.
 2. La liste `/produits` devient un composant serveur qui lit la base, et la page détail lit un produit par son `id`.
 3. On crée `/api/produits` (GET, POST) et `/api/produits/[id]` (DELETE), testés avec Postman.
 4. On ajoute le formulaire `/produits/nouveau` avec sa Server Action et `revalidatePath` : le nouveau produit apparaît immédiatement.
@@ -205,7 +205,7 @@ Seules les variables qui commencent par `NEXT_PUBLIC_` sont intégrées au JavaS
 
 ## Exercice autonome
 
-Complète le mini-projet « annuaire » du groupe :
+Complète le mini-projet « annuaire » :
 
 1. Une table `membres` (pseudo unique, nom, rôle, bio, créé le), créée dans PostgreSQL avec Docker Compose.
 2. La page `/membres`, en composant serveur avec revalidation toutes les 30 secondes, et la page `/membres/[pseudo]` qui renvoie un 404 si le membre n'existe pas.
@@ -257,4 +257,4 @@ Le formulaire, côté client, utilise `const [etat, action] = useActionState(ajo
 - **Prisma** et **Drizzle** sont des ORM TypeScript, avec un typage des requêtes et des migrations.
 - **Auth.js** (NextAuth) gère l'authentification : connexion Google, GitHub, ou par e-mail.
 - Le déploiement sur Vercel est gratuit pour les projets personnels, avec une prévisualisation à chaque pull request. Une image Docker (`output: 'standalone'`) permet aussi de déployer n'importe où.
-- Demain : tester ce parcours de bout en bout avec Cypress.
+- Cours suivant conseillé : « Tests de bout en bout avec Cypress » : tester ce parcours de bout en bout.

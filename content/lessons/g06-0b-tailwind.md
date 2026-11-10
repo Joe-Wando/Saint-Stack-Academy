@@ -18,10 +18,10 @@ objectifs:
   - Rendre une interface responsive avec les préfixes sm, md et lg
   - Gérer les états (hover, focus) et le mode sombre, et personnaliser le thème
 prerequis:
-  - Séance « React, composants, props, état et routes »
+  - Cours « React, composants, props, état et routes »
   - Bases de CSS (boîte, flexbox)
 referentiels:
-  - Cours « Introduction à Tailwind CSS » de M. Harouna Soumaré (Software and DevOps engineer), base de cette séance
+  - Cours « Introduction à Tailwind CSS » de M. Harouna Soumaré (Software and DevOps engineer), base de ce cours
   - Documentation officielle tailwindcss.com (version 4)
   - W3C, WCAG 2.2, critère 1.4.3 « Contraste minimum »
 quiz:
@@ -47,7 +47,7 @@ quiz:
     explication: "Le préfixe d'état se place avant la classe : hover:, focus:, active:, disabled:, et dark: pour le mode sombre."
 ---
 
-> Cette séance reprend le cours « Introduction à Tailwind CSS » de **M. Harouna Soumaré**, que je remercie. L'installation a été mise à jour pour Tailwind 4, la version actuelle.
+> Ce cours reprend le cours « Introduction à Tailwind CSS » de **M. Harouna Soumaré**, que je remercie. L'installation a été mise à jour pour Tailwind 4, la version actuelle.
 
 ## Qu'est-ce que Tailwind CSS ?
 
@@ -201,7 +201,7 @@ N'assemble jamais un nom de classe par morceaux, comme `bg-${couleur}-600` : Tai
 
 ## Démonstration
 
-On reprend la vitrine React de la séance précédente et on la style :
+On reprend la vitrine React du cours « React, composants, props, état et routes » et on la style :
 
 - un en-tête `flex justify-between items-center` ;
 - une grille de cartes responsive ;

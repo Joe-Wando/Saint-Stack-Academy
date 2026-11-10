@@ -18,7 +18,7 @@ objectifs:
   - Planifier un script avec crontab et vérifier son exécution
   - Comparer cron et les timers systemd
 prerequis:
-  - Séance « Bash, variables, conditions, boucles et fonctions »
+  - Cours « Bash, variables, conditions, boucles et fonctions »
 referentiels:
   - LPIC-1 (102-500), objectif 107.2 « Automatiser les tâches d'administration en planifiant des travaux »
   - CompTIA Linux+ (XK0-005), domaine 4
@@ -48,7 +48,7 @@ quiz:
 
 ## L'idée
 
-Hier, tu as appris la syntaxe Bash. Aujourd'hui, on écrit un script **utile** : une sauvegarde automatique. On le **planifie** ensuite pour qu'il tourne chaque nuit sans toi. Ce couple « script et planification » est le geste de base de l'automatisation.
+Dans le cours « Bash, variables, conditions, boucles et fonctions », tu as appris la syntaxe Bash. Ici, on écrit un script **utile** : une sauvegarde automatique. On le **planifie** ensuite pour qu'il tourne chaque nuit sans toi. Ce couple « script et planification » est le geste de base de l'automatisation.
 
 ## Une bonne sauvegarde
 
@@ -240,4 +240,4 @@ log "Bilan : $compresses compressé(s), $supprimes supprimé(s)"
 
 - `logrotate`, l'outil standard de Linux, fait exactement ce travail de rotation pour les journaux du système.
 - `rsync` et `restic` permettent des sauvegardes incrémentales et chiffrées vers un serveur distant ou le cloud, pour respecter le « 1 hors site » de la règle 3-2-1.
-- En semaine 6, Airflow orchestrera des tâches planifiées bien plus complexes, avec des dépendances entre elles.
+- Dans le cours « Apache Airflow, les bases de l'orchestration », Airflow orchestre des tâches planifiées bien plus complexes, avec des dépendances entre elles.

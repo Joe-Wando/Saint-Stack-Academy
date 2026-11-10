@@ -20,7 +20,7 @@ objectifs:
   - Appliquer les protections de base (en-têtes HTTP, HTTPS, dépendances à jour, secrets)
 prerequis:
   - Une API Node/Express ou NestJS (semaines 2 et 3)
-  - Les bases de HTTP (semaine 1)
+  - Les bases de HTTP (voir le cours « Les réseaux pour développeurs, IP, ports, DNS et HTTP »)
 referentiels:
   - OWASP Top 10 (édition 2021) et OWASP ASVS 4.0 (Application Security Verification Standard)
   - CompTIA Security+ (SY0-701), domaine 2 « Threats, Vulnerabilities and Mitigations »
@@ -130,7 +130,7 @@ Les règles :
 - **Refus par défaut** : une route est protégée, sauf exception explicite.
 - On renvoie **404** plutôt que 403, pour ne pas confirmer que la ressource existe.
 
-C'est exactement ce que fait la plateforme Saint Stack Academy : un apprenant qui demande un cours solo reçoit une erreur **403**, contrôlée par le serveur.
+Par exemple, sur une plateforme de cours, un apprenant qui demande un cours privé reçoit une erreur **404**, contrôlée par le serveur.
 
 ## A02 et A07, les mots de passe et les sessions
 
@@ -168,9 +168,9 @@ app.disable('x-powered-by');
 ```
 
 - **HTTPS partout**, et jamais de détail technique ni de trace de pile dans les erreurs renvoyées en production.
-- **Les dépendances** : `npm audit`, Dependabot sur GitHub, ou `trivy fs .`, à intégrer en CI (semaine 3).
+- **Les dépendances** : `npm audit`, Dependabot sur GitHub, ou `trivy fs .`, à intégrer en CI (voir le cours « Intégration continue avec GitHub Actions, premier workflow »).
 - **Les secrets** : dans des variables d'environnement, jamais dans Git. On ajoute `gitleaks` en CI.
-- **La journalisation** : on enregistre les connexions, les échecs et les refus d'accès (sans les mots de passe), puis on alerte (semaine 4).
+- **La journalisation** : on enregistre les connexions, les échecs et les refus d'accès (sans les mots de passe), puis on alerte (voir le cours « Supervision avec Prometheus et Grafana »).
 
 ## Démonstration
 

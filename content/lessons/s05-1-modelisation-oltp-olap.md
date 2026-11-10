@@ -18,7 +18,7 @@ objectifs:
   - Choisir les clés de substitution et gérer l'historique (dimensions à évolution lente)
   - Traduire un besoin métier en modèle dimensionnel et l'implémenter en SQL
 prerequis:
-  - Séances SQL de la semaine 4
+  - Cours « SQL pour la data, jointures et agrégats » et « SQL avancé, CTE et fonctions de fenêtrage »
 referentiels:
   - Ralph Kimball et Margy Ross, « The Data Warehouse Toolkit », 3e édition (méthode en 4 étapes)
   - Databricks Certified Data Engineer Associate, domaine « Data Modeling » (architecture médaillon)
@@ -57,7 +57,7 @@ quiz:
 | Utilisateurs | l'application | les analystes, Power BI, la data science |
 | Outils | PostgreSQL, MySQL | BigQuery, Snowflake, Redshift, Databricks, ou PostgreSQL |
 
-Lancer de grosses analyses directement sur la base de production la **ralentirait** pour les clients. Le modèle normalisé impose aussi de nombreuses jointures. On **copie** donc les données dans un **entrepôt** (*data warehouse*) organisé pour l'analyse. Le transport et la transformation, c'est l'**ETL**, sujet de demain.
+Lancer de grosses analyses directement sur la base de production la **ralentirait** pour les clients. Le modèle normalisé impose aussi de nombreuses jointures. On **copie** donc les données dans un **entrepôt** (*data warehouse*) organisé pour l'analyse. Le transport et la transformation, c'est l'**ETL**, sujet du cours « Construire un pipeline ETL en Python vers PostgreSQL ».
 
 ## L'architecture médaillon
 
@@ -166,7 +166,7 @@ Le prix à payer est la redondance : « Vêtements » est répété sur chaque l
 
 ## Démonstration
 
-À partir de la base de la boutique (semaine 4) :
+À partir de la base de la boutique (voir le cours « SQL pour la data, jointures et agrégats ») :
 
 1. On applique les 4 étapes de Kimball.
 2. On dessine l'étoile.
@@ -217,4 +217,4 @@ Question 5 : **une seule** table de faits convient si les deux processus partage
 
 - Le **schéma en flocon** normalise les dimensions (une table catégorie séparée). Il est rarement préférable à l'étoile.
 - Le **Data Vault** est une méthode alternative pour les très grands entrepôts qui reçoivent de nombreuses sources.
-- Demain : construire le pipeline ETL qui alimente automatiquement cette étoile, de bronze à gold.
+- Cours suivant conseillé : « Construire un pipeline ETL en Python vers PostgreSQL » : construire le pipeline ETL qui alimente automatiquement cette étoile, de bronze à gold.

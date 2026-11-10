@@ -18,7 +18,7 @@ objectifs:
   - Vérifier un chart (lint, template, dry-run) et gérer son cycle de vie (install, upgrade, rollback)
   - Déclarer des dépendances et publier un chart
 prerequis:
-  - Séances Kubernetes de la semaine 4 (dont l'introduction à Helm)
+  - Cours Kubernetes, dont « Kubernetes, application multi-services, stockage persistant et introduction à Helm »
 referentiels:
   - CNCF CKAD, domaine « Application Deployment » (Helm)
   - Documentation Helm v3, « Chart Template Guide » et « Best Practices »
@@ -48,7 +48,7 @@ quiz:
 
 ## Pourquoi écrire son chart ?
 
-Le 3 décembre, le groupe a **utilisé** un chart existant (`bitnami/postgresql`). Pour **ta propre** application (l'API boutique, la plateforme Saint Stack), tu as des manifestes (Deployment, Service, Ingress, ConfigMap) presque identiques d'un environnement à l'autre. Seuls changent les répliques, l'image, le domaine et les ressources.
+Dans le cours « Kubernetes, application multi-services, stockage persistant et introduction à Helm », tu as **utilisé** un chart existant (`bitnami/postgresql`). Pour **ta propre** application (l'API boutique, par exemple), tu as des manifestes (Deployment, Service, Ingress, ConfigMap) presque identiques d'un environnement à l'autre. Seuls changent les répliques, l'image, le domaine et les ressources.
 
 **Helm** les transforme en **modèles paramétrés** : un seul chart, plusieurs fichiers de valeurs.
 

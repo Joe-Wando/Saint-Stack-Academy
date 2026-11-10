@@ -19,7 +19,7 @@ objectifs:
   - Distinguer une fusion en avance rapide (fast-forward) d'une fusion à trois voies
   - Publier une branche sur GitHub avec push et récupérer celle des autres avec pull
 prerequis:
-  - Séance « Le terminal Linux »
+  - Cours « Le terminal Linux, se déplacer et manipuler des fichiers »
   - Git installé et un compte GitHub
 referentiels:
   - GitHub Foundations (certification GitHub), domaines 1 et 2
@@ -143,7 +143,7 @@ C1 ── C2 ── C3 ── C4 ── C5   ← main, login
 C1 ── C2 ── C3 ── C6 ── M   ← main
 ```
 
-Si les deux branches ont modifié **les mêmes lignes**, Git ne peut pas choisir : c'est un **conflit**. Ce sera le sujet de demain.
+Si les deux branches ont modifié **les mêmes lignes**, Git ne peut pas choisir : c'est un **conflit**. Ce sera le sujet du cours suivant, « Git, conflits, pull requests et revue de code ».
 
 ## Travailler avec GitHub
 

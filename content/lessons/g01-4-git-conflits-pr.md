@@ -19,7 +19,7 @@ objectifs:
   - Faire une revue de code constructive avec commentaires, suggestions et approbation
   - Protéger la branche main
 prerequis:
-  - Séance « Git, dépôts, commits, branches et fusion »
+  - Cours « Git, dépôts, commits, branches et fusion »
 referentiels:
   - GitHub Foundations, domaine 3 « Collaboration Features »
   - Pro Git, chapitres 3.2 « Basic Merging » et 5 « Distributed Git »
@@ -49,7 +49,7 @@ quiz:
 
 ## Pourquoi des conflits ?
 
-Hier, Git fusionnait tout seul. Il le fait tant que les deux branches touchent des endroits **différents**. Si Awa et Moussa modifient **la même ligne** de `index.html`, chacun d'une façon différente, Git ne peut pas deviner laquelle garder. Il s'arrête et te demande de décider : c'est un **conflit**.
+Dans le cours « Git, dépôts, commits, branches et fusion », Git fusionnait tout seul. Il le fait tant que les deux branches touchent des endroits **différents**. Si Awa et Moussa modifient **la même ligne** de `index.html`, chacun d'une façon différente, Git ne peut pas deviner laquelle garder. Il s'arrête et te demande de décider : c'est un **conflit**.
 
 Un conflit n'est pas une erreur. C'est une **question** que Git te pose.
 
@@ -104,7 +104,7 @@ main ──●──────────────────────
 1. Créer une branche depuis `main` : `feature/panier`, `fix/total-negatif`.
 2. Faire des commits, puis pousser la branche.
 3. Ouvrir une **pull request** (PR) vers `main`.
-4. Les collègues relisent, et la CI lance les tests. Ce sera vu en semaine 3.
+4. Les collègues relisent, et la CI lance les tests. Ce sera vu dans le cours « Intégration continue avec GitHub Actions, premier workflow ».
 5. Fusionner, puis supprimer la branche.
 
 ## Une bonne pull request
@@ -153,7 +153,7 @@ Dans *Settings*, puis *Branches* (ou *Rules*), ajoute une règle sur `main` :
 
 - exiger une pull request avant toute fusion ;
 - exiger au moins une approbation ;
-- exiger que les vérifications de la CI passent (semaine 3).
+- exiger que les vérifications de la CI passent (voir le cours « Intégration continue avec GitHub Actions, premier workflow »).
 
 Ainsi, plus personne, même pas toi, ne peut pousser directement sur `main`.
 
@@ -176,7 +176,7 @@ git log --oneline --graph
 
 ## Exercice guidé
 
-Par deux, sur le dépôt d'hier :
+Par deux, sur le dépôt du cours « Git, dépôts, commits, branches et fusion » :
 
 1. A et B partent tous les deux de `main` à jour.
 2. A crée `feature/titre-a` et change la ligne `<h1>` de `index.html`. B crée `feature/titre-b` et change **la même ligne** autrement.

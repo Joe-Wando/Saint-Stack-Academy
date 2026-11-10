@@ -18,7 +18,7 @@ objectifs:
   - Choisir les bons types et contraintes PostgreSQL (NOT NULL, UNIQUE, CHECK, ON DELETE)
   - Écrire le script DDL et le faire évoluer avec des migrations
 prerequis:
-  - Séances SQL de la semaine 7
+  - Cours SQL, de « SQL, interroger une base avec SELECT » à « SQL, sous-requêtes, CTE, vues et fonctions de fenêtrage »
 referentiels:
   - Oracle Database SQL Certified Associate (1Z0-071), domaine « Creating Tables and Constraints »
   - E. F. Codd, modèle relationnel (1970) et formes normales
@@ -209,7 +209,7 @@ Le prix par jour dépend du modèle de la voiture.
 
 ## Exercice autonome
 
-Modélise la base du mini-projet de groupe, enrichi d'**événements** : un membre peut organiser des événements, s'inscrire à ceux des autres, et chaque événement a des **tags** (plusieurs par événement).
+Modélise la base du mini-projet « annuaire », enrichi d'**événements** : un membre peut organiser des événements, s'inscrire à ceux des autres, et chaque événement a des **tags** (plusieurs par événement).
 
 1. Le modèle entité-association, avec les cardinalités.
 2. La vérification de la 3FN, en justifiant chaque table.
@@ -254,4 +254,4 @@ Exercice autonome, les tables clés :
 
 - La forme normale de Boyce-Codd (BCNF) et la 4FN traitent des cas plus rares.
 - Les outils de diagramme dbdiagram.io et DrawSQL génèrent le SQL à partir du schéma.
-- Demain : les index, les transactions et les sauvegardes, pour une base rapide et fiable.
+- Cours suivant conseillé : « PostgreSQL, index, transactions et sauvegardes » : une base rapide et fiable.

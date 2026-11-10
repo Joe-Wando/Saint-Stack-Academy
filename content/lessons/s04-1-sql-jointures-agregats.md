@@ -49,9 +49,9 @@ quiz:
 
 ## Pourquoi le SQL en data ?
 
-Le SQL est **la** langue commune de la donnée. Le data engineer s'en sert pour construire les tables, l'analyste pour répondre aux questions, et dbt, Spark SQL, BigQuery et Snowflake le parlent tous. Les sujets de cette semaine (jointures, agrégats, fenêtres) reviennent dans tous les entretiens techniques.
+Le SQL est **la** langue commune de la donnée. Le data engineer s'en sert pour construire les tables, l'analyste pour répondre aux questions, et dbt, Spark SQL, BigQuery et Snowflake le parlent tous. Les sujets de ce cours et du suivant (jointures, agrégats, fenêtres) reviennent dans tous les entretiens techniques.
 
-Tu étudies ici le SQL **en avance** sur le groupe, qui l'abordera en semaine 7, avec un angle **analyse de données**.
+Tu étudies ici le SQL avec un angle **analyse de données**. Les cours « SQL, interroger une base avec SELECT » et suivants en donnent l'angle développeur.
 
 ## La base d'exemple
 
@@ -258,5 +258,5 @@ Question 4 : `WHERE` est évalué **avant** `GROUP BY`, donc `COUNT(*)` n'existe
 ## Pour aller plus loin
 
 - `GROUPING SETS` et `ROLLUP` calculent des sous-totaux et un total général en une seule requête.
-- `EXPLAIN ANALYZE` montre comment PostgreSQL exécute une jointure. On le verra avec les index en semaine 8.
-- Demain : les fonctions de fenêtrage et les CTE, les outils préférés des data engineers.
+- `EXPLAIN ANALYZE` montre comment PostgreSQL exécute une jointure. On le verra avec les index (voir le cours « PostgreSQL, index, transactions et sauvegardes »).
+- Cours suivant conseillé : « SQL avancé, CTE et fonctions de fenêtrage » : les outils préférés des data engineers.

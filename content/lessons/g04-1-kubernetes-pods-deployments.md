@@ -18,7 +18,7 @@ objectifs:
   - Écrire les manifestes YAML d'un Pod et d'un Deployment
   - Faire une mise à l'échelle, une mise à jour progressive et un retour arrière
 prerequis:
-  - Semaine 2 (Docker, Compose)
+  - Cours Docker, dont « Docker Compose et Docker Hub »
 referentiels:
   - CNCF Kubernetes and Cloud Native Associate (KCNA), domaines « Kubernetes Fundamentals » et « Container Orchestration »
   - CNCF Certified Kubernetes Application Developer (CKAD), domaine « Application Deployment »
@@ -85,7 +85,7 @@ On ne dit pas à Kubernetes **comment** faire (« lance un conteneur, puis un au
 | **kube-scheduler** | choisit sur quel nœud placer chaque nouveau Pod |
 | **controller-manager** | fait tourner les boucles de réconciliation |
 | **kubelet** | l'agent présent sur chaque nœud, qui lance et surveille les conteneurs |
-| **kube-proxy** | règles réseau des Services (vus demain) |
+| **kube-proxy** | règles réseau des Services (vus dans le cours suivant) |
 | **runtime** | containerd, qui exécute réellement les conteneurs |
 
 ## Un cluster local
@@ -211,7 +211,7 @@ La **mise à jour progressive** (*rolling update*) crée les nouveaux Pods au fu
 
 ## Exercice autonome
 
-1. Déploie ton image d'API, publiée en semaine 3, en Deployment à 3 répliques, avec des ressources et les deux sondes.
+1. Déploie ton image d'API, publiée dans le cours « GitHub Actions, tests, matrice, secrets et publication d'une image Docker », en Deployment à 3 répliques, avec des ressources et les deux sondes.
 2. Provoque un plantage : un Pod qui démarre avec une mauvaise commande. Quel statut observes-tu, et comment le diagnostiques-tu ?
 3. Fais une mise à jour vers une nouvelle version de ton image, puis un retour arrière. Note les révisions.
 4. Explique sur ta feuille ce que fait le scheduler si tu demandes 10 répliques avec `requests: memory: 2Gi` sur un cluster d'un nœud de 8 Gi.
@@ -246,4 +246,4 @@ Exercice autonome :
 
 - `k9s` est une interface texte très pratique pour naviguer dans un cluster.
 - Les *Namespaces* séparent les environnements dans un même cluster : `kubectl create namespace test`.
-- Demain : rendre l'API joignable avec les Services, et la configurer avec les ConfigMaps et les Secrets.
+- Cours suivant conseillé : « Kubernetes, Services, Ingress, ConfigMaps et Secrets » : rendre l'API joignable et la configurer.

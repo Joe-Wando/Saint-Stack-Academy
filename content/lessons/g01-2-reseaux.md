@@ -19,7 +19,7 @@ objectifs:
   - Lire une requête et une réponse HTTP, avec la méthode, le code de statut et les en-têtes
   - Diagnostiquer une connexion avec ping, curl et ss
 prerequis:
-  - Séance « Le terminal Linux »
+  - Cours « Le terminal Linux, se déplacer et manipuler des fichiers »
 referentiels:
   - CompTIA Network+ (N10-009), domaines 1 « Networking Concepts » et 5 « Troubleshooting »
   - LPI Linux Essentials (010-160), thème 4.4 « Votre ordinateur sur le réseau »
@@ -56,7 +56,7 @@ Quand tu tapes `https://github.com` dans ton navigateur, quatre questions se pos
 3. **Quel programme** sur cette machine ? C'est le port, ici 443.
 4. **Que veut-on lui dire ?** C'est le protocole HTTP : « donne-moi la page d'accueil ».
 
-Toute cette séance déroule ces quatre étapes.
+Tout ce cours déroule ces quatre étapes.
 
 > Analogie postale : le nom de domaine est le nom de l'entreprise, l'IP est l'adresse de l'immeuble, le port est le numéro du bureau, et HTTP est la langue de la lettre.
 
@@ -206,4 +206,4 @@ curl -i -X POST https://jsonplaceholder.typicode.com/posts \
 
 - Les outils de développement du navigateur (F12, onglet Réseau) montrent chaque requête HTTP de la page.
 - Le site *howdns.works* explique le DNS sous forme de bande dessinée.
-- La séance solo « Réseaux approfondis » (semaine 2) aborde le sous-réseautage, le routage, le pare-feu `ufw` et `tcpdump`.
+- Le cours « Réseaux approfondis, sous-réseaux, routage, pare-feu et diagnostic » aborde le sous-réseautage, le routage, le pare-feu `ufw` et `tcpdump`.

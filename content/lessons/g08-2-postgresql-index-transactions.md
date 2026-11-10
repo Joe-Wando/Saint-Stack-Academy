@@ -18,7 +18,7 @@ objectifs:
   - Comprendre les niveaux d'isolation et les verrous dans les cas courants
   - Sauvegarder et restaurer une base avec pg_dump et pg_restore, et planifier les sauvegardes
 prerequis:
-  - Séance « PostgreSQL, modéliser et normaliser »
+  - Cours « PostgreSQL, modéliser et normaliser une base de données »
 referentiels:
   - Documentation PostgreSQL 16, chapitres 11 « Indexes », 13 « Concurrency Control » et 26 « Backup and Restore »
   - Oracle Database SQL Certified Associate (1Z0-071), domaine « Managing Transactions »
@@ -48,7 +48,7 @@ quiz:
 
 ## L'idée
 
-Hier, la base était **juste**. Aujourd'hui, on la rend **rapide** (les index), **fiable** quand plusieurs utilisateurs écrivent en même temps (les transactions) et **récupérable** en cas de catastrophe (les sauvegardes). Ce sont les trois questions que pose toute mise en production.
+Dans le cours « PostgreSQL, modéliser et normaliser une base de données », la base est devenue **juste**. Ici, on la rend **rapide** (les index), **fiable** quand plusieurs utilisateurs écrivent en même temps (les transactions) et **récupérable** en cas de catastrophe (les sauvegardes). Ce sont les trois questions que pose toute mise en production.
 
 ## Le jeu d'essai : un million de lignes
 
@@ -201,7 +201,7 @@ docker exec pg-cours pg_dump -U postgres -F c postgres > sauvegarde.dump
 
 **La stratégie** :
 
-- **automatiser**, par exemple avec le script et le cron de la semaine 2, une fois par nuit ;
+- **automatiser**, par exemple avec le script et le cron (voir le cours « Bash en pratique, script de sauvegarde et planification avec cron »), une fois par nuit ;
 - appliquer la règle **3-2-1** : 3 copies, sur 2 supports différents, dont 1 hors site ;
 - **chiffrer** les sauvegardes, qui contiennent des données personnelles ;
 - **tester la restauration** chaque mois, en chronométrant.
@@ -255,4 +255,4 @@ Question 3, sans `FOR UPDATE` : les deux transactions lisent `places_restantes =
 
 - `pg_stat_statements` liste les requêtes les plus coûteuses de la base. C'est le point de départ de toute optimisation.
 - Les **réplicas en lecture** et la haute disponibilité (Patroni, ou AWS RDS Multi-AZ) servent à absorber la charge et à survivre à une panne.
-- Jeudi : MongoDB et Redis, deux bases **NoSQL** pour d'autres besoins.
+- Cours suivant conseillé : « NoSQL, MongoDB et Redis » : deux bases **NoSQL** pour d'autres besoins.

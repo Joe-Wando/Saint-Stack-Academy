@@ -18,7 +18,7 @@ objectifs:
   - Gérer un service avec systemctl et écrire une unité systemd simple
   - Lire les journaux avec journalctl et dans /var/log
 prerequis:
-  - Séance « Linux, utilisateurs, groupes et droits d'accès »
+  - Cours « Linux, utilisateurs, groupes et droits d'accès »
 referentiels:
   - LPIC-1 (101-500), objectifs 101.3 « Niveaux d'exécution et cibles systemd » et 103.5 « Créer, surveiller et tuer des processus »
   - LPIC-1 (102-500), objectif 108.2 « Journalisation du système »
@@ -242,6 +242,6 @@ Le heredoc de l'unité est écrit **sans** guillemets autour de `EOF`, pour que 
 
 ## Pour aller plus loin
 
-- Les *timers* systemd sont une alternative moderne à cron, que l'on verra en semaine 2.
+- Les *timers* systemd sont une alternative moderne à cron, que l'on retrouve dans le cours « Bash en pratique, script de sauvegarde et planification avec cron ».
 - `systemd-analyze blame` montre ce qui ralentit le démarrage de la machine.
-- Docker (semaine 2) isole des processus : tu y retrouveras les mêmes notions de PID et de signaux.
+- Docker (voir le cours « Docker, images et conteneurs ») isole des processus : tu y retrouveras les mêmes notions de PID et de signaux.

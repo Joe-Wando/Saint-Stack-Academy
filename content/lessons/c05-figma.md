@@ -18,7 +18,7 @@ objectifs:
   - Créer des composants, des variantes et des styles (couleurs, typographie)
   - Prototyper un parcours et préparer la remise aux développeurs (Dev Mode)
 prerequis:
-  - Séances React et Tailwind CSS
+  - Cours « React, composants, props, état et routes » et « Tailwind CSS, styler avec des classes utilitaires »
   - Un compte Figma gratuit
 referentiels:
   - Google UX Design Professional Certificate, cours « Build Wireframes and Low-Fidelity Prototypes »
@@ -49,7 +49,7 @@ quiz:
 
 ## Pourquoi maquetter avant de coder ?
 
-Modifier une maquette prend 2 minutes. Modifier une interface déjà codée, testée et déployée prend des heures. Maquetter permet de **valider le parcours** avec les utilisateurs et le Product Owner (la séance Scrum du 10 décembre) **avant** d'écrire la première ligne de code.
+Modifier une maquette prend 2 minutes. Modifier une interface déjà codée, testée et déployée prend des heures. Maquetter permet de **valider le parcours** avec les utilisateurs et le Product Owner (voir le cours « Scrum en pratique avec Jira ») **avant** d'écrire la première ligne de code.
 
 **Figma** est l'outil de référence. Il fonctionne dans le navigateur, se partage par un simple lien, et plusieurs personnes peuvent y travailler en même temps.
 
@@ -118,10 +118,10 @@ Un ensemble de composants et de styles forme un **design system**. C'est ce qui 
 
 ## Démonstration
 
-On maquette la page « Programme » de la plateforme Saint Stack Academy :
+On maquette la page « Catalogue » d'une plateforme de cours en ligne :
 
 1. un wireframe ;
-2. les styles de couleur (la charte verte, bleue et violette de la plateforme) ;
+2. les styles de couleur (une charte de trois couleurs) ;
 3. le composant « Carte de cours », avec des variantes selon le statut (à faire, en cours, terminé) ;
 4. la grille de cartes en Auto Layout ;
 5. un prototype qui relie une carte à la page du cours ;
@@ -135,7 +135,7 @@ On maquette la page « Programme » de la plateforme Saint Stack Academy :
 
 ## Exercice autonome
 
-Maquette le mini-projet « annuaire » du groupe :
+Maquette le mini-projet « annuaire » (voir le cours « Scrum en pratique avec Jira ») :
 
 1. Les wireframes de 3 écrans : liste des membres, profil, formulaire d'ajout.
 2. Les styles de couleur et de texte, et 4 composants (bouton, champ, carte membre, barre de navigation).
@@ -154,7 +154,7 @@ Exercice guidé, ce qu'on attend :
 
 Pour le corriger, on fonce le bleu (par exemple `#2563EB`, environ 5,2:1) ou on agrandit et met en gras le texte (le seuil passe alors à 3:1 pour du « grand texte »).
 
-> Ce test révèle un vrai point d'amélioration de la plateforme Saint Stack Academy : ses boutons principaux utilisent ce bleu avec un texte blanc. C'est une bonne première correction à proposer.
+> Ce test révèle un piège fréquent : de nombreuses interfaces utilisent ce bleu pour leurs boutons principaux, avec un texte blanc. C'est une bonne première correction à proposer.
 
 Exercice autonome, l'évaluation : les écrans suivent-ils les **heuristiques de Nielsen** ? On vérifie notamment :
 - la visibilité de l'état du système (indicateur de chargement, messages après une action) ;

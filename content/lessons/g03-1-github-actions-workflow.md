@@ -18,7 +18,7 @@ objectifs:
   - Utiliser des actions du Marketplace (checkout, setup-node) et des commandes shell
   - Lire les journaux d'exécution et corriger un workflow en échec
 prerequis:
-  - Séances Git de la semaine 1
+  - Cours « Git, dépôts, commits, branches et fusion » et « Git, conflits, pull requests et revue de code »
   - Un dépôt GitHub contenant un petit projet Node
 referentiels:
   - GitHub Actions (certification GitHub), domaines 1 « Author and maintain workflows » et 2 « Consume workflows »
@@ -127,7 +127,7 @@ jobs:
 
 - Onglet **Actions** du dépôt : la liste des exécutions, avec un point vert, rouge ou jaune.
 - En cliquant sur une exécution puis sur un job, on voit le **journal de chaque étape**, que l'on déplie pour trouver l'erreur.
-- Sur une pull request, les vérifications apparaissent en bas. Avec la protection de branche vue en semaine 1, on peut **exiger** qu'elles passent avant toute fusion.
+- Sur une pull request, les vérifications apparaissent en bas. Avec la protection de branche (voir le cours « Git, conflits, pull requests et revue de code »), on peut **exiger** qu'elles passent avant toute fusion.
 - Un badge dans le README affiche l'état en permanence : `![CI](https://github.com/<pseudo>/<depot>/actions/workflows/ci.yml/badge.svg)`.
 
 ## Les déclencheurs utiles
@@ -137,7 +137,7 @@ on:
   push:
     paths: ['api/**']              # seulement si des fichiers de api/ changent
   schedule:
-    - cron: '0 6 * * 1'            # chaque lundi à 6 h UTC (syntaxe cron de la semaine 2)
+    - cron: '0 6 * * 1'            # chaque lundi à 6 h UTC (voir le cours « Bash en pratique, script de sauvegarde et planification avec cron »)
   workflow_dispatch:
     inputs:
       environnement:
@@ -159,7 +159,7 @@ on:
 
 ## Démonstration
 
-1. On reprend l'API Express de la semaine 2 et on ajoute un test minimal avec le module natif `node:test` :
+1. On reprend l'API Express (voir le cours « Docker, volumes, réseaux et dockerisation d'une API ») et on ajoute un test minimal avec le module natif `node:test` :
 
 ```js
 // somme.js
@@ -232,4 +232,4 @@ Dans *Settings*, puis *Branches* ou *Rules*, coche *Require status checks to pas
 
 - Le Marketplace (github.com/marketplace?type=actions) contient des milliers d'actions.
 - `act` (nektos/act) exécute tes workflows en local dans Docker, pour tester sans pousser.
-- Demain : la matrice de versions, les secrets, et la construction puis la publication d'une image Docker.
+- Cours suivant conseillé : « GitHub Actions, tests, matrice, secrets et publication d'une image Docker » : la matrice de versions, les secrets, et la publication d'une image Docker.

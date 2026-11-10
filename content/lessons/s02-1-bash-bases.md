@@ -18,7 +18,7 @@ objectifs:
   - Écrire des boucles for et while, et des fonctions
   - Rendre un script robuste avec set -euo pipefail et des guillemets
 prerequis:
-  - Séances solo de la semaine 1
+  - Cours Linux : droits, processus, paquets et SSH
 referentiels:
   - LPIC-1 (102-500), objectif 105.2 « Personnaliser ou écrire des scripts simples »
   - CompTIA Linux+ (XK0-005), domaine 4 « Scripting, Containers and Automation »
@@ -48,7 +48,7 @@ quiz:
 
 ## Pourquoi Bash ?
 
-Tout ce que tu tapes dans le terminal peut s'enregistrer dans un fichier et se rejouer : c'est un **script**. Les ingénieurs DevOps automatisent ainsi les sauvegardes, les déploiements, le nettoyage des journaux ou l'installation d'un serveur. Les pipelines CI/CD (semaine 3) exécutent eux aussi des commandes Bash.
+Tout ce que tu tapes dans le terminal peut s'enregistrer dans un fichier et se rejouer : c'est un **script**. Les ingénieurs DevOps automatisent ainsi les sauvegardes, les déploiements, le nettoyage des journaux ou l'installation d'un serveur. Les pipelines CI/CD (voir le cours « Intégration continue avec GitHub Actions, premier workflow ») exécutent eux aussi des commandes Bash.
 
 ## Le premier script
 
@@ -257,4 +257,4 @@ La dernière ligne est un test : son code de retour devient celui du script.
 
 - Les tableaux associatifs (`declare -A`) permettent de faire un dictionnaire clé-valeur en Bash.
 - `trap 'nettoyage' EXIT` exécute une fonction à la fin du script, même en cas d'erreur.
-- Demain, on écrit un vrai script de sauvegarde et on le planifie avec cron.
+- Cours suivant conseillé : « Bash en pratique, script de sauvegarde et planification avec cron » : un vrai script de sauvegarde, planifié avec cron.

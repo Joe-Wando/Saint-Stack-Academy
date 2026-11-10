@@ -18,7 +18,7 @@ objectifs:
   - Traiter les données par partition de date pour des relances et rattrapages sûrs
   - Mettre en place alertes, SLA et bonnes pratiques de production
 prerequis:
-  - Séances « Apache Airflow, les bases », « Pipeline ETL » et « dbt, tests et documentation »
+  - Cours « Apache Airflow, les bases de l'orchestration », « Construire un pipeline ETL en Python vers PostgreSQL » et « dbt, tests, documentation, snapshots et intégration continue »
 referentiels:
   - Astronomer Certification for Apache Airflow Fundamentals et DAG Authoring
   - Databricks Certified Data Engineer Associate, domaine « Production Pipelines »
@@ -189,7 +189,7 @@ def test_aucune_erreur_import():
     assert DagBag(dag_folder="dags", include_examples=False).import_errors == {}
 ```
 
-6. **Les SLA et la supervision** : on mesure la durée des exécutions et on alerte si les données ne sont pas prêtes à 7 h. Airflow expose des métriques StatsD, que Prometheus et Grafana (semaine 4) peuvent afficher.
+6. **Les SLA et la supervision** : on mesure la durée des exécutions et on alerte si les données ne sont pas prêtes à 7 h. Airflow expose des métriques StatsD, que Prometheus et Grafana (voir le cours « Supervision avec Prometheus et Grafana ») peuvent afficher.
 
 ## Démonstration
 
