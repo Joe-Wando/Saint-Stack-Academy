@@ -8,3 +8,11 @@ dist/
 illustrations-saint-stack/
 illustrations-saint-stack.zip
 *.tsbuildinfo
+
+# Dossiers et archives de contenus fournis, recopiés dans content/ et web/public/
+saint-stack-v2-pour-claude-code/
+saint-stack-v2-pour-claude-code.zip
+saint-stack-cours-l1-l2/
+saint-stack-cours-l1-l2.zip
+lot1-L1-S1/
+lot1-L1-S1.zip
