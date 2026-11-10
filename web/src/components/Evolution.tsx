@@ -30,6 +30,7 @@ function IconeJalon({ code }: { code: string }) {
     'quiz-parfait': <><circle {...p} cx="12" cy="12" r="8" /><circle {...p} cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1.2" fill="currentColor" /></>,
     ue: <><rect {...p} x="4" y="5" width="16" height="14" rx="2" /><path {...p} d="M8 10l2.5 2.5L16 8" /></>,
     semestre: <><rect {...p} x="3" y="4" width="18" height="16" rx="2" /><path {...p} d="M3 9h18M8 14l2 2 5-5" /></>,
+    badge: <><circle {...p} cx="12" cy="9" r="5" /><path {...p} d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5" /></>,
     parcours: <><path {...p} d="M5 19c4-1 3-6 7-7s3-6 7-7" /><circle {...p} cx="5" cy="19" r="1.5" /><circle {...p} cx="19" cy="5" r="1.5" /></>,
   };
   return <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">{formes[code] ?? formes['cours-1']}</svg>;

@@ -1,15 +1,14 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { CONTACT } from '@/lib/contact';
+import PhotoFondateur from './PhotoFondateur';
 
 /** Écrans de compte : à gauche le portrait du fondateur et sa citation, à droite le formulaire. */
 export default function CadreAuth({ titre, children }: { titre: string; children: ReactNode }) {
   return (
     <main className="auth">
       <aside className="auth-art">
-        <Image className="auth-photo" src={CONTACT.photo} alt={`Portrait d’${CONTACT.fondateur}, fondateur de Saint Stack Academy`}
-          width={280} height={280} sizes="(max-width: 860px) 96px, 280px" priority />
+        <PhotoFondateur className="auth-photo" taille={280} sizes="(max-width: 860px) 96px, 280px" priority />
         <figure className="auth-citation">
           <blockquote>« Une notion à la fois. Chaque chapitre compris est une victoire. »</blockquote>
           <figcaption>{CONTACT.fondateur}, fondateur</figcaption>

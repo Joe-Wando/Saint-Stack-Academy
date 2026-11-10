@@ -9,6 +9,7 @@ export default function PiedDePage() {
           <Link href="/licence">Licence</Link>
           <Link href="/parcours">Parcours</Link>
           <Link href="/catalogue">Catalogue</Link>
+          <Link href="/certifications">Certifications</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/confidentialite">Confidentialité</Link>
         </nav>

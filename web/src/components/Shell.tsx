@@ -33,6 +33,7 @@ function MenuCompte({ u }: { u: Utilisateur }) {
       {ouvert && (
         <div className="compte-menu">
           <Link href="/profil" onClick={() => setOuvert(false)}>Mon profil</Link>
+          <Link href="/bienvenue" onClick={() => setOuvert(false)}>Revoir la visite</Link>
           <button onClick={deconnecter}>Déconnexion</button>
         </div>
       )}
@@ -47,6 +48,7 @@ function EnTeteConnecte({ u }: { u: Utilisateur }) {
     { href: '/licence', label: 'Licence' },
     { href: '/parcours', label: 'Parcours métiers' },
     { href: '/catalogue', label: 'Catalogue' },
+    { href: '/certifications', label: 'Certifications' },
     { href: '/contact', label: 'Contact' },
     ...(u.role === 'admin' ? [{ href: '/admin', label: 'Administration' }] : []),
   ];

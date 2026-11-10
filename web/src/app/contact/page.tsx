@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
+import PhotoFondateur from '@/components/PhotoFondateur';
 import { api, Utilisateur } from '@/lib/api';
 import { CONTACT, SUJETS_CONTACT } from '@/lib/contact';
 
@@ -61,7 +61,7 @@ export default function Contact() {
           </section>
           <div className="contact-grille">
             <section className="card fondateur" aria-labelledby="t-fondateur">
-              <Image className="fondateur-photo" src={CONTACT.photo} alt={`Portrait d’${CONTACT.fondateur}`} width={160} height={160} sizes="160px" />
+              <PhotoFondateur className="fondateur-photo" taille={160} />
               <h2 id="t-fondateur">{CONTACT.fondateur}</h2>
               <p className="muted">{CONTACT.role}</p>
               <div className="moyens">

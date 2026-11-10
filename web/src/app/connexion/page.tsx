@@ -20,7 +20,9 @@ export default function Connexion() {
     try {
       const s = await api<{ jeton: string; utilisateur: Utilisateur }>('/auth/connexion', { method: 'POST', body: JSON.stringify(f) });
       enregistrerSession(s);
-      router.replace(suiteSure(parametre('suite') || reprendreSuite()));
+      const suite = suiteSure(parametre('suite') || reprendreSuite());
+      // Première connexion : la visite de bienvenue d'abord, puis la page demandée.
+      router.replace(s.utilisateur.bienvenueVue ? suite : `/bienvenue?suite=${encodeURIComponent(suite)}`);
     } catch (err) {
       const x = err as Error & { statut?: number };
       setErreur(x.message);

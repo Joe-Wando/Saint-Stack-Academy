@@ -6,7 +6,7 @@ export type Role = 'admin' | 'apprenant';
 export type Niveau = 'L1' | 'L2' | 'L3' | 'autre';
 export interface Utilisateur {
   id: number; nom: string; email: string; role: Role;
-  niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string; photo?: string | null;
+  niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string; photo?: string | null; bienvenueVue?: boolean;
 }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
 export interface ResumeCours {
@@ -32,7 +32,16 @@ export interface Referentiel {
   niveaux: { code: string; titre: string; semestres: SemestreRef[]; troncCommun: SemestreRef[]; options: { code: string; titre: string; semestres: SemestreRef[] }[] }[];
   parcours: { code: string; titre: string; domaine: string; cours: (ResumeCours & { etape: number })[] }[];
 }
+export interface ElementCertification {
+  nom: string; organisme: string; type: 'badge' | 'certificat' | 'certification'; cout: string;
+  ue?: string; prepare?: string; facultatif?: boolean; lien?: string;
+}
+export interface Certifications {
+  niveaux: { L1: { intro: string; elements: ElementCertification[] }; L2: { intro: string; elements: ElementCertification[] }; L3: { intro: string; options: Record<string, ElementCertification[]> } };
+  conseils: string[];
+}
 export interface MonNiveau {
+  certifications?: ElementCertification[];
   niveau: string | null; option: { code: string; titre: string } | null; titre: string | null;
   ues: { niveau: string; semestre: string; ue: string; option: string | null; cours: ResumeCours[] }[];
 }

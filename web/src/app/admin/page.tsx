@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import AdminCadre from '@/components/AdminCadre';
 import Avatar from '@/components/Avatar';
+import ReglagePhotoFondateur from '@/components/ReglagePhotoFondateur';
 import { api, NIVEAUX, Niveau } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 
 interface Tableau {
-  chiffres: { inscrits: number; verifies: number; actifs7: number; actifs30: number; coursTermines: number; quizPasses: number; messagesNonLus: number };
+  chiffres: { inscrits: number; verifies: number; actifs7: number; actifs30: number; coursTermines: number; quizPasses: number; messagesNonLus: number; badgesDeclares: number };
   inscriptionsParSemaine: { semaine: string; nombre: number }[];
   activiteParSemaine: { semaine: string; nombre: number }[];
   parNiveau: { niveau: string; nombre: number }[];
@@ -21,7 +22,7 @@ interface Tableau {
 const ACTIONS: Record<string, string> = {
   suspension: 'Suspension', reactivation: 'Réactivation', changement_role: 'Changement de rôle', suppression: 'Suppression',
   changement_niveau: 'Changement de niveau', verification_manuelle: 'Vérification manuelle', renvoi_verification: 'Renvoi de la vérification',
-  rechargement_contenu: 'Rechargement des cours',
+  rechargement_contenu: 'Rechargement des cours', photo_fondateur: 'Nouvelle photo de connexion', photo_fondateur_origine: 'Retour à la photo d’origine',
 };
 const jour = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
 const quand = (iso: string) => new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
@@ -61,9 +62,11 @@ function Contenu() {
       <section className="chiffres chiffres-4" aria-label="Chiffres clés">
         <div className="chiffre"><span className="k">Inscrits</span><span className="v">{c.inscrits}</span><span className="muted small">{c.verifies} vérifié{c.verifies > 1 ? 's' : ''}</span></div>
         <div className="chiffre"><span className="k">Actifs</span><span className="v">{c.actifs7}</span><span className="muted small">sur 7 jours · {c.actifs30} sur 30 jours</span></div>
-        <div className="chiffre"><span className="k">Cours terminés</span><span className="v">{c.coursTermines}</span><span className="muted small">{c.quizPasses} quiz passés</span></div>
+        <div className="chiffre"><span className="k">Cours terminés</span><span className="v">{c.coursTermines}</span><span className="muted small">{c.quizPasses} quiz passés · {c.badgesDeclares} badge{c.badgesDeclares > 1 ? 's' : ''} déclaré{c.badgesDeclares > 1 ? 's' : ''}</span></div>
         <div className={`chiffre ${c.messagesNonLus ? 'warn' : ''}`}><span className="k">Messages non lus</span><span className="v">{c.messagesNonLus}</span><Link className="small" href="/admin/messages">Voir les messages</Link></div>
       </section>
+
+      <ReglagePhotoFondateur />
 
       <div className="grid2">
         <section className="card"><Histogramme titre="Inscriptions par semaine" unite="inscription(s)" donnees={t.inscriptionsParSemaine.map((s) => ({ libelle: jour(s.semaine), nombre: s.nombre }))} /></section>

@@ -9,6 +9,7 @@ export default function EnTetePublic() {
   const liens = [
     { href: '/licence', label: 'Licence' },
     { href: '/parcours', label: 'Parcours métiers' },
+    { href: '/certifications', label: 'Certifications' },
     { href: '/contact', label: 'Contact' },
   ];
   return (

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import AdminCadre from '@/components/AdminCadre';
 import Avatar from '@/components/Avatar';
 import Evolution, { DonneesEvolution } from '@/components/Evolution';
+import { BadgeObtenu, ListeBadges } from '@/components/MesBadges';
 import { CarteNiveaux, OptionsL3 } from '@/components/ChoixNiveau';
 import { api, NIVEAUX, Niveau, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
@@ -17,6 +18,7 @@ interface Fiche {
   };
   evolution: DonneesEvolution;
   activites: { cours: string; titre: string; type: string; detail: { chapitre?: number; score?: number; total?: number } | null; date: string }[];
+  certifications: BadgeObtenu[];
 }
 
 const TYPES: Record<string, string> = { cours_commence: 'Cours commencé', chapitre_lu: 'Chapitre lu', cours_termine: 'Cours terminé', quiz: 'Quiz' };
@@ -99,6 +101,11 @@ function Contenu({ id, moi }: { id: string; moi: Utilisateur }) {
 
       <h2>Son évolution</h2>
       <Evolution e={f.evolution} moi={false} />
+
+      <section className="card">
+        <h2 className="h-petit">Ses badges et certifications</h2>
+        <ListeBadges badges={f.certifications} />
+      </section>
 
       <section className="card">
         <h2 className="h-petit">Historique des activités</h2>

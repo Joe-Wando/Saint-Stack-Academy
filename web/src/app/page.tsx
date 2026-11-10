@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import EnTetePublic from '@/components/EnTetePublic';
 import PiedDePage from '@/components/PiedDePage';
 import CarteCours from '@/components/CarteCours';
+import PhotoFondateur from '@/components/PhotoFondateur';
 import { api, Referentiel, ResumeCours, session } from '@/lib/api';
 import { infoDomaine } from '@/lib/domaines';
 import { CONTACT } from '@/lib/contact';
@@ -14,7 +14,8 @@ import { CONTACT } from '@/lib/contact';
 const OFFRES = [
   { titre: 'Licence L1 à L3', texte: 'Les cours rangés par semestre et par unité d’enseignement, dans l’ordre conseillé, avec les trois options de L3.', illus: 'systemes', href: '/licence' },
   { titre: 'Parcours métiers', texte: 'Développeur web, DevOps, Data engineer et Administrateur systèmes : une suite de cours pour viser un métier.', illus: 'devops', href: '/parcours' },
-  { titre: 'Cours en chapitres', texte: 'Une notion par chapitre, des exercices corrigés, un quiz à la fin et un mode présentation.', illus: 'web', href: '/catalogue' },
+  { titre: 'Cours en chapitres', texte: 'Une notion par chapitre, des exercices corrigés, un quiz à la fin et un mode présentation.', illus: 'tests', href: '/catalogue' },
+  { titre: 'Mettre ton site en ligne', texte: 'GitHub Pages, Netlify, Vercel et ton propre nom de domaine : publie tes projets dès la L1.', illus: 'web', href: '/parcours/deploiement' },
 ];
 const ETAPES = [
   'Je crée mon compte et je choisis mon niveau.',
@@ -73,8 +74,7 @@ export default function AccueilPublic() {
             </div>
             <div className="hero-portrait">
               <div className="portrait-forme" aria-hidden="true" />
-              <Image className="portrait" src={CONTACT.photo} alt="Portrait d’Olivier Jonathan DIPO WANDO, fondateur de Saint Stack Academy"
-                width={360} height={360} priority sizes="(max-width: 900px) 240px, 360px" />
+              <PhotoFondateur className="portrait" taille={360} priority sizes="(max-width: 900px) 240px, 360px" />
               <div className="carte-flottante carte-fondateur">
                 <strong>{CONTACT.fondateur}</strong>
                 <span>Fondateur et formateur</span>
@@ -108,7 +108,7 @@ export default function AccueilPublic() {
           </section>
 
           <section className="mot-fondateur" aria-labelledby="t-mot">
-            <Image className="mot-photo" src={CONTACT.photo} alt="" width={96} height={96} sizes="96px" />
+            <PhotoFondateur className="mot-photo" taille={96} decorative />
             <div>
               <h2 id="t-mot" className="titre-section" style={{ margin: 0 }}>Le mot du fondateur</h2>
               <blockquote>« J’ai créé Saint Stack Academy pour que chacun puisse apprendre les outils du métier, pas à pas, sans pression. Les cours suivent les références internationales et sont faits pour être compris. »</blockquote>

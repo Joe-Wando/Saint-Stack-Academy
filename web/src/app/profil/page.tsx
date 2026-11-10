@@ -5,6 +5,7 @@ import Shell from '@/components/Shell';
 import Avatar from '@/components/Avatar';
 import Onglets from '@/components/Onglets';
 import Evolution, { DonneesEvolution } from '@/components/Evolution';
+import MesBadges from '@/components/MesBadges';
 import { CarteNiveaux, OptionsL3, titreOption } from '@/components/ChoixNiveau';
 import { API, api, deconnecter, enregistrerSession, libelleNiveau, Niveau, session, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
@@ -20,10 +21,10 @@ function majSession(u: Utilisateur, maj: Maj) {
 
 // ----- Onglet « Mon évolution » ---------------------------------------------------------------
 function OngletEvolution() {
-  const { donnees, erreur } = useDonnees(() => api<DonneesEvolution>('/moi/evolution'));
+  const { donnees, erreur, recharger } = useDonnees(() => api<DonneesEvolution>('/moi/evolution'));
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
   if (!donnees) return <p className="muted">Chargement…</p>;
-  return <Evolution e={donnees} />;
+  return <><Evolution e={donnees} /><MesBadges onChange={recharger} /></>;
 }
 
 // ----- Photo de profil ------------------------------------------------------------------------
