@@ -23,7 +23,7 @@ function Contenu() {
   const filtres = tous.filter((c) =>
     (difficulte === 'toutes' || normal(c.difficulte) === normal(difficulte))
     && mots.every((m) => normal(`${c.titre} ${c.objectifs.join(' ')}`).includes(m)));
-  const groupes = ORDRE_DOMAINES
+  const sections = ORDRE_DOMAINES
     .map((cle) => ({ d: DOMAINES.find((x) => x.cle === cle)!, cours: filtres.filter((c) => infoDomaine(c.domaine).cle === cle) }))
     .filter((g) => g.cours.length > 0);
   const nbDomaines = new Set(tous.map((c) => infoDomaine(c.domaine).cle)).size;
@@ -51,15 +51,15 @@ function Contenu() {
 
       <nav aria-label="Domaines">
         <ul className="ancres">
-          {groupes.map(({ d, cours }) => (
+          {sections.map(({ d, cours }) => (
             <li key={d.cle} style={styleDomaine(d.nom)}><a href={`#${d.cle}`}>{d.nom} · {cours.length}</a></li>
           ))}
         </ul>
       </nav>
 
-      {!groupes.length && <p className="card">Aucun cours ne correspond. Essaie un autre mot, ou retire le filtre de difficulté.</p>}
+      {!sections.length && <p className="card">Aucun cours ne correspond. Essaie un autre mot, ou retire le filtre de difficulté.</p>}
 
-      {groupes.map(({ d, cours }) => {
+      {sections.map(({ d, cours }) => {
         const termines = cours.filter((c) => idx.get(c.slug)?.statut === 'termine').length;
         return (
           <section key={d.cle} id={d.cle} className="domaine" style={styleDomaine(d.nom)} aria-labelledby={`t-${d.cle}`}>

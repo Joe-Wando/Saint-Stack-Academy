@@ -172,8 +172,6 @@ h1, h2, h3, p, li, td, th { overflow-wrap: anywhere; }
 .chipbtn { font: inherit; font-size: .9rem; font-weight: 600; border: 1px solid var(--ligne); background: var(--carte); color: var(--texte); border-radius: 99px; padding: .4rem 1rem; cursor: pointer; }
 .chipbtn:hover { border-color: var(--p); }
 .chipbtn.on { background: var(--p); color: #fff; border-color: var(--p); }
-.semaine-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin: 2.4rem 0 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--ligne); }
-.semaine-tete h2 { margin: 0; }
 
 /* --------------------------------------------------------------------------
    Page de cours : bannière, sommaire, chapitre
