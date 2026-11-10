@@ -1,0 +1,63 @@
+// Génère web/src/lib/pictos-donnees.ts : seulement les logos (simple-icons) et les icônes (lucide-react)
+// cités dans content/sujets.yaml (et content/organismes.yaml s'il existe), pour garder le bundle léger.
+// Usage : npm run pictos   (à relancer après chaque modification de sujets.yaml ou organismes.yaml)
+//
+// Les logos sont recopiés tels quels depuis simple-icons : tracé et couleur d'origine, sans modification.
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import matter from 'gray-matter';
+
+const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
+const web = join(racine, 'web');
+const exiger = createRequire(join(web, 'package.json'));
+const yaml = (f) => matter.engines.yaml.parse(readFileSync(join(racine, 'content', f), 'utf8'));
+
+const sujets = yaml('sujets.yaml').sujets;
+const organismes = existsSync(join(racine, 'content', 'organismes.yaml')) ? yaml('organismes.yaml').organismes : {};
+
+const nomsLogos = new Set([...Object.values(sujets), ...Object.values(organismes)].map((x) => x.logo).filter(Boolean));
+const nomsIcones = new Set(['book-open', ...Object.values(sujets).map((x) => x.icone).filter(Boolean)]);
+
+// simple-icons : un objet par logo (title, slug, hex, path).
+const si = exiger('simple-icons');
+const parSlug = new Map(Object.values(si).filter((x) => x && x.slug).map((x) => [x.slug, x]));
+const versionPaquet = (p) => JSON.parse(readFileSync(join(web, 'node_modules', p, 'package.json'), 'utf8')).version;
+const versionSi = versionPaquet('simple-icons');
+const logos = {};
+for (const n of [...nomsLogos].sort()) {
+  const x = parSlug.get(n);
+  if (!x) { console.warn(`Logo absent de simple-icons ${versionSi} : ${n}`); continue; }
+  logos[n] = { titre: x.title, hex: `#${x.hex}`, trace: x.path };
+}
+
+// lucide-react : nom kebab-case -> composant PascalCase, vérifié dans le paquet installé.
+const lucide = exiger('lucide-react');
+const versionLucide = versionPaquet('lucide-react');
+const pascal = (n) => n.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join('');
+const icones = [];
+for (const n of [...nomsIcones].sort()) {
+  const c = pascal(n);
+  if (!lucide[c]) { console.warn(`Icône absente de lucide-react ${versionLucide} : ${n}`); continue; }
+  icones.push([n, c]);
+}
+
+const sortie = `// FICHIER GÉNÉRÉ par tools/generer-pictos.mjs : ne pas modifier à la main (npm run pictos).
+// Logos : simple-icons ${versionSi} (CC0 1.0 pour les fichiers ; les logos restent des marques de leurs titulaires).
+// Icônes : lucide-react ${versionLucide} (ISC).
+import type { LucideIcon } from 'lucide-react';
+import { ${icones.map(([, c]) => c).join(', ')} } from 'lucide-react';
+
+export interface LogoMarque { titre: string; hex: string; trace: string }
+
+/** Logos de technologies et d'organismes, dans leur couleur d'origine (viewBox 0 0 24 24). */
+export const LOGOS: Record<string, LogoMarque> = ${JSON.stringify(logos, null, 2)};
+
+/** Icônes génériques, par nom Lucide. */
+export const ICONES: Record<string, LucideIcon> = {
+${icones.map(([n, c]) => `  '${n}': ${c},`).join('\n')}
+};
+`;
+writeFileSync(join(web, 'src/lib/pictos-donnees.ts'), sortie);
+console.log(`web/src/lib/pictos-donnees.ts : ${Object.keys(logos).length} logos, ${icones.length} icônes`);

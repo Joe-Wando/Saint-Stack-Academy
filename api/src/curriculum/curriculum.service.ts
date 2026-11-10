@@ -1,8 +1,9 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import matter = require('gray-matter');
 import { config } from '../config';
+import { chargerSujets, SujetCours } from './sujets';
 
 export interface QuestionQuiz { question: string; choix: string[]; reponse: number; explication: string }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
@@ -25,12 +26,13 @@ export interface Cours {
   referentiels: string[];
   quiz: QuestionQuiz[];
   contenu: string;          // Markdown
+  sujet: SujetCours;        // logo de la technologie ou icône générique (content/sujets.yaml)
 }
 
 export interface ResumeCours {
   slug: string; titre: string; domaine: string; duree: number; difficulte: string; ordre: number;
   objectifs: string[]; nbQuestions: number; visibilite: 'public' | 'prive';
-  licence: PlaceLicence[]; parcours: PlaceParcours[];
+  licence: PlaceLicence[]; parcours: PlaceParcours[]; sujet: SujetCours;
 }
 
 export interface ElementCertification {
@@ -60,18 +62,22 @@ const texte = (v: unknown) => (typeof v === 'string' ? v : v && typeof v === 'ob
 const liste = (v: unknown) => (Array.isArray(v) ? v.map(texte) : []);
 
 @Injectable()
-export class CurriculumService {
+export class CurriculumService implements OnModuleInit {
   private readonly logger = new Logger('Curriculum');
   private cache: Cours[] | null = null;
   private ref: Referentiel | null = null;
   private certifs: Certifications | null = null;
+  private marques: { libelle: string; marque: string }[] = [];
+
+  /** Au démarrage : charge les cours et vérifie les sujets (avertissement dans les logs si un logo ou une icône manque). */
+  onModuleInit() { this.tous(); }
 
   /** Lit tous les cours de content/lessons (une fois, au premier appel). */
   tous(): Cours[] {
     if (this.cache) return this.cache;
     const dir = path.join(config.contentDir, 'lessons');
     const fichiers = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.md')) : [];
-    const cours = fichiers.map((f): Cours => {
+    const cours = fichiers.map((f): Omit<Cours, 'sujet'> => {
       const { data, content } = matter(fs.readFileSync(path.join(dir, f), 'utf8'));
       return {
         slug: String(data.slug ?? f.replace(/\.md$/, '')),
@@ -91,10 +97,13 @@ export class CurriculumService {
         contenu: content.trim(),
       };
     });
-    cours.sort((a, b) => a.ordre - b.ordre || a.slug.localeCompare(b.slug));
-    this.logger.log(`${cours.length} cours chargés`);
-    this.cache = cours;
-    return cours;
+    const { sujetDe, marques } = chargerSujets(cours.map((c) => c.slug));
+    this.marques = marques;
+    const complets: Cours[] = cours.map((c) => ({ ...c, sujet: sujetDe(c.slug) }));
+    complets.sort((a, b) => a.ordre - b.ordre || a.slug.localeCompare(b.slug));
+    this.logger.log(`${complets.length} cours chargés`);
+    this.cache = complets;
+    return complets;
   }
 
   /** Lit content/referentiel.yaml, la source de vérité de la structure L1, L2, L3 et des parcours. */
@@ -135,6 +144,9 @@ export class CurriculumService {
     return { cours: cours.length, prives: cours.filter((c) => c.visibilite === 'prive').length };
   }
 
+  /** Mentions de marque des sujets affichés avec un logo (page « Marques »). */
+  mentionsMarques() { this.tous(); return this.marques; }
+
   optionsL3() {
     return this.referentielBrut().niveaux.find((n) => n.code === 'L3')?.options ?? [];
   }
@@ -146,7 +158,7 @@ export class CurriculumService {
   resume(c: Cours): ResumeCours {
     return {
       slug: c.slug, titre: c.titre, domaine: c.domaine, duree: c.duree, difficulte: c.difficulte, ordre: c.ordre,
-      objectifs: c.objectifs, nbQuestions: c.quiz.length, visibilite: c.visibilite, licence: c.licence, parcours: c.parcours,
+      objectifs: c.objectifs, nbQuestions: c.quiz.length, visibilite: c.visibilite, licence: c.licence, parcours: c.parcours, sujet: c.sujet,
     };
   }
 

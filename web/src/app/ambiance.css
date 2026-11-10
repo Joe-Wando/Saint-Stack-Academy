@@ -140,3 +140,8 @@ h1 { font-weight: 800; }
 /* Accueil connecté : la carte « Reprendre » avec un liseré soleil */
 .reprendre { border: 0; box-shadow: var(--ombre-forte); position: relative; }
 .reprendre::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--soleil); border-radius: var(--rayon) 0 0 var(--rayon); z-index: 1; }
+
+/* Pastille du sujet d'un cours (logo de technologie ou icône générique) */
+.picto-sujet { display: inline-grid; place-items: center; flex: none; border-radius: 50%; background: #fff;
+  box-shadow: 0 0 0 1px rgba(33, 31, 77, .10), 0 4px 10px rgba(33, 31, 77, .12); }
+.picto-sujet svg { display: block; }

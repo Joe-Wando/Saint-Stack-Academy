@@ -9,15 +9,19 @@ export interface Utilisateur {
   niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string; photo?: string | null; bienvenueVue?: boolean;
 }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
+/** Sujet du cours : logo de la technologie (simple-icons) ou icône générique (Lucide). */
+export interface Sujet { cle: string; libelle: string; logo: string | null; icone: string }
 export interface ResumeCours {
   slug: string; titre: string; domaine: string; duree: number; difficulte: string; ordre: number;
   objectifs: string[]; nbQuestions: number; visibilite: 'public' | 'prive';
   licence: PlaceLicence[]; parcours: { parcours: string; ordre: number }[];
+  sujet?: Sujet;
 }
 export type Emplacement =
   | ({ type: 'licence'; optionTitre: string | null; suivant: { slug: string; titre: string } | null } & PlaceLicence)
   | { type: 'parcours'; code: string; titre: string; etape: number; total: number; suivant: { slug: string; titre: string } | null };
 export interface Cours {
+  sujet?: Sujet;
   slug: string; titre: string; domaine: string; duree: number; difficulte: string; ordre: number; visibilite: 'public' | 'prive';
   objectifs: string[]; prerequis: string[]; referentiels: string[];
   prerequisCours: { slug: string; titre: string }[];

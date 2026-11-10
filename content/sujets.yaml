@@ -1,0 +1,199 @@
+# Sujet de chaque cours : il sert à afficher le logo de la technologie (ou une icône générique) sur les cartes,
+# les bannières et les images de partage. À copier dans content/sujets.yaml.
+#
+# logo  : nom de fichier du paquet npm « simple-icons » (version 16.x), affiché dans SA COULEUR D'ORIGINE, non modifié.
+#         null = pas de logo de marque : on affiche l'icône générique.
+# icone : nom d'icône du paquet « lucide-react » (version 1.x), dessinée dans la couleur du domaine.
+#
+# Règle des marques (décision d'Olivier, 10 novembre 2026) : un logo sert uniquement à dire « ce cours porte sur X ».
+# Pas de logo pour les éditeurs aux règles strictes (Oracle/Java, AWS, Microsoft, Red Hat, Atlassian, CNCF/Kubernetes,
+# Grafana) : icône générique à la place. Si un éditeur demande le retrait de son logo, on met logo: null ici, et c'est tout.
+
+sujets:
+  # Langages et frameworks
+  c:            { libelle: "Langage C",            logo: c,            icone: code-xml,      marque: null }
+  java:         { libelle: "Java",                 logo: null,         icone: coffee,        marque: null }
+  python:       { libelle: "Python",               logo: python,       icone: code-xml,      marque: "Python et le logo Python sont des marques de la Python Software Foundation." }
+  numpy:        { libelle: "NumPy",                logo: numpy,        icone: sigma,         marque: "NumPy est une marque de NumFOCUS." }
+  pandas:       { libelle: "pandas",               logo: pandas,       icone: table-properties, marque: "pandas est une marque de NumFOCUS." }
+  scikitlearn:  { libelle: "scikit-learn",         logo: scikitlearn,  icone: brain-circuit, marque: null }
+  react:        { libelle: "React",                logo: react,        icone: code-xml,      marque: "React est une marque de Meta Platforms, Inc." }
+  tailwind:     { libelle: "Tailwind CSS",         logo: tailwindcss,  icone: code-xml,      marque: "Tailwind CSS est une marque de Tailwind Labs Inc." }
+  nextjs:       { libelle: "Next.js",              logo: nextdotjs,    icone: code-xml,      marque: "Next.js est une marque de Vercel, Inc." }
+  express:      { libelle: "Express et GraphQL",   logo: graphql,      icone: code-xml,      marque: "GraphQL est une marque de The GraphQL Foundation." }
+  figma:        { libelle: "Figma",                logo: figma,        icone: shapes,        marque: "Figma est une marque de Figma, Inc." }
+  # Données et bases de données
+  sql:          { libelle: "SQL",                  logo: null,         icone: database,      marque: null }
+  postgresql:   { libelle: "PostgreSQL",           logo: postgresql,   icone: database,      marque: "PostgreSQL est une marque de la PostgreSQL Community Association of Canada." }
+  mysql:        { libelle: "MySQL et Redis",       logo: null,         icone: database,      marque: null }
+  nosql:        { libelle: "MongoDB et Redis",     logo: mongodb,      icone: database,      marque: "MongoDB est une marque de MongoDB, Inc." }
+  modelisation: { libelle: "Modélisation",         logo: null,         icone: boxes,         marque: null }
+  etl:          { libelle: "ETL",                  logo: null,         icone: workflow,      marque: null }
+  dbt:          { libelle: "dbt",                  logo: null,         icone: workflow,      marque: null }
+  airflow:      { libelle: "Apache Airflow",       logo: apacheairflow, icone: workflow,     marque: "Apache Airflow, Airflow et Apache sont des marques de The Apache Software Foundation." }
+  spark:        { libelle: "Apache Spark",         logo: apachespark,  icone: zap,           marque: "Apache Spark et Spark sont des marques de The Apache Software Foundation." }
+  kafka:        { libelle: "Kafka, BigQuery, Snowflake", logo: apachekafka, icone: cloud,    marque: "Apache Kafka et Kafka sont des marques de The Apache Software Foundation." }
+  powerbi:      { libelle: "Power BI",             logo: null,         icone: chart-column,  marque: null }
+  # Versionnement, CI/CD, conteneurs
+  git:          { libelle: "Git",                  logo: git,          icone: git-branch,    marque: "Git et le logo Git sont des marques de Software Freedom Conservancy." }
+  githubactions: { libelle: "GitHub Actions",      logo: githubactions, icone: infinity,     marque: "GitHub est une marque de GitHub, Inc." }
+  gitlab:       { libelle: "GitLab CI/CD",         logo: gitlab,       icone: infinity,      marque: "GitLab est une marque de GitLab Inc." }
+  jenkins:      { libelle: "Jenkins",              logo: jenkins,      icone: infinity,      marque: "Jenkins est une marque de LF Charities Inc." }
+  docker:       { libelle: "Docker",               logo: docker,       icone: container,     marque: "Docker et le logo Docker sont des marques de Docker, Inc." }
+  kubernetes:   { libelle: "Kubernetes",           logo: null,         icone: ship-wheel,    marque: null }
+  helm:         { libelle: "Helm",                 logo: null,         icone: ship-wheel,    marque: null }
+  supervision:  { libelle: "Supervision",          logo: null,         icone: activity,      marque: null }
+  ansible:      { libelle: "Ansible",              logo: null,         icone: settings-2,    marque: null }
+  # Déploiement
+  githubpages:  { libelle: "GitHub Pages",         logo: githubpages,  icone: rocket,        marque: "GitHub est une marque de GitHub, Inc." }
+  netlify:      { libelle: "Netlify",              logo: netlify,      icone: rocket,        marque: "Netlify est une marque de Netlify, Inc." }
+  vercel:       { libelle: "Vercel",               logo: vercel,       icone: rocket,        marque: "Vercel est une marque de Vercel, Inc." }
+  dns:          { libelle: "DNS et HTTPS",         logo: null,         icone: globe,         marque: null }
+  # Systèmes et réseaux
+  linux:        { libelle: "Linux",                logo: linux,        icone: square-terminal, marque: "Linux® est la marque déposée de Linus Torvalds aux États-Unis et dans d'autres pays." }
+  bash:         { libelle: "Bash",                 logo: gnubash,      icone: square-terminal, marque: null }
+  reseaux:      { libelle: "Réseaux",              logo: null,         icone: network,       marque: null }
+  windows:      { libelle: "Windows Server",       logo: null,         icone: server,        marque: null }
+  powershell:   { libelle: "PowerShell",           logo: null,         icone: square-terminal, marque: null }
+  # Qualité et sécurité
+  owasp:        { libelle: "OWASP",                logo: owasp,        icone: lock,          marque: "OWASP est une marque de la OWASP Foundation, Inc." }
+  postman:      { libelle: "Postman",              logo: postman,      icone: test-tube,     marque: "Postman est une marque de Postman, Inc." }
+  jest:         { libelle: "Jest",                 logo: jest,         icone: test-tube,     marque: null }
+  supertest:    { libelle: "Supertest",            logo: null,         icone: test-tube,     marque: null }
+  cypress:      { libelle: "Cypress",              logo: cypress,      icone: test-tube,     marque: "Cypress est une marque de Cypress.io, Inc." }
+  scrum:        { libelle: "Scrum",                logo: null,         icone: kanban,        marque: null }
+  # Fondamentaux de L1 et L2 (pas de marque)
+  binaire:      { libelle: "Codage de l'information", logo: null,      icone: binary,        marque: null }
+  materiel:     { libelle: "Matériel",             logo: null,         icone: cpu,           marque: null }
+  depannage:    { libelle: "Diagnostic",           logo: null,         icone: wrench,        marque: null }
+  maintenance:  { libelle: "Maintenance",          logo: null,         icone: shield-check,  marque: null }
+  pointeurs:    { libelle: "Mémoire et pointeurs", logo: null,         icone: memory-stick,  marque: null }
+  structures:   { libelle: "Structures",           logo: null,         icone: braces,        marque: null }
+  listes:       { libelle: "Listes chaînées",      logo: null,         icone: list,          marque: null }
+  piles:        { libelle: "Piles et files",       logo: null,         icone: layers,        marque: null }
+  merise:       { libelle: "Merise",               logo: null,         icone: table-properties, marque: null }
+  uml:          { libelle: "UML",                  logo: null,         icone: shapes,        marque: null }
+  logique:      { libelle: "Logique",              logo: null,         icone: sigma,         marque: null }
+  maths:        { libelle: "Mathématiques",        logo: null,         icone: sigma,         marque: null }
+  panorama:     { libelle: "Histoire",             logo: null,         icone: history,       marque: null }
+  metiers:      { libelle: "Métiers",              logo: null,         icone: compass,       marque: null }
+  ethique:      { libelle: "Éthique",              logo: null,         icone: scale,         marque: null }
+  ecrit:        { libelle: "Écrit professionnel",  logo: null,         icone: mail,          marque: null }
+  oral:         { libelle: "Oral",                 logo: null,         icone: presentation,  marque: null }
+  cv:           { libelle: "CV",                   logo: null,         icone: file-user,     marque: null }
+  anglais:      { libelle: "Anglais",              logo: null,         icone: languages,     marque: null }
+  bureautique:  { libelle: "Traitement de texte",  logo: null,         icone: file-text,     marque: null }
+  tableur:      { libelle: "Tableur",              logo: null,         icone: sheet,         marque: null }
+  stage:        { libelle: "Stage",                logo: null,         icone: briefcase,     marque: null }
+  projet:       { libelle: "Projet",               logo: null,         icone: kanban,        marque: null }
+  cloudaws:     { libelle: "Cloud",                logo: null,         icone: cloud,         marque: null }
+
+cours:
+  c01-windows-partages-ntfs: windows
+  c02-numpy: numpy
+  c03-helm: helm
+  c04-ansible: ansible
+  c05-figma: figma
+  c06-express-graphql: express
+  c07-scikit-learn: scikitlearn
+  c08-mysql-redis: mysql
+  c09-power-bi-approfondi: powerbi
+  d01-github-pages: githubpages
+  d02-netlify: netlify
+  d03-vercel: vercel
+  d04-domaine-dns-https: dns
+  g01-1-terminal-linux: linux
+  g01-2-reseaux: reseaux
+  g01-3-git-branches: git
+  g01-4-git-conflits-pr: git
+  g02-1-docker-images-conteneurs: docker
+  g02-2-dockerfile: docker
+  g02-3-docker-volumes-reseaux: docker
+  g02-4-docker-compose-hub: docker
+  g03-1-github-actions-workflow: githubactions
+  g03-2-github-actions-image: githubactions
+  g03-3-gitlab-ci: gitlab
+  g03-4-jenkins: jenkins
+  g04-1-kubernetes-pods-deployments: kubernetes
+  g04-2-kubernetes-services-config: kubernetes
+  g04-3-kubernetes-multi-services-helm: kubernetes
+  g04-4-prometheus-grafana: supervision
+  g05-1-securite-owasp: owasp
+  g05-2-postman: postman
+  g05-3-jira-scrum: scrum
+  g05-4-jest: jest
+  g06-0a-react: react
+  g06-0b-tailwind: tailwind
+  g06-1-supertest: supertest
+  g06-2-nextjs-pages-routage: nextjs
+  g06-3-nextjs-donnees-api: nextjs
+  g06-4-cypress: cypress
+  g07-1-sql-select: sql
+  g07-2-sql-agregats-jointures: sql
+  g07-3-sql-sousrequetes-vues-fenetres: sql
+  g08-1-postgresql-modelisation: postgresql
+  g08-2-postgresql-index-transactions: postgresql
+  g08-3-mongodb-redis: nosql
+  l1-algo-1-pointeurs-memoire: pointeurs
+  l1-algo-2-structures: structures
+  l1-algo-3-listes-chainees: listes
+  l1-algo-4-piles-files: piles
+  l1-algo-5-merise-mcd-mld: merise
+  l1-algo-6-introduction-uml: uml
+  l1-arc-1-representation-information: binaire
+  l1-arc-2-composants-ordinateur: materiel
+  l1-arc-3-monter-diagnostiquer-pc: depannage
+  l1-arc-4-maintenance-depannage: maintenance
+  l1-c-1-premiers-programmes-variables: c
+  l1-c-2-conditions: c
+  l1-c-3-boucles: c
+  l1-c-4-fonctions: c
+  l1-c-5-tableaux: c
+  l1-c-6-chaines: c
+  l1-com-1-ecrits-professionnels: ecrit
+  l1-com-2-presenter-oral: oral
+  l1-com-3-cv-lettre-motivation: cv
+  l1-dec-1-panorama-informatique: panorama
+  l1-dec-2-metiers-parcours: metiers
+  l1-dec-3-numerique-responsable-ethique: ethique
+  l1-math-1-logique-ensembles: logique
+  l1-math-2-algebre-boole: logique
+  l1-math-3-arithmetique: maths
+  l1-math-4-denombrement: maths
+  l1-out-1-anglais-technique: anglais
+  l1-out-2-traitement-texte: bureautique
+  l1-out-3-tableur: tableur
+  l1-pro-1-chercher-reussir-stage: stage
+  l1-pro-2-rapport-stage: stage
+  l2-ang-1-entretien-anglais: anglais
+  l2-ang-2-documentation-anglais: anglais
+  l2-poo-1-java-classes-objets: java
+  l2-poo-2-heritage-polymorphisme: java
+  l2-poo-3-interfaces-abstraites: java
+  l2-poo-4-exceptions: java
+  l2-poo-5-collections: java
+  l2-poo-6-python-oriente-objet: python
+  l2-pro-1-projet-equipe: projet
+  l2-pro-2-preparer-soutenance: oral
+  s01-1-linux-droits: linux
+  s01-2-processus-services: linux
+  s01-3-paquets-ssh: linux
+  s02-1-bash-bases: bash
+  s02-2-script-cron: bash
+  s02-3-reseaux-approfondis: reseaux
+  s03-1-windows-dns-dhcp: windows
+  s03-2-active-directory-gpo: windows
+  s03-3-powershell: powershell
+  s04-1-sql-jointures-agregats: sql
+  s04-2-sql-fenetres-cte: sql
+  s04-3-python-pandas-matplotlib: pandas
+  s05-1-modelisation-oltp-olap: modelisation
+  s05-2-etl-postgresql: etl
+  s05-3-dbt: dbt
+  s06-1-dbt-tests-doc: dbt
+  s06-2-airflow-bases: airflow
+  s06-3-airflow-orchestration: airflow
+  s07-1-power-bi: powerbi
+  s07-2-spark: spark
+  s08-1-kafka-bigquery-snowflake: kafka
+  s08-2-bilan-plan-aws: cloudaws
