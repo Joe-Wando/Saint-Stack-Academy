@@ -34,6 +34,7 @@ docker compose up -d --build
 2. Le quiz est dans l'en-tête. `reponse` est l'indice (à partir de 0) du bon choix. Les réponses ne sont jamais envoyées au navigateur.
 3. Une section `## Correction` est masquée jusqu'au clic de l'apprenant.
 4. Redémarre l'API pour recharger les cours : `docker compose restart api`.
+5. Régénère les diaporamas PowerPoint (`web/public/diaporamas/<slug>.pptx`, commités) : `npm install` puis `npm run diaporamas` à la racine. Pour un seul cours : `node tools/generer-diaporamas.mjs <slug>`.
 
 Structure d'un cours :
 - Objectifs

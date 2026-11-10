@@ -1,0 +1,15 @@
+{
+  "name": "saint-stack-academy",
+  "private": true,
+  "description": "Outils du dépôt : génération des illustrations et des diaporamas PowerPoint.",
+  "scripts": {
+    "diaporamas": "node tools/generer-diaporamas.mjs",
+    "illustrations": "node tools/illustrations.js"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "gray-matter": "^4.0.3",
+    "opentype.js": "^1.3.4",
+    "pptxgenjs": "^4.0.1"
+  }
+}
