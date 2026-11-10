@@ -17,7 +17,7 @@ prerequis:
   - Séances « SQL avancé, CTE et fonctions de fenêtrage », « Modélisation des données » et « Pipeline ETL »
 referentiels:
   - dbt Analytics Engineering Certification (dbt Labs), domaines « Developing dbt models » et « Managing data pipelines »
-  - Documentation dbt, « Best practice guides : How we structure our dbt projects »
+  - "Documentation dbt, « Best practice guides : How we structure our dbt projects »"
   - Databricks Certified Data Engineer Associate (architecture médaillon)
 quiz:
   - question: "Quelle étape de l'ELT dbt prend-il en charge ?"

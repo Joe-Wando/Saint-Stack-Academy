@@ -12,7 +12,7 @@ objectifs:
   - Écrire des mesures avancées avec variables, itérateurs (SUMX, RANKX) et manipulation du contexte
   - Utiliser l'intelligence temporelle avancée et les groupes de calcul
   - Diagnostiquer et optimiser un modèle (VertiPaq, Performance Analyzer, DAX Studio)
-  - Gouverner : RLS dynamique, actualisation incrémentielle, déploiement par environnements
+  - "Gouverner : RLS dynamique, actualisation incrémentielle, déploiement par environnements"
 prerequis:
   - Séance solo « Power BI, du modèle en étoile au tableau de bord »
 referentiels:

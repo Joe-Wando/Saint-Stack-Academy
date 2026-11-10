@@ -17,7 +17,7 @@ prerequis:
   - Compléments NumPy ; séance « Python pour la data, pandas et Matplotlib »
   - Cours DIT « Introduction ML, Classification » (Abdoul Wahab Diallo)
 referentiels:
-  - Cours DIT « Introduction ML, Classification » et « Intro ML » (L2) : notations TP, TN, FP, FN
+  - "Cours DIT « Introduction ML, Classification » et « Intro ML » (L2) : notations TP, TN, FP, FN"
   - Google Cloud Professional Machine Learning Engineer, domaine « Developing ML models » (bases)
   - Documentation scikit-learn, « User Guide »
 quiz:
