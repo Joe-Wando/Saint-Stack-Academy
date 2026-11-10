@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { api, deconnecter, enregistrerSession, session, Utilisateur } from '@/lib/api';
+import Avatar from './Avatar';
+import EnTetePublic from './EnTetePublic';
 import PiedDePage from './PiedDePage';
 
-export function initiales(nom: string) {
-  const mots = nom.trim().split(/\s+/).filter(Boolean);
-  return ((mots[0]?.[0] ?? '') + (mots.length > 1 ? mots[mots.length - 1][0] : '')).toUpperCase() || '?';
-}
+export { initiales } from './Avatar';
 
 /** Menu du compte : Mon profil, Déconnexion. Se ferme avec Échap ou un clic à l'extérieur. */
 function MenuCompte({ u }: { u: Utilisateur }) {
@@ -28,7 +27,7 @@ function MenuCompte({ u }: { u: Utilisateur }) {
     <div className="compte" ref={zone}>
       <button ref={bouton} className="compte-btn" aria-expanded={ouvert} aria-haspopup="true" onClick={() => setOuvert((o) => !o)}>
         <span className="who-txt"><strong>{u.nom}</strong><small>{u.role === 'admin' ? 'Admin' : 'Apprenant'}</small></span>
-        <span className="avatar" aria-hidden="true">{initiales(u.nom)}</span>
+        <Avatar nom={u.nom} photo={u.photo} />
         <span className="sr">Menu du compte</span>
       </button>
       {ouvert && (
@@ -41,58 +40,81 @@ function MenuCompte({ u }: { u: Utilisateur }) {
   );
 }
 
-/**
- * Cadre commun des pages connectées : en-tête, vérification de la session et pied de page.
- * Avec `nu`, seule la session est vérifiée (mode présentation, sans en-tête).
- * Avec `plein`, le contenu occupe toute la largeur (la page gère ses marges).
- * Avec `admin`, la page est réservée à l'administrateur.
- */
-export default function Shell({ children, nu = false, plein = false, admin = false }: {
-  children: (u: Utilisateur) => ReactNode; nu?: boolean; plein?: boolean; admin?: boolean;
-}) {
-  const [u, setU] = useState<Utilisateur | null>(null);
-  const router = useRouter();
+function EnTeteConnecte({ u }: { u: Utilisateur }) {
   const chemin = usePathname();
-
-  useEffect(() => {
-    const s = session();
-    if (!s) { router.replace(`/connexion?suite=${encodeURIComponent(chemin)}`); return; }
-    setU(s.utilisateur);
-    // Le profil peut avoir changé (niveau, rôle) : on le relit une fois.
-    api<Utilisateur>('/auth/moi').then((p) => {
-      enregistrerSession({ jeton: s.jeton, utilisateur: p });
-      setU(p);
-    }).catch(() => {});
-  }, [router, chemin]);
-
-  if (!u) return nu ? <div className="pres" /> : <main className="page"><p className="muted">Chargement…</p></main>;
-  if (admin && u.role !== 'admin') return <main className="page"><p className="error" role="alert">Cette page est réservée à l’administrateur.</p></main>;
-  if (nu) return <>{children(u)}</>;
-
   const liens = [
     { href: '/accueil', label: 'Accueil' },
     { href: '/licence', label: 'Licence' },
     { href: '/parcours', label: 'Parcours métiers' },
     { href: '/catalogue', label: 'Catalogue' },
-    ...(u.role === 'admin' ? [{ href: '/admin/mes-cours', label: 'Mes cours' }, { href: '/admin/utilisateurs', label: 'Utilisateurs' }, { href: '/admin/statistiques', label: 'Statistiques' }] : []),
+    { href: '/contact', label: 'Contact' },
+    ...(u.role === 'admin' ? [{ href: '/admin', label: 'Administration' }] : []),
   ];
+  return (
+    <header className="topbar">
+      <div className="topbar-in">
+        <Link href="/accueil" className="brand" aria-label="Saint Stack Academy, accueil">
+          <span className="logo" aria-hidden="true">SS</span><span className="brand-name">Saint Stack Academy</span>
+        </Link>
+        <nav className="nav" aria-label="Navigation principale">
+          {liens.map((l) => {
+            const actif = chemin === l.href || chemin.startsWith(l.href + '/');
+            return <Link key={l.href} href={l.href} aria-current={actif ? 'page' : undefined}>{l.label}</Link>;
+          })}
+        </nav>
+        <MenuCompte u={u} />
+      </div>
+    </header>
+  );
+}
 
+/** Lit la session et relit le profil une fois (niveau, rôle et photo peuvent avoir changé). */
+function useSession(exiger: boolean) {
+  const [u, setU] = useState<Utilisateur | null>(null);
+  const [pret, setPret] = useState(false);
+  const router = useRouter();
+  const chemin = usePathname();
+  useEffect(() => {
+    const s = session();
+    if (!s) {
+      if (exiger) router.replace(`/connexion?suite=${encodeURIComponent(chemin)}`);
+      setPret(true);
+      return;
+    }
+    setU(s.utilisateur); setPret(true);
+    api<Utilisateur>('/auth/moi').then((p) => { enregistrerSession({ jeton: s.jeton, utilisateur: p }); setU(p); }).catch(() => {});
+  }, [router, chemin, exiger]);
+  return { u, pret, setU };
+}
+
+/**
+ * Cadre des pages connectées : en-tête, vérification de la session et pied de page.
+ * Avec `nu`, seule la session est vérifiée (mode présentation, sans en-tête).
+ * Avec `plein`, le contenu occupe toute la largeur. Avec `admin`, la page est réservée à l'administrateur.
+ */
+export default function Shell({ children, nu = false, plein = false, admin = false }: {
+  children: (u: Utilisateur, majProfil: (u: Utilisateur) => void) => ReactNode; nu?: boolean; plein?: boolean; admin?: boolean;
+}) {
+  const { u, setU } = useSession(true);
+  if (!u) return nu ? <div className="pres" /> : <main className="page"><p className="muted">Chargement…</p></main>;
+  if (admin && u.role !== 'admin') return <main className="page"><p className="error" role="alert">Cette page est réservée à l’administrateur.</p></main>;
+  if (nu) return <>{children(u, setU)}</>;
   return (
     <>
-      <header className="topbar">
-        <div className="topbar-in">
-          <Link href="/accueil" className="brand" aria-label="Saint Stack Academy, accueil">
-            <span className="logo" aria-hidden="true">SS</span><span className="brand-name">Saint Stack Academy</span>
-          </Link>
-          <nav className="nav" aria-label="Navigation principale">
-            {liens.map((l) => {
-              const actif = chemin === l.href || chemin.startsWith(l.href + '/');
-              return <Link key={l.href} href={l.href} aria-current={actif ? 'page' : undefined}>{l.label}</Link>;
-            })}
-          </nav>
-          <MenuCompte u={u} />
-        </div>
-      </header>
+      <EnTeteConnecte u={u} />
+      <main className={plein ? undefined : 'page'}>{children(u, setU)}</main>
+      <PiedDePage />
+    </>
+  );
+}
+
+/** Cadre des pages consultables sans compte (Licence, Parcours, Catalogue, Contact) : `u` vaut null sans session. */
+export function ShellOuvert({ children, plein = false }: { children: (u: Utilisateur | null) => ReactNode; plein?: boolean }) {
+  const { u, pret } = useSession(false);
+  if (!pret) return <main className="page"><p className="muted">Chargement…</p></main>;
+  return (
+    <>
+      {u ? <EnTeteConnecte u={u} /> : <EnTetePublic />}
       <main className={plein ? undefined : 'page'}>{children(u)}</main>
       <PiedDePage />
     </>

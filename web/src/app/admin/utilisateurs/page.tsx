@@ -1,12 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Shell, { initiales } from '@/components/Shell';
+import AdminCadre from '@/components/AdminCadre';
+import Avatar from '@/components/Avatar';
 import { api, NIVEAUX, Niveau } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 
 interface Ligne {
-  id: number; nom: string; email: string; role: 'admin' | 'apprenant';
+  id: number; nom: string; email: string; role: 'admin' | 'apprenant'; photo: string | null; suspendu: boolean;
   niveau: Niveau | null; optionL3: string | null; optionTitre: string | null; etablissement: string | null;
   emailVerifie: boolean; inscritLe: string; derniereActivite: string | null;
   commences: number; termines: number; moyenneQuiz: number | null;
@@ -15,32 +17,27 @@ interface Reponse { total: number; page: number; pages: number; parPage: number;
 
 const date = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : '–');
 
-/** Liste des comptes inscrits, réservée à l'admin. */
 function Contenu() {
   const [q, setQ] = useState('');
   const [recherche, setRecherche] = useState('');
   const [niveau, setNiveau] = useState('');
   const [verifie, setVerifie] = useState('');
+  const [actif, setActif] = useState('');
   const [tri, setTri] = useState('inscription');
   const [page, setPage] = useState(1);
 
   // La recherche part 300 ms après la dernière frappe.
   useEffect(() => { const t = setTimeout(() => { setRecherche(q); setPage(1); }, 300); return () => clearTimeout(t); }, [q]);
-
-  const params = new URLSearchParams({ q: recherche, niveau, verifie, tri, page: String(page) }).toString();
+  const params = new URLSearchParams({ q: recherche, niveau, verifie, actif, tri, page: String(page) }).toString();
   const { donnees: r, erreur } = useDonnees(() => api<Reponse>(`/admin/utilisateurs?${params}`), [params]);
-
   const filtre = (setter: (v: string) => void) => (e: { target: { value: string } }) => { setter(e.target.value); setPage(1); };
 
   return (
     <>
-      <section className="hero">
-        <p className="eyebrow">Administration</p>
-        <h1>Utilisateurs</h1>
-        <p className="muted">Les comptes inscrits et leur avancement.{r ? ` ${r.total} compte${r.total > 1 ? 's' : ''}.` : ''}</p>
-      </section>
+      <h1>Utilisateurs</h1>
+      <p className="muted">Les comptes inscrits et leur avancement.{r ? ` ${r.total} compte${r.total > 1 ? 's' : ''}.` : ''} Clique sur un nom pour ouvrir sa fiche.</p>
 
-      <section className="card filtres-admin" aria-label="Rechercher et filtrer">
+      <section className="card filtres-admin filtres-5" aria-label="Rechercher et filtrer">
         <label htmlFor="q">Rechercher<input id="q" type="search" className="champ" placeholder="Nom ou e-mail" value={q} onChange={(e) => setQ(e.target.value)} /></label>
         <label htmlFor="niveau">Niveau
           <select id="niveau" className="champ" value={niveau} onChange={filtre(setNiveau)}>
@@ -52,6 +49,11 @@ function Contenu() {
         <label htmlFor="verifie">E-mail
           <select id="verifie" className="champ" value={verifie} onChange={filtre(setVerifie)}>
             <option value="">Tous</option><option value="oui">Vérifié</option><option value="non">Non vérifié</option>
+          </select>
+        </label>
+        <label htmlFor="actif">Activité
+          <select id="actif" className="champ" value={actif} onChange={filtre(setActif)}>
+            <option value="">Tous</option><option value="oui">Actif (30 jours)</option><option value="non">Inactif</option><option value="suspendu">Suspendu</option>
           </select>
         </label>
         <label htmlFor="tri">Trier par
@@ -76,11 +78,13 @@ function Contenu() {
                   <tr key={u.id}>
                     <td>
                       <div className="personne">
-                        <span className="avatar" aria-hidden="true">{initiales(u.nom)}</span>
+                        <Avatar nom={u.nom} photo={u.photo} />
                         <span>
-                          <strong>{u.nom}</strong>{u.role === 'admin' && <span className="tag" style={{ marginLeft: '.4rem' }}>Admin</span>}<br />
+                          <Link href={`/admin/utilisateurs/${u.id}`}><strong>{u.nom}</strong></Link>
+                          {u.role === 'admin' && <span className="tag" style={{ marginLeft: '.4rem' }}>Admin</span>}
+                          {u.suspendu && <span className="statut en_cours" style={{ marginLeft: '.4rem' }}>Suspendu</span>}<br />
                           <span className="muted small">{u.email}</span>
-                          {!u.emailVerifie && <> <span className="statut en_cours">E-mail non vérifié</span></>}
+                          {!u.emailVerifie && <> <span className="statut">E-mail non vérifié</span></>}
                           {u.etablissement && <><br /><span className="muted small">{u.etablissement}</span></>}
                         </span>
                       </div>
@@ -111,5 +115,5 @@ function Contenu() {
 }
 
 export default function Utilisateurs() {
-  return <Shell admin>{() => <Contenu />}</Shell>;
+  return <AdminCadre>{() => <Contenu />}</AdminCadre>;
 }

@@ -16,18 +16,18 @@ export function statutCours(p?: Progression | null): { label: string; cls: strin
  * Carte entièrement cliquable vers un cours : illustration, domaine, titre, durée, difficulté et statut.
  * `horizontal` : l'illustration à gauche (étapes d'un parcours).
  */
-export default function CarteCours({ cours, prog, horizontal = false }: { cours: ResumeCours; prog?: Progression | null; horizontal?: boolean }) {
+export default function CarteCours({ cours, prog, horizontal = false, anonyme = false }: { cours: ResumeCours; prog?: Progression | null; horizontal?: boolean; anonyme?: boolean }) {
   const st = statutCours(prog);
   const dom = infoDomaine(cours.domaine);
   return (
-    <Link href={`/cours/${cours.slug}`} className={`cc${horizontal ? ' cc-h' : ''}`} style={styleDomaine(cours.domaine)}>
+    <Link href={anonyme ? `/inscription?suite=${encodeURIComponent(`/cours/${cours.slug}`)}` : `/cours/${cours.slug}`} className={`cc${horizontal ? ' cc-h' : ''}`} style={styleDomaine(cours.domaine)}>
       <div className="cc-img"><img src={illustration(cours.domaine)} alt="" loading="lazy" width={960} height={540} /></div>
       <div className="cc-body">
         <span className="tag dom">{dom.nom}{cours.visibilite === 'prive' ? ' · privé' : ''}</span>
         <span className="cc-titre">{cours.titre}</span>
         <div className="cc-pied">
           <span>{dureeH(cours.duree)} · {capitale(cours.difficulte)}</span>
-          <span className={`statut ${st.cls}`}>{st.label}</span>
+          {anonyme ? <span className="statut">Commencer ce cours</span> : <span className={`statut ${st.cls}`}>{st.label}</span>}
         </div>
       </div>
     </Link>

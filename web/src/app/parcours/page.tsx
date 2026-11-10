@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Shell from '@/components/Shell';
-import { api, indexer, pourcent, Progression, Referentiel } from '@/lib/api';
+import { ShellOuvert } from '@/components/Shell';
+import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
@@ -14,7 +14,7 @@ const PHRASES: Record<string, string> = {
 };
 
 function Contenu() {
-  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), api<Progression[]>('/progression')]));
+  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), progressionSiConnecte()]));
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
   if (!donnees) return <p className="muted">Chargement…</p>;
   const [ref, prog] = donnees;
@@ -50,5 +50,5 @@ function Contenu() {
 }
 
 export default function Parcours() {
-  return <Shell>{() => <Contenu />}</Shell>;
+  return <ShellOuvert>{() => <Contenu />}</ShellOuvert>;
 }

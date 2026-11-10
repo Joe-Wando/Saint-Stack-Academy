@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import Shell from '@/components/Shell';
+import AdminCadre from '@/components/AdminCadre';
 import { statutCours } from '@/components/CarteCours';
 import { api, dureeH, indexer, pourcent, Progression, ResumeCours } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
@@ -56,7 +56,6 @@ function Contenu() {
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">Mon espace</p>
         <h1>Mes cours</h1>
         <p className="muted">Ma liste de cours à étudier, dans l’ordre que je choisis. {termines} terminé{termines > 1 ? 's' : ''} sur {liste.length}.</p>
         <div className="bar" aria-hidden="true" style={{ maxWidth: 420 }}><span style={{ width: `${pourcent(termines, liste.length)}%` }} /></div>
@@ -107,5 +106,5 @@ function Contenu() {
 }
 
 export default function MesCours() {
-  return <Shell admin>{() => <Contenu />}</Shell>;
+  return <AdminCadre>{() => <Contenu />}</AdminCadre>;
 }

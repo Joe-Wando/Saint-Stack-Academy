@@ -3,15 +3,15 @@
 import Link from 'next/link';
 import { CSSProperties, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import Shell from '@/components/Shell';
+import { ShellOuvert } from '@/components/Shell';
 import CarteCours, { statutCours } from '@/components/CarteCours';
-import { api, indexer, pourcent, Progression, Referentiel } from '@/lib/api';
+import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
-function Contenu({ code }: { code: string }) {
+function Contenu({ code, connecte }: { code: string; connecte: boolean }) {
   useEffect(() => { try { sessionStorage.setItem('ssa-parcours', code); } catch { /* indisponible */ } }, [code]);
-  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), api<Progression[]>('/progression')]));
+  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), progressionSiConnecte()]));
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
   if (!donnees) return <p className="muted">Chargement…</p>;
   const [ref, prog] = donnees;
@@ -44,7 +44,7 @@ function Contenu({ code }: { code: string }) {
               <span className="numero" aria-hidden="true">{etat === 'termine' ? '✓' : i + 1}</span>
               <div className="etape-contenu">
                 <p className="small etape-etat"><span className="sr">Étape {i + 1} : </span><span className={`statut ${st.cls}`}>{etat === 'termine' ? 'Terminé' : etat === 'en_cours' ? 'En cours' : 'À faire'}</span></p>
-                <CarteCours cours={c} prog={pr} horizontal />
+                <CarteCours cours={c} prog={pr} horizontal anonyme={!connecte} />
               </div>
             </li>
           );
@@ -56,5 +56,5 @@ function Contenu({ code }: { code: string }) {
 
 export default function ParcoursDetail() {
   const { code } = useParams<{ code: string }>();
-  return <Shell>{() => <Contenu code={code} />}</Shell>;
+  return <ShellOuvert>{(u) => <Contenu code={code} connecte={!!u} />}</ShellOuvert>;
 }

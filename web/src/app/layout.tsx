@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './v2.css';
+import './complement.css';
 
 export const metadata: Metadata = {
   title: 'Saint Stack Academy',

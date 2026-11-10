@@ -3,17 +3,17 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Shell from '@/components/Shell';
+import { ShellOuvert } from '@/components/Shell';
 import Onglets from '@/components/Onglets';
 import CarteCours, { CartePreparation } from '@/components/CarteCours';
-import { api, indexer, pourcent, Progression, Referentiel, SemestreRef, Utilisateur } from '@/lib/api';
+import { api, indexer, pourcent, progressionSiConnecte, Referentiel, SemestreRef, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { ancreUe } from '@/lib/licence';
 
 type Idx = ReturnType<typeof indexer>;
 
 /** Une UE : titre, progression, cartes dans l'ordre, ou « Cours en préparation ». */
-function Ue({ semestre, titre, cours, idx }: { semestre: string; titre: string; cours: SemestreRef['ues'][number]['cours']; idx: Idx }) {
+function Ue({ semestre, titre, cours, idx, anonyme }: { semestre: string; titre: string; cours: SemestreRef['ues'][number]['cours']; idx: Idx; anonyme: boolean }) {
   const faits = cours.filter((c) => idx.get(c.slug)?.statut === 'termine').length;
   return (
     <section className="ue" id={ancreUe(semestre, titre)} aria-labelledby={`t-${ancreUe(semestre, titre)}`}>
@@ -23,20 +23,20 @@ function Ue({ semestre, titre, cours, idx }: { semestre: string; titre: string; 
       </div>
       {cours.length > 0 && <div className="bar sm ue-bar" aria-hidden="true"><span style={{ width: `${pourcent(faits, cours.length)}%` }} /></div>}
       <div className="grille">
-        {cours.length ? cours.map((c) => <CarteCours key={c.slug} cours={c} prog={idx.get(c.slug)} />) : <CartePreparation />}
+        {cours.length ? cours.map((c) => <CarteCours key={c.slug} cours={c} prog={idx.get(c.slug)} anonyme={anonyme} />) : <CartePreparation />}
       </div>
     </section>
   );
 }
 
-function Semestres({ semestres, idx }: { semestres: SemestreRef[]; idx: Idx }) {
-  return <>{semestres.map((s) => s.ues.map((ue) => <Ue key={`${s.code}-${ue.titre}`} semestre={s.code} titre={ue.titre} cours={ue.cours} idx={idx} />))}</>;
+function Semestres({ semestres, idx, anonyme }: { semestres: SemestreRef[]; idx: Idx; anonyme: boolean }) {
+  return <>{semestres.map((s) => s.ues.map((ue) => <Ue key={`${s.code}-${ue.titre}`} semestre={s.code} titre={ue.titre} cours={ue.cours} idx={idx} anonyme={anonyme} />))}</>;
 }
 
-function Contenu({ code, u }: { code: string; u: Utilisateur }) {
-  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), api<Progression[]>('/progression')]));
+function Contenu({ code, u }: { code: string; u: Utilisateur | null }) {
+  const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), progressionSiConnecte()]));
   const [onglet, setOnglet] = useState('');
-  const [option, setOption] = useState(u.niveau === 'L3' && u.optionL3 ? u.optionL3 : '');
+  const [option, setOption] = useState(u?.niveau === 'L3' && u.optionL3 ? u.optionL3 : '');
   const niveau = donnees?.[0].niveaux.find((n) => n.code === code.toUpperCase());
 
   useEffect(() => {
@@ -67,7 +67,7 @@ function Contenu({ code, u }: { code: string; u: Utilisateur }) {
       {niveau.semestres.length > 0 && (
         <Onglets id="semestres" label="Semestres" actif={onglet} onChange={setOnglet}
           onglets={niveau.semestres.map((s) => ({ cle: s.code, titre: `Semestre ${s.code.slice(1)} (${s.code})` }))}>
-          <Semestres semestres={niveau.semestres.filter((s) => s.code === onglet)} idx={idx} />
+          <Semestres semestres={niveau.semestres.filter((s) => s.code === onglet)} idx={idx} anonyme={!u} />
         </Onglets>
       )}
 
@@ -80,20 +80,20 @@ function Contenu({ code, u }: { code: string; u: Utilisateur }) {
                 <label key={o.code} className={`choix-carte${option === o.code ? ' on' : ''}`}>
                   <input type="radio" name="option" value={o.code} checked={option === o.code} onChange={() => setOption(o.code)} />
                   <strong>{o.titre}</strong>
-                  <span className="small muted">{o.semestres.flatMap((s) => s.ues.flatMap((x) => x.cours)).length} cours{u.optionL3 === o.code ? ' · ton option' : ''}</span>
+                  <span className="small muted">{o.semestres.flatMap((s) => s.ues.flatMap((x) => x.cours)).length} cours{u?.optionL3 === o.code ? ' · ton option' : ''}</span>
                 </label>
               ))}
             </div>
           </fieldset>
           <div className="section-head"><h2>Tronc commun</h2><span className="muted small">pour toutes les options</span></div>
-          <Semestres semestres={niveau.troncCommun} idx={idx} />
+          <Semestres semestres={niveau.troncCommun} idx={idx} anonyme={!u} />
           {opt && (
             <>
               <div className="section-head"><h2>Option {opt.titre}</h2></div>
               {opt.semestres.map((s) => (
                 <div key={s.code}>
                   <h3 className="semestre-titre">Semestre {s.code.slice(1)} ({s.code})</h3>
-                  <Semestres semestres={[s]} idx={idx} />
+                  <Semestres semestres={[s]} idx={idx} anonyme={!u} />
                 </div>
               ))}
             </>
@@ -106,5 +106,5 @@ function Contenu({ code, u }: { code: string; u: Utilisateur }) {
 
 export default function LicenceNiveau() {
   const { niveau } = useParams<{ niveau: string }>();
-  return <Shell>{(u) => <Contenu code={niveau} u={u} />}</Shell>;
+  return <ShellOuvert>{(u) => <Contenu code={niveau} u={u} />}</ShellOuvert>;
 }

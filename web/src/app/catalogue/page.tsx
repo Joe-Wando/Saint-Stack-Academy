@@ -1,16 +1,16 @@
 'use client';
 
 import { CSSProperties, useState } from 'react';
-import Shell from '@/components/Shell';
+import { ShellOuvert } from '@/components/Shell';
 import CarteCours from '@/components/CarteCours';
-import { api, capitale, DIFFICULTES, indexer, pourcent, Progression, ResumeCours } from '@/lib/api';
+import { api, capitale, DIFFICULTES, indexer, pourcent, progressionSiConnecte, ResumeCours } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, illustration, infoDomaine, ORDRE_DOMAINES, styleDomaine } from '@/lib/domaines';
 
 const normal = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
-function Contenu() {
-  const { donnees, erreur } = useDonnees(() => Promise.all([api<ResumeCours[]>('/cours'), api<Progression[]>('/progression')]));
+function Contenu({ connecte }: { connecte: boolean }) {
+  const { donnees, erreur } = useDonnees(() => Promise.all([api<ResumeCours[]>('/cours'), progressionSiConnecte()]));
   const [recherche, setRecherche] = useState('');
   const [difficulte, setDifficulte] = useState<string>('toutes');
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
@@ -75,7 +75,7 @@ function Contenu() {
               </div>
             </div>
             <div className="grille">
-              {cours.map((c) => <CarteCours key={c.slug} cours={c} prog={idx.get(c.slug)} />)}
+              {cours.map((c) => <CarteCours key={c.slug} cours={c} prog={idx.get(c.slug)} anonyme={!connecte} />)}
             </div>
           </section>
         );
@@ -85,5 +85,5 @@ function Contenu() {
 }
 
 export default function Catalogue() {
-  return <Shell>{() => <Contenu />}</Shell>;
+  return <ShellOuvert>{(u) => <Contenu connecte={!!u} />}</ShellOuvert>;
 }

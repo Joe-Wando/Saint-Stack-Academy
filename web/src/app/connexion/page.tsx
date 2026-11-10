@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import CadreAuth, { parametre, suiteSure } from '@/components/CadreAuth';
-import { api, enregistrerSession, Utilisateur } from '@/lib/api';
+import { api, enregistrerSession, reprendreSuite, Utilisateur } from '@/lib/api';
 
 export default function Connexion() {
   const router = useRouter();
@@ -20,11 +20,11 @@ export default function Connexion() {
     try {
       const s = await api<{ jeton: string; utilisateur: Utilisateur }>('/auth/connexion', { method: 'POST', body: JSON.stringify(f) });
       enregistrerSession(s);
-      router.replace(suiteSure(parametre('suite')));
+      router.replace(suiteSure(parametre('suite') || reprendreSuite()));
     } catch (err) {
       const x = err as Error & { statut?: number };
       setErreur(x.message);
-      if (x.statut === 403) setNonVerifie(f.email);
+      if (x.statut === 403 && /Active ton compte/.test(x.message)) setNonVerifie(f.email);
       setEnvoi(false);
     }
   }

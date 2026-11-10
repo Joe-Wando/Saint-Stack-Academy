@@ -95,6 +95,8 @@ function Contenu({ slug }: { slug: string }) {
 
   function aller(i: number) {
     const j = Math.min(Math.max(i, 0), n - 1);
+    // Passer au chapitre suivant : celui qu'on quitte compte comme lu (enregistré une seule fois côté serveur).
+    if (j > actif) api(`/progression/${slug}/chapitre`, { method: 'POST', body: JSON.stringify({ chapitre: actif }) }).catch(() => {});
     setActif(j);
     ecrireLocal(`ssa-chapitre-${slug}`, j);
     if (j > plusLoin) { setPlusLoin(j); ecrireLocal(`ssa-lu-${slug}`, j); }

@@ -1,13 +1,24 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { CONTACT } from '@/lib/contact';
 
-/** Mise en page des écrans de compte : illustration à gauche, formulaire à droite. */
+/** Écrans de compte : à gauche le portrait du fondateur et sa citation, à droite le formulaire. */
 export default function CadreAuth({ titre, children }: { titre: string; children: ReactNode }) {
   return (
     <main className="auth">
       <aside className="auth-art">
-        <img src="/illustrations/devops.svg" alt="" width={960} height={540} />
-        <p>Apprendre les outils du métier, une notion à la fois, à ton rythme.</p>
+        <Image className="auth-photo" src={CONTACT.photo} alt={`Portrait d’${CONTACT.fondateur}, fondateur de Saint Stack Academy`}
+          width={280} height={280} sizes="(max-width: 860px) 96px, 280px" priority />
+        <figure className="auth-citation">
+          <blockquote>« Une notion à la fois. Chaque chapitre compris est une victoire. »</blockquote>
+          <figcaption>{CONTACT.fondateur}, fondateur</figcaption>
+        </figure>
+        <ul className="auth-puces">
+          <li>Cours gratuits</li>
+          <li>Exercices corrigés</li>
+          <li>Suivi de progression</li>
+        </ul>
       </aside>
       <div className="auth-col">
         <div className="auth-card">

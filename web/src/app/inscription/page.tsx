@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
-import CadreAuth from '@/components/CadreAuth';
-import { api, Niveau } from '@/lib/api';
+import { FormEvent, useEffect, useState } from 'react';
+import CadreAuth, { parametre, suiteSure } from '@/components/CadreAuth';
+import { api, memoriserSuite, Niveau } from '@/lib/api';
 import { CarteNiveaux, OptionsL3 } from '@/components/ChoixNiveau';
 
 export default function Inscription() {
@@ -14,6 +14,9 @@ export default function Inscription() {
   const [envoye, setEnvoye] = useState('');
   const [message, setMessage] = useState('');
   const [envoi, setEnvoi] = useState(false);
+  const [accepte, setAccepte] = useState(false);
+  // Arrivée depuis « Commencer ce cours » : on y reviendra après la vérification et la connexion.
+  useEffect(() => { const s = parametre('suite'); if (s) memoriserSuite(suiteSure(s)); }, []);
 
   async function soumettre(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,11 +24,12 @@ export default function Inscription() {
     const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     if (!niveau) { setErreur('Choisis ton niveau.'); return; }
     if (niveau === 'L3' && !option) { setErreur('En L3, choisis ton option.'); return; }
+    if (!accepte) { setErreur('Coche la case pour indiquer que tu as lu la politique de confidentialité.'); return; }
     setEnvoi(true);
     try {
       const r = await api<{ message: string }>('/auth/inscription', {
         method: 'POST',
-        body: JSON.stringify({ nom: f.nom, email: f.email, motDePasse: f.motDePasse, niveau, optionL3: niveau === 'L3' ? option : undefined, etablissement: f.etablissement }),
+        body: JSON.stringify({ nom: f.nom, email: f.email, motDePasse: f.motDePasse, niveau, optionL3: niveau === 'L3' ? option : undefined, etablissement: f.etablissement, confidentialite: accepte }),
       });
       setMessage(r.message); setEnvoye(f.email);
     } catch (err) {
@@ -74,6 +78,10 @@ export default function Inscription() {
 
         <label htmlFor="etablissement">Établissement <span className="muted small">(facultatif)</span>
           <input id="etablissement" name="etablissement" autoComplete="organization" maxLength={120} />
+        </label>
+        <label className="case" htmlFor="confidentialite">
+          <input id="confidentialite" type="checkbox" checked={accepte} onChange={(e) => setAccepte(e.target.checked)} required />
+          <span>J’ai lu la <Link href="/confidentialite" target="_blank">politique de confidentialité</Link>.</span>
         </label>
         {erreur && <p className="error" role="alert">{erreur}</p>}
         <button className="btn primary" disabled={envoi}>{envoi ? 'Un instant…' : 'Créer mon compte'}</button>

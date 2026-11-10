@@ -6,7 +6,7 @@ export type Role = 'admin' | 'apprenant';
 export type Niveau = 'L1' | 'L2' | 'L3' | 'autre';
 export interface Utilisateur {
   id: number; nom: string; email: string; role: Role;
-  niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string;
+  niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe?: string; photo?: string | null;
 }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
 export interface ResumeCours {
@@ -88,3 +88,17 @@ export function libelleNiveau(u: Pick<Utilisateur, 'niveau' | 'optionL3'>, optio
 /** Index de la progression par slug. */
 export const indexer = (prog: Progression[]) => new Map(prog.map((p) => [p.cours, p]));
 export const pourcent = (n: number, d: number) => (d ? Math.round((100 * n) / d) : 0);
+
+/** Adresse publique d'une photo de profil. */
+export const urlPhoto = (photo?: string | null) => (photo ? `${API}/photos/${photo}` : null);
+
+/** La progression si l'on est connecté, une liste vide sinon (pages consultables sans compte). */
+export const progressionSiConnecte = () => (session() ? api<Progression[]>('/progression') : Promise.resolve([] as Progression[]));
+
+/** Page où revenir après l'inscription et la connexion (mémorisée pendant la vérification de l'e-mail). */
+export function memoriserSuite(chemin: string) {
+  try { if (chemin) localStorage.setItem('ssa-suite', chemin); } catch { /* indisponible */ }
+}
+export function reprendreSuite() {
+  try { const s = localStorage.getItem('ssa-suite') ?? ''; localStorage.removeItem('ssa-suite'); return s; } catch { return ''; }
+}
