@@ -21,6 +21,12 @@ export class CurriculumController {
     return this.curriculum.liste(u);
   }
 
+  /** Les certifications à viser, niveau par niveau. Publique. */
+  @Get('certifications')
+  certifications() {
+    return this.curriculum.certifications();
+  }
+
   @Get('cours/:slug')
   @UseGuards(AuthGuard)
   cours(@Param('slug') slug: string, @Moi() u: Utilisateur) {
@@ -31,6 +37,6 @@ export class CurriculumController {
   @UseGuards(AuthGuard)
   async monNiveau(@Moi() u: Utilisateur) {
     const p = await this.auth.profil(u.id);
-    return this.curriculum.monNiveau(u, p.niveau, p.optionL3);
+    return { ...this.curriculum.monNiveau(u, p.niveau, p.optionL3), certifications: this.curriculum.certificationsDe(p.niveau, p.optionL3) };
   }
 }

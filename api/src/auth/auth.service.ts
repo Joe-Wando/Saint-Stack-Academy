@@ -14,13 +14,13 @@ export const NIVEAUX: Niveau[] = ['L1', 'L2', 'L3', 'autre'];
 /** Contenu du jeton de session. */
 export interface Utilisateur { id: number; nom: string; email: string; role: Role }
 /** Profil complet, renvoyé au navigateur. */
-export interface Profil extends Utilisateur { niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe: string; photo: string | null }
+export interface Profil extends Utilisateur { niveau: Niveau | null; optionL3: string | null; etablissement: string | null; inscritLe: string; photo: string | null; bienvenueVue: boolean }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const COUT_BCRYPT = 12;
 export const MSG_VERIFIER = 'Vérifie ta boîte mail pour activer ton compte.';
 export const MSG_OUBLI = 'Si un compte existe avec cette adresse, tu vas recevoir un e-mail pour choisir un nouveau mot de passe.';
-const COLONNES = `id, nom, email, role, niveau, option_l3 AS "optionL3", etablissement, cree_le AS "inscritLe", photo`;
+const COLONNES = `id, nom, email, role, niveau, option_l3 AS "optionL3", etablissement, cree_le AS "inscritLe", photo, bienvenue_vue AS "bienvenueVue"`;
 
 const hacher = (jeton: string) => createHash('sha256').update(jeton).digest('hex');
 
@@ -153,8 +153,10 @@ export class AuthService {
     return p;
   }
 
-  async modifier(id: number, b: { nom?: unknown; niveau?: unknown; optionL3?: unknown; etablissement?: unknown }) {
+  async modifier(id: number, b: { nom?: unknown; niveau?: unknown; optionL3?: unknown; etablissement?: unknown; bienvenueVue?: unknown }) {
     const actuel = await this.profil(id);
+    // La visite de bienvenue terminée ou passée : on ne la propose plus automatiquement.
+    if (b.bienvenueVue === true) await this.db.query('UPDATE utilisateurs SET bienvenue_vue = true WHERE id = $1', [id]);
     const nom = b.nom === undefined ? actuel.nom : String(b.nom).trim().slice(0, 80);
     if (nom.length < 2) throw new BadRequestException('Indique ton nom (au moins 2 caractères).');
     const { niveau, optionL3 } = b.niveau === undefined && b.optionL3 === undefined && actuel.niveau

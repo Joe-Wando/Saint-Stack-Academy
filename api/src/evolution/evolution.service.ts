@@ -77,6 +77,8 @@ export class EvolutionService {
 
     const notes = await this.db.query<{ cours: string; maj_le: string }>(
       "SELECT cours, maj_le FROM notes WHERE utilisateur_id = $1 AND btrim(contenu) <> '' ORDER BY maj_le DESC", [utilisateurId]);
+    const [badge] = await this.db.query<{ date: string; nom: string }>(
+      "SELECT to_char(obtenue_le, 'YYYY-MM-DD') AS date, nom FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le, id LIMIT 1", [utilisateurId]);
     const [{ chapitres }] = await this.db.query<{ chapitres: number }>(
       "SELECT count(*)::int AS chapitres FROM activites WHERE utilisateur_id = $1 AND type = 'chapitre_lu'", [utilisateurId]);
 
@@ -91,7 +93,10 @@ export class EvolutionService {
       parSemaine,
       quiz,
       domaines,
-      jalons: this.jalons(finDe, quiz, prog),
+      jalons: [
+        ...this.jalons(finDe, quiz, prog),
+        { code: 'badge', titre: 'Premier badge obtenu', atteint: !!badge, date: badge?.date ?? null, detail: badge?.nom },
+      ],
       notes: notes.map((n) => ({ cours: n.cours, titre: titres.get(n.cours) ?? n.cours, majLe: iso(n.maj_le) })),
     };
   }

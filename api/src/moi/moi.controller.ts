@@ -49,6 +49,43 @@ export class MoiController {
     return this.auth.demanderChangementEmail(u.id, b?.nouvelEmail, b?.motDePasse);
   }
 
+  // ----- Mes badges et certifications (déclarés par l'étudiant) ---------------------------------
+  @Get('certifications')
+  mesCertifications(@Moi() u: Utilisateur) {
+    return this.db.query(
+      `SELECT id, nom, organisme, type, to_char(obtenue_le, 'YYYY-MM-DD') AS "obtenueLe", lien_verification AS "lienVerification"
+       FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le DESC, id DESC`, [u.id]);
+  }
+
+  @Post('certifications')
+  async ajouterCertification(@Moi() u: Utilisateur, @Body() b: Record<string, unknown>) {
+    const nom = String(b?.nom ?? '').trim().slice(0, 200);
+    const organisme = String(b?.organisme ?? '').trim().slice(0, 200);
+    const type = String(b?.type ?? '');
+    const date = String(b?.obtenueLe ?? '');
+    const lien = String(b?.lienVerification ?? '').trim();
+    if (nom.length < 2) throw new BadRequestException('Indique le nom du badge ou de la certification.');
+    if (organisme.length < 2) throw new BadRequestException("Indique l'organisme.");
+    if (!['badge', 'certificat', 'certification'].includes(type)) throw new BadRequestException('Choisis le type : badge, certificat ou certification.');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date)) || Date.parse(date) > Date.now() + 86_400_000) {
+      throw new BadRequestException("Indique une date d'obtention valide, pas dans le futur.");
+    }
+    if (lien && (!/^https?:\/\/\S+$/i.test(lien) || lien.length > 500)) throw new BadRequestException('Le lien de vérification doit commencer par https://');
+    const [{ total }] = await this.db.query<{ total: number }>('SELECT count(*)::int AS total FROM certifications_obtenues WHERE utilisateur_id = $1', [u.id]);
+    if (total >= 100) throw new BadRequestException('Tu as atteint la limite de 100 entrées.');
+    const [c] = await this.db.query(
+      `INSERT INTO certifications_obtenues (utilisateur_id, nom, organisme, type, obtenue_le, lien_verification)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`, [u.id, nom, organisme, type, date, lien || null]);
+    return c;
+  }
+
+  @Delete('certifications/:id')
+  async retirerCertification(@Moi() u: Utilisateur, @Param('id') id: string) {
+    const [c] = await this.db.query('DELETE FROM certifications_obtenues WHERE id = $1 AND utilisateur_id = $2 RETURNING id', [Number(id) || 0, u.id]);
+    if (!c) throw new NotFoundException('Entrée introuvable.');
+    return { ok: true };
+  }
+
   /** Toutes mes données, en JSON : profil, progression, activités et notes. */
   @Get('donnees')
   async donnees(@Moi() u: Utilisateur) {
@@ -61,6 +98,7 @@ export class MoiController {
       progression: await this.db.query('SELECT cours, statut, quiz_score AS "quizScore", quiz_total AS "quizTotal", quiz_essais AS "quizEssais", maj_le AS "majLe" FROM progression WHERE utilisateur_id = $1 ORDER BY cours', [u.id]),
       activites: await this.db.query('SELECT cours, type, detail, cree_le AS date FROM activites WHERE utilisateur_id = $1 ORDER BY cree_le', [u.id]),
       notes: await this.db.query('SELECT cours, contenu, maj_le AS "majLe" FROM notes WHERE utilisateur_id = $1 ORDER BY cours', [u.id]),
+      certifications: await this.db.query('SELECT nom, organisme, type, obtenue_le AS "obtenueLe", lien_verification AS "lienVerification" FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le', [u.id]),
       messagesEnvoyes: await this.db.query('SELECT sujet, message, cree_le AS date FROM messages WHERE utilisateur_id = $1 ORDER BY cree_le', [u.id]),
     };
   }

@@ -28,6 +28,18 @@ export class PhotoService {
   }
 
   async enregistrer(utilisateurId: number, fichier: { buffer: Buffer; size: number; mimetype: string } | undefined) {
+    const nom = await this.convertir(fichier, 512);
+    const [avant] = await this.db.query<{ photo: string | null }>('SELECT photo FROM utilisateurs WHERE id = $1', [utilisateurId]);
+    await this.db.query('UPDATE utilisateurs SET photo = $1 WHERE id = $2', [nom, utilisateurId]);
+    this.effacer(avant?.photo);
+    return { photo: nom };
+  }
+
+  /**
+   * Vérifie une image envoyée, la recadre en carré de `cote` pixels, la convertit en WebP sans métadonnées
+   * et l'enregistre sous un nom aléatoire. Renvoie ce nom.
+   */
+  async convertir(fichier: { buffer: Buffer; size: number; mimetype: string } | undefined, cote: number): Promise<string> {
     if (!fichier?.buffer?.length) throw new BadRequestException('Choisis une image.');
     if (fichier.size > TAILLE_MAX) throw new BadRequestException('La photo dépasse 2 Mo. Choisis une image plus légère.');
     if (!formatReel(fichier.buffer)) throw new BadRequestException('Ce fichier n’est pas une image JPEG, PNG ou WebP.');
@@ -37,7 +49,7 @@ export class PhotoService {
       // rotate() applique l'orientation EXIF avant de la perdre ; sharp ne recopie aucune métadonnée par défaut.
       sortie = await sharp(fichier.buffer, { limitInputPixels: 40_000_000 })
         .rotate()
-        .resize(512, 512, { fit: 'cover', position: 'centre' })
+        .resize(cote, cote, { fit: 'cover', position: 'centre' })
         .webp({ quality: 82 })
         .toBuffer();
     } catch {
@@ -46,11 +58,7 @@ export class PhotoService {
     fs.mkdirSync(config.uploadsDir, { recursive: true });
     const nom = `${randomUUID()}.webp`;
     fs.writeFileSync(this.chemin(nom), sortie);
-
-    const [avant] = await this.db.query<{ photo: string | null }>('SELECT photo FROM utilisateurs WHERE id = $1', [utilisateurId]);
-    await this.db.query('UPDATE utilisateurs SET photo = $1 WHERE id = $2', [nom, utilisateurId]);
-    this.effacer(avant?.photo);
-    return { photo: nom };
+    return nom;
   }
 
   async retirer(utilisateurId: number) {

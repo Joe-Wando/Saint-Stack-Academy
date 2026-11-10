@@ -17,6 +17,7 @@ import { EvolutionService } from './evolution/evolution.service';
 import { MoiController, PhotosController } from './moi/moi.controller';
 import { PhotoService } from './moi/photo.service';
 import { ContactController } from './contact/contact.controller';
+import { SiteController } from './site/site.controller';
 
 @Controller()
 class SanteController {
@@ -25,7 +26,7 @@ class SanteController {
 }
 
 @Module({
-  controllers: [SanteController, AuthController, CurriculumController, ProgressController, AdminController, MoiController, PhotosController, ContactController],
+  controllers: [SanteController, AuthController, CurriculumController, ProgressController, AdminController, MoiController, PhotosController, ContactController, SiteController],
   providers: [DbService, AuthService, MailService, AuthGuard, SessionFacultativeGuard, LimiteGuard, CurriculumService, EvolutionService, PhotoService],
 })
 class AppModule {}

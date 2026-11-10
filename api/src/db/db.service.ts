@@ -99,6 +99,23 @@ export class DbService implements OnModuleInit, OnModuleDestroy {
         utilisateur_id int NULL REFERENCES utilisateurs(id) ON DELETE SET NULL
       );
 
+      -- Complément n° 2 : bienvenue, certifications déclarées, réglages du site
+      ALTER TABLE utilisateurs ADD COLUMN IF NOT EXISTS bienvenue_vue boolean NOT NULL DEFAULT false;
+      CREATE TABLE IF NOT EXISTS certifications_obtenues (
+        id                 serial PRIMARY KEY,
+        utilisateur_id     int NOT NULL REFERENCES utilisateurs(id) ON DELETE CASCADE,
+        nom                text NOT NULL,
+        organisme          text NOT NULL,
+        type               text NOT NULL CHECK (type IN ('badge', 'certificat', 'certification')),
+        obtenue_le         date NOT NULL,
+        lien_verification  text NULL
+      );
+      CREATE TABLE IF NOT EXISTS parametres (
+        cle     text PRIMARY KEY,
+        valeur  text,
+        maj_le  timestamptz NOT NULL DEFAULT now()
+      );
+
       CREATE TABLE IF NOT EXISTS journal_admin (
         id        bigserial PRIMARY KEY,
         admin_id  int NULL REFERENCES utilisateurs(id) ON DELETE SET NULL,
@@ -111,7 +128,7 @@ export class DbService implements OnModuleInit, OnModuleDestroy {
     if (config.adminEmail) {
       // Le compte de l'admin existe déjà : il est considéré comme vérifié.
       await this.pool.query(
-        "UPDATE utilisateurs SET email_verifie = true, role = 'admin' WHERE email = $1", [config.adminEmail]);
+        "UPDATE utilisateurs SET email_verifie = true, role = 'admin', bienvenue_vue = true WHERE email = $1", [config.adminEmail]);
     }
     await this.pool.query('DELETE FROM jetons_email WHERE expire_le < now() - interval \'7 days\'');
     this.logger.log('Base de données prête');

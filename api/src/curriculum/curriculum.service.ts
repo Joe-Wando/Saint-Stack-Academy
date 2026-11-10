@@ -33,6 +33,19 @@ export interface ResumeCours {
   licence: PlaceLicence[]; parcours: PlaceParcours[];
 }
 
+export interface ElementCertification {
+  nom: string; organisme: string; type: 'badge' | 'certificat' | 'certification'; cout: string;
+  ue?: string; prepare?: string; facultatif?: boolean; lien?: string;
+}
+export interface Certifications {
+  niveaux: {
+    L1: { intro: string; elements: ElementCertification[] };
+    L2: { intro: string; elements: ElementCertification[] };
+    L3: { intro: string; options: Record<string, ElementCertification[]> };
+  };
+  conseils: string[];
+}
+
 interface Referentiel {
   niveaux: {
     code: string; titre: string;
@@ -51,6 +64,7 @@ export class CurriculumService {
   private readonly logger = new Logger('Curriculum');
   private cache: Cours[] | null = null;
   private ref: Referentiel | null = null;
+  private certifs: Certifications | null = null;
 
   /** Lit tous les cours de content/lessons (une fois, au premier appel). */
   tous(): Cours[] {
@@ -91,10 +105,31 @@ export class CurriculumService {
     return this.ref;
   }
 
-  /** Relit content/ (cours et référentiel) sans redémarrer l'API. */
+  /** Lit content/certifications.yaml (badges, certificats et certifications par niveau). */
+  certifications(): Certifications {
+    if (this.certifs) return this.certifs;
+    const f = path.join(config.contentDir, 'certifications.yaml');
+    const vide: Certifications = { niveaux: { L1: { intro: '', elements: [] }, L2: { intro: '', elements: [] }, L3: { intro: '', options: {} } }, conseils: [] };
+    this.certifs = fs.existsSync(f)
+      ? (matter as unknown as { engines: { yaml: { parse: (s: string) => Certifications } } }).engines.yaml.parse(fs.readFileSync(f, 'utf8'))
+      : vide;
+    return this.certifs;
+  }
+
+  /** Les certifications d'un niveau (en L3 : celles de l'option). */
+  certificationsDe(niveau: string | null, optionL3: string | null): ElementCertification[] {
+    const c = this.certifications().niveaux;
+    if (niveau === 'L1' || niveau === 'L2') return c[niveau]?.elements ?? [];
+    if (niveau === 'L3') return optionL3 ? c.L3?.options?.[optionL3] ?? [] : Object.values(c.L3?.options ?? {}).flat();
+    return [];
+  }
+
+  /** Relit content/ (cours, référentiel, certifications) sans redémarrer l'API. */
   recharger() {
     this.cache = null;
     this.ref = null;
+    this.certifs = null;
+    this.certifications();
     const cours = this.tous();
     this.referentielBrut();
     return { cours: cours.length, prives: cours.filter((c) => c.visibilite === 'prive').length };

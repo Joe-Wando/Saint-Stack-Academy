@@ -45,7 +45,8 @@ export class AdminController {
         (SELECT count(DISTINCT utilisateur_id) FROM activites WHERE cree_le > now() - interval '30 days')::int AS actifs30,
         (SELECT count(*) FROM progression WHERE statut = 'termine')::int AS "coursTermines",
         (SELECT count(*) FROM activites WHERE type = 'quiz')::int AS "quizPasses",
-        (SELECT count(*) FROM messages WHERE NOT lu)::int AS "messagesNonLus"`);
+        (SELECT count(*) FROM messages WHERE NOT lu)::int AS "messagesNonLus",
+        (SELECT count(*) FROM certifications_obtenues)::int AS "badgesDeclares"`);
     const semaines = (table: string, colonne: string, filtre = 'true') => this.db.query<{ semaine: string; nombre: number }>(`
       SELECT to_char(s.semaine, 'YYYY-MM-DD') AS semaine, count(t.*)::int AS nombre
       FROM generate_series(date_trunc('week', now()) - interval '11 weeks', date_trunc('week', now()), interval '1 week') AS s(semaine)
@@ -143,6 +144,9 @@ export class AdminController {
       },
       evolution: await this.evolution.evolution(id),
       activites: await this.evolution.historique(id, 100),
+      certifications: await this.db.query(
+        `SELECT id, nom, organisme, type, to_char(obtenue_le, 'YYYY-MM-DD') AS "obtenueLe", lien_verification AS "lienVerification"
+         FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le DESC`, [id]),
     };
   }
 
