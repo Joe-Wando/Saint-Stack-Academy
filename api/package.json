@@ -1,0 +1,31 @@
+{
+  "name": "saint-stack-academy-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API de la plateforme Saint Stack Academy : comptes, programme, progression, quiz et suivi formateur",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "dev": "tsc -p tsconfig.json && node dist/main.js",
+    "test": "node --test dist/**/*.spec.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "11.1.6",
+    "@nestjs/core": "11.1.6",
+    "@nestjs/platform-express": "11.1.6",
+    "bcryptjs": "3.0.2",
+    "gray-matter": "4.0.3",
+    "jsonwebtoken": "9.0.2",
+    "pg": "8.16.3",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
+    "@types/express": "5.0.3",
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/node": "22.18.0",
+    "@types/pg": "8.15.5",
+    "typescript": "5.9.2"
+  }
+}

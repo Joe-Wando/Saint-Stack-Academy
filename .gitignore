@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.next/
+.env
+*.log
+
+# Sources fournies, copiées dans web/public et tools/
+illustrations-saint-stack/
+illustrations-saint-stack.zip
