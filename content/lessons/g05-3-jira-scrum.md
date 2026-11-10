@@ -8,7 +8,7 @@ licence:
   - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
 parcours:
   - { parcours: devops, ordre: 19 }
-  - { parcours: web, ordre: 18 }
+  - { parcours: web, ordre: 20 }
 ordre: 2
 prerequis_cours: []
 visibilite: public

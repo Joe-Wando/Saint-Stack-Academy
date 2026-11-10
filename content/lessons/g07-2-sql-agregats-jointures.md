@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
 parcours:
-  - { parcours: web, ordre: 11 }
+  - { parcours: web, ordre: 13 }
   - { parcours: data, ordre: 2 }
 ordre: 4
 prerequis_cours: [g07-1-sql-select]

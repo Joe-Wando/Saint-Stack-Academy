@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
 parcours:
-  - { parcours: web, ordre: 15 }
+  - { parcours: web, ordre: 17 }
 ordre: 4
 prerequis_cours: [g05-4-jest, g05-2-postman]
 visibilite: public

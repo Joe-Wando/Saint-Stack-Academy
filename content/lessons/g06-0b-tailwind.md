@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L2, semestre: S3, ue: "Développement front-end et infographie" }
 parcours:
-  - { parcours: web, ordre: 5 }
+  - { parcours: web, ordre: 7 }
 ordre: 2
 prerequis_cours: [g06-0a-react]
 visibilite: public

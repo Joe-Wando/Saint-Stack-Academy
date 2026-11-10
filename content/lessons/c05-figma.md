@@ -7,7 +7,7 @@ difficulte: découverte
 licence:
   - { niveau: L2, semestre: S3, ue: "Développement front-end et infographie" }
 parcours:
-  - { parcours: web, ordre: 4 }
+  - { parcours: web, ordre: 5 }
 ordre: 3
 prerequis_cours: []
 visibilite: public

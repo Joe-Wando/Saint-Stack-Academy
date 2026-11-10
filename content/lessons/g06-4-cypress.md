@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L3, semestre: S5, ue: "Génie logiciel et qualité" }
 parcours:
-  - { parcours: web, ordre: 16 }
+  - { parcours: web, ordre: 18 }
 ordre: 5
 prerequis_cours: []
 visibilite: public

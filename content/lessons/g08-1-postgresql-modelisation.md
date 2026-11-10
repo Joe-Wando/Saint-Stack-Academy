@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L2, semestre: S3, ue: "Bases de données et versionnement" }
 parcours:
-  - { parcours: web, ordre: 12 }
+  - { parcours: web, ordre: 14 }
 ordre: 5
 prerequis_cours: []
 visibilite: public

@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L3, semestre: S5, ue: "Développement web avancé", option: developpement-logiciel }
 parcours:
-  - { parcours: web, ordre: 8 }
+  - { parcours: web, ordre: 9 }
 ordre: 2
 prerequis_cours: []
 visibilite: public

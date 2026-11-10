@@ -8,7 +8,7 @@ licence:
   - { niveau: L2, semestre: S4, ue: "Réseaux et sécurité" }
 parcours:
   - { parcours: devops, ordre: 18 }
-  - { parcours: web, ordre: 17 }
+  - { parcours: web, ordre: 19 }
 ordre: 2
 prerequis_cours: []
 visibilite: public

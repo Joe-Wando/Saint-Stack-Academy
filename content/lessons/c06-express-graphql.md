@@ -7,7 +7,7 @@ difficulte: bases
 licence:
   - { niveau: L2, semestre: S4, ue: "Développement back-end" }
 parcours:
-  - { parcours: web, ordre: 9 }
+  - { parcours: web, ordre: 11 }
 ordre: 2
 prerequis_cours: []
 visibilite: public
