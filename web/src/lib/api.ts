@@ -48,3 +48,11 @@ export function dateFr(iso: string) {
 export function aujourdHui() {
   return new Date().toISOString().slice(0, 10);
 }
+export function dateCourte(iso: string) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+}
+/** Durée en heures : 120 → « 2 h », 90 → « 1 h 30 ». */
+export function dureeH(minutes: number) {
+  const h = Math.floor(minutes / 60), m = minutes % 60;
+  return h ? `${h} h${m ? ` ${String(m).padStart(2, '0')}` : ''}` : `${m} min`;
+}
