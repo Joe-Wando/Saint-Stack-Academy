@@ -4,7 +4,8 @@
   "description": "Outils du dépôt : génération des illustrations et des diaporamas PowerPoint.",
   "scripts": {
     "diaporamas": "node tools/generer-diaporamas.mjs",
-    "illustrations": "node tools/illustrations.js"
+    "illustrations": "node tools/illustrations.js",
+    "icones": "node tools/generer-icones.mjs"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

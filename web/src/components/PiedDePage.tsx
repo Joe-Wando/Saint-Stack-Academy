@@ -1,3 +1,4 @@
+import Monogramme from './Monogramme';
 import Link from 'next/link';
 import { Vague } from './Decor';
 
@@ -7,7 +8,7 @@ export default function PiedDePage() {
       <div className="pied-vague" aria-hidden="true"><Vague /></div>
       <footer className="pied">
         <div className="pied-in">
-          <div className="brand"><span className="logo" aria-hidden="true">SS</span>Saint Stack Academy</div>
+          <div className="brand"><Monogramme />Saint Stack Academy</div>
           <nav aria-label="Pied de page">
             <Link href="/licence">Licence</Link>
             <Link href="/parcours">Parcours</Link>

@@ -26,3 +26,7 @@ PROMPT*.md
 .idea/
 .DS_Store
 Thumbs.db
+
+# Paquet des images, recopié dans content/
+saint-stack-images/
+saint-stack-images.zip

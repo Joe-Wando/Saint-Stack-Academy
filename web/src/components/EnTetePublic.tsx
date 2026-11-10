@@ -1,5 +1,6 @@
 'use client';
 
+import Monogramme from './Monogramme';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -16,7 +17,7 @@ export default function EnTetePublic() {
     <header className="topbar">
       <div className="topbar-in">
         <Link href="/" className="brand" aria-label="Saint Stack Academy, page d’accueil">
-          <span className="logo" aria-hidden="true">SS</span><span className="brand-name">Saint Stack Academy</span>
+          <Monogramme /><span className="brand-name">Saint Stack Academy</span>
         </Link>
         <nav className="nav nav-public" aria-label="Navigation principale">
           {liens.map((l) => (

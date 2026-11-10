@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { api, deconnecter, enregistrerSession, session, Utilisateur } from '@/lib/api';
 import Avatar from './Avatar';
+import Monogramme from './Monogramme';
 import EnTetePublic from './EnTetePublic';
 import PiedDePage from './PiedDePage';
 
@@ -59,7 +60,7 @@ function EnTeteConnecte({ u }: { u: Utilisateur }) {
     <header className="topbar">
       <div className="topbar-in">
         <Link href="/accueil" className="brand" aria-label="Saint Stack Academy, accueil">
-          <span className="logo" aria-hidden="true">SS</span><span className="brand-name">Saint Stack Academy</span>
+          <Monogramme /><span className="brand-name">Saint Stack Academy</span>
         </Link>
         <nav className="nav" aria-label="Navigation principale">
           {liens.map((l) => {

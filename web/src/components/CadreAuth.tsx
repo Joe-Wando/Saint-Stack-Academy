@@ -1,3 +1,4 @@
+import Monogramme from './Monogramme';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { CONTACT } from '@/lib/contact';
@@ -21,7 +22,7 @@ export default function CadreAuth({ titre, children }: { titre: string; children
       </aside>
       <div className="auth-col">
         <div className="auth-card">
-          <Link href="/" className="brand"><span className="logo" aria-hidden="true">SS</span>Saint Stack Academy</Link>
+          <Link href="/" className="brand"><Monogramme />Saint Stack Academy</Link>
           <h1>{titre}</h1>
           {children}
         </div>
