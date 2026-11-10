@@ -5,7 +5,7 @@ import { CSSProperties, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { ShellOuvert } from '@/components/Shell';
 import CarteCours, { statutCours } from '@/components/CarteCours';
-import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
+import { api, indexer, pourcent, progressionSiConnecte, Referentiel, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
@@ -30,8 +30,12 @@ function Contenu({ code, connecte }: { code: string; connecte: boolean }) {
           <p className="eyebrow" style={{ color: 'inherit' }}>Parcours métier</p>
           <h1 className="h-dom">{p.titre}</h1>
           <p>{p.cours.length} étapes, dans l’ordre conseillé.</p>
-          <strong className="small">{faits} terminée{faits > 1 ? 's' : ''} sur {p.cours.length}</strong>
-          <div className="bar" style={{ '--bar': dom?.accent } as CSSProperties} aria-hidden="true"><span style={{ width: `${pourcent(faits, p.cours.length)}%` }} /></div>
+          {session() && (
+            <>
+              <strong className="small">{faits} terminée{faits > 1 ? 's' : ''} sur {p.cours.length}</strong>
+              <div className="bar" style={{ '--bar': dom?.accent } as CSSProperties} aria-hidden="true"><span style={{ width: `${pourcent(faits, p.cours.length)}%` }} /></div>
+            </>
+          )}
         </div>
       </section>
       <ol className="chemin">

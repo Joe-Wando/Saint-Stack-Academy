@@ -19,9 +19,9 @@ function Ue({ semestre, titre, cours, idx, anonyme }: { semestre: string; titre:
     <section className="ue" id={ancreUe(semestre, titre)} aria-labelledby={`t-${ancreUe(semestre, titre)}`}>
       <div className="ue-tete">
         <h3 id={`t-${ancreUe(semestre, titre)}`}>{titre}</h3>
-        <span className="small muted">{cours.length ? `${faits} terminé${faits > 1 ? 's' : ''} sur ${cours.length}` : 'Cours en préparation'}</span>
+        <span className="small muted">{!cours.length ? 'Cours en préparation' : anonyme ? `${cours.length} cours` : `${faits} terminé${faits > 1 ? 's' : ''} sur ${cours.length}`}</span>
       </div>
-      {cours.length > 0 && <div className="bar sm ue-bar" aria-hidden="true"><span style={{ width: `${pourcent(faits, cours.length)}%` }} /></div>}
+      {cours.length > 0 && !anonyme && <div className="bar sm ue-bar" aria-hidden="true"><span style={{ width: `${pourcent(faits, cours.length)}%` }} /></div>}
       <div className="grille">
         {cours.length ? cours.map((c) => <CarteCours key={c.slug} cours={c} prog={idx.get(c.slug)} anonyme={anonyme} />) : <CartePreparation />}
       </div>

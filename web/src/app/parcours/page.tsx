@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { ShellOuvert } from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
-import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
+import { api, indexer, pourcent, progressionSiConnecte, Referentiel, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
 const PHRASES: Record<string, string> = {
+  deploiement: 'GitHub Pages, Netlify, Vercel et ton propre nom de domaine : publier ses projets dès la L1.',
   web: 'Du maquettage au déploiement : React, Next.js, API, tests et intégration continue.',
   devops: 'Git, Docker, CI/CD, Kubernetes et supervision : livrer vite et de façon fiable.',
   data: 'SQL, Python, ETL, dbt, Airflow, Spark et Power BI : de la donnée brute au tableau de bord.',
@@ -20,6 +21,7 @@ function Contenu() {
   if (!donnees) return <p className="muted">Chargement…</p>;
   const [ref, prog] = donnees;
   const idx = indexer(prog);
+  const connecte = !!session();
 
   return (
     <>
@@ -39,8 +41,12 @@ function Contenu() {
                 <span className="tag dom">{p.cours.length} étapes</span>
                 <h2>{p.titre}</h2>
                 <p className="muted small">{PHRASES[p.code] ?? dom?.description}</p>
-                <div className="bar sm" aria-hidden="true"><span style={{ width: `${pourcent(faits, p.cours.length)}%` }} /></div>
-                <span className="small muted">{faits} terminé{faits > 1 ? 's' : ''} sur {p.cours.length}</span>
+                {connecte && (
+                  <>
+                    <div className="bar sm" aria-hidden="true"><span style={{ width: `${pourcent(faits, p.cours.length)}%` }} /></div>
+                    <span className="small muted">{faits} terminé{faits > 1 ? 's' : ''} sur {p.cours.length}</span>
+                  </>
+                )}
               </div>
             </Link>
           );

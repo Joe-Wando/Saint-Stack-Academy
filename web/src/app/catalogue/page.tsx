@@ -4,7 +4,7 @@ import { CSSProperties, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
-import { api, capitale, DIFFICULTES, indexer, pourcent, progressionSiConnecte, ResumeCours } from '@/lib/api';
+import { api, capitale, DIFFICULTES, indexer, pourcent, progressionSiConnecte, ResumeCours, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { DOMAINES, illustration, infoDomaine, ORDRE_DOMAINES, styleDomaine } from '@/lib/domaines';
 
@@ -69,10 +69,12 @@ function Contenu({ connecte }: { connecte: boolean }) {
               <div className="dom-tete-corps">
                 <h2 id={`t-${d.cle}`}>{d.nom}</h2>
                 <p>{d.description}</p>
+                {session() && (<>
                 <strong className="small">{termines} cours terminé{termines > 1 ? 's' : ''} sur {cours.length}</strong>
                 <div className="bar" style={{ '--bar': d.accent } as CSSProperties} role="img" aria-label={`${pourcent(termines, cours.length)} % terminés`}>
                   <span style={{ width: `${pourcent(termines, cours.length)}%` }} />
                 </div>
+                </>)}
               </div>
             </div>
             <div className="grille">
