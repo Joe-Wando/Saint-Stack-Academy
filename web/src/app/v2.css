@@ -152,10 +152,27 @@
 }
 .profil { max-width: 640px; }
 
-/* Menu : sept liens pour l'admin, défilant plutôt que débordant */
-.nav { overflow-x: auto; scrollbar-width: none; min-width: 0; }
+/* En-tête connecté : jusqu'à sept liens pour l'admin.
+   Le nom est dans le menu du compte (seul l'avatar reste dans la barre), et le menu n'est jamais coupé. */
+.nav { overflow-x: auto; scrollbar-width: none; min-width: 0; justify-content: flex-start; justify-content: safe center; }
 .nav::-webkit-scrollbar { display: none; }
-@media (max-width: 1180px) and (min-width: 761px) { .nav a { padding: 0 .55rem; font-size: .92rem; } }
+.compte-btn { padding: .2rem; }
+.compte-entete { display: grid; padding: .5rem .7rem .6rem; margin-bottom: .25rem; border-bottom: 1px solid var(--ligne); line-height: 1.3; }
+.compte-entete strong { font-size: .92rem; }
+.compte-entete small { color: var(--doux); font-size: .78rem; overflow-wrap: anywhere; }
+.compte-menu { min-width: 230px; max-width: min(320px, calc(100vw - 32px)); }
+@media (max-width: 1200px) and (min-width: 1001px) {
+  .brand-name { display: none; }
+  .nav a { padding: 0 .6rem; font-size: .93rem; }
+}
+/* À 1 000 px et moins : les liens passent sur leur propre ligne, alignés à gauche. */
+@media (max-width: 1000px) {
+  .topbar-in { height: auto; flex-wrap: wrap; padding-top: .6rem; gap: .5rem; }
+  .brand-name { display: inline; }
+  .nav { order: 3; flex-basis: 100%; height: 44px; justify-content: flex-start; }
+  .nav a { padding: 0 .7rem; font-size: .92rem; }
+  .nav a:first-child { padding-left: 0; }
+}
 
 /* Administration : utilisateurs */
 .filtres-admin { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); gap: .8rem; align-items: end; }

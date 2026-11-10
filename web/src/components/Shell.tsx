@@ -26,12 +26,15 @@ function MenuCompte({ u }: { u: Utilisateur }) {
   return (
     <div className="compte" ref={zone}>
       <button ref={bouton} className="compte-btn" aria-expanded={ouvert} aria-haspopup="true" onClick={() => setOuvert((o) => !o)}>
-        <span className="who-txt"><strong>{u.nom}</strong><small>{u.role === 'admin' ? 'Admin' : 'Apprenant'}</small></span>
         <Avatar nom={u.nom} photo={u.photo} />
-        <span className="sr">Menu du compte</span>
+        <span className="sr">Menu du compte de {u.nom}</span>
       </button>
       {ouvert && (
         <div className="compte-menu">
+          <div className="compte-entete">
+            <strong>{u.nom}</strong>
+            <small>{u.role === 'admin' ? 'Admin' : 'Apprenant'} · {u.email}</small>
+          </div>
           <Link href="/profil" onClick={() => setOuvert(false)}>Mon profil</Link>
           <Link href="/bienvenue" onClick={() => setOuvert(false)}>Revoir la visite</Link>
           <button onClick={deconnecter}>Déconnexion</button>
