@@ -56,6 +56,7 @@ niveaux:
           - { code: S5, ues: [Développement web avancé] }
           - { code: S6, ues: [Livraison des applications] }
 parcours:
+  - { code: deploiement, titre: Mettre son site en ligne, domaine: web }
   - { code: web, titre: Développeur web, domaine: web }
   - { code: devops, titre: Ingénieur DevOps, domaine: devops }
   - { code: data, titre: Data engineer, domaine: data }
