@@ -1,0 +1,62 @@
+niveaux:
+  - code: L1
+    titre: Licence 1 · Fondamentaux de l'informatique
+    semestres:
+      - code: S1
+        ues:
+          - Découverte de l'informatique et de ses métiers
+          - Architecture des ordinateurs et maintenance
+          - Algorithmique et programmation 1
+          - Mathématiques pour l'informatique 1
+          - Communication et expression
+          - Langues et outils
+      - code: S2
+        ues:
+          - Maintenance et réseaux
+          - Systèmes d'exploitation
+          - Programmation web
+          - Algorithmique et modélisation
+          - Pratiques professionnelles 1
+  - code: L2
+    titre: Licence 2 · Programmation, données et réseaux
+    semestres:
+      - code: S3
+        ues:
+          - Langages et programmation orientée objet
+          - Bases de données et versionnement
+          - Développement front-end et infographie
+          - Langues et outils 2
+      - code: S4
+        ues:
+          - Développement back-end
+          - Réseaux et sécurité
+          - Virtualisation et cloud
+          - Pratiques professionnelles 2
+  - code: L3
+    titre: Licence 3 · Spécialisation
+    tronc_commun:
+      - code: S5
+        ues:
+          - Génie logiciel et qualité
+          - Bases de données avancées
+    options:
+      - code: big-data-ia
+        titre: Big Data et intelligence artificielle
+        semestres:
+          - { code: S5, ues: [Ingénierie des données] }
+          - { code: S6, ues: [Pipelines et big data, Décisionnel et IA] }
+      - code: reseaux-systemes-cloud
+        titre: Réseaux, systèmes et cloud
+        semestres:
+          - { code: S5, ues: [Administration des systèmes] }
+          - { code: S6, ues: ["Conteneurs, orchestration et automatisation", Intégration et déploiement continus] }
+      - code: developpement-logiciel
+        titre: Développement logiciel (web et mobile)
+        semestres:
+          - { code: S5, ues: [Développement web avancé] }
+          - { code: S6, ues: [Livraison des applications] }
+parcours:
+  - { code: web, titre: Développeur web, domaine: web }
+  - { code: devops, titre: Ingénieur DevOps, domaine: devops }
+  - { code: data, titre: Data engineer, domaine: data }
+  - { code: systemes, titre: Administrateur systèmes et réseaux, domaine: systemes }
