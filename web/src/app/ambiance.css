@@ -116,7 +116,7 @@ h1 { font-weight: 800; }
 
 /* Connexion et inscription : colonne encre */
 .auth-art { background: radial-gradient(110% 80% at 20% 0%, var(--encre-2), var(--encre)); color: #EDEBFA; }
-.auth-photo { border-color: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, .15); }
+.auth-art .auth-photo { border-color: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, .15); }
 .auth-citation blockquote { color: #fff; font-family: var(--police-main), cursive; font-style: normal; font-size: 1.9rem; line-height: 1.25; }
 .auth-citation figcaption { color: #C9C5EE; }
 .auth-puces li { background: rgba(255, 255, 255, .1); color: #fff; border: 1px solid rgba(255, 255, 255, .2); }

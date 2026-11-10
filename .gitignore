@@ -30,3 +30,6 @@ Thumbs.db
 # Paquet des images, recopié dans content/
 saint-stack-images/
 saint-stack-images.zip
+
+# Réglages personnels de Claude Code
+.claude/settings.local.json

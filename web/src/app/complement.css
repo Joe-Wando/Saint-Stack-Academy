@@ -20,7 +20,7 @@
 
 /* Connexion et inscription : portrait du fondateur */
 .auth-art { align-items: center; text-align: center; }
-.auth-photo { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 2px solid var(--p); box-shadow: 0 0 0 6px #fff; }
+.auth-art .auth-photo { width: 280px; max-width: 70vw; height: auto; aspect-ratio: 1; flex: none; border-radius: 50%; object-fit: cover; border: 2px solid var(--p); box-shadow: 0 0 0 6px #fff; }
 .auth-citation { margin: 0; max-width: 34ch; }
 .auth-citation blockquote { margin: 0; font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 1.4rem; line-height: 1.45; color: var(--p-hover); }
 .auth-citation figcaption { margin-top: .7rem; font-size: .92rem; color: var(--doux); }
@@ -28,7 +28,7 @@
 .auth-puces li { background: #fff; border-radius: 99px; padding: .3rem .8rem; font-size: .85rem; font-weight: 600; color: var(--p-hover); }
 @media (max-width: 860px) {
   .auth-art { display: flex; padding: 1.4rem 16px .4rem; background: #fff; gap: .5rem; }
-  .auth-photo { width: 96px; height: 96px; box-shadow: none; }
+  .auth-art .auth-photo { width: 96px; height: 96px; box-shadow: none; }
   .auth-citation, .auth-puces { display: none; }
   .auth-col { padding-top: .5rem; }
 }
