@@ -5,9 +5,9 @@ import { ShellOuvert } from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
+import { illustrationNiveau } from '@/lib/illustrations-pages';
 import { slugsDe } from '@/lib/licence';
 
-const ILLUS: Record<string, string> = { L1: 'systemes', L2: 'web', L3: 'data' };
 
 function Contenu({ connecte }: { connecte: boolean }) {
   const { donnees, erreur } = useDonnees(() => Promise.all([api<Referentiel>('/referentiel'), progressionSiConnecte()]));
@@ -30,7 +30,7 @@ function Contenu({ connecte }: { connecte: boolean }) {
           const [code, ...reste] = n.titre.split(' · ');
           return (
             <Link key={n.code} href={`/licence/${n.code}`} className="grande-carte">
-              <img src={`/illustrations/${ILLUS[n.code] ?? 'projet'}.svg`} alt="" width={960} height={540} />
+              <img src={illustrationNiveau(n.code)} alt="" width={960} height={540} />
               <div className="grande-carte-corps">
                 <span className="tag">{code}</span>
                 <h2>{reste.join(' · ') || n.titre}</h2>

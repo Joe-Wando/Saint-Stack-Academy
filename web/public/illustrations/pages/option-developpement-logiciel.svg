@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540"><rect width="960" height="540" fill="#f1e2e8"/>
+<circle cx="830.4" cy="91.80000000000001" r="149.76" fill="#9D2E5C" opacity="0.16"/><circle cx="110.4" cy="469.8" r="129.60000000000002" fill="#9D2E5C" opacity="0.12"/>
+<rect x="0" y="469.8" width="960" height="70.2" fill="#e6c9d5"/><g transform="translate(470,50)"><rect width="400" height="250" rx="16" fill="#fff" stroke="#DCE5E0" stroke-width="3"/>
+<rect width="400" height="38" rx="16" fill="#e2c0ce"/><rect y="22" width="400" height="16" fill="#e2c0ce"/>
+<circle cx="24" cy="19" r="6.5" fill="#F08C3A"/><circle cx="45" cy="19" r="6.5" fill="#F2C14E"/><circle cx="66" cy="19" r="6.5" fill="#7FD6A4"/>
+<text x="200" y="26" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#5e1c37" text-anchor="middle">App.tsx</text>
+<text x="22" y="74" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#8B6CF0">function </tspan><tspan fill="#4C8DF6">App</tspan><tspan fill="#0F2A1F">() {</tspan></text><text x="22" y="106" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#8B6CF0">  return </tspan><tspan fill="#9D2E5C">&lt;Accueil /&gt;</tspan></text><text x="22" y="138" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="undefined">}</tspan></text></g><g transform="translate(30,120) scale(0.8)"><g >
+<ellipse cx="300" cy="404" rx="250" ry="12" fill="#0F2A1F" opacity=".07"/>
+<!-- chaise -->
+<rect x="70" y="150" width="22" height="160" rx="11" fill="#2B3531"/>
+<rect x="70" y="288" width="160" height="22" rx="11" fill="#2B3531"/>
+<rect x="140" y="310" width="14" height="70" fill="#3E4A45"/><path d="M90 386 L206 386" stroke="#3E4A45" stroke-width="11" stroke-linecap="round"/>
+<circle cx="94" cy="396" r="9" fill="#2B3531"/><circle cx="202" cy="396" r="9" fill="#2B3531"/>
+<!-- bureau -->
+<rect x="250" y="252" width="270" height="16" rx="6" fill="#C9A47A"/><rect x="250" y="264" width="270" height="6" fill="#A88358"/>
+<rect x="272" y="270" width="12" height="134" fill="#A88358"/><rect x="490" y="270" width="12" height="134" fill="#A88358"/>
+<!-- jambes -->
+<path d="M120 292 L262 296" stroke="#23324D" stroke-width="44" stroke-linecap="round"/>
+<path d="M262 296 L284 384" stroke="#1e2b41" stroke-width="38" stroke-linecap="round"/>
+<path d="M266 384 L312 384 Q322 400 310 404 L262 404 Q254 394 266 384Z" fill="#fff" stroke="#0F2A1F" stroke-width="2.5"/>
+<!-- ordinateur -->
+<path d="M310 244 L430 244 L434 252 L306 252 Z" fill="#3E4A45"/>
+<path d="M424 246 L456 132 L466 134 L436 250 Z" fill="#2B3531"/><path d="M430 240 L458 140" stroke="#9D2E5C" stroke-width="3" opacity=".7"/>
+<!-- tasse -->
+<rect x="470" y="218" width="28" height="34" rx="6" fill="#F08C3A"/><path d="M498 226 q14 0 14 12 q0 10 -14 10" stroke="#F08C3A" stroke-width="5" fill="none"/>
+<!-- buste -->
+<path d="M110 150 Q126 120 168 126 Q204 134 206 178 L208 286 Q178 304 126 300 Q100 276 100 228 Z" fill="#9D2E5C"/>
+<path d="M160 126 Q204 134 206 178 L208 286 Q186 298 164 300 Z" fill="#000" opacity=".07"/>
+<!-- bras -->
+<path d="M176 170 Q214 226 268 236" stroke="#84274d" stroke-width="30" stroke-linecap="round" fill="none"/>
+<path d="M268 236 L326 244" stroke="#84274d" stroke-width="25" stroke-linecap="round"/>
+<ellipse cx="338" cy="244" rx="12" ry="10" fill="#B07650"/>
+<!-- tête -->
+<rect x="150" y="98" width="26" height="36" rx="10" fill="#9b6846"/>
+<circle cx="160" cy="70" r="46" fill="#17140F"/>
+<path d="M128 74 Q130 28 170 30 Q210 34 206 80 Q204 118 172 120 Q160 122 150 116 Q128 108 128 74Z" fill="#B07650"/>
+<path d="M126 70 Q134 40 170 40 Q200 42 206 70 Q190 56 170 56 Q146 56 126 70Z" fill="#17140F"/>
+<circle cx="140" cy="80" r="8" fill="#a26d4a"/>
+<ellipse cx="190" cy="76" rx="3" ry="3.8" fill="#1C140D"/>
+<path d="M184 66 q6 -3 12 0" stroke="#2A1C12" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M204 80 q6 6 1 10" stroke="#84593c" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<path d="M184 100 q8 6 16 0" stroke="#3B2314" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+<path d="M146 92 Q150 124 176 122 Q200 120 206 96 Q194 112 176 112 Q156 110 146 92Z" fill="#17140F"/>
+</g></g><g transform="translate(770,260) scale(0.9) rotate(8 60 110)"><rect width="120" height="220" rx="20" fill="#0B1A14"/><rect x="8" y="12" width="104" height="196" rx="12" fill="#fff"/>
+<rect x="18" y="24" width="84" height="40" rx="8" fill="#9D2E5C"/><rect x="18" y="74" width="84" height="12" rx="5" fill="#DCE5E0"/><rect x="18" y="94" width="60" height="12" rx="5" fill="#DCE5E0"/>
+<rect x="18" y="118" width="38" height="38" rx="8" fill="#d8abbe"/><rect x="64" y="118" width="38" height="38" rx="8" fill="#f7da95"/>
+<rect x="30" y="172" width="60" height="22" rx="11" fill="#9D2E5C"/></g></svg>

@@ -7,6 +7,7 @@ import { ShellOuvert } from '@/components/Shell';
 import CarteCours, { statutCours } from '@/components/CarteCours';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
+import { illustrationParcours } from '@/lib/illustrations-pages';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
 function Contenu({ code, connecte }: { code: string; connecte: boolean }) {
@@ -25,7 +26,7 @@ function Contenu({ code, connecte }: { code: string; connecte: boolean }) {
     <div style={styleDomaine(dom?.nom ?? '')}>
       <Link href="/parcours" className="small">← Parcours métiers</Link>
       <section className="dom-tete parcours-tete">
-        <img src={`/illustrations/${p.domaine}.svg`} alt="" width={960} height={540} />
+        <img src={illustrationParcours(p.code)} alt="" width={960} height={540} />
         <div className="dom-tete-corps">
           <p className="eyebrow" style={{ color: 'inherit' }}>Parcours métier</p>
           <h1 className="h-dom">{p.titre}</h1>

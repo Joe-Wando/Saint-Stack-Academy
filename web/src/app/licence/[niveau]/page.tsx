@@ -8,6 +8,7 @@ import Onglets from '@/components/Onglets';
 import CarteCours, { CartePreparation } from '@/components/CarteCours';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel, SemestreRef, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
+import { illustrationNiveau } from '@/lib/illustrations-pages';
 import { ancreUe } from '@/lib/licence';
 
 type Idx = ReturnType<typeof indexer>;
@@ -59,9 +60,13 @@ function Contenu({ code, u }: { code: string; u: Utilisateur | null }) {
   return (
     <>
       <Link href="/licence" className="small">← Licence</Link>
-      <section className="hero">
-        <p className="eyebrow">{abrev}</p>
-        <h1>{reste.join(' · ') || niveau.titre}</h1>
+      <section className="hero hero-illus">
+        <div>
+          <p className="eyebrow">{abrev}</p>
+          <h1>{reste.join(' · ') || niveau.titre}</h1>
+          {opt && <p className="muted">Option : {opt.titre}</p>}
+        </div>
+        <img src={illustrationNiveau(niveau.code, niveau.options.length ? option : null)} alt="" width={960} height={540} />
       </section>
 
       {niveau.semestres.length > 0 && (

@@ -8,6 +8,7 @@ import CarteCertification, { TYPES_CERTIF } from '@/components/CarteCertificatio
 import { api, Certifications, Referentiel, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { lienUeDepuis } from '@/lib/licence';
+import { ILLUS } from '@/lib/illustrations-pages';
 
 function Contenu({ u }: { u: Utilisateur | null }) {
   const { donnees, erreur } = useDonnees(() => Promise.all([api<Certifications>('/certifications'), api<Referentiel>('/referentiel').catch(() => null)]));
@@ -27,10 +28,13 @@ function Contenu({ u }: { u: Utilisateur | null }) {
 
   return (
     <>
-      <section className="hero">
-        <p className="eyebrow">Certifications</p>
-        <h1>Les certifications à viser, <Souligne>niveau par niveau</Souligne></h1>
-        <p className="muted">Des badges gratuits pour valider les bases, puis des certifications reconnues par les recruteurs.</p>
+      <section className="hero hero-illus">
+        <div>
+          <p className="eyebrow">Certifications</p>
+          <h1>Les certifications à viser, <Souligne>niveau par niveau</Souligne></h1>
+          <p className="muted">Des badges gratuits pour valider les bases, puis des certifications reconnues par les recruteurs.</p>
+        </div>
+        <img src={ILLUS.certifications} alt="" width={960} height={540} />
       </section>
 
       <section className="card encadre-types" aria-labelledby="t-types">

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import Shell from '@/components/Shell';
 import PhotoFondateur from '@/components/PhotoFondateur';
+import { ILLUS_BIENVENUE } from '@/lib/illustrations-pages';
 import CarteCertification from '@/components/CarteCertification';
 import { CarteNiveaux, OptionsL3, titreOption } from '@/components/ChoixNiveau';
 import { parametre, suiteSure } from '@/components/CadreAuth';
@@ -85,6 +86,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) 
       </div>
 
       <section className="card bienvenue-ecran" aria-live="polite">
+        <img className="bienvenue-illus" src={ILLUS_BIENVENUE[ecran]} alt="" width={960} height={540} />
         {ecran === 0 && (
           <>
             <div className="bienvenue-intro">

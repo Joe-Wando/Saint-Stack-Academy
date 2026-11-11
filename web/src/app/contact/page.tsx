@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import PhotoFondateur from '@/components/PhotoFondateur';
+import { ILLUS } from '@/lib/illustrations-pages';
 import { api, Utilisateur } from '@/lib/api';
 import { CONTACT, SUJETS_CONTACT } from '@/lib/contact';
 
@@ -55,10 +56,13 @@ export default function Contact() {
     <ShellOuvert>
       {(u) => (
         <>
-          <section className="hero">
-            <p className="eyebrow">Contact</p>
-            <h1>Une question ? <Souligne>Écris-moi.</Souligne></h1>
-            <p className="muted">Une question sur un cours, une erreur à signaler ou une idée de partenariat : je lis tous les messages.</p>
+          <section className="hero hero-illus">
+            <div>
+              <p className="eyebrow">Contact</p>
+              <h1>Une question ? <Souligne>Écris-moi.</Souligne></h1>
+              <p className="muted">Une question sur un cours, une erreur à signaler ou une idée de partenariat : je lis tous les messages.</p>
+            </div>
+            <img src={ILLUS.contact} alt="" width={960} height={540} />
           </section>
           <div className="contact-grille">
             <section className="card fondateur" aria-labelledby="t-fondateur">

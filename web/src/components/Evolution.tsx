@@ -4,6 +4,8 @@ import Link from 'next/link';
 import type { CSSProperties, JSX } from 'react';
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { pourcent } from '@/lib/api';
+import EtatVide from './EtatVide';
+import { ILLUS } from '@/lib/illustrations-pages';
 import { infoDomaine } from '@/lib/domaines';
 
 export interface DonneesEvolution {
@@ -60,6 +62,11 @@ export default function Evolution({ e, moi = true }: { e: DonneesEvolution; moi?
 
   return (
     <div className="evolution">
+      {moi && t.coursCommences === 0 && t.chapitresLus === 0 && (
+        <EtatVide image={ILLUS.videCours} titre="Tu n’as pas encore commencé de cours">
+          <p className="muted">Ton évolution apparaîtra ici dès ton premier chapitre lu. <Link href="/licence">Choisir un cours</Link></p>
+        </EtatVide>
+      )}
       <section className="chiffres chiffres-4" aria-label="Chiffres clés">
         <div className="chiffre"><span className="k">Cours terminés</span><span className="v">{t.coursTermines}</span><span className="muted small">{t.coursCommences} commencé{t.coursCommences > 1 ? 's' : ''}</span></div>
         <div className="chiffre"><span className="k">Chapitres lus</span><span className="v">{t.chapitresLus}</span></div>

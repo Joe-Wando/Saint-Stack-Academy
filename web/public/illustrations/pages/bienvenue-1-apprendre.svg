@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540"><rect width="960" height="540" fill="#efeafd"/>
+<circle cx="830.4" cy="91.80000000000001" r="149.76" fill="#8B6CF0" opacity="0.16"/><circle cx="110.4" cy="469.8" r="129.60000000000002" fill="#8B6CF0" opacity="0.12"/>
+<rect x="0" y="469.8" width="960" height="70.2" fill="#e1d9fb"/><g transform="translate(560,70)"><rect width="330" height="280" rx="16" fill="#fff" stroke="#DCE5E0" stroke-width="3"/>
+<rect width="330" height="38" rx="16" fill="#dcd3fb"/><rect y="22" width="330" height="16" fill="#dcd3fb"/>
+<circle cx="24" cy="19" r="6.5" fill="#F08C3A"/><circle cx="45" cy="19" r="6.5" fill="#F2C14E"/><circle cx="66" cy="19" r="6.5" fill="#7FD6A4"/>
+<text x="165" y="26" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#534190" text-anchor="middle">Sommaire</text>
+<text x="22" y="74" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#0F2A1F">1  Objectifs</tspan></text><text x="22" y="106" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#0F2A1F">2  L’idée</tspan></text><text x="22" y="138" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#0F2A1F">3  Exemple guidé</tspan></text><text x="22" y="170" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#0F2A1F">4  Exercice</tspan></text><text x="22" y="202" font-family="JetBrains Mono,Consolas,monospace" font-size="19" xml:space="preserve"><tspan fill="#0F2A1F">5  Quiz</tspan></text></g><g transform="translate(20,120) scale(0.82)"><g >
+<ellipse cx="300" cy="404" rx="250" ry="12" fill="#0F2A1F" opacity=".07"/>
+<!-- chaise -->
+<rect x="70" y="150" width="22" height="160" rx="11" fill="#2B3531"/>
+<rect x="70" y="288" width="160" height="22" rx="11" fill="#2B3531"/>
+<rect x="140" y="310" width="14" height="70" fill="#3E4A45"/><path d="M90 386 L206 386" stroke="#3E4A45" stroke-width="11" stroke-linecap="round"/>
+<circle cx="94" cy="396" r="9" fill="#2B3531"/><circle cx="202" cy="396" r="9" fill="#2B3531"/>
+<!-- bureau -->
+<rect x="250" y="252" width="270" height="16" rx="6" fill="#C9A47A"/><rect x="250" y="264" width="270" height="6" fill="#A88358"/>
+<rect x="272" y="270" width="12" height="134" fill="#A88358"/><rect x="490" y="270" width="12" height="134" fill="#A88358"/>
+<!-- jambes -->
+<path d="M120 292 L262 296" stroke="#23324D" stroke-width="44" stroke-linecap="round"/>
+<path d="M262 296 L284 384" stroke="#1e2b41" stroke-width="38" stroke-linecap="round"/>
+<path d="M266 384 L312 384 Q322 400 310 404 L262 404 Q254 394 266 384Z" fill="#fff" stroke="#0F2A1F" stroke-width="2.5"/>
+<!-- ordinateur -->
+<path d="M310 244 L430 244 L434 252 L306 252 Z" fill="#3E4A45"/>
+<path d="M424 246 L456 132 L466 134 L436 250 Z" fill="#2B3531"/><path d="M430 240 L458 140" stroke="#8B6CF0" stroke-width="3" opacity=".7"/>
+<!-- tasse -->
+<rect x="470" y="218" width="28" height="34" rx="6" fill="#F08C3A"/><path d="M498 226 q14 0 14 12 q0 10 -14 10" stroke="#F08C3A" stroke-width="5" fill="none"/>
+<!-- buste -->
+<path d="M110 150 Q126 120 168 126 Q204 134 206 178 L208 286 Q178 304 126 300 Q100 276 100 228 Z" fill="#2BB3A3"/>
+<path d="M160 126 Q204 134 206 178 L208 286 Q186 298 164 300 Z" fill="#000" opacity=".07"/>
+<!-- bras -->
+<path d="M176 170 Q214 226 268 236" stroke="#249689" stroke-width="30" stroke-linecap="round" fill="none"/>
+<path d="M268 236 L326 244" stroke="#249689" stroke-width="25" stroke-linecap="round"/>
+<ellipse cx="338" cy="244" rx="12" ry="10" fill="#8A5534"/>
+<!-- tête -->
+<rect x="150" y="98" width="26" height="36" rx="10" fill="#794b2e"/>
+
+<path d="M128 74 Q130 28 170 30 Q210 34 206 80 Q204 118 172 120 Q160 122 150 116 Q128 108 128 74Z" fill="#8A5534"/>
+<path d="M120 76 Q118 26 168 28 Q210 32 206 74 Q194 52 168 54 Q144 54 136 78 Z" fill="#17140F"/>
+<circle cx="140" cy="80" r="8" fill="#7f4e30"/>
+<ellipse cx="190" cy="76" rx="3" ry="3.8" fill="#1C140D"/>
+<path d="M184 66 q6 -3 12 0" stroke="#2A1C12" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M204 80 q6 6 1 10" stroke="#684027" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<path d="M184 100 q8 6 16 0" stroke="#3B2314" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+
+<circle cx="192" cy="76" r="10" fill="#fff" fill-opacity=".15" stroke="#1E2B25" stroke-width="2.6"/><path d="M182 74 L160 70" stroke="#1E2B25" stroke-width="2.6"/></g></g></svg>

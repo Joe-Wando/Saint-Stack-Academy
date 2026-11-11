@@ -4,6 +4,8 @@ import { FormEvent, useState } from 'react';
 import { api, Certifications, ElementCertification } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { TYPES_CERTIF } from './CarteCertification';
+import EtatVide from './EtatVide';
+import { ILLUS } from '@/lib/illustrations-pages';
 
 export interface BadgeObtenu { id: number; nom: string; organisme: string; type: ElementCertification['type']; obtenueLe: string; lienVerification: string | null }
 
@@ -11,7 +13,13 @@ const date = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr
 
 /** Liste des badges et certifications déclarés (lecture seule pour l'admin). */
 export function ListeBadges({ badges, retirer }: { badges: BadgeObtenu[]; retirer?: (id: number) => void }) {
-  if (!badges.length) return <p className="muted">Aucun badge ni certification déclaré pour l’instant.</p>;
+  if (!badges.length) {
+    return (
+      <EtatVide image={ILLUS.videBadges} titre="Aucun badge pour l’instant">
+        <p className="muted small">Aucun badge ni certification déclaré pour l’instant.</p>
+      </EtatVide>
+    );
+  }
   return (
     <ul className="badges">
       {badges.map((b) => (

@@ -36,11 +36,17 @@ function trouver(rep) {
         await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
         await page.evaluate((s) => localStorage.setItem('ssa-session', JSON.stringify(s)), t.session);
       }
+      if (t.stockageSession) {
+        if (!t.session) await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
+        await page.evaluate((o) => { for (const [k, v] of Object.entries(o)) sessionStorage.setItem(k, v); }, t.stockageSession);
+      }
       await page.goto(t.url, { waitUntil: 'networkidle2', timeout: 45000 }).catch((e) => console.error('Attente réseau :', t.url, e.message));
       // Attendre la fin des « Chargement… » des pages client.
       await page.waitForFunction(() => !/Chargement…/.test(document.body.innerText), { timeout: 15000 }).catch(() => {});
       // Maquette : CSS ajouté à la page avant la capture, sans toucher au site.
       if (t.css) await page.addStyleTag({ content: t.css });
+      // Saisie dans un champ avant la capture : { selecteur, texte }.
+      if (t.saisie) { await page.type(t.saisie.selecteur, t.saisie.texte); await new Promise((r) => setTimeout(r, 300)); }
       await page.evaluate(() => document.fonts && document.fonts.ready);
       // Charger les images différées (loading=lazy) avant la capture.
       await page.evaluate(() => document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }));

@@ -5,6 +5,7 @@ import { ShellOuvert } from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import { api, indexer, pourcent, progressionSiConnecte, Referentiel, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
+import { illustrationParcours } from '@/lib/illustrations-pages';
 import { DOMAINES, styleDomaine } from '@/lib/domaines';
 
 const PHRASES: Record<string, string> = {
@@ -36,7 +37,7 @@ function Contenu() {
           const faits = p.cours.filter((c) => idx.get(c.slug)?.statut === 'termine').length;
           return (
             <Link key={p.code} href={`/parcours/${p.code}`} className="grande-carte" style={styleDomaine(dom?.nom ?? '')}>
-              <img src={`/illustrations/${p.domaine}.svg`} alt="" width={960} height={540} />
+              <img src={illustrationParcours(p.code)} alt="" width={960} height={540} />
               <div className="grande-carte-corps">
                 <span className="tag dom">{p.cours.length} étapes</span>
                 <h2>{p.titre}</h2>

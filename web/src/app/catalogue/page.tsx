@@ -6,6 +6,8 @@ import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
 import { api, capitale, DIFFICULTES, indexer, pourcent, progressionSiConnecte, ResumeCours, session } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
+import EtatVide from '@/components/EtatVide';
+import { ILLUS } from '@/lib/illustrations-pages';
 import { DOMAINES, illustration, infoDomaine, ORDRE_DOMAINES, styleDomaine } from '@/lib/domaines';
 
 const normal = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -58,7 +60,11 @@ function Contenu({ connecte }: { connecte: boolean }) {
         </ul>
       </nav>
 
-      {!sections.length && <p className="card">Aucun cours ne correspond. Essaie un autre mot, ou retire le filtre de difficulté.</p>}
+      {!sections.length && (
+        <EtatVide image={ILLUS.videRecherche} titre="Aucun cours ne correspond">
+          <p className="muted">Essaie un autre mot, ou retire le filtre de difficulté.</p>
+        </EtatVide>
+      )}
 
       {sections.map(({ d, cours }) => {
         const termines = cours.filter((c) => idx.get(c.slug)?.statut === 'termine').length;

@@ -6,6 +6,8 @@ import Shell from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
 import VisuelCours from '@/components/VisuelCours';
+import EtatVide from '@/components/EtatVide';
+import { ILLUS } from '@/lib/illustrations-pages';
 import { api, capitale, dureeH, indexer, libelleNiveau, MonNiveau, pourcent, Progression, ResumeCours, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { infoDomaine, styleDomaine } from '@/lib/domaines';
@@ -69,9 +71,10 @@ function Contenu({ u }: { u: Utilisateur }) {
         </Link>
       ) : sansNiveau ? (
         <section className="card invitation">
-          <h2>Par où commencer ?</h2>
-          <p>Choisis un parcours métier : une suite de cours dans l’ordre, pour viser un métier. Tu peux aussi indiquer ton niveau de licence dans ton profil.</p>
-          <div className="banniere-actions"><Link href="/parcours" className="btn primary">Choisir un parcours</Link><Link href="/profil" className="btn">Indiquer mon niveau</Link></div>
+          <EtatVide image={ILLUS.videCours} titre="Par où commencer ?">
+            <p>Choisis un parcours métier : une suite de cours dans l’ordre, pour viser un métier. Tu peux aussi indiquer ton niveau de licence dans ton profil.</p>
+            <div className="banniere-actions"><Link href="/parcours" className="btn primary">Choisir un parcours</Link><Link href="/profil" className="btn">Indiquer mon niveau</Link></div>
+          </EtatVide>
         </section>
       ) : (
         <section className="card"><h2>Bravo, ton niveau est terminé</h2><p className="muted" style={{ margin: 0 }}>Tu as terminé tous les cours de ton niveau. Les <Link href="/parcours">parcours métiers</Link> et le <Link href="/catalogue">catalogue</Link> t’attendent.</p></section>
