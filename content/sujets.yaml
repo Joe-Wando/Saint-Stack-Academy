@@ -4,6 +4,8 @@
 # logo  : nom de fichier du paquet npm « simple-icons » (version 16.x), affiché dans SA COULEUR D'ORIGINE, non modifié.
 #         null = pas de logo de marque : on affiche l'icône générique.
 # icone : nom d'icône du paquet « lucide-react » (version 1.x), dessinée dans la couleur du domaine.
+# diaporama (facultatif) : couleurs du PowerPoint du sujet { principale, sombre, claire }. Absent : calculées
+#         à partir de la couleur du logo (tools/diaporamas/couleurs.mjs). Le logo, lui, garde toujours sa couleur.
 #
 # Règle des marques (décision d'Olivier, 10 novembre 2026) : un logo sert uniquement à dire « ce cours porte sur X ».
 # Pas de logo pour les éditeurs aux règles strictes (Oracle/Java, AWS, Microsoft, Red Hat, Atlassian, CNCF/Kubernetes,
@@ -35,17 +37,17 @@ sujets:
   kafka:        { libelle: "Kafka, BigQuery, Snowflake", logo: apachekafka, icone: cloud,    marque: "Apache Kafka et Kafka sont des marques de The Apache Software Foundation." }
   powerbi:      { libelle: "Power BI",             logo: null,         icone: chart-column,  marque: null }
   # Versionnement, CI/CD, conteneurs
-  git:          { libelle: "Git",                  logo: git,          icone: git-branch,    marque: "Git et le logo Git sont des marques de Software Freedom Conservancy." }
-  githubactions: { libelle: "GitHub Actions",      logo: githubactions, icone: infinity,     marque: "GitHub est une marque de GitHub, Inc." }
+  git:          { libelle: "Git",                  logo: git,          icone: git-branch,    marque: "Git et le logo Git sont des marques de Software Freedom Conservancy.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
+  githubactions: { libelle: "GitHub Actions",      logo: githubactions, icone: infinity,     marque: "GitHub est une marque de GitHub, Inc.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
   gitlab:       { libelle: "GitLab CI/CD",         logo: gitlab,       icone: infinity,      marque: "GitLab est une marque de GitLab Inc." }
   jenkins:      { libelle: "Jenkins",              logo: jenkins,      icone: infinity,      marque: "Jenkins est une marque de LF Charities Inc." }
-  docker:       { libelle: "Docker",               logo: docker,       icone: container,     marque: "Docker et le logo Docker sont des marques de Docker, Inc." }
+  docker:       { libelle: "Docker",               logo: docker,       icone: container,     marque: "Docker et le logo Docker sont des marques de Docker, Inc.", diaporama: { principale: "#2496ED", sombre: "#0B3D6E", claire: "#E3F1FD" } }
   kubernetes:   { libelle: "Kubernetes",           logo: null,         icone: ship-wheel,    marque: null }
   helm:         { libelle: "Helm",                 logo: null,         icone: ship-wheel,    marque: null }
   supervision:  { libelle: "Supervision",          logo: null,         icone: activity,      marque: null }
   ansible:      { libelle: "Ansible",              logo: null,         icone: settings-2,    marque: null }
   # Déploiement
-  githubpages:  { libelle: "GitHub Pages",         logo: github,       icone: rocket,        marque: "GitHub et le logo GitHub sont des marques de GitHub, Inc." }
+  githubpages:  { libelle: "GitHub Pages",         logo: github,       icone: rocket,        marque: "GitHub et le logo GitHub sont des marques de GitHub, Inc.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
   netlify:      { libelle: "Netlify",              logo: netlify,      icone: rocket,        marque: "Netlify est une marque de Netlify, Inc." }
   vercel:       { libelle: "Vercel",               logo: vercel,       icone: rocket,        marque: "Vercel est une marque de Vercel, Inc." }
   dns:          { libelle: "DNS et HTTPS",         logo: null,         icone: globe,         marque: null }

@@ -42,3 +42,6 @@ saint-stack-charte-unipro/
 saint-stack-charte-unipro.zip
 saint-stack-images/
 Images/
+
+# PowerPoint générés au déploiement (npm run diaporamas), jamais versionnés
+web/public/diaporamas/

@@ -1,4 +1,4 @@
-// Module pur (ni React ni Next) : partagé par le site et par tools/generer-diaporamas.mjs.
+// Module pur (ni React ni Next) : partagé par le site et par tools/diaporamas/generer.mjs.
 // Il décrit les domaines et découpe un cours en chapitres et en diapositives.
 
 import { COULEURS_RUBANS } from './charte.mjs';

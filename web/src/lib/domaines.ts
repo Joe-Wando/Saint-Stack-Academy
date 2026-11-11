@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { infoDomaine } from './contenu.mjs';
 
-// Les données et le découpage vivent dans un module pur, partagé avec tools/generer-diaporamas.mjs.
+// Les données et le découpage vivent dans un module pur, partagé avec tools/diaporamas/generer.mjs.
 export {
   DOMAINES, ORDRE_DOMAINES, infoDomaine, illustration, chapitres, diapos, blocs, estCorrection, plan,
   COULEURS_NIVEAUX, OPTIONS_COURTES, niveauCours, couleurUtilisateur,

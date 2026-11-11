@@ -1,0 +1,12 @@
+# Contexte de construction du site (web/Dockerfile, construit depuis la racine)
+**/node_modules
+**/.next
+.git
+.env
+*.log
+Images
+saint-stack-*
+*.zip
+web/public/diaporamas
+web/public/vendor
+api
