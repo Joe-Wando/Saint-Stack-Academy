@@ -1,18 +1,21 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { api, Certifications, ElementCertification } from '@/lib/api';
+import { api, Certifications, ElementCertification, OrganismeCertif } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
-import { TYPES_CERTIF } from './CarteCertification';
+import { Award } from 'lucide-react';
+import { ICONES_CERTIF, OrganismesCertif, TYPES_CERTIF } from './CarteCertification';
+import { Macaron } from './Decor';
+import { couleurUtilisateur } from '@/lib/domaines';
 import EtatVide from './EtatVide';
 import { ILLUS } from '@/lib/illustrations-pages';
 
-export interface BadgeObtenu { id: number; nom: string; organisme: string; type: ElementCertification['type']; obtenueLe: string; lienVerification: string | null }
+export interface BadgeObtenu { id: number; nom: string; organisme: string; type: ElementCertification['type']; obtenueLe: string; lienVerification: string | null; organismes?: OrganismeCertif[] }
 
 const date = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 
 /** Liste des badges et certifications déclarés (lecture seule pour l'admin). */
-export function ListeBadges({ badges, retirer }: { badges: BadgeObtenu[]; retirer?: (id: number) => void }) {
+export function ListeBadges({ badges, retirer, niveau }: { badges: BadgeObtenu[]; retirer?: (id: number) => void; niveau?: string | null }) {
   if (!badges.length) {
     return (
       <EtatVide image={ILLUS.videBadges} titre="Aucun badge pour l’instant">
@@ -24,10 +27,12 @@ export function ListeBadges({ badges, retirer }: { badges: BadgeObtenu[]; retire
     <ul className="badges">
       {badges.map((b) => (
         <li key={b.id}>
-          <span className={`type-certif ${b.type}`}>{TYPES_CERTIF[b.type]?.label ?? b.type}</span>
+          <Macaron icone={ICONES_CERTIF[b.type] ?? Award} couleur={couleurUtilisateur(niveau)} taille={44} />
           <span className="badge-texte">
+            <span className={`type-certif ${b.type}`}>{TYPES_CERTIF[b.type]?.label ?? b.type}</span>
             <strong>{b.nom}</strong>
-            <span className="small muted">{b.organisme} · obtenu le {date(b.obtenueLe)}</span>
+            <OrganismesCertif organisme={b.organisme} organismes={b.organismes} type={b.type} />
+            <span className="small muted">Obtenu le {date(b.obtenueLe)}</span>
             {b.lienVerification && <a className="small" href={b.lienVerification} target="_blank" rel="noopener noreferrer">Vérifier ce badge<span className="sr"> (nouvel onglet)</span></a>}
           </span>
           {retirer && <button className="btn sm" onClick={() => retirer(b.id)} aria-label={`Retirer « ${b.nom} »`}>Retirer</button>}
@@ -38,7 +43,7 @@ export function ListeBadges({ badges, retirer }: { badges: BadgeObtenu[]; retire
 }
 
 /** Bloc du profil : mes badges, avec un formulaire prérempli à partir de certifications.yaml. */
-export default function MesBadges({ onChange }: { onChange?: () => void }) {
+export default function MesBadges({ onChange, niveau }: { onChange?: () => void; niveau?: string | null }) {
   const { donnees, erreur, recharger } = useDonnees(() => Promise.all([api<BadgeObtenu[]>('/moi/certifications'), api<Certifications>('/certifications')]));
   const [ouvert, setOuvert] = useState(false);
   const [modele, setModele] = useState('');
@@ -105,7 +110,7 @@ export default function MesBadges({ onChange }: { onChange?: () => void }) {
         </form>
       )}
       {message && <p className="succes" role="status" style={{ marginBottom: '.8rem' }}>{message}</p>}
-      <ListeBadges badges={badges} retirer={retirer} />
+      <ListeBadges badges={badges} retirer={retirer} niveau={niveau} />
     </section>
   );
 }

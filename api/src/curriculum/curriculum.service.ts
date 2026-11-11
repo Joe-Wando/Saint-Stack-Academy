@@ -4,6 +4,7 @@ import * as path from 'path';
 import matter = require('gray-matter');
 import { config } from '../config';
 import { chargerSujets, SujetCours } from './sujets';
+import { chargerOrganismes, OrganismeCertif } from './organismes';
 
 export interface QuestionQuiz { question: string; choix: string[]; reponse: number; explication: string }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
@@ -38,6 +39,7 @@ export interface ResumeCours {
 export interface ElementCertification {
   nom: string; organisme: string; type: 'badge' | 'certificat' | 'certification'; cout: string;
   ue?: string; prepare?: string; facultatif?: boolean; lien?: string;
+  organismes?: OrganismeCertif[]; // organismes reconnus dans « organisme » (content/organismes.yaml)
 }
 export interface Certifications {
   niveaux: {
@@ -68,9 +70,11 @@ export class CurriculumService implements OnModuleInit {
   private ref: Referentiel | null = null;
   private certifs: Certifications | null = null;
   private marques: { libelle: string; marque: string }[] = [];
+  private marquesOrganismes: { nom: string; marque: string }[] = [];
+  private trouverOrganismes: ((texte: string) => OrganismeCertif[]) | null = null;
 
   /** Au démarrage : charge les cours et vérifie les sujets (avertissement dans les logs si un logo ou une icône manque). */
-  onModuleInit() { this.tous(); }
+  onModuleInit() { this.tous(); this.certifications(); }
 
   /** Lit tous les cours de content/lessons (une fois, au premier appel). */
   tous(): Cours[] {
@@ -119,9 +123,19 @@ export class CurriculumService implements OnModuleInit {
     if (this.certifs) return this.certifs;
     const f = path.join(config.contentDir, 'certifications.yaml');
     const vide: Certifications = { niveaux: { L1: { intro: '', elements: [] }, L2: { intro: '', elements: [] }, L3: { intro: '', options: {} } }, conseils: [] };
-    this.certifs = fs.existsSync(f)
+    const c: Certifications = fs.existsSync(f)
       ? (matter as unknown as { engines: { yaml: { parse: (s: string) => Certifications } } }).engines.yaml.parse(fs.readFileSync(f, 'utf8'))
       : vide;
+    // Organismes qui délivrent chaque élément : logo (ou nom seul) et site officiel.
+    const { trouver, marques } = chargerOrganismes();
+    this.marquesOrganismes = marques;
+    this.trouverOrganismes = trouver;
+    const elements = [...(c.niveaux?.L1?.elements ?? []), ...(c.niveaux?.L2?.elements ?? []), ...Object.values(c.niveaux?.L3?.options ?? {}).flat()];
+    for (const e of elements) {
+      e.organismes = trouver(String(e.organisme ?? ''));
+      if (!e.organismes.length) this.logger.warn(`Certification « ${e.nom} » : aucun organisme reconnu dans « ${e.organisme} » (content/organismes.yaml).`);
+    }
+    this.certifs = c;
     return this.certifs;
   }
 
@@ -146,6 +160,12 @@ export class CurriculumService implements OnModuleInit {
 
   /** Mentions de marque des sujets affichés avec un logo (page « Marques »). */
   mentionsMarques() { this.tous(); return this.marques; }
+
+  /** Organismes reconnus dans un texte libre (badges déclarés par l'étudiant). */
+  organismesDe(texte: string): OrganismeCertif[] { this.certifications(); return this.trouverOrganismes?.(String(texte ?? '')) ?? []; }
+
+  /** Mentions de marque des organismes de certification affichés avec un logo (page « Marques »). */
+  mentionsOrganismes() { this.certifications(); return this.marquesOrganismes; }
 
   optionsL3() {
     return this.referentielBrut().niveaux.find((n) => n.code === 'L3')?.options ?? [];

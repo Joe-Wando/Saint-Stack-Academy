@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import type { LucideIcon } from 'lucide-react';
 
 /* Éléments décoratifs de la charte Saint Stack : vague, macaron festonné, trait de pinceau, étincelles.
    Tous sont purement décoratifs (aria-hidden) et suivent la couleur du texte (currentColor). */
@@ -25,8 +26,25 @@ const FESTONS = (() => {
   return `M${pts.join('L')}Z`;
 })();
 
-/** Macaron festonné, avec un court texte. */
-export function Macaron({ children, className = '' }: { children: ReactNode; className?: string }) {
+/**
+ * Macaron festonné, avec un court texte.
+ * Avec `icone` : macaron de badge, dans la couleur `couleur` (couleur du niveau), icône Lucide blanche au centre.
+ * Il reste décoratif : le nom du badge est toujours écrit en texte HTML à côté.
+ */
+export function Macaron({ children, className = '', icone: Icone, couleur, taille = 52 }: {
+  children?: ReactNode; className?: string; icone?: LucideIcon; couleur?: string; taille?: number;
+}) {
+  if (Icone) {
+    return (
+      <span className={`macaron-badge ${className}`} style={{ width: taille, height: taille, '--macaron': couleur } as CSSProperties} aria-hidden="true">
+        <svg viewBox="0 0 100 100" focusable="false">
+          <path d={FESTONS} className="macaron-fond" />
+          <circle cx="50" cy="50" r="33" className="macaron-cercle" />
+        </svg>
+        <Icone size={Math.round(taille * 0.42)} strokeWidth={2} color="#fff" focusable="false" />
+      </span>
+    );
+  }
   return (
     <div className={`macaron ${className}`}>
       <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">

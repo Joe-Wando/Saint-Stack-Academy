@@ -39,7 +39,10 @@ export interface Referentiel {
 export interface ElementCertification {
   nom: string; organisme: string; type: 'badge' | 'certificat' | 'certification'; cout: string;
   ue?: string; prepare?: string; facultatif?: boolean; lien?: string;
+  organismes?: OrganismeCertif[];
 }
+/** Organisme qui délivre une certification (content/organismes.yaml) : logo simple-icons ou nom seul. */
+export interface OrganismeCertif { cle: string; nom: string; logo: string | null; site: string }
 export interface Certifications {
   niveaux: { L1: { intro: string; elements: ElementCertification[] }; L2: { intro: string; elements: ElementCertification[] }; L3: { intro: string; options: Record<string, ElementCertification[]> } };
   conseils: string[];

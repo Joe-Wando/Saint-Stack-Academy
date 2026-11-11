@@ -8,6 +8,7 @@ import { ILLUS_BIENVENUE } from '@/lib/illustrations-pages';
 import CarteCertification from '@/components/CarteCertification';
 import { CarteNiveaux, OptionsL3, titreOption } from '@/components/ChoixNiveau';
 import { parametre, suiteSure } from '@/components/CadreAuth';
+import { COULEURS_NIVEAUX, couleurUtilisateur } from '@/lib/domaines';
 import { api, enregistrerSession, libelleNiveau, MonNiveau, Niveau, session, Utilisateur } from '@/lib/api';
 
 const TITRES = ['Bienvenue', 'Ton niveau', 'Ce que tu vas apprendre', 'Bien utiliser la plateforme'];
@@ -144,7 +145,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) 
             {certifs.length ? (
               <>
                 <h2 className="h-petit">Les premières certifications à viser</h2>
-                <div className="grille-certifs">{certifs.map((e) => <CarteCertification key={e.nom} e={e} />)}</div>
+                <div className="grille-certifs">{certifs.map((e) => <CarteCertification key={e.nom} e={e} couleur={COULEURS_NIVEAUX[mon?.option?.code ?? ''] ?? couleurUtilisateur(mon?.niveau)} />)}</div>
               </>
             ) : <p className="muted">Choisis un niveau pour voir les certifications adaptées.</p>}
             <p><a href="/certifications" target="_blank" rel="noopener">Voir toutes les certifications<span className="sr"> (nouvel onglet)</span> ↗</a></p>

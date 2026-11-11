@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import { AuthGuard, Moi } from '../auth/auth.guard';
 import { AuthService, Utilisateur } from '../auth/auth.service';
 import { LimiteGuard } from '../auth/limite.guard';
+import { CurriculumService } from '../curriculum/curriculum.service';
 import { DbService } from '../db/db.service';
 import { EvolutionService } from '../evolution/evolution.service';
 import { NOM_PHOTO, PhotoService } from './photo.service';
@@ -18,6 +19,7 @@ export class MoiController {
   constructor(
     private readonly db: DbService, private readonly auth: AuthService,
     private readonly evolution: EvolutionService, private readonly photos: PhotoService,
+    private readonly curriculum: CurriculumService,
   ) {}
 
   @Get('evolution')
@@ -51,10 +53,11 @@ export class MoiController {
 
   // ----- Mes badges et certifications (déclarés par l'étudiant) ---------------------------------
   @Get('certifications')
-  mesCertifications(@Moi() u: Utilisateur) {
-    return this.db.query(
+  async mesCertifications(@Moi() u: Utilisateur) {
+    const lignes = await this.db.query<{ organisme: string }>(
       `SELECT id, nom, organisme, type, to_char(obtenue_le, 'YYYY-MM-DD') AS "obtenueLe", lien_verification AS "lienVerification"
        FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le DESC, id DESC`, [u.id]);
+    return lignes.map((l) => ({ ...l, organismes: this.curriculum.organismesDe(l.organisme) }));
   }
 
   @Post('certifications')

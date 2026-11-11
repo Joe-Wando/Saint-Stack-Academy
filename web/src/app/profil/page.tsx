@@ -20,11 +20,11 @@ function majSession(u: Utilisateur, maj: Maj) {
 }
 
 // ----- Onglet « Mon évolution » ---------------------------------------------------------------
-function OngletEvolution() {
+function OngletEvolution({ niveau }: { niveau?: string | null }) {
   const { donnees, erreur, recharger } = useDonnees(() => api<DonneesEvolution>('/moi/evolution'));
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
   if (!donnees) return <p className="muted">Chargement…</p>;
-  return <><Evolution e={donnees} /><MesBadges onChange={recharger} /></>;
+  return <><Evolution e={donnees} niveau={niveau} /><MesBadges onChange={recharger} niveau={niveau} /></>;
 }
 
 // ----- Photo de profil ------------------------------------------------------------------------
@@ -78,7 +78,7 @@ function Photo({ u, maj }: { u: Utilisateur; maj: Maj }) {
     <section className="photo-profil" aria-labelledby="t-photo">
       <h2 id="t-photo" className="h-petit">Photo de profil</h2>
       <div className="photo-ligne">
-        {apercu ? <img className="avatar avatar-photo" src={apercu} alt="Aperçu de la nouvelle photo" width={96} height={96} style={{ width: 96, height: 96 }} /> : <Avatar nom={u.nom} photo={u.photo} taille={96} />}
+        {apercu ? <img className="avatar avatar-photo" src={apercu} alt="Aperçu de la nouvelle photo" width={96} height={96} style={{ width: 96, height: 96 }} /> : <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} taille={96} />}
         <div className="photo-actions">
           <label className="btn" htmlFor="photo">Changer ma photo</label>
           <input id="photo" ref={champ} className="sr" type="file" accept="image/jpeg,image/png,image/webp" onChange={choisir} />
@@ -240,7 +240,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: Maj }) {
   return (
     <>
       <section className="profil-tete">
-        <Avatar nom={u.nom} photo={u.photo} taille={88} />
+        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} taille={88} />
         <div>
           <h1>{u.nom}</h1>
           <p className="muted" style={{ margin: 0 }}>{libelleNiveau(u, titreOption(u.optionL3))}{u.etablissement ? ` · ${u.etablissement}` : ''}</p>
@@ -249,7 +249,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: Maj }) {
       </section>
       <Onglets id="profil" label="Mon profil" actif={onglet} onChange={(o) => { setOnglet(o); history.replaceState(null, '', `#${o}`); }}
         onglets={[{ cle: 'evolution', titre: 'Mon évolution' }, { cle: 'informations', titre: 'Mes informations' }, { cle: 'securite', titre: 'Sécurité' }]}>
-        {onglet === 'evolution' && <OngletEvolution />}
+        {onglet === 'evolution' && <OngletEvolution niveau={u.niveau} />}
         {onglet === 'informations' && <OngletInformations u={u} maj={maj} />}
         {onglet === 'securite' && <OngletSecurite u={u} />}
       </Onglets>

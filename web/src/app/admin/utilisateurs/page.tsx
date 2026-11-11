@@ -78,7 +78,7 @@ function Contenu() {
                   <tr key={u.id}>
                     <td>
                       <div className="personne">
-                        <Avatar nom={u.nom} photo={u.photo} />
+                        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} />
                         <span>
                           <Link href={`/admin/utilisateurs/${u.id}`}><strong>{u.nom}</strong></Link>
                           {u.role === 'admin' && <span className="tag" style={{ marginLeft: '.4rem' }}>Admin</span>}

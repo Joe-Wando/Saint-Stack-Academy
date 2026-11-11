@@ -219,3 +219,22 @@ h1 { font-weight: 800; }
 @media (max-width: 760px) { .page-404 { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; } .page-404 > img { max-width: 440px; } }
 /* Grandes cartes et en-têtes : illustrations au bon ratio */
 .grande-carte img, .parcours-tete img { height: auto; }
+.avatar.avatar-initiales { color: #fff; }
+
+/* Macarons des badges (phase 5) : couleur du niveau, icône Lucide blanche au centre. */
+.macaron-badge { position: relative; display: inline-grid; place-items: center; flex: none; }
+.macaron-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.macaron-badge .macaron-fond { fill: var(--macaron, #3C3489); }
+.macaron-badge .macaron-cercle { fill: none; stroke: #fff; stroke-width: 1.6; stroke-dasharray: 3 3; opacity: .7; }
+.macaron-badge > svg:last-child { position: relative; width: auto; height: auto; inset: auto; }
+.macaron-badge.eteint .macaron-fond { fill: #C9C7D6; }
+
+/* Cartes de certification : macaron du type, logos des organismes (24 px au plus, couleur d'origine). */
+.certif-tete { display: flex; align-items: center; gap: .7rem; }
+.certif-organismes { display: grid; gap: .25rem; }
+.certif-logos { display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
+.logo-organisme { display: inline-flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 600; color: var(--texte); text-decoration: none; }
+.logo-organisme svg { flex: none; max-height: 24px; }
+.logo-organisme:hover span:first-of-type, .logo-organisme:focus-visible span:first-of-type { text-decoration: underline; }
+.certif-mention { font-size: .78rem; line-height: 1.35; }
+.badge-texte .type-certif { justify-self: start; margin-bottom: .2rem; }

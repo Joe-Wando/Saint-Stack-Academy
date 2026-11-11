@@ -6,7 +6,9 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, Responsiv
 import { pourcent } from '@/lib/api';
 import EtatVide from './EtatVide';
 import { ILLUS } from '@/lib/illustrations-pages';
-import { infoDomaine } from '@/lib/domaines';
+import { couleurUtilisateur, infoDomaine } from '@/lib/domaines';
+import { Award, Medal } from 'lucide-react';
+import { Macaron } from './Decor';
 
 export interface DonneesEvolution {
   totaux: { coursTermines: number; coursCommences: number; chapitresLus: number; quizPasses: number; moyenneQuiz: number | null };
@@ -21,21 +23,9 @@ const jour = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: '
 const date = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 const COULEUR = '#534AB7';
 
-/** Icônes SVG simples des jalons (aucun emoji). */
-function IconeJalon({ code }: { code: string }) {
-  const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
-  const formes: Record<string, JSX.Element> = {
-    'cours-1': <path {...p} d="M5 12l4 4 10-10" />,
-    'cours-5': <><circle {...p} cx="12" cy="12" r="8" /><path {...p} d="M8.5 12l2.5 2.5 4.5-5" /></>,
-    'cours-10': <><path {...p} d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" /></>,
-    'cours-25': <><path {...p} d="M7 4h10v5a5 5 0 01-10 0z" /><path {...p} d="M12 14v4M8 20h8M7 6H4v1a3 3 0 003 3M17 6h3v1a3 3 0 01-3 3" /></>,
-    'quiz-parfait': <><circle {...p} cx="12" cy="12" r="8" /><circle {...p} cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1.2" fill="currentColor" /></>,
-    ue: <><rect {...p} x="4" y="5" width="16" height="14" rx="2" /><path {...p} d="M8 10l2.5 2.5L16 8" /></>,
-    semestre: <><rect {...p} x="3" y="4" width="18" height="16" rx="2" /><path {...p} d="M3 9h18M8 14l2 2 5-5" /></>,
-    badge: <><circle {...p} cx="12" cy="9" r="5" /><path {...p} d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5" /></>,
-    parcours: <><path {...p} d="M5 19c4-1 3-6 7-7s3-6 7-7" /><circle {...p} cx="5" cy="19" r="1.5" /><circle {...p} cx="19" cy="5" r="1.5" /></>,
-  };
-  return <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">{formes[code] ?? formes['cours-1']}</svg>;
+/** Macaron des badges de la plateforme : médaille pour un parcours terminé, sinon la récompense. Gris tant qu'il n'est pas atteint. */
+function MacaronJalon({ code, atteint, couleur }: { code: string; atteint: boolean; couleur: string }) {
+  return <Macaron icone={code === 'parcours' ? Medal : Award} couleur={couleur} taille={44} className={atteint ? '' : 'eteint'} />;
 }
 
 /** Graphique accompagné d'un tableau de données, lisible par les lecteurs d'écran. */
@@ -54,7 +44,7 @@ function Graphique({ titre, description, children, tableau }: { titre: string; d
   );
 }
 
-export default function Evolution({ e, moi = true }: { e: DonneesEvolution; moi?: boolean }) {
+export default function Evolution({ e, moi = true, niveau }: { e: DonneesEvolution; moi?: boolean; niveau?: string | null }) {
   const semaines = e.parSemaine.map((s) => ({ ...s, libelle: jour(s.semaine) }));
   const quiz = e.quiz.map((q, i) => ({ ...q, n: i + 1, pct: Math.round((100 * q.score) / q.total) }));
   const domaines = e.domaines.filter((d) => d.termines > 0 || d.moyenneQuiz !== null);
@@ -139,7 +129,7 @@ export default function Evolution({ e, moi = true }: { e: DonneesEvolution; moi?
         <ul className="jalons">
           {e.jalons.map((j) => (
             <li key={j.code} className={j.atteint ? 'atteint' : ''}>
-              <span className="jalon-icone"><IconeJalon code={j.code} /></span>
+              <MacaronJalon code={j.code} atteint={j.atteint} couleur={couleurUtilisateur(niveau)} />
               <span>
                 <strong>{j.titre}</strong>
                 <span className="small muted">{j.atteint && j.date ? `Le ${date(j.date)}${j.detail ? ` · ${j.detail}` : ''}` : 'Pas encore atteint'}</span>

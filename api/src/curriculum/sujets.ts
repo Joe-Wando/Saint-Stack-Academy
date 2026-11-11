@@ -28,7 +28,7 @@ function dossierPaquet(nom: string): string | null {
 }
 
 /** Noms des logos de simple-icons installés (fichiers icons/<nom>.svg). */
-function logosDisponibles(): Set<string> | null {
+export function logosDisponibles(): Set<string> | null {
   const d = dossierPaquet('simple-icons');
   if (!d) return null;
   return new Set(fs.readdirSync(path.join(d, 'icons')).filter((f) => f.endsWith('.svg')).map((f) => f.slice(0, -4)));

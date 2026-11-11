@@ -50,7 +50,7 @@ function Contenu({ id, moi }: { id: string; moi: Utilisateur }) {
     <>
       <Link href="/admin/utilisateurs" className="small">← Utilisateurs</Link>
       <section className="profil-tete">
-        <Avatar nom={u.nom} photo={u.photo} taille={88} />
+        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} taille={88} />
         <div>
           <h1>{u.nom}</h1>
           <p className="muted" style={{ margin: 0 }}>{u.email} · {u.role === 'admin' ? 'Admin' : 'Apprenant'}</p>
@@ -100,11 +100,11 @@ function Contenu({ id, moi }: { id: string; moi: Utilisateur }) {
       </section>
 
       <h2>Son évolution</h2>
-      <Evolution e={f.evolution} moi={false} />
+      <Evolution e={f.evolution} moi={false} niveau={u.niveau} />
 
       <section className="card">
         <h2 className="h-petit">Ses badges et certifications</h2>
-        <ListeBadges badges={f.certifications} />
+        <ListeBadges badges={f.certifications} niveau={u.niveau} />
       </section>
 
       <section className="card">

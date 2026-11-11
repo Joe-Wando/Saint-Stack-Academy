@@ -9,6 +9,7 @@ import { api, Certifications, Referentiel, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
 import { lienUeDepuis } from '@/lib/licence';
 import { ILLUS } from '@/lib/illustrations-pages';
+import { COULEURS_NIVEAUX } from '@/lib/domaines';
 
 function Contenu({ u }: { u: Utilisateur | null }) {
   const { donnees, erreur } = useDonnees(() => Promise.all([api<Certifications>('/certifications'), api<Referentiel>('/referentiel').catch(() => null)]));
@@ -25,6 +26,7 @@ function Contenu({ u }: { u: Utilisateur | null }) {
   const opt = option || optionsL3[0]?.code || Object.keys(c.niveaux.L3.options)[0];
   const elements = niveau === 'L3' ? c.niveaux.L3.options[opt] ?? [] : c.niveaux[niveau as 'L1' | 'L2'].elements;
   const intro = c.niveaux[niveau as 'L1' | 'L2' | 'L3'].intro;
+  const couleur = (niveau === 'L3' ? COULEURS_NIVEAUX[opt] : undefined) ?? COULEURS_NIVEAUX[niveau];
 
   return (
     <>
@@ -57,7 +59,7 @@ function Contenu({ u }: { u: Utilisateur | null }) {
           </div>
         )}
         <div className="grille-certifs">
-          {elements.map((e) => <CarteCertification key={e.nom} e={e} lienUe={lienUeDepuis(ref, niveau, e.ue)} />)}
+          {elements.map((e) => <CarteCertification key={e.nom} e={e} lienUe={lienUeDepuis(ref, niveau, e.ue)} couleur={couleur} />)}
         </div>
       </Onglets>
 

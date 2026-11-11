@@ -1,0 +1,28 @@
+# Organismes de certification : logo affiché à côté du nom, pour indiquer OÙ l'étudiant passe la certification.
+# À copier dans content/organismes.yaml.
+#
+# Décision d'Olivier (10 novembre 2026) : le logo identifie l'organisme qui délivre la certification.
+# Saint Stack Academy ne délivre pas ces certifications et n'est pas partenaire de ces organismes.
+#
+# logo : nom de fichier du paquet npm « simple-icons » (16.x), affiché dans sa couleur d'origine, non modifié.
+#        null = l'organisme n'a pas de logo disponible dans simple-icons : on affiche son nom seul.
+# motifs : textes cherchés (sans tenir compte de la casse) dans le champ « organisme » de content/certifications.yaml.
+#          Quand un élément cite deux organismes, on affiche les deux logos, dans l'ordre du texte.
+# Pour retirer un logo à la demande d'un organisme : mettre logo: null, et c'est tout.
+
+organismes:
+  cisco:        { nom: "Cisco",                    logo: cisco,        motifs: ["Cisco"],                   site: "https://www.netacad.com", marque: "Cisco et Cisco Networking Academy sont des marques de Cisco Systems, Inc." }
+  coursera:     { nom: "Coursera",                 logo: coursera,     motifs: ["Coursera"],                site: "https://www.coursera.org", marque: "Coursera est une marque de Coursera, Inc." }
+  freecodecamp: { nom: "freeCodeCamp",             logo: freecodecamp, motifs: ["freeCodeCamp"],            site: "https://www.freecodecamp.org", marque: "freeCodeCamp est une marque de Free Code Camp, Inc." }
+  google:       { nom: "Google",                   logo: google,       motifs: ["Google"],                  site: "https://grow.google/certificates/", marque: "Google est une marque de Google LLC." }
+  meta:         { nom: "Meta",                     logo: meta,         motifs: ["Meta"],                    site: "https://www.coursera.org/meta", marque: "Meta est une marque de Meta Platforms, Inc." }
+  github:       { nom: "GitHub",                   logo: github,       motifs: ["GitHub"],                  site: "https://resources.github.com/learn/certifications/", marque: "GitHub est une marque de GitHub, Inc." }
+  comptia:      { nom: "CompTIA",                  logo: comptia,      motifs: ["CompTIA"],                 site: "https://www.comptia.org", marque: "CompTIA est une marque de CompTIA, Inc." }
+  linuxfoundation: { nom: "Linux Foundation",      logo: linuxfoundation, motifs: ["Linux Foundation"],     site: "https://training.linuxfoundation.org", marque: "The Linux Foundation est une marque de The Linux Foundation." }
+  # Pas de logo disponible : nom seul
+  openedg:      { nom: "OpenEDG Python Institute", logo: null,         motifs: ["OpenEDG", "Python Institute", "JS Institute"], site: "https://pythoninstitute.org", marque: null }
+  microsoft:    { nom: "Microsoft",                logo: null,         motifs: ["Microsoft"],               site: "https://learn.microsoft.com/credentials/", marque: null }
+  ibm:          { nom: "IBM",                      logo: null,         motifs: ["IBM"],                     site: "https://www.coursera.org/ibm", marque: null }
+  aws:          { nom: "AWS",                      logo: null,         motifs: ["AWS"],                     site: "https://aws.amazon.com/certification/", marque: null }
+  lpi:          { nom: "LPI",                      logo: null,         motifs: ["LPI"],                     site: "https://www.lpi.org", marque: null }
+  databricks:   { nom: "Databricks",               logo: null,         motifs: ["Databricks"],              site: "https://www.databricks.com/learn/certification", marque: null }

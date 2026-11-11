@@ -27,7 +27,7 @@ function MenuCompte({ u }: { u: Utilisateur }) {
   return (
     <div className="compte" ref={zone}>
       <button ref={bouton} className="compte-btn" aria-expanded={ouvert} aria-haspopup="true" onClick={() => setOuvert((o) => !o)}>
-        <Avatar nom={u.nom} photo={u.photo} />
+        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} />
         <span className="sr">Menu du compte de {u.nom}</span>
       </button>
       {ouvert && (

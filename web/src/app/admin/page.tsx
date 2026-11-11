@@ -99,7 +99,7 @@ function Contenu() {
           <ul className="liste-simple">
             {t.derniersInscrits.map((u) => (
               <li key={u.id}>
-                <Avatar nom={u.nom} photo={u.photo} taille={32} />
+                <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} taille={32} />
                 <Link href={`/admin/utilisateurs/${u.id}`}>{u.nom}</Link>
                 <span className="small muted">{u.niveau ? NIVEAUX[u.niveau as Niveau] : '–'} · {jour(u.inscritLe)}</span>
               </li>

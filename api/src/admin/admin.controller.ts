@@ -144,9 +144,10 @@ export class AdminController {
       },
       evolution: await this.evolution.evolution(id),
       activites: await this.evolution.historique(id, 100),
-      certifications: await this.db.query(
+      certifications: (await this.db.query<{ organisme: string }>(
         `SELECT id, nom, organisme, type, to_char(obtenue_le, 'YYYY-MM-DD') AS "obtenueLe", lien_verification AS "lienVerification"
-         FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le DESC`, [id]),
+         FROM certifications_obtenues WHERE utilisateur_id = $1 ORDER BY obtenue_le DESC`, [id]))
+        .map((l) => ({ ...l, organismes: this.curriculum.organismesDe(l.organisme) })),
     };
   }
 
