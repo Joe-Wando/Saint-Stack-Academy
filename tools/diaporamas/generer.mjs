@@ -56,7 +56,12 @@ function morceaux(texte, base = {}) {
     i = m.index + m[0].length;
   }
   if (i < texte.length) res.push({ text: texte.slice(i), options: { ...base } });
-  return res.length ? res : [{ text: texte, options: { ...base } }];
+  if (!res.length) return [{ text: texte, options: { ...base } }];
+  // pptxgenjs ouvre un nouveau paragraphe à chaque morceau qui porte une puce : seul le premier la garde.
+  for (const r of res.slice(1)) delete r.options.bullet;
+  // Le saut de ligne ne vaut qu'à la fin de l'élément, donc sur le dernier morceau.
+  for (const r of res.slice(0, -1)) delete r.options.breakLine;
+  return res;
 }
 
 /** Découpe le corps d'un chapitre en blocs : sous-titre, paragraphe, liste, code, tableau, citation. */
@@ -117,6 +122,17 @@ function pagesDeCode(lignes) {
   return pages.length ? pages : [[]];
 }
 
+/** Raccourcit un texte à n caractères au plus, sur une fin de mot, avec « … ». */
+const couper = (t, n) => (t.length <= n ? t : `${t.slice(0, n).replace(/\s+\S*$/, '')}…`);
+
+/** Étiquette lisible du langage d'un encadré de code (« c » → « C », « bash » → « Bash »), rien pour du texte brut. */
+const LANGAGES = { c: 'C', cpp: 'C++', js: 'JavaScript', javascript: 'JavaScript', ts: 'TypeScript', typescript: 'TypeScript', sql: 'SQL', html: 'HTML', css: 'CSS', json: 'JSON', yaml: 'YAML', yml: 'YAML', php: 'PHP', sh: 'Shell', powershell: 'PowerShell', ps1: 'PowerShell', jsx: 'JSX', tsx: 'TSX', xml: 'XML', dockerfile: 'Dockerfile', graphql: 'GraphQL', dax: 'DAX' };
+function nomLangage(lang) {
+  const l = (lang ?? '').trim().toLowerCase();
+  if (!l || l === 'text' || l === 'txt' || l === 'plaintext') return null;
+  return LANGAGES[l] ?? l.charAt(0).toUpperCase() + l.slice(1);
+}
+
 /** Hauteur estimée d'une ligne de tableau (pouces) selon le texte et la largeur des colonnes. */
 const hauteurLigne = (row, colW, pt) => 0.14 + Math.max(...row.map((c, j) => Math.ceil((nu(c).length || 1) / Math.max(4, (colW[j] - 0.12) / (pt * 0.0075))))) * (pt / 72) * 1.25;
 
@@ -148,15 +164,27 @@ async function automatique(d, cours, sujet) {
       if (tampon.length) tampon[tampon.length - 1].options = { ...tampon[tampon.length - 1].options, breakLine: true };
       tampon.push(...runs); nbMots += n; nbLignes += lignes;
     };
+    // Place libre sous le dernier tableau ou encadré de code : un court texte qui le suit s'y range
+    // au lieu d'occuper seul une diapositive.
+    let suite = null;
     for (const b of blocsDe(chapitre.corps)) {
+      const placeSous = suite; suite = null;
       if (b.type === 'sous') { vider(); titre = nu(b.texte); continue; }
       if (b.type === 'paragraphe') {
-        for (const part of decouper(b.texte)) ajouter(morceaux(part, b.citation ? { italic: true } : {}), mots(part), Math.ceil(nu(part).length / 85));
+        const parts = decouper(b.texte);
+        const hEstimee = parts.reduce((a, p) => a + Math.ceil(nu(p).length / 85) * 0.24 + 0.1, 0);
+        if (placeSous && !tampon.length && parts.length === 1 && mots(parts[0]) <= 45 && placeSous.y + hEstimee <= 4.85) {
+          d.texte(placeSous.s, morceaux(parts[0], b.citation ? { italic: true } : {}), 0.6, placeSous.y, 7.4, 4.85 - placeSous.y, 13);
+          suite = { s: placeSous.s, y: placeSous.y + hEstimee + 0.1 };
+          continue;
+        }
+        for (const part of parts) ajouter(morceaux(part, b.citation ? { italic: true } : {}), mots(part), Math.ceil(nu(part).length / 85));
         continue;
       }
       if (b.type === 'liste') {
         const items = b.items.map((t) => {
-          const m = /^\*\*(.+?)\*\*\s*[:–-]?\s*(.*)$/.exec(t) ?? /^([^:]{2,40}) : (.+)$/.exec(t);
+          // Le gras doit être un mot entier : « **S**ituation » ne se coupe pas en « S » et « ituation ».
+          const m = /^\*\*([^*]+)\*\*(?![\p{L}\p{N}])\s*[:–-]?\s*(.*)$/u.exec(t) ?? /^([^:]{2,40}) : (.+)$/.exec(t);
           return m ? [iconeCartes, nu(m[1]).replace(/[ :]+$/, ''), nu(m[2])] : [iconeCartes, nu(t), ''];
         });
         const courts = b.items.every((t) => mots(nu(t)) <= 18) && items.every(([, t, desc]) => mots(t) <= 7 || (!desc && mots(t) <= 9));
@@ -184,12 +212,12 @@ async function automatique(d, cours, sujet) {
           let y = 1.25;
           if (intro) { d.texte(s, intro, 0.6, 1.25, 7.4, 0.95, 13); y = 2.3; tampon = []; nbMots = 0; nbLignes = 0; }
           const h = Math.min(4.85 - y, 0.3 + Math.max(lignes.length, 2) * 0.2 + (b.lang ? 0.3 : 0));
-          d.code(s, lignes.join('\n'), 0.6, y, 7.4, h, { titre: b.lang && b.lang !== 'text' ? b.lang : null, taille: 11 });
+          d.code(s, lignes.join('\n'), 0.6, y, 7.4, h, { titre: nomLangage(b.lang), taille: 11 });
+          if (k === pages.length - 1) suite = { s, y: y + h + 0.2 };
         }
         continue;
       }
       if (b.type === 'tableau' && b.rows.length) {
-        vider();
         const [entete, ...corps] = b.rows;
         const nCol = entete.length;
         const pt = nCol > 3 ? 10 : 11;
@@ -204,9 +232,16 @@ async function automatique(d, cours, sujet) {
           cur.push(r); hauteur += hl;
         }
         if (cur.length || !pages.length) pages.push(cur);
+        const hauteurPage = (lignes) => lignes.reduce((a, r) => a + hauteurLigne(r, colW, pt), hauteurLigne(entete, colW, pt));
+        // Un court texte d'introduction reste au-dessus du tableau s'il tient sur la même page.
+        const intro = tampon.length && nbMots <= 45 && nbLignes <= 2 && 2.2 + hauteurPage(pages[0]) <= 4.85 ? tampon : null;
+        if (!intro) vider();
         for (const [k2, lignes] of pages.entries()) {
           const s = d.contenu(pages.length > 1 ? `${titre} (${k2 + 1}/${pages.length})` : titre);
-          d.tableau(s, entete.map(nu), lignes.map((r) => entete.map((_, j) => nu(r[j] ?? ''))), { x: 0.6, y: 1.25, colW, taille: pt });
+          let y = 1.25;
+          if (k2 === 0 && intro) { d.texte(s, intro, 0.6, 1.25, 7.4, 0.8, 13); y = 2.2; tampon = []; nbMots = 0; nbLignes = 0; }
+          d.tableau(s, entete.map(nu), lignes.map((r) => entete.map((_, j) => nu(r[j] ?? ''))), { x: 0.6, y, colW, taille: pt });
+          if (k2 === pages.length - 1) suite = { s, y: y + hauteurPage(lignes) + 0.25 };
         }
       }
     }
@@ -232,7 +267,11 @@ async function automatique(d, cours, sujet) {
         if (b.type !== 'liste') continue;
         for (const t of b.items) {
           const m = /\[([^\]]+)\]\((https?:[^)]+)\)\s*[:–-]?\s*(.*)$/.exec(t);
-          liens.push(m ? ['external-link', m[1], nu(m[3]) || new URL(m[2]).hostname, m[2]] : ['book-open', nu(t).slice(0, 70), '', null]);
+          if (m) { liens.push(['external-link', m[1], couper(nu(m[3]), 110) || new URL(m[2]).hostname, m[2]]); continue; }
+          // Sans lien : « titre : précision » si le texte en contient une, sinon le texte entier, coupé à un mot.
+          const brut = nu(t).replace(/\.$/, '');
+          const i = brut.indexOf(' : ');
+          liens.push(i > 0 && i <= 70 ? ['book-open', brut.slice(0, i), couper(brut.slice(i + 3), 110), null] : ['book-open', couper(brut, 110), '', null]);
         }
       }
     }
