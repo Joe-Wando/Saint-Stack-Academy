@@ -310,7 +310,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 .eyebrow, .chapitre-num { color: var(--corail-fonce); }
 .bandeau-sombre .eyebrow, .parcours-tete.bandeau-sombre .eyebrow { color: var(--corail-sur-sombre); }
 /* Liens dans un texte : soulignés partout (ils ne se distinguent pas par la seule couleur). */
-main p a:not(.btn), main li a:not(.btn):not(.cc), main td a, .certif-ue a, .muted a { text-decoration: underline; text-underline-offset: 2px; }
+main p a:not(.btn), main li a:not(.btn):not(.cc):not(.carte-techno), main td a, .certif-ue a, .muted a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* ==========================================================================
    Rapprochements avec les maquettes (phase 5)

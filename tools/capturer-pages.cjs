@@ -24,7 +24,8 @@ function trouver(rep) {
   const navigateur = trouver(path.join(dossier, 'navigateurs'));
   if (!navigateur) throw new Error('chrome-headless-shell.exe introuvable dans ' + dossier);
   const travaux = JSON.parse(fs.readFileSync(fichier, 'utf8'));
-  const profil = fs.mkdtempSync(path.join(os.tmpdir(), 'ssa-pptr-'));
+  // Profil neuf à chaque lancement, à côté du navigateur (le dossier Temp de Windows peut bloquer le démarrage).
+  const profil = fs.mkdtempSync(path.join(dossier, 'profil-'));
   const nav = await puppeteer.launch({ executablePath: navigateur, headless: 'shell', userDataDir: profil, args: ['--hide-scrollbars'] });
   try {
     for (const t of travaux) {
