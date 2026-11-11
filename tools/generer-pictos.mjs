@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import matter from 'gray-matter';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -43,6 +43,20 @@ for (const n of [...nomsIcones].sort()) {
   icones.push([n, c]);
 }
 
+// Tracés des icônes (pour les images de partage, rendues sans React) : nom PascalCase -> fichier du paquet.
+const dossierIcones = join(web, 'node_modules/lucide-react/dist/esm');
+const fichierDe = new Map();
+for (const m of readFileSync(join(dossierIcones, 'lucide-react.mjs'), 'utf8').matchAll(/export \{([^}]*)\} from '\.\/icons\/([a-z0-9-]+)\.mjs'/g)) {
+  for (const n of m[1].matchAll(/default as ([A-Za-z0-9]+)/g)) fichierDe.set(n[1], m[2]);
+}
+const traces = {};
+for (const [n, c] of icones) {
+  const f = fichierDe.get(c);
+  if (!f) continue;
+  const mod = await import(pathToFileURL(join(dossierIcones, 'icons', `${f}.mjs`)).href);
+  traces[n] = mod.__iconData.node.map(([tag, { key, ...attrs }]) => [tag, attrs]);
+}
+
 const sortie = `// FICHIER GÉNÉRÉ par tools/generer-pictos.mjs : ne pas modifier à la main (npm run pictos).
 // Logos : simple-icons ${versionSi} (CC0 1.0 pour les fichiers ; les logos restent des marques de leurs titulaires).
 // Icônes : lucide-react ${versionLucide} (ISC).
@@ -53,6 +67,9 @@ export interface LogoMarque { titre: string; hex: string; trace: string }
 
 /** Logos de technologies et d'organismes, dans leur couleur d'origine (viewBox 0 0 24 24). */
 export const LOGOS: Record<string, LogoMarque> = ${JSON.stringify(logos, null, 2)};
+
+/** Tracés des mêmes icônes (viewBox 0 0 24 24, trait), pour dessiner sans React (images de partage). */
+export const TRACES_ICONES: Record<string, [string, Record<string, string>][]> = ${JSON.stringify(traces)};
 
 /** Icônes génériques, par nom Lucide. */
 export const ICONES: Record<string, LucideIcon> = {
