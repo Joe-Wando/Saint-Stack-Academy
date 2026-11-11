@@ -81,7 +81,7 @@ Ligne par ligne :
 | `printf("...\n");` | Affiche un texte. `\n` passe à la ligne. Chaque instruction se termine par `;`. |
 | `return 0;` | Le programme se termine et signale au système que tout s'est bien passé. |
 
-On compile, puis on exécute :
+On compile, puis on exécute. Dans Code::Blocks : menu « Générer », « Générer et exécuter », touche F9. En ligne de commande :
 
 ```bash
 gcc -Wall bonjour.c -o bonjour

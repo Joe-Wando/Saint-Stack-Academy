@@ -10,6 +10,7 @@ COPY web/package.json web/package-lock.json web/
 RUN --mount=type=cache,target=/root/.npm cd web && npm ci --prefer-offline --no-audit --no-fund
 COPY content content
 COPY tools/diaporamas tools/diaporamas
+COPY tools/verifier-outils.mjs tools/verifier-outils.mjs
 COPY web web
 # L'adresse de l'API est intégrée au code du navigateur au moment de la construction
 ARG NEXT_PUBLIC_API_URL=http://localhost:4000/api
@@ -18,7 +19,8 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 # Un PowerPoint par cours public, aux couleurs de son sujet : web/public/diaporamas/<slug>.pptx
-RUN npm run diaporamas
+# Vérification du contenu (logiciels de chaque sujet), puis un PowerPoint par cours public
+RUN npm run verifier && npm run diaporamas
 # Cache de Next.js : seules les pages modifiées sont recompilées
 RUN --mount=type=cache,target=/repo/web/.next/cache cd web && npm run build
 

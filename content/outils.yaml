@@ -1,0 +1,132 @@
+# Logiciels à installer pour suivre chaque cours sur MeredianStack. À copier dans content/outils.yaml.
+# Règles : uniquement des logiciels gratuits (ou avec une version gratuite), d'abord ceux qui marchent sous Windows,
+# puisque la plupart des étudiants sont sous Windows. Une solution « en ligne » quand elle existe, pour ceux qui
+# ont un ordinateur faible ou partagé. Pas de logo ici : on affiche le nom en texte.
+
+logiciels:
+  codeblocks:   { nom: "Code::Blocks", role: "Éditeur et compilateur C tout-en-un", systemes: [windows, linux, macos], site: "https://www.codeblocks.org/downloads/", installer: "Sous Windows, prends l'installateur dont le nom contient « mingw » : il contient déjà le compilateur GCC." }
+  vscode:       { nom: "Visual Studio Code", role: "Éditeur de code", systemes: [windows, linux, macos], site: "https://code.visualstudio.com/", installer: "Installe-le, puis ajoute l'extension du langage du cours depuis l'onglet Extensions." }
+  msys2:        { nom: "GCC avec MSYS2", role: "Compilateur C pour Windows, à utiliser avec VS Code", systemes: [windows], site: "https://www.msys2.org/", installer: "Dans le terminal MSYS2 UCRT64 : pacman -S mingw-w64-ucrt-x86_64-gcc, puis ajoute C:\\msys64\\ucrt64\\bin au PATH." }
+  onlinegdb:    { nom: "OnlineGDB", role: "Compiler et exécuter du C, C++ ou Java dans le navigateur", systemes: [en_ligne], site: "https://www.onlinegdb.com/", installer: "Rien à installer." }
+  temurin:      { nom: "JDK Temurin (Java 21)", role: "Kit de développement Java", systemes: [windows, linux, macos], site: "https://adoptium.net/", installer: "Prends la version LTS 21 et coche « Set JAVA_HOME » pendant l'installation." }
+  intellij:     { nom: "IntelliJ IDEA", role: "Environnement de développement Java", systemes: [windows, linux, macos], site: "https://www.jetbrains.com/idea/download/", installer: "La version gratuite suffit pour tous les cours." }
+  netbeans:     { nom: "Apache NetBeans", role: "Environnement de développement Java, plus léger", systemes: [windows, linux, macos], site: "https://netbeans.apache.org/", installer: "Installe d'abord le JDK." }
+  python:       { nom: "Python 3", role: "Langage Python", systemes: [windows, linux, macos], site: "https://www.python.org/downloads/", installer: "Sous Windows, coche « Add python.exe to PATH » au premier écran." }
+  jupyter:      { nom: "Jupyter (dans VS Code)", role: "Carnets de calcul Python", systemes: [windows, linux, macos], site: "https://code.visualstudio.com/docs/datascience/jupyter-notebooks", installer: "Ajoute les extensions Python et Jupyter dans VS Code, puis : pip install numpy pandas matplotlib scikit-learn" }
+  colab:        { nom: "Google Colab", role: "Carnets Python dans le navigateur", systemes: [en_ligne], site: "https://colab.research.google.com/", installer: "Il suffit d'un compte Google." }
+  nodejs:       { nom: "Node.js (version LTS)", role: "Exécuter JavaScript hors du navigateur, et npm", systemes: [windows, linux, macos], site: "https://nodejs.org/", installer: "Prends la version LTS. Vérifie avec node -v et npm -v." }
+  navigateur:   { nom: "Chrome ou Firefox", role: "Navigateur avec outils de développement (F12)", systemes: [windows, linux, macos], site: "https://www.mozilla.org/firefox/", installer: "Tu en as sûrement déjà un." }
+  figma:        { nom: "Figma", role: "Maquettes d'interfaces", systemes: [en_ligne], site: "https://www.figma.com/", installer: "Fonctionne dans le navigateur, avec un compte gratuit." }
+  postgresql:   { nom: "PostgreSQL", role: "Base de données relationnelle", systemes: [windows, linux, macos], site: "https://www.postgresql.org/download/", installer: "Note bien le mot de passe de l'utilisateur postgres choisi pendant l'installation. pgAdmin est inclus." }
+  mysql:        { nom: "MySQL Community", role: "Base de données relationnelle", systemes: [windows, linux, macos], site: "https://dev.mysql.com/downloads/", installer: "Ou plus simplement avec Docker : docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=motdepasse mysql:8" }
+  dbeaver:      { nom: "DBeaver Community", role: "Client graphique pour toutes les bases SQL", systemes: [windows, linux, macos], site: "https://dbeaver.io/download/", installer: "Il télécharge lui-même le pilote de la base à la première connexion." }
+  mongodb:      { nom: "MongoDB Community et Compass", role: "Base de données de documents et son interface", systemes: [windows, linux, macos], site: "https://www.mongodb.com/try/download/community", installer: "Compass est proposé pendant l'installation : garde-le coché." }
+  redis:        { nom: "Redis (avec Docker)", role: "Base clé-valeur en mémoire", systemes: [windows, linux, macos], site: "https://redis.io/", installer: "docker run -d -p 6379:6379 redis:7" }
+  drawio:       { nom: "draw.io", role: "Schémas, MCD, diagrammes UML", systemes: [en_ligne, windows, linux, macos], site: "https://app.diagrams.net/", installer: "Fonctionne dans le navigateur ; une version de bureau existe." }
+  looping:      { nom: "Looping", role: "Modélisation Merise (MCD, MLD, SQL)", systemes: [windows], site: "https://www.looping-mcd.fr/", installer: "Un seul fichier à lancer, sans installation." }
+  plantuml:     { nom: "PlantUML", role: "Diagrammes UML écrits en texte", systemes: [en_ligne], site: "https://www.plantuml.com/plantuml/", installer: "Version en ligne, ou extension PlantUML dans VS Code." }
+  dbtcore:      { nom: "dbt Core", role: "Transformations SQL versionnées", systemes: [windows, linux, macos], site: "https://docs.getdbt.com/docs/core/installation-overview", installer: "pip install dbt-postgres" }
+  pyspark:      { nom: "PySpark", role: "Spark depuis Python", systemes: [windows, linux, macos], site: "https://spark.apache.org/docs/latest/api/python/getting_started/install.html", installer: "pip install pyspark (demande aussi un JDK). Plus simple : Google Colab." }
+  powerbi:      { nom: "Power BI Desktop", role: "Tableaux de bord", systemes: [windows], site: "https://www.microsoft.com/fr-fr/power-platform/products/power-bi/desktop", installer: "Uniquement sous Windows, depuis le Microsoft Store." }
+  git:          { nom: "Git", role: "Gestion de versions", systemes: [windows, linux, macos], site: "https://git-scm.com/downloads", installer: "Sous Windows, garde les options par défaut ; Git Bash est installé avec." }
+  github:       { nom: "Compte GitHub", role: "Hébergement de dépôts, Actions, Pages", systemes: [en_ligne], site: "https://github.com/", installer: "Crée un compte gratuit ; l'offre étudiant (GitHub Education) est aussi gratuite." }
+  gitlab:       { nom: "Compte GitLab", role: "Dépôts et pipelines CI/CD", systemes: [en_ligne], site: "https://gitlab.com/", installer: "Crée un compte gratuit." }
+  dockerdesktop: { nom: "Docker Desktop", role: "Conteneurs (inclut Docker Compose)", systemes: [windows, macos, linux], site: "https://www.docker.com/products/docker-desktop/", installer: "Sous Windows, il active WSL 2. Il faut au moins 8 Go de mémoire. Sous Linux, Docker Engine suffit." }
+  playdocker:   { nom: "Play with Docker", role: "Docker dans le navigateur, session de 4 heures", systemes: [en_ligne], site: "https://labs.play-with-docker.com/", installer: "Il suffit d'un compte Docker Hub." }
+  jenkins:      { nom: "Jenkins (avec Docker)", role: "Serveur d'intégration continue", systemes: [windows, linux, macos], site: "https://www.jenkins.io/doc/book/installing/docker/", installer: "docker run -d -p 8080:8080 jenkins/jenkins:lts" }
+  minikube:     { nom: "minikube et kubectl", role: "Cluster Kubernetes local", systemes: [windows, linux, macos], site: "https://minikube.sigs.k8s.io/docs/start/", installer: "Ou active simplement Kubernetes dans les réglages de Docker Desktop." }
+  helm:         { nom: "Helm", role: "Gestionnaire de paquets Kubernetes", systemes: [windows, linux, macos], site: "https://helm.sh/docs/intro/install/", installer: "Sous Windows : winget install Helm.Helm" }
+  prometheus:   { nom: "Prometheus et Grafana (avec Docker)", role: "Métriques et tableaux de supervision", systemes: [windows, linux, macos], site: "https://prometheus.io/docs/introduction/first_steps/", installer: "Le cours fournit un compose.yaml qui lance les deux." }
+  wsl:          { nom: "WSL 2 avec Ubuntu", role: "Un vrai Linux dans Windows", systemes: [windows], site: "https://learn.microsoft.com/fr-fr/windows/wsl/install", installer: "Dans PowerShell en administrateur : wsl --install, puis redémarre." }
+  virtualbox:   { nom: "VirtualBox", role: "Machines virtuelles", systemes: [windows, linux, macos], site: "https://www.virtualbox.org/", installer: "Active la virtualisation dans le BIOS si une erreur VT-x apparaît." }
+  ansible:      { nom: "Ansible", role: "Automatisation de configuration", systemes: [linux, macos], site: "https://docs.ansible.com/", installer: "Sous Windows, installe-le dans WSL : sudo apt install ansible" }
+  netlify:      { nom: "Compte Netlify", role: "Hébergement de sites statiques", systemes: [en_ligne], site: "https://www.netlify.com/", installer: "Connexion avec ton compte GitHub." }
+  vercel:       { nom: "Compte Vercel", role: "Hébergement d'applications Next.js", systemes: [en_ligne], site: "https://vercel.com/", installer: "Connexion avec ton compte GitHub." }
+  packettracer: { nom: "Cisco Packet Tracer", role: "Simulateur de réseaux", systemes: [windows, linux, macos], site: "https://www.netacad.com/resources/lab-downloads", installer: "Gratuit avec un compte Cisco Networking Academy." }
+  wireshark:    { nom: "Wireshark", role: "Analyse du trafic réseau", systemes: [windows, linux, macos], site: "https://www.wireshark.org/download.html", installer: "Accepte l'installation de Npcap sous Windows." }
+  powershell:   { nom: "PowerShell 7", role: "Terminal et scripts Windows", systemes: [windows, linux, macos], site: "https://learn.microsoft.com/fr-fr/powershell/scripting/install/installing-powershell-on-windows", installer: "winget install Microsoft.PowerShell" }
+  winserver:    { nom: "Windows Server (évaluation)", role: "Serveur Windows dans une machine virtuelle", systemes: [windows, linux, macos], site: "https://www.microsoft.com/fr-fr/evalcenter", installer: "Version d'évaluation gratuite de 180 jours, à installer dans VirtualBox." }
+  zap:          { nom: "ZAP", role: "Scanner de sécurité web", systemes: [windows, linux, macos], site: "https://www.zaproxy.org/download/", installer: "N'analyse que tes propres applications, ou OWASP Juice Shop." }
+  juiceshop:    { nom: "OWASP Juice Shop", role: "Application volontairement vulnérable pour s'entraîner", systemes: [windows, linux, macos], site: "https://owasp.org/www-project-juice-shop/", installer: "docker run -d -p 3000:3000 bkimminich/juice-shop" }
+  postman:      { nom: "Postman", role: "Tester une API", systemes: [windows, linux, macos], site: "https://www.postman.com/downloads/", installer: "La version gratuite suffit. Alternative sans compte : l'extension Thunder Client de VS Code." }
+  trello:       { nom: "Trello", role: "Tableau Scrum ou Kanban", systemes: [en_ligne], site: "https://trello.com/", installer: "Compte gratuit." }
+  geogebra:     { nom: "GeoGebra", role: "Calcul, graphes et géométrie", systemes: [en_ligne, windows, linux, macos], site: "https://www.geogebra.org/calculator", installer: "Fonctionne dans le navigateur." }
+  cpuz:         { nom: "CPU-Z", role: "Identifier processeur, mémoire, carte mère", systemes: [windows], site: "https://www.cpuid.com/softwares/cpu-z.html", installer: "Prends la version ZIP, sans installation." }
+  crystaldisk:  { nom: "CrystalDiskInfo", role: "État de santé des disques", systemes: [windows], site: "https://crystalmark.info/en/software/crystaldiskinfo/", installer: "Version portable disponible." }
+  rufus:        { nom: "Rufus", role: "Créer une clé USB d'installation", systemes: [windows], site: "https://rufus.ie/", installer: "Un seul fichier, sans installation." }
+  libreoffice:  { nom: "LibreOffice", role: "Traitement de texte, tableur, présentation", systemes: [windows, linux, macos], site: "https://fr.libreoffice.org/download/telecharger-libreoffice/", installer: "Gratuit. Microsoft 365 ou Google Docs conviennent aussi." }
+  awscli:       { nom: "Compte AWS et AWS CLI", role: "Services cloud", systemes: [windows, linux, macos], site: "https://aws.amazon.com/fr/free/", installer: "L'offre gratuite demande une carte bancaire : crée une alerte de budget à 1 dollar dès le premier jour." }
+
+# Pour chaque sujet : « principal » = ce que le cours utilise ; « autres » = alternatives ; « en_ligne » = sans installation.
+# aucun: true = cours sans logiciel (le bloc ne s'affiche pas).
+sujets:
+  c:             { principal: [codeblocks], autres: [vscode, msys2], en_ligne: [onlinegdb] }
+  pointeurs:     { principal: [codeblocks], autres: [vscode, msys2], en_ligne: [onlinegdb] }
+  structures:    { principal: [codeblocks], autres: [vscode, msys2], en_ligne: [onlinegdb] }
+  listes:        { principal: [codeblocks], autres: [vscode, msys2], en_ligne: [onlinegdb] }
+  piles:         { principal: [codeblocks], autres: [vscode, msys2], en_ligne: [onlinegdb] }
+  java:          { principal: [temurin, intellij], autres: [netbeans, vscode], en_ligne: [onlinegdb] }
+  python:        { principal: [python, vscode], autres: [jupyter], en_ligne: [colab] }
+  numpy:         { principal: [python, jupyter], autres: [], en_ligne: [colab] }
+  pandas:        { principal: [python, jupyter], autres: [], en_ligne: [colab] }
+  scikitlearn:   { principal: [python, jupyter], autres: [], en_ligne: [colab] }
+  react:         { principal: [nodejs, vscode, navigateur], autres: [], en_ligne: [] }
+  tailwind:      { principal: [nodejs, vscode, navigateur], autres: [], en_ligne: [] }
+  nextjs:        { principal: [nodejs, vscode, navigateur], autres: [], en_ligne: [] }
+  express:       { principal: [nodejs, vscode], autres: [postman], en_ligne: [] }
+  figma:         { principal: [figma], autres: [], en_ligne: [] }
+  sql:           { principal: [postgresql], autres: [dbeaver], en_ligne: [] }
+  postgresql:    { principal: [postgresql], autres: [dbeaver], en_ligne: [] }
+  mysql:         { principal: [mysql, dbeaver], autres: [redis, dockerdesktop], en_ligne: [] }
+  nosql:         { principal: [mongodb], autres: [redis, dockerdesktop], en_ligne: [] }
+  modelisation:  { principal: [drawio], autres: [looping], en_ligne: [] }
+  merise:        { principal: [looping], autres: [drawio], en_ligne: [] }
+  uml:           { principal: [drawio], autres: [plantuml], en_ligne: [] }
+  etl:           { principal: [python, vscode, postgresql], autres: [], en_ligne: [colab] }
+  dbt:           { principal: [dbtcore, postgresql, vscode], autres: [], en_ligne: [] }
+  airflow:       { principal: [dockerdesktop], autres: [], en_ligne: [] }
+  spark:         { principal: [pyspark, temurin], autres: [], en_ligne: [colab] }
+  kafka:         { principal: [dockerdesktop], autres: [], en_ligne: [] }
+  powerbi:       { principal: [powerbi], autres: [], en_ligne: [] }
+  git:           { principal: [git, vscode], autres: [github], en_ligne: [] }
+  githubactions: { principal: [git, github], autres: [], en_ligne: [] }
+  githubpages:   { principal: [git, github], autres: [], en_ligne: [] }
+  gitlab:        { principal: [git, gitlab], autres: [], en_ligne: [] }
+  jenkins:       { principal: [dockerdesktop, jenkins], autres: [], en_ligne: [] }
+  docker:        { principal: [dockerdesktop], autres: [wsl], en_ligne: [playdocker] }
+  kubernetes:    { principal: [dockerdesktop, minikube], autres: [], en_ligne: [] }
+  helm:          { principal: [minikube, helm], autres: [], en_ligne: [] }
+  supervision:   { principal: [dockerdesktop, prometheus], autres: [], en_ligne: [] }
+  ansible:       { principal: [wsl, ansible], autres: [virtualbox], en_ligne: [] }
+  netlify:       { principal: [git, netlify], autres: [], en_ligne: [] }
+  vercel:        { principal: [git, vercel], autres: [], en_ligne: [] }
+  dns:           { principal: [navigateur], autres: [wsl], en_ligne: [] }
+  linux:         { principal: [wsl], autres: [virtualbox], en_ligne: [] }
+  bash:          { principal: [wsl], autres: [git], en_ligne: [] }
+  reseaux:       { principal: [packettracer], autres: [wireshark], en_ligne: [] }
+  windows:       { principal: [virtualbox, winserver], autres: [powershell], en_ligne: [] }
+  powershell:    { principal: [powershell], autres: [vscode], en_ligne: [] }
+  owasp:         { principal: [dockerdesktop, juiceshop, zap], autres: [], en_ligne: [] }
+  postman:       { principal: [postman], autres: [vscode], en_ligne: [] }
+  jest:          { principal: [nodejs, vscode], autres: [], en_ligne: [] }
+  supertest:     { principal: [nodejs, vscode], autres: [postman], en_ligne: [] }
+  cypress:       { principal: [nodejs, vscode, navigateur], autres: [], en_ligne: [] }
+  scrum:         { principal: [trello], autres: [], en_ligne: [] }
+  maths:         { principal: [geogebra], autres: [python], en_ligne: [colab] }
+  materiel:      { principal: [cpuz], autres: [crystaldisk], en_ligne: [] }
+  depannage:     { principal: [cpuz, crystaldisk], autres: [rufus], en_ligne: [] }
+  maintenance:   { principal: [rufus, crystaldisk], autres: [virtualbox], en_ligne: [] }
+  bureautique:   { principal: [libreoffice], autres: [], en_ligne: [] }
+  tableur:       { principal: [libreoffice], autres: [], en_ligne: [] }
+  ecrit:         { principal: [libreoffice], autres: [], en_ligne: [] }
+  cv:            { principal: [libreoffice], autres: [], en_ligne: [] }
+  oral:          { principal: [libreoffice], autres: [], en_ligne: [] }
+  projet:        { principal: [vscode, git], autres: [github], en_ligne: [] }
+  cloudaws:      { principal: [awscli], autres: [], en_ligne: [] }
+  binaire:       { aucun: true }
+  logique:       { aucun: true }
+  panorama:      { aucun: true }
+  metiers:       { aucun: true }
+  ethique:       { aucun: true }
+  anglais:       { aucun: true }
+  stage:         { aucun: true }

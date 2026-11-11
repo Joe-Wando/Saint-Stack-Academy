@@ -26,6 +26,15 @@ const FIN = /^(exercice guidé|exercice autonome|pour aller plus loin)/i;
 // ---------- Sujets ----------
 const yaml = (f) => matter.engines.yaml.parse(readFileSync(join(racine, 'content', f), 'utf8'));
 const { sujets = {}, cours: sujetDuCours = {} } = yaml('sujets.yaml');
+const { logiciels = {}, sujets: outilsParSujet = {} } = existsSync(join(racine, 'content', 'outils.yaml')) ? yaml('outils.yaml') : {};
+/** Logiciels d'un cours : champ « outils » du cours, sinon ceux de son sujet ; null si aucun. */
+function outilsDe(data, cle) {
+  const def = outilsParSujet[cle];
+  const cles = Array.isArray(data.outils) ? data.outils : def && !def.aucun ? def.principal ?? [] : [];
+  const voir = (l) => (l ?? []).map((k) => logiciels[k]).filter(Boolean);
+  const principal = voir(cles);
+  return principal.length ? { principal, enLigne: Array.isArray(data.outils) ? [] : voir(def?.en_ligne) } : null;
+}
 const si = exiger('simple-icons');
 const hexLogo = (nom) => Object.values(si).find((x) => x && x.slug === nom)?.hex ?? null;
 
@@ -254,6 +263,8 @@ for (const f of fichiers) {
     const soigne = join(racine, 'content/diaporamas', `${slug}.mjs`);
     const mod = existsSync(soigne) ? await import(pathToFileURL(soigne).href) : null;
     const d = creer({ titre: mod?.titre ?? data.titre, couleurs, logo: sujet?.logo ?? null, iconeSujet: sujet?.icone ?? 'book-open', libelleSujet: sujet?.libelle ?? '' });
+    const outils = outilsDe(data, cle);
+    if (outils) { const plan = d.plan; d.plan = (items) => { plan(items); d.outils(outils.principal, outils.enLigne); }; }
     if (mod) await mod.default(d);
     else await automatique(d, { ...data, contenu: content }, sujet);
     await d.enregistrer(cible);

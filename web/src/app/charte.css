@@ -345,3 +345,32 @@ main p a:not(.btn), main li a:not(.btn):not(.cc), main td a, .certif-ue a, .mute
 .admin-menu a[aria-current="page"] { background: var(--bleu); color: #fff; font-weight: 700; }
 .bandeau-accueil-photo figcaption { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
 .bandeau-accueil-photo figcaption strong { color: #fff; }
+
+/* ==========================================================================
+   Outils à installer (bloc des cours et page /outils)
+   ========================================================================== */
+.bloc-outils { background: var(--blanc); border: 1px solid var(--bord); border-radius: var(--rayon); padding: 18px 20px; margin-top: 16px; }
+.bloc-outils h3 { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 1.15rem; margin: 0 0 8px; }
+.bloc-outils-replie summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--doux); font-size: 15px; }
+.bloc-outils-replie summary .lien-voir { color: var(--bleu); text-decoration: underline; margin-left: 4px; }
+.bloc-outils-replie[open] summary { margin-bottom: 8px; }
+.outils-groupe h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--corail-fonce); margin: 14px 0 8px; }
+.liste-logiciels { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.logiciel { border: 1px solid var(--bord); border-radius: 10px; padding: 12px 14px; background: var(--fond); }
+.logiciel-tete { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.logiciel-systemes { display: flex; flex-wrap: wrap; gap: 4px; }
+.etiquette-systeme { font-size: 12px; font-weight: 700; color: var(--nuit); background: var(--bleu-clair); border-radius: 999px; padding: 2px 8px; }
+.logiciel-role { margin: 4px 0 0; color: var(--doux); font-size: 14px; }
+.logiciel-installer { margin: 6px 0; font-size: 14px; }
+.logiciel a { font-size: 14px; font-weight: 700; color: var(--bleu); text-decoration: underline; display: inline-flex; min-height: 32px; align-items: center; }
+.grille-logiciels { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); margin-top: 16px; }
+.logiciel-avec-sujets { display: flex; flex-direction: column; gap: 6px; }
+.logiciel-avec-sujets .logiciel { flex: 1; background: var(--blanc); }
+.logiciel-sujets { margin: 0; color: var(--doux); }
+.grille-logiciels .logiciel { background: var(--blanc); }
+.logiciel-sujets { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--bord); color: var(--doux); }
+/* Accueil : « Les technologies que tu vas apprendre » (logos dans leur couleur d'origine, non modifiés). */
+.grille-technos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.carte-techno { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 110px; padding: 16px 10px; background: var(--blanc); border: 1px solid var(--bord); border-radius: var(--rayon); color: var(--nuit); font-weight: 700; font-size: 14px; text-align: center; text-decoration: none; }
+.carte-techno:hover { border-color: var(--bleu); color: var(--nuit); text-decoration: none; }
+@media (max-width: 480px) { .grille-technos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .carte-techno { min-height: 96px; font-size: 13px; padding: 12px 6px; } }

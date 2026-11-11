@@ -5,6 +5,7 @@ import matter = require('gray-matter');
 import { config } from '../config';
 import { chargerSujets, SujetCours } from './sujets';
 import { chargerOrganismes, OrganismeCertif } from './organismes';
+import { chargerOutils, FAMILLES, Logiciel, OutilsSujet } from './outils';
 
 export interface QuestionQuiz { question: string; choix: string[]; reponse: number; explication: string }
 export interface PlaceLicence { niveau: string; semestre: string; ue: string; option?: string }
@@ -28,6 +29,7 @@ export interface Cours {
   quiz: QuestionQuiz[];
   contenu: string;          // Markdown
   sujet: SujetCours;        // logo de la technologie ou icône générique (content/sujets.yaml)
+  outilsCours: string[] | null; // champ facultatif « outils » : remplace la liste du sujet pour ce cours
 }
 
 export interface ResumeCours {
@@ -72,6 +74,7 @@ export class CurriculumService implements OnModuleInit {
   private marques: { libelle: string; marque: string }[] = [];
   private marquesOrganismes: { nom: string; marque: string }[] = [];
   private trouverOrganismes: ((texte: string) => OrganismeCertif[]) | null = null;
+  private outils: { logiciels: Map<string, Logiciel>; parSujet: Map<string, OutilsSujet> } | null = null;
 
   /** Au démarrage : charge les cours et vérifie les sujets (avertissement dans les logs si un logo ou une icône manque). */
   onModuleInit() { this.tous(); this.certifications(); }
@@ -98,6 +101,7 @@ export class CurriculumService implements OnModuleInit {
         prerequis: liste(data.prerequis),
         referentiels: liste(data.referentiels),
         quiz: (data.quiz ?? []) as QuestionQuiz[],
+        outilsCours: Array.isArray(data.outils) ? data.outils.map(String) : null,
         contenu: content.trim(),
       };
     });
@@ -152,12 +156,54 @@ export class CurriculumService implements OnModuleInit {
   /** Relit content/ (cours, référentiel, certifications) sans redémarrer l'API. */
   recharger() {
     this.cache = null;
+    this.outils = null;
     this.ref = null;
     this.certifs = null;
     this.certifications();
     const cours = this.tous();
     this.referentielBrut();
     return { cours: cours.length, prives: cours.filter((c) => c.visibilite === 'prive').length };
+  }
+
+  /** content/outils.yaml, lu une fois (relu par « Recharger les cours »). */
+  private lireOutils() { return (this.outils ??= chargerOutils()); }
+
+  /**
+   * Bloc « Avant de commencer : tes outils » d'un cours : logiciels principaux, autres et en ligne.
+   * `premier` : vrai sur la première leçon du sujet dans au moins un de ses parcours ou UE (bloc complet) ;
+   * sur les leçons suivantes, la page affiche seulement une ligne repliable. null : rien à afficher.
+   */
+  outilsDuCours(c: Cours, u: RoleOuAnonyme) {
+    const { logiciels, parSujet } = this.lireOutils();
+    const def = parSujet.get(c.sujet.cle);
+    if (!c.outilsCours && (!def || def.aucun)) return null;
+    const voir = (cles: string[]) => cles.map((k) => logiciels.get(k)).filter((x): x is Logiciel => !!x);
+    const principal = voir(c.outilsCours ?? def?.principal ?? []);
+    if (!principal.length) return null;
+    const autres = c.outilsCours ? [] : voir(def?.autres ?? []);
+    const enLigne = c.outilsCours ? [] : voir(def?.en_ligne ?? []);
+    const memeSujet = this.tous().filter((x) => x.sujet.cle === c.sujet.cle && this.visible(x, u));
+    const premierLicence = c.licence.some((l) => !memeSujet.some((x) => x.slug !== c.slug && x.ordre < c.ordre
+      && x.licence.some((m) => m.niveau === l.niveau && m.semestre === l.semestre && m.ue === l.ue)));
+    const premierParcours = c.parcours.some((p) => !memeSujet.some((x) => x.slug !== c.slug && x.parcours.some((q) => q.parcours === p.parcours && q.ordre < p.ordre)));
+    const premier = (!c.licence.length && !c.parcours.length) || premierLicence || premierParcours;
+    return { principal, autres, enLigne, premier };
+  }
+
+  /** Page /outils : les logiciels par famille, avec les sujets (ayant au moins un cours visible) qui les utilisent. */
+  pageOutils(u: RoleOuAnonyme) {
+    const { logiciels, parSujet } = this.lireOutils();
+    const cours = this.tous().filter((c) => this.visible(c, u));
+    const libelles = new Map(cours.map((c) => [c.sujet.cle, c.sujet.libelle]));
+    const sujetsDe = (cle: string) => [...parSujet.entries()]
+      .filter(([s, d]) => libelles.has(s) && [...d.principal, ...d.autres, ...d.en_ligne].includes(cle))
+      .map(([s]) => ({ cle: s, libelle: libelles.get(s) as string }))
+      .sort((a, b) => a.libelle.localeCompare(b.libelle, 'fr'));
+    const classes = new Set(FAMILLES.flatMap((f) => f.cles));
+    const familles = [...FAMILLES, { nom: 'Autres', cles: [...logiciels.keys()].filter((k) => !classes.has(k)) }]
+      .map((f) => ({ nom: f.nom, logiciels: f.cles.map((k) => logiciels.get(k)).filter((x): x is Logiciel => !!x).map((l) => ({ ...l, sujets: sujetsDe(l.cle) })) }))
+      .filter((f) => f.logiciels.length);
+    return { familles };
   }
 
   /** Mentions de marque des sujets affichés avec un logo (page « Marques »). */
@@ -254,9 +300,10 @@ export class CurriculumService implements OnModuleInit {
         return { type: 'parcours' as const, code: p.parcours, titre: def?.titre ?? p.parcours, etape: p.ordre, total: etapes.length, suivant: suivant ? { slug: suivant.slug, titre: suivant.titre } : null };
       }),
     ];
-    const { quiz, prerequisCours, ...reste } = c;
+    const { quiz, prerequisCours, outilsCours: _outilsCours, ...reste } = c;
     return {
       ...reste,
+      outils: this.outilsDuCours(c, u),
       prerequisCours: prerequisCours.map(titreDe).filter((x): x is Cours => !!x).map((x) => ({ slug: x.slug, titre: x.titre })),
       emplacements,
       quiz: quiz.map(({ question, choix }) => ({ question, choix })),

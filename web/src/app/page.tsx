@@ -11,6 +11,7 @@ import PhotoFondateur from '@/components/PhotoFondateur';
 import { api, Referentiel, ResumeCours, session, sessionValide, Utilisateur } from '@/lib/api';
 import { COULEURS_NIVEAUX } from '@/lib/domaines';
 import { CONTACT } from '@/lib/contact';
+import { LOGOS } from '@/lib/pictos-donnees';
 
 const OFFRES = [
   { Icone: BookOpen, titre: 'Des cours complets', texte: 'Chaque cours a ses chapitres, un exercice corrigé et un quiz.' },
@@ -50,6 +51,15 @@ export default function AccueilPublic() {
   }, []);
 
   const cours = ref ? coursDuReferentiel(ref) : [];
+  // Technologies enseignées : sujets avec un logo et au moins un cours public, du plus de cours au moins, 16 au plus.
+  const parSujet = new Map<string, { cle: string; libelle: string; logo: string; n: number }>();
+  for (const c of cours) {
+    if (!c.sujet?.logo || !LOGOS[c.sujet.logo]) continue;
+    const e = parSujet.get(c.sujet.cle) ?? { cle: c.sujet.cle, libelle: c.sujet.libelle, logo: c.sujet.logo, n: 0 };
+    e.n++; parSujet.set(c.sujet.cle, e);
+  }
+  const technologies = [...parSujet.values()].sort((a, b) => b.n - a.n || a.libelle.localeCompare(b.libelle, 'fr')).slice(0, 16);
+
   // Cours populaires : les premiers cours de L1, un par domaine, trois au plus.
   const populaires = [...new Map(cours.filter((c) => c.licence?.[0]?.niveau === 'L1').map((c) => [c.domaine, c])).values()].slice(0, 3);
 
@@ -101,6 +111,23 @@ export default function AccueilPublic() {
               ))}
             </div>
           </section>
+
+          {technologies.length > 0 && (
+            <section className="section-charte" aria-labelledby="t-technos">
+              <div className="section-head"><h2 id="t-technos" style={{ margin: 0 }}>Les technologies que tu vas apprendre</h2><Link href="/catalogue" className="lien-fort">Voir tous les sujets</Link></div>
+              {/* Exception voulue à « pas de logo sur l'accueil » : chaque logo identifie un sujet enseigné et mène à ses cours. */}
+              <ul className="grille-technos">
+                {technologies.map((t) => (
+                  <li key={t.cle}>
+                    <Link href={`/catalogue?sujet=${encodeURIComponent(t.cle)}`} className="carte-techno">
+                      <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true" focusable="false"><path d={LOGOS[t.logo].trace} fill={LOGOS[t.logo].hex} /></svg>
+                      <span>{t.libelle}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <section className="section-charte" aria-labelledby="t-niveau">
             <h2 id="t-niveau">Choisis ton niveau</h2>

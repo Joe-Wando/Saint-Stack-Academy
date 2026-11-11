@@ -27,6 +27,13 @@ export class CurriculumController {
     return this.curriculum.certifications();
   }
 
+  /** Page « Installer ses outils » : les logiciels par famille et les sujets qui les utilisent. Publique. */
+  @Get('outils')
+  @UseGuards(SessionFacultativeGuard)
+  outils(@Moi() u?: Utilisateur) {
+    return this.curriculum.pageOutils(u);
+  }
+
   /** Mentions de marque (page « Marques ») : sujets affichés avec un logo, puis organismes de certification avec logo. Publique. */
   @Get('marques')
   marques() {

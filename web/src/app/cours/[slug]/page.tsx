@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Shell from '@/components/Shell';
 import Quiz from '@/components/Quiz';
 import Markdown from '@/components/Markdown';
+import BlocOutils from '@/components/BlocOutils';
 import PictoSujet from '@/components/PictoSujet';
 import VisuelCours from '@/components/VisuelCours';
 import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
@@ -215,6 +216,7 @@ function Contenu({ slug }: { slug: string }) {
                     <h3>Prérequis</h3>
                     {cours.prerequis.length ? <ul>{cours.prerequis.map((p, i) => <li key={i}>{p}</li>)}</ul> : <p className="small" style={{ margin: 0 }}>Aucun : ce cours peut être suivi directement.</p>}
                   </div>
+                  <BlocOutils outils={cours.outils} />
                   {cours.referentiels.length > 0 && (
                     <div className="encadre">
                       <h3>Référentiels</h3>

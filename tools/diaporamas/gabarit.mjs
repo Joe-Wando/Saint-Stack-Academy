@@ -124,6 +124,19 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
         s.addText(t, { x: x + cote + 0.15, y, w: 3.55 - cote - 0.15 - 0.05, h: cote, fontSize: taille, bold: true, color: C.texte, valign: 'middle', margin: 0, isTextBox: true, fit: 'shrink' });
       });
     },
+    /** « Tes outils » : les logiciels à installer et ceux qui marchent en ligne (content/outils.yaml). */
+    outils(principal, enLigne = []) {
+      const s = api.contenu('Tes outils');
+      const lignes = (titre, liste) => liste.length ? [
+        { text: titre, options: { bold: true, fontSize: 15, color: C.sombre, breakLine: true, paraSpaceBefore: 6 } },
+        ...liste.flatMap((l, i) => [
+          { text: `${l.nom} : `, options: { bold: true, fontSize: 13, color: C.texte, bullet: true } },
+          { text: `${l.role}. `, options: { fontSize: 13, color: C.texte } },
+          { text: l.site.replace(/^https:\/\//, '').replace(/\/$/, ''), options: { fontSize: 11, color: C.lien, hyperlink: { url: l.site }, breakLine: true } },
+        ]),
+      ] : [];
+      api.texte(s, [...lignes('À installer', principal.slice(0, 4)), ...lignes('Sans installation', enLigne.slice(0, 2))], 0.6, 1.25, 7.4, 3.5, 13);
+    },
     async separateur(num, t) {
       section = t.replace(/ \?$/, '').slice(0, 60);
       pres.addSection({ title: section });

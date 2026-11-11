@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
 import CarteCours from '@/components/CarteCours';
 import { api, indexer, progressionSiConnecte, ResumeCours } from '@/lib/api';
@@ -18,11 +18,16 @@ function Contenu({ connecte }: { connecte: boolean }) {
   const [recherche, setRecherche] = useState('');
   const [niveau, setNiveau] = useState('tous');
   const [domaine, setDomaine] = useState('tous');
+  // Filtre par sujet, depuis l'adresse (/catalogue?sujet=docker) : accueil, page /outils.
+  const [sujet, setSujetBrut] = useState('');
+  useEffect(() => { setSujetBrut(new URLSearchParams(window.location.search).get('sujet') ?? ''); }, []);
+  const retirerSujet = () => { setSujetBrut(''); window.history.replaceState(null, '', '/catalogue'); };
   if (erreur) return <p className="error" role="alert">{erreur}</p>;
   if (!donnees) return <p className="muted">Chargement…</p>;
   const [tous, prog] = donnees;
   const idx = indexer(prog);
 
+  const libelleSujet = tous.find((c) => c.sujet?.cle === sujet)?.sujet?.libelle ?? sujet;
   const nbDomaines = new Set(tous.map((c) => infoDomaine(c.domaine).cle)).size;
   const domaines = ORDRE_DOMAINES.map((cle) => DOMAINES.find((d) => d.cle === cle)!).filter((d) => tous.some((c) => infoDomaine(c.domaine).cle === d.cle));
   const ordre = new Map(ORDRE_DOMAINES.map((c, i) => [c, i]));
@@ -32,6 +37,7 @@ function Contenu({ connecte }: { connecte: boolean }) {
   const filtres = tous
     .filter((c) => niveau === 'tous' || (niveau === 'hors' ? !c.licence?.length : c.licence?.some((l) => l.niveau === niveau)))
     .filter((c) => domaine === 'tous' || infoDomaine(c.domaine).cle === domaine)
+    .filter((c) => !sujet || c.sujet?.cle === sujet)
     .filter((c) => mots.every((m) => normal(`${c.titre} ${c.sujet?.libelle ?? ''} ${c.objectifs.join(' ')}`).includes(m)))
     .sort((a, b) => (ordre.get(infoDomaine(a.domaine).cle) ?? 99) - (ordre.get(infoDomaine(b.domaine).cle) ?? 99) || a.ordre - b.ordre);
 
@@ -59,6 +65,11 @@ function Contenu({ connecte }: { connecte: boolean }) {
           <button key={d.cle} className={`chipbtn ${domaine === d.cle ? 'on' : ''}`} aria-pressed={domaine === d.cle} onClick={() => setDomaine(d.cle)}>{d.nom}</button>
         ))}
       </div>
+      {sujet && (
+        <div className="filtres" role="group" aria-label="Filtre par sujet">
+          <button className="chipbtn on" onClick={retirerSujet} aria-label={`Retirer le filtre Sujet : ${libelleSujet}`}>Sujet : {libelleSujet} <span aria-hidden="true">×</span></button>
+        </div>
+      )}
       <p className="small muted resultats" aria-live="polite">{filtres.length} cours trouvé{filtres.length > 1 ? 's' : ''}</p>
 
       {filtres.length ? (

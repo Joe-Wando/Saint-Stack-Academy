@@ -15,6 +15,7 @@ export default function PiedDePage() {
           <Link href="/parcours">Parcours</Link>
           <Link href="/catalogue">Catalogue</Link>
           <Link href="/certifications">Certifications</Link>
+          <Link href="/outils">Installer ses outils</Link>
         </nav>
         <nav className="pied-colonne" aria-label="La plateforme">
           <span className="pied-titre">La plateforme</span>

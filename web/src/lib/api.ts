@@ -27,7 +27,13 @@ export interface Cours {
   prerequisCours: { slug: string; titre: string }[];
   emplacements: Emplacement[];
   contenu: string; quiz: { question: string; choix: string[] }[];
+  /** Logiciels du cours (content/outils.yaml) ; null quand le sujet n'en demande aucun. */
+  outils?: OutilsCours | null;
 }
+/** Un logiciel à installer, ou à utiliser en ligne. */
+export interface Logiciel { cle: string; nom: string; role: string; systemes: string[]; site: string; installer: string }
+/** Bloc « Avant de commencer : tes outils ». `premier` : première leçon du sujet (bloc complet). */
+export interface OutilsCours { principal: Logiciel[]; autres: Logiciel[]; enLigne: Logiciel[]; premier: boolean }
 export interface Progression { cours: string; statut: 'a_faire' | 'en_cours' | 'termine'; quizScore: number | null; quizTotal: number | null; quizEssais: number }
 
 export interface UeRef { titre: string; cours: ResumeCours[] }
