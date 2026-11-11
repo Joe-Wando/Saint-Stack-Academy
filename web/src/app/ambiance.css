@@ -145,3 +145,48 @@ h1 { font-weight: 800; }
 .picto-sujet { display: inline-grid; place-items: center; flex: none; border-radius: 50%; background: #fff;
   box-shadow: 0 0 0 1px rgba(33, 31, 77, .10), 0 4px 10px rgba(33, 31, 77, .12); }
 .picto-sujet svg { display: block; }
+
+/* Visuel de cours : fond du domaine + ruban de niveau + pastille du sujet */
+.visuel-cours { position: relative; }
+.ruban-niveau { position: absolute; top: 10px; left: 10px; z-index: 2; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  padding: .24rem .62rem; border-radius: 999px; color: #fff; font-family: var(--police-titre), sans-serif; font-weight: 700; font-size: .74rem; letter-spacing: .01em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .18); }
+.visuel-picto { position: absolute; right: 14px; bottom: -20px; z-index: 2; }
+.cc .cc-body { padding-top: 1.15rem; }
+.cc .cc-body > .tag.dom { margin-right: 52px; align-self: flex-start; }
+.cc-sujet { display: block; margin-top: -.15rem; font-size: .82rem; font-weight: 600; color: var(--doux); }
+.cc-h .visuel-cours { flex: none; }
+.cc-h .visuel-cours .cc-img { height: 100%; }
+/* Bannière de cours */
+.banniere-visuel .visuel-picto { right: 18px; bottom: -22px; }
+.banniere-sujet { display: inline-flex; align-items: center; gap: .5rem; margin: .1rem 0 .2rem; font-weight: 700; color: var(--dom-texte); }
+.banniere-sujet .ruban-niveau { position: static; box-shadow: none; }
+@media (min-width: 861px) { .banniere-sujet .ruban-niveau { display: none; } }
+/* Carte « Reprendre » */
+.reprendre .visuel-cours { height: 100%; }
+.reprendre .visuel-cours .reprendre-img { height: 100%; }
+@media (max-width: 600px) {
+  .ruban-niveau { font-size: .7rem; top: 8px; left: 8px; }
+}
+/* Carte horizontale (étapes d'un parcours) : la pastille à cheval sur le bord droit de l'image */
+@media (min-width: 601px) {
+  .cc-h .visuel-picto { right: -20px; bottom: 14px; }
+  .cc-h .cc-body { padding-left: 2rem; padding-top: .9rem; }
+  .cc-h .cc-body > .tag.dom { margin-right: 0; }
+}
+@media (max-width: 860px) { .banniere-visuel { display: none; } }
+@media (min-width: 861px) { .banniere-sujet .picto-sujet { display: none; } }
+/* Couverture du mode Présenter */
+.d-couverture .visuel-cours .ruban-niveau { font-size: 1rem; padding: .35rem .9rem; top: 16px; left: 16px; }
+.d-couverture .visuel-picto { right: 22px; bottom: -28px; }
+.d-sujet { margin: .2rem 0 0; font-weight: 700; font-size: 1.2rem; opacity: .9; }
+.banniere-img { aspect-ratio: 16 / 9; background: var(--dom-fond); }
+.banniere-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.d-couverture-img img { height: auto; }
+/* Couverture du mode Présenter : le visuel garde la hauteur de l'image, la pastille sur son bord */
+.d-couverture > .visuel-cours { align-self: center; margin: 3cqw 3cqw 3cqw 0; }
+.d-couverture > .visuel-cours .d-couverture-img { padding: 0; }
+.d-couverture > .visuel-cours .ruban-niveau { top: 1.2cqw; left: 1.2cqw; font-size: 1.3cqw; padding: .4cqw 1cqw; }
+.d-couverture > .visuel-cours .visuel-picto { right: 2cqw; bottom: -2.6cqw; width: 5.2cqw !important; height: 5.2cqw !important; }
+.d-couverture > .visuel-cours .visuel-picto svg { width: 2.9cqw; height: 2.9cqw; }
+.reprendre .visuel-picto { bottom: 12px; right: 12px; }

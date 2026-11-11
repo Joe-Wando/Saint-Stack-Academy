@@ -6,24 +6,27 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { plugins } from '@/components/Markdown';
 import Shell from '@/components/Shell';
+import VisuelCours from '@/components/VisuelCours';
 import { api, capitale, Cours, dureeH } from '@/lib/api';
-import { Diapositive, illustration, infoDomaine, plan, styleDomaine } from '@/lib/domaines';
+import { Diapositive, infoDomaine, plan, styleDomaine } from '@/lib/domaines';
 
 const AUTEUR = 'Olivier Jonathan DIPO WANDO';
 const LETTRES = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n: number }) {
   const dom = infoDomaine(cours.domaine);
+  const licence = cours.emplacements.flatMap((x) => (x.type === 'licence' ? [{ niveau: x.niveau, semestre: x.semestre, option: x.option }] : []));
   if (d.type === 'couverture') {
     return (
       <div className="d-couverture">
         <div className="d-couverture-txt">
           <span className="tag">{dom.nom}</span>
           <h1>{cours.titre}</h1>
+          {cours.sujet && <p className="d-sujet">{cours.sujet.libelle}</p>}
           <p className="d-info">{dureeH(cours.duree)} · {capitale(cours.difficulte)}</p>
           <p className="d-auteur">{AUTEUR}</p>
         </div>
-        <div className="d-couverture-img"><img src={illustration(cours.domaine)} alt="" width={960} height={540} /></div>
+        <VisuelCours domaine={cours.domaine} sujet={cours.sujet} licence={licence} classeImage="d-couverture-img" taillePicto={64} prioritaire />
       </div>
     );
   }

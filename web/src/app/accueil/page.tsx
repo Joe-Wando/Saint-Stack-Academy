@@ -5,9 +5,10 @@ import { CSSProperties } from 'react';
 import Shell from '@/components/Shell';
 import { Souligne } from '@/components/Decor';
 import CarteCours from '@/components/CarteCours';
+import VisuelCours from '@/components/VisuelCours';
 import { api, capitale, dureeH, indexer, libelleNiveau, MonNiveau, pourcent, Progression, ResumeCours, Utilisateur } from '@/lib/api';
 import { useDonnees } from '@/lib/donnees';
-import { illustration, infoDomaine, styleDomaine } from '@/lib/domaines';
+import { infoDomaine, styleDomaine } from '@/lib/domaines';
 import { niveau as niveauStat, parDomaine } from '@/lib/stats';
 
 /** Chapitres lus, mémorisés dans ce navigateur par la page de cours (clés ssa-lu-<slug>). */
@@ -55,10 +56,11 @@ function Contenu({ u }: { u: Utilisateur }) {
 
       {reprise ? (
         <Link href={`/cours/${reprise.slug}`} className="reprendre" style={styleDomaine(reprise.domaine)}>
-          <div className="reprendre-img"><img src={illustration(reprise.domaine)} alt="" width={960} height={540} /></div>
+          <VisuelCours domaine={reprise.domaine} sujet={reprise.sujet} licence={reprise.licence} classeImage="reprendre-img" prioritaire />
           <div className="reprendre-corps">
             <span className="tag">{statut(reprise.slug) === 'en_cours' ? 'Reprendre' : 'Cours conseillé'}</span>
             <h2>{reprise.titre}</h2>
+            {reprise.sujet && <span className="cc-sujet">{reprise.sujet.libelle}</span>}
             <p className="muted small" style={{ margin: 0 }}>
               {infoDomaine(reprise.domaine).nom} · {dureeH(reprise.duree)} · {capitale(reprise.difficulte)} · {reprise.objectifs.length} objectif{reprise.objectifs.length > 1 ? 's' : ''}
             </p>

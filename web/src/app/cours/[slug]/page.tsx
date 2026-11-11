@@ -7,9 +7,11 @@ import Shell from '@/components/Shell';
 import { Vague } from '@/components/Decor';
 import Quiz from '@/components/Quiz';
 import Markdown from '@/components/Markdown';
+import PictoSujet from '@/components/PictoSujet';
+import VisuelCours from '@/components/VisuelCours';
 import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
 import { ancreUe } from '@/lib/licence';
-import { chapitres, estCorrection, illustration, infoDomaine, styleDomaine } from '@/lib/domaines';
+import { chapitres, estCorrection, infoDomaine, niveauCours, styleDomaine } from '@/lib/domaines';
 
 type Etape = { type: 'objectifs' | 'section' | 'correction' | 'quiz'; titre: string; corps: string };
 
@@ -131,6 +133,9 @@ function Contenu({ slug }: { slug: string }) {
     ?? cours.emplacements.find((x) => x.type === 'licence' && x.suivant)?.suivant
     ?? cours.emplacements.find((x) => x.suivant)?.suivant ?? null;
 
+  const licence = cours.emplacements.flatMap((x) => (x.type === 'licence' ? [{ niveau: x.niveau, semestre: x.semestre, option: x.option }] : []));
+  const niveau = niveauCours(licence);
+
   return (
     <div style={styleDomaine(cours.domaine)}>
       <header className="banniere">
@@ -143,6 +148,13 @@ function Contenu({ slug }: { slug: string }) {
               </ul>
             )}
             <h1>{cours.titre}</h1>
+            {cours.sujet && (
+              <p className="banniere-sujet">
+                <span className="ruban-niveau" style={{ background: niveau.couleur }}>{niveau.libelle}</span>
+                <PictoSujet sujet={cours.sujet} domaine={cours.domaine} taille={30} />
+                <span>{cours.sujet.libelle}</span>
+              </p>
+            )}
             <p className="meta" style={{ marginTop: 0 }}>{dureeH(cours.duree)} · {capitale(cours.difficulte)} · {n} chapitres{cours.visibilite === 'prive' ? ' · cours privé' : ''}</p>
             <div className="banniere-actions">
               <Link href={`/cours/${slug}/presenter`} className="btn primary">Présenter</Link>
@@ -150,7 +162,9 @@ function Contenu({ slug }: { slug: string }) {
               {progChargee && <span className={`statut ${statut}`}>{STATUTS[statut]}</span>}
             </div>
           </div>
-          <div className="banniere-img"><img src={illustration(cours.domaine)} alt="" width={960} height={540} /></div>
+          <div className="banniere-visuel">
+            <VisuelCours domaine={cours.domaine} sujet={cours.sujet} licence={licence} classeImage="banniere-img" taillePicto={52} prioritaire />
+          </div>
         </div>
         <Vague />
       </header>

@@ -149,3 +149,42 @@ export function plan(cours) {
   (cours.quiz ?? []).forEach((q, i) => res.push({ type: 'question', numero: i + 1, total: cours.quiz.length, question: q.question, choix: q.choix }));
   return res;
 }
+
+/* ==========================================================================
+   Couleurs des niveaux : cartes, bannières, images de partage et avatars par défaut.
+   Texte blanc sur chaque couleur (contraste vérifié, de 5,2:1 à 10,3:1).
+   ========================================================================== */
+export const COULEURS_NIVEAUX = {
+  L1: '#0F7B5F',
+  L2: '#185FA5',
+  L3: '#534AB7',                        // tronc commun de L3
+  'big-data-ia': '#A04D08',
+  'reseaux-systemes-cloud': '#0E6A84',
+  'developpement-logiciel': '#9D2E5C',
+  parcours: '#3C3489',                  // cours hors licence, et utilisateur sans niveau
+};
+
+/** Noms courts des options de L3, pour les rubans. */
+export const OPTIONS_COURTES = {
+  'big-data-ia': 'Big Data et IA',
+  'reseaux-systemes-cloud': 'Réseaux, systèmes et cloud',
+  'developpement-logiciel': 'Développement logiciel',
+};
+
+/**
+ * Niveau d'un cours, d'après son PREMIER emplacement de licence :
+ * « L1 · S1 », « L3 · S5 » (tronc commun), « L3 · Big Data et IA » (option), ou « Parcours » hors licence.
+ */
+export function niveauCours(licence) {
+  const l = Array.isArray(licence) ? licence[0] : null;
+  if (!l) return { cle: 'parcours', libelle: 'Parcours', couleur: COULEURS_NIVEAUX.parcours };
+  if (l.option && COULEURS_NIVEAUX[l.option]) {
+    return { cle: l.option, libelle: `${l.niveau} · ${OPTIONS_COURTES[l.option] ?? l.option}`, couleur: COULEURS_NIVEAUX[l.option] };
+  }
+  return { cle: l.niveau, libelle: `${l.niveau} · ${l.semestre}`, couleur: COULEURS_NIVEAUX[l.niveau] ?? COULEURS_NIVEAUX.parcours };
+}
+
+/** Couleur d'un utilisateur selon son niveau (avatar par défaut) : violet foncé s'il n'en a pas. */
+export function couleurUtilisateur(niveau) {
+  return COULEURS_NIVEAUX[niveau] ?? COULEURS_NIVEAUX.parcours;
+}

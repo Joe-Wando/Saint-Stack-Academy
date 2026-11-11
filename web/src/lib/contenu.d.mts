@@ -20,3 +20,9 @@ export type Diapositive =
   | ({ type: 'contenu' } & Diapo)
   | { type: 'question'; numero: number; total: number; question: string; choix: string[] };
 export function plan(cours: { titre: string; domaine: string; contenu: string; objectifs?: string[]; quiz?: { question: string; choix: string[] }[] }): Diapositive[];
+
+export interface NiveauCours { cle: string; libelle: string; couleur: string }
+export const COULEURS_NIVEAUX: Record<string, string>;
+export const OPTIONS_COURTES: Record<string, string>;
+export function niveauCours(licence: { niveau: string; semestre: string; option?: string }[] | null | undefined): NiveauCours;
+export function couleurUtilisateur(niveau: string | null | undefined): string;

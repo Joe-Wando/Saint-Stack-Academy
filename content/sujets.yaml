@@ -45,7 +45,7 @@ sujets:
   supervision:  { libelle: "Supervision",          logo: null,         icone: activity,      marque: null }
   ansible:      { libelle: "Ansible",              logo: null,         icone: settings-2,    marque: null }
   # Déploiement
-  githubpages:  { libelle: "GitHub Pages",         logo: githubpages,  icone: rocket,        marque: "GitHub est une marque de GitHub, Inc." }
+  githubpages:  { libelle: "GitHub Pages",         logo: github,       icone: rocket,        marque: "GitHub et le logo GitHub sont des marques de GitHub, Inc." }
   netlify:      { libelle: "Netlify",              logo: netlify,      icone: rocket,        marque: "Netlify est une marque de Netlify, Inc." }
   vercel:       { libelle: "Vercel",               logo: vercel,       icone: rocket,        marque: "Vercel est une marque de Vercel, Inc." }
   dns:          { libelle: "DNS et HTTPS",         logo: null,         icone: globe,         marque: null }

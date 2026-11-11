@@ -36,13 +36,18 @@ function trouver(rep) {
         await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
         await page.evaluate((s) => localStorage.setItem('ssa-session', JSON.stringify(s)), t.session);
       }
-      await page.goto(t.url, { waitUntil: 'networkidle0', timeout: 45000 });
+      await page.goto(t.url, { waitUntil: 'networkidle2', timeout: 45000 }).catch((e) => console.error('Attente réseau :', t.url, e.message));
       // Attendre la fin des « Chargement… » des pages client.
       await page.waitForFunction(() => !/Chargement…/.test(document.body.innerText), { timeout: 15000 }).catch(() => {});
       // Maquette : CSS ajouté à la page avant la capture, sans toucher au site.
       if (t.css) await page.addStyleTag({ content: t.css });
       await page.evaluate(() => document.fonts && document.fonts.ready);
+      // Charger les images différées (loading=lazy) avant la capture.
+      await page.evaluate(() => document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }));
+      await page.waitForFunction(() => [...document.images].every((i) => i.complete), { timeout: 10000 }).catch(() => {});
       if (t.defiler) await page.evaluate((y) => window.scrollTo(0, y), t.defiler);
+      // Faire défiler jusqu'à un élément (sélecteur CSS), sous l'en-tête collant.
+      if (t.element) await page.evaluate((sel) => { const e = document.querySelector(sel); if (e) window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 90); }, t.element);
       await new Promise((r) => setTimeout(r, 400));
       await page.screenshot({ path: t.sortie, fullPage: !!t.pleinePage });
       console.log(t.sortie);
