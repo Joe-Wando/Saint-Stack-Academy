@@ -14,7 +14,7 @@ export default function CadreAuth({ titre, children }: { titre: string; children
         <PhotoFondateur className="auth-photo" taille={280} sizes="(max-width: 860px) 96px, 280px" priority />
         <figure className="auth-citation">
           <blockquote>« Une notion à la fois. Chaque chapitre compris est une victoire. »</blockquote>
-          <figcaption>{CONTACT.fondateur}, fondateur</figcaption>
+          <figcaption>{CONTACT.fondateur}, {CONTACT.titre.toLowerCase()}, fondateur</figcaption>
         </figure>
         <ul className="auth-puces">
           <li>Cours gratuits</li>
@@ -24,7 +24,7 @@ export default function CadreAuth({ titre, children }: { titre: string; children
       </aside>
       <div className="auth-col">
         <div className="auth-card">
-          <Link href="/" className="brand"><Monogramme />Saint Stack Academy</Link>
+          <Link href="/" className="brand"><Monogramme />MeredianStack</Link>
           <h1>{titre}</h1>
           {children}
         </div>

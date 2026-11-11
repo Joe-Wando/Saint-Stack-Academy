@@ -3,7 +3,7 @@ import { metaPartage } from '@/lib/meta';
 
 export const metadata = metaPartage({
   titre: 'Marques et logos',
-  description: 'Les mentions de marque des technologies et des organismes de certification cités sur Saint Stack Academy.',
+  description: 'Les mentions de marque des technologies et des organismes de certification cités sur MeredianStack.',
   chemin: '/marques',
 });
 

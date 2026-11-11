@@ -96,7 +96,7 @@ export class MoiController {
     const [extra] = await this.db.query('SELECT email_verifie AS "emailVerifie", confidentialite_acceptee_le AS "confidentialiteAccepteeLe" FROM utilisateurs WHERE id = $1', [u.id]);
     return {
       exporteLe: new Date().toISOString(),
-      plateforme: 'Saint Stack Academy',
+      plateforme: 'MeredianStack',
       profil: { ...profil, ...extra },
       progression: await this.db.query('SELECT cours, statut, quiz_score AS "quizScore", quiz_total AS "quizTotal", quiz_essais AS "quizEssais", maj_le AS "majLe" FROM progression WHERE utilisateur_id = $1 ORDER BY cours', [u.id]),
       activites: await this.db.query('SELECT cours, type, detail, cree_le AS date FROM activites WHERE utilisateur_id = $1 ORDER BY cree_le', [u.id]),

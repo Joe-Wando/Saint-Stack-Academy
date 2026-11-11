@@ -10,7 +10,7 @@ export default function Confidentialite() {
       {() => (
         <article className="card texte-long">
           <p className="eyebrow">Confidentialité</p>
-          <h1>Tes données sur Saint Stack Academy</h1>
+          <h1>Tes données sur MeredianStack</h1>
           <p className="muted">Dernière mise à jour : novembre 2026.</p>
 
           <h2>Ce que nous enregistrons</h2>

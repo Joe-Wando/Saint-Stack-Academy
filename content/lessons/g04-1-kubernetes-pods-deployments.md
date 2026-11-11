@@ -92,7 +92,7 @@ On ne dit pas à Kubernetes **comment** faire (« lance un conteneur, puis un au
 
 ```bash
 # Option 1 : kind (Kubernetes IN Docker), léger
-kind create cluster --name saint-stack
+kind create cluster --name meredianstack
 # Option 2 : minikube
 minikube start
 # Docker Desktop : Settings, puis Kubernetes, puis Enable
@@ -166,7 +166,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/saint-stack/boutique-api:1.0
+          image: ghcr.io/meredianstack/boutique-api:1.0
           ports:
             - containerPort: 3000
           resources:
@@ -188,7 +188,7 @@ kubectl apply -f deployment.yaml
 kubectl get deploy,rs,pods
 kubectl scale deployment boutique-api --replicas=5
 kubectl delete pod <un-des-pods>            # il est recréé aussitôt
-kubectl set image deployment/boutique-api api=ghcr.io/saint-stack/boutique-api:1.1
+kubectl set image deployment/boutique-api api=ghcr.io/meredianstack/boutique-api:1.1
 kubectl rollout status deployment/boutique-api   # mise à jour progressive
 kubectl rollout history deployment/boutique-api
 kubectl rollout undo deployment/boutique-api     # retour à la 1.0

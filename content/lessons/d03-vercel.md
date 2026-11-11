@@ -140,7 +140,7 @@ Le code serveur de Next.js tourne sous forme de **fonctions** : elles démarrent
 - pas de stockage de fichiers local durable : utilise un stockage externe pour les photos téléversées ;
 - une base de données **hébergée** est nécessaire.
 
-C'est pourquoi l'API NestJS de la plateforme Saint Stack Academy, avec son serveur permanent et ses fichiers, est plutôt destinée à un VPS avec Docker Compose. Son front-end Next.js, lui, pourrait aller sur Vercel.
+C'est pourquoi l'API NestJS de la plateforme MeredianStack, avec son serveur permanent et ses fichiers, est plutôt destinée à un VPS avec Docker Compose. Son front-end Next.js, lui, pourrait aller sur Vercel.
 
 ## Démonstration
 

@@ -147,7 +147,7 @@ Quand un texte affiche « Ã© » à la place de « é », c'est qu'un fichier �
 
 Une image numérique est une grille de **pixels**. En mode **RVB** (rouge, vert, bleu ; *RGB* en anglais), chaque pixel a trois composantes de 0 à 255, soit un octet chacune : 3 octets par pixel, et 2²⁴ ≈ 16,7 millions de couleurs.
 
-En CSS, la couleur `#534AB7` signifie : rouge 0x53 = 83, vert 0x4A = 74, bleu 0xB7 = 183. C'est le violet de Saint Stack Academy.
+En CSS, la couleur `#534AB7` signifie : rouge 0x53 = 83, vert 0x4A = 74, bleu 0xB7 = 183. C'est le violet de MeredianStack.
 
 Une photo de 1920 × 1080 pixels, non compressée, pèse 1920 × 1080 × 3 ≈ 6,2 Mo. Les formats JPEG, PNG ou WebP la **compressent** pour réduire fortement ce poids.
 

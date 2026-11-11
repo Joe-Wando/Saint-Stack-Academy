@@ -70,7 +70,7 @@ Le Sénégal a adopté dès 2008 la **loi n° 2008-12** sur la protection des do
 | **Sécurité** | On protège les données contre la perte, le vol et l'accès non autorisé. |
 | **Droits des personnes** | Accès, rectification, opposition, suppression. |
 
-Pour un développeur, cela se traduit concrètement : pas de champ de formulaire inutile, des mots de passe **hachés** et jamais stockés en clair, une page de confidentialité, et une fonction pour exporter ou supprimer son compte. La plateforme Saint Stack Academy applique ces principes : tu peux le vérifier sur sa page « Confidentialité ».
+Pour un développeur, cela se traduit concrètement : pas de champ de formulaire inutile, des mots de passe **hachés** et jamais stockés en clair, une page de confidentialité, et une fonction pour exporter ou supprimer son compte. La plateforme MeredianStack applique ces principes : tu peux le vérifier sur sa page « Confidentialité ».
 
 ## Ta sécurité personnelle
 

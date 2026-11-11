@@ -161,9 +161,9 @@ docker run -d --name web -p 8080:80 nginx:1.27
 curl -I localhost:8080                      # 200 OK, Server: nginx
 docker exec -it web sh
   cat /etc/os-release                       # Debian : le conteneur a son propre système de fichiers
-  echo "<h1>Saint Stack</h1>" > /usr/share/nginx/html/index.html
+  echo "<h1>MeredianStack</h1>" > /usr/share/nginx/html/index.html
   exit
-curl localhost:8080                         # <h1>Saint Stack</h1>
+curl localhost:8080                         # <h1>MeredianStack</h1>
 docker logs web                             # on voit nos requêtes curl
 docker rm -f web && docker run -d --name web -p 8080:80 nginx:1.27
 curl localhost:8080                         # la page par défaut revient : la modification est perdue

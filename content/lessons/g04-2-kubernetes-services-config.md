@@ -153,7 +153,7 @@ kubectl get secret boutique-db -o yaml       # la valeur apparaît en base64
     spec:
       containers:
         - name: api
-          image: ghcr.io/saint-stack/boutique-api:1.0
+          image: ghcr.io/meredianstack/boutique-api:1.0
           envFrom:
             - configMapRef: { name: boutique-config }     # toutes les clés deviennent des variables
             - secretRef:    { name: boutique-db }

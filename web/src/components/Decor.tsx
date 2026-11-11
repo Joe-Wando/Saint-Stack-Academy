@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
-/* Éléments décoratifs de la charte Saint Stack : vague, macaron festonné, trait de pinceau, étincelles.
+/* Éléments décoratifs de la charte MeredianStack : vague, macaron festonné, trait de pinceau, étincelles.
    Tous sont purement décoratifs (aria-hidden) et suivent la couleur du texte (currentColor). */
 
 /** Vague de transition entre deux sections. `haut` : la vague est en haut de la section suivante. */

@@ -1,7 +1,7 @@
 import { COULEURS_NIVEAUX } from '@/lib/contenu.mjs';
 import { imageGabarit, TAILLE_OG, TYPE_OG } from '@/lib/og';
 
-export const alt = 'Les certifications à viser, niveau par niveau, sur Saint Stack Academy';
+export const alt = 'Les certifications à viser, niveau par niveau, sur MeredianStack';
 export const size = TAILLE_OG;
 export const contentType = TYPE_OG;
 

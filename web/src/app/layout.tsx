@@ -20,10 +20,10 @@ const DESCRIPTION = 'Apprends l’informatique à ton rythme, de la L1 aux méti
 export const metadata: Metadata = {
   // Adresse publique du site : les images de partage sont annoncées avec une URL absolue.
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: { default: 'Saint Stack Academy', template: '%s · Saint Stack Academy' },
+  title: { default: 'MeredianStack', template: '%s · MeredianStack' },
   description: DESCRIPTION,
-  openGraph: { title: 'Saint Stack Academy', description: DESCRIPTION, siteName: 'Saint Stack Academy', locale: 'fr_FR', type: 'website' },
-  twitter: { card: 'summary_large_image', title: 'Saint Stack Academy', description: DESCRIPTION },
+  openGraph: { title: 'MeredianStack', description: DESCRIPTION, siteName: 'MeredianStack', locale: 'fr_FR', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'MeredianStack', description: DESCRIPTION },
 };
 
 export const viewport: Viewport = { themeColor: CHARTE.nuit };

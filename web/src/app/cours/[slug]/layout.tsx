@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const c = await coursServeur(slug);
   if (!c) return {};
-  const description = c.objectifs?.[0] ? `${c.objectifs[0]}` : `Cours de ${c.domaine} sur Saint Stack Academy.`;
+  const description = c.objectifs?.[0] ? `${c.objectifs[0]}` : `Cours de ${c.domaine} sur MeredianStack.`;
   return metaPartage({ titre: c.titre, description, chemin: `/cours/${slug}` });
 }
 

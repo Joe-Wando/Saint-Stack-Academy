@@ -122,7 +122,7 @@ Fichier `/etc/systemd/system/api.service` :
 
 ```ini
 [Unit]
-Description=API Saint Stack
+Description=API MeredianStack
 After=network.target postgresql.service
 
 [Service]

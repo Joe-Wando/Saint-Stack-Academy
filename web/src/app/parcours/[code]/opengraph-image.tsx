@@ -1,7 +1,7 @@
 import { imageDefaut, imageGabarit, TAILLE_OG, TYPE_OG } from '@/lib/og';
 import { gabaritParcours } from '@/lib/og-donnees';
 
-export const alt = 'Aperçu d’un parcours métier de Saint Stack Academy';
+export const alt = 'Aperçu d’un parcours métier de MeredianStack';
 export const size = TAILLE_OG;
 export const contentType = TYPE_OG;
 

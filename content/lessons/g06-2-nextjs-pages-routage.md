@@ -110,7 +110,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import './globals.css';
 
-export const metadata: Metadata = { title: 'Boutique Saint Stack', description: 'Mode et accessoires à Dakar' };
+export const metadata: Metadata = { title: 'Boutique MeredianStack', description: 'Mode et accessoires à Dakar' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

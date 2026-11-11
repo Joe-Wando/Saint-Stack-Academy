@@ -21,7 +21,7 @@ export const config = {
     port: Number(env('SMTP_PORT') || 587),
     user: env('SMTP_USER'),
     pass: env('SMTP_PASS'),
-    from: env('SMTP_FROM') || 'Saint Stack Academy <no-reply@localhost>',
+    from: env('SMTP_FROM') || 'MeredianStack <no-reply@localhost>',
   },
 };
 

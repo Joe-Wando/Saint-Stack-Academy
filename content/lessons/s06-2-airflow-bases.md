@@ -125,7 +125,7 @@ from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
 
 @dag(
-    dag_id="bonjour_saint_stack",
+    dag_id="bonjour_meredianstack",
     schedule="@daily",                      # ou une expression cron : "0 2 * * *"
     start_date=datetime(2026, 12, 1),
     catchup=False,                          # ne pas rattraper les jours passés
@@ -180,7 +180,7 @@ Le **fuseau horaire** : Airflow raisonne en UTC par défaut. Dakar étant en UTC
 - **Les journaux** : un clic sur une tâche, puis *Logs*. C'est là qu'on lit les erreurs.
 - **Clear** : relancer une tâche, et éventuellement celles qui en dépendent.
 
-En ligne de commande : `docker compose exec airflow-scheduler airflow dags test bonjour_saint_stack 2026-12-15` exécute le DAG une fois, pour tester.
+En ligne de commande : `docker compose exec airflow-scheduler airflow dags test bonjour_meredianstack 2026-12-15` exécute le DAG une fois, pour tester.
 
 ## Démonstration
 

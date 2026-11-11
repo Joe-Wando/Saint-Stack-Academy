@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { config } from '../config';
 
-const NOM = 'Saint Stack Academy';
+const NOM = 'MeredianStack';
 
 /** Échappe le texte inséré dans le HTML d'un e-mail. */
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));

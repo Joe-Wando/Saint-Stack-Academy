@@ -1,7 +1,7 @@
 import { imageDefaut, imageGabarit, TAILLE_OG, TYPE_OG } from '@/lib/og';
 import { gabaritNiveau } from '@/lib/og-donnees';
 
-export const alt = 'Aperçu d’un niveau de licence sur Saint Stack Academy';
+export const alt = 'Aperçu d’un niveau de licence sur MeredianStack';
 export const size = TAILLE_OG;
 export const contentType = TYPE_OG;
 

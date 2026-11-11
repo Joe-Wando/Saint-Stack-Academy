@@ -94,7 +94,7 @@ function Contenu({ u, maj }: { u: Utilisateur; maj: (u: Utilisateur) => void }) 
               <PhotoFondateur className="bienvenue-photo" taille={120} decorative />
               <div>
                 <h1 ref={titre} tabIndex={-1}>Bienvenue, {u.nom.split(' ')[0]}</h1>
-                <p>Je suis Olivier, fondateur de Saint Stack Academy. Ici, tu apprends à ton rythme, sans pression ni calendrier. Voici ce que tu peux faire.</p>
+                <p>Je suis Olivier, fondateur de MeredianStack. Ici, tu apprends à ton rythme, sans pression ni calendrier. Voici ce que tu peux faire.</p>
               </div>
             </div>
             <ul className="usages">

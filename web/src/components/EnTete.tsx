@@ -9,7 +9,7 @@ export interface LienMenu { href: string; label: string }
 
 /**
  * En-tête de la charte (CHARTE.md § 4) : fond blanc, trait corail de 3 px en bas,
- * « Saint Stack » en bleu nuit et « Academy » en corail, lien actif souligné de corail.
+ * « MeredianStack » en bleu nuit et « Academy » en corail, lien actif souligné de corail.
  * Sous 1024 px, le menu se replie derrière un bouton à trois traits de 44 × 44 px.
  */
 export default function EnTete({ accueil, liens, droite }: { accueil: string; liens: LienMenu[]; droite: ReactNode }) {
@@ -27,8 +27,8 @@ export default function EnTete({ accueil, liens, droite }: { accueil: string; li
   return (
     <header className={`topbar${ouvert ? ' menu-ouvert' : ''}`}>
       <div className="topbar-in">
-        <Link href={accueil} className="brand" aria-label="Saint Stack Academy, page d’accueil">
-          <Monogramme /><span className="brand-name">Saint Stack <span className="brand-academy">Academy</span></span>
+        <Link href={accueil} className="brand" aria-label="MeredianStack, page d’accueil">
+          <Monogramme /><span className="brand-name">Meredian<span className="brand-academy">Stack</span></span>
         </Link>
         <button type="button" className="menu-btn" aria-expanded={ouvert} aria-controls="menu-principal" onClick={() => setOuvert((o) => !o)}>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>

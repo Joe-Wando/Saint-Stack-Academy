@@ -206,7 +206,7 @@ On reprend la vitrine React du cours « React, composants, props, état et route
 - un en-tête `flex justify-between items-center` ;
 - une grille de cartes responsive ;
 - des cartes `rounded-xl shadow` avec un effet `hover:shadow-lg` ;
-- un bouton aux couleurs de Saint Stack.
+- un bouton aux couleurs de MeredianStack.
 
 ## Exercice guidé
 

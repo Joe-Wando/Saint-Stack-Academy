@@ -231,7 +231,7 @@ async function automatique(d, cours, sujet) {
     const defi = defiTexte.split(/\s+/).slice(0, 45).join(' ') + (mots(defiTexte) > 45 ? '…' : '');
     if (liens.length || defi) {
       const s = d.contenu('Mise en pratique');
-      await d.ressources(s, liens.length ? liens : [['graduation-cap', 'Cours Saint Stack Academy', cours.titre, null]], defi || null);
+      await d.ressources(s, liens.length ? liens : [['graduation-cap', 'Cours MeredianStack', cours.titre, null]], defi || null);
     }
   }
 }

@@ -6,7 +6,7 @@ import { LOGOS } from '@/lib/pictos-donnees';
  * - Logo simple-icons dans sa couleur d'origine, sans modification, 24 px de haut au plus.
  * - Toujours accompagné du nom de l'organisme en texte ; sans logo disponible, le nom seul.
  * - Lien vers le site officiel, dans un nouvel onglet.
- * Il indique seulement OÙ se passe la certification : Saint Stack Academy n'est pas partenaire de l'organisme.
+ * Il indique seulement OÙ se passe la certification : MeredianStack n'est pas partenaire de l'organisme.
  */
 export default function LogoOrganisme({ o, taille = 24 }: { o: OrganismeCertif; taille?: number }) {
   const logo = o.logo ? LOGOS[o.logo] : undefined;
@@ -26,10 +26,10 @@ export default function LogoOrganisme({ o, taille = 24 }: { o: OrganismeCertif; 
 /** « de Cisco », « d’OpenEDG Python Institute ». */
 const de = (nom: string) => (/^[aeiouyéèh]/i.test(nom) ? `d’${nom}` : `de ${nom}`);
 
-/** « Délivrée par Cisco et OpenEDG. Saint Stack Academy n’est partenaire ni de Cisco ni d’OpenEDG. » */
+/** « Délivrée par Cisco et OpenEDG. MeredianStack n’est partenaire ni de Cisco ni d’OpenEDG. » */
 export function mentionOrganismes(noms: string[], feminin = true) {
   if (!noms.length) return '';
   const par = noms.length > 1 ? `${noms.slice(0, -1).join(', ')} et ${noms[noms.length - 1]}` : noms[0];
   const partenaire = noms.length > 1 ? `n’est partenaire ${noms.map((n) => `ni ${de(n)}`).join(' ')}` : `n’est pas partenaire ${de(noms[0])}`;
-  return `Délivré${feminin ? 'e' : ''} par ${par}. Saint Stack Academy ${partenaire}.`;
+  return `Délivré${feminin ? 'e' : ''} par ${par}. MeredianStack ${partenaire}.`;
 }

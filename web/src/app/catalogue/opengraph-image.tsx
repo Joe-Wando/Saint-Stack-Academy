@@ -1,7 +1,7 @@
 import { COULEURS_NIVEAUX, infoDomaine } from '@/lib/contenu.mjs';
 import { apiServeur, imageGabarit, TAILLE_OG, TYPE_OG } from '@/lib/og';
 
-export const alt = 'Le catalogue des cours de Saint Stack Academy, domaine par domaine';
+export const alt = 'Le catalogue des cours de MeredianStack, domaine par domaine';
 export const size = TAILLE_OG;
 export const contentType = TYPE_OG;
 // Rendue à la demande (l'API n'est pas joignable pendant la construction) ; la réponse de l'API reste en cache une journée.

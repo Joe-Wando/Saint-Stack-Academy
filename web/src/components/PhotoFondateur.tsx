@@ -23,7 +23,7 @@ export default function PhotoFondateur({ taille, className, priority = false, si
 }) {
   const [perso, setPerso] = useState<string | null | undefined>(undefined);
   useEffect(() => { lirePhotoFondateur().then(setPerso); }, []);
-  const alt = decorative ? '' : `Portrait d’${CONTACT.fondateur}, fondateur de Saint Stack Academy`;
+  const alt = decorative ? '' : `Portrait d’${CONTACT.fondateur}, développeur et data analyst, fondateur de MeredianStack`;
   if (perso === undefined) return <span className={className} style={{ width: taille, height: taille, display: 'inline-block', background: 'var(--p-clair)' }} aria-hidden="true" />;
   return perso
     ? <Image className={className} src={`${API}/photos/${perso}`} alt={alt} width={taille} height={taille} sizes={sizes ?? `${taille}px`} priority={priority} unoptimized />

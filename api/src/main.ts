@@ -38,6 +38,6 @@ async function demarrer() {
   app.enableCors({ origin: config.corsOrigin.split(',').map((s) => s.trim()) });
   app.setGlobalPrefix('api');
   await app.listen(config.port);
-  console.log(`API Saint Stack Academy sur le port ${config.port}`);
+  console.log(`API MeredianStack sur le port ${config.port}`);
 }
 demarrer();

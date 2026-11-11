@@ -8,7 +8,7 @@ import { logosDisponibles } from './sujets';
 /**
  * Organisme qui délivre une certification, renvoyé avec chaque élément de certifications.yaml.
  * Le logo (simple-icons, couleur d'origine) indique seulement OÙ se passe la certification :
- * Saint Stack Academy n'est partenaire d'aucun de ces organismes.
+ * MeredianStack n'est partenaire d'aucun de ces organismes.
  */
 export interface OrganismeCertif { cle: string; nom: string; logo: string | null; site: string }
 

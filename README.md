@@ -1,4 +1,4 @@
-# Saint Stack Academy
+# MeredianStack
 
 Une plateforme ouverte à tous les étudiants en informatique, quelle que soit leur école : des cours en chapitres, des exercices corrigés, des quiz corrigés par le serveur et le suivi de sa progression. Chacun avance à son rythme, sans calendrier.
 

@@ -114,7 +114,7 @@ ansible web -i inventaire.ini -m command -a "uptime"  # commande ponctuelle (mod
   hosts: web
   become: true                       # sudo
   vars:
-    site_titre: "Boutique Saint Stack"
+    site_titre: "Boutique MeredianStack"
   tasks:
     - name: Installer nginx
       ansible.builtin.apt:
@@ -222,7 +222,7 @@ Le fichier est **chiffré** (AES-256). On peut le commiter dans Git, mais **jama
 
 1. installe `htop`, `tree` et `curl` (une seule tâche, avec une liste) ;
 2. crée l'utilisateur `formation`, dans le groupe `sudo` ;
-3. crée le dossier `/opt/saint-stack`, avec le propriétaire `formation` et les droits `0750`.
+3. crée le dossier `/opt/meredianstack`, avec le propriétaire `formation` et les droits `0750`.
 
 Lance-le deux fois et compare les récapitulatifs.
 
@@ -253,7 +253,7 @@ Exercice guidé :
         groups: sudo
         append: true
     - ansible.builtin.file:
-        path: /opt/saint-stack
+        path: /opt/meredianstack
         state: directory
         owner: formation
         mode: "0750"

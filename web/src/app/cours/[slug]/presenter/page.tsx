@@ -54,7 +54,7 @@ function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n:
       <p className="d-surtitre">{surtitre}</p>
       <h2 className="d-titre">{titre}</h2>
       <div className="d-corps">{corps}</div>
-      <div className="d-pied"><span>Saint Stack Academy · {cours.titre}</span><span>{i + 1} / {n}</span></div>
+      <div className="d-pied"><span>MeredianStack · {cours.titre}</span><span>{i + 1} / {n}</span></div>
     </div>
   );
 }

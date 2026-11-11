@@ -1,7 +1,9 @@
 /** Coordonnées affichées sur la page Contact : à modifier ici, et seulement ici. */
 export const CONTACT = {
   fondateur: 'Olivier Jonathan DIPO WANDO',
-  role: 'Fondateur et formateur, Saint Stack Academy',
+  /** Titre du fondateur, repris sur Contact, l'accueil, la connexion et les PowerPoint. */
+  titre: 'Développeur et data analyst',
+  role: 'Développeur et data analyst · Fondateur et formateur de MeredianStack',
   photo: '/olivier.jpg',
   telephoneAffiche: '+221 78 526 82 08',
   telephone: '+221785268208',

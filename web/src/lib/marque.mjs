@@ -1,4 +1,4 @@
-/* Monogramme PROVISOIRE de Saint Stack Academy, défini ICI SEULEMENT.
+/* Monogramme PROVISOIRE de MeredianStack, défini ICI SEULEMENT.
    Il sert à l'en-tête, au pied de page, aux pages de connexion, au favicon, aux icônes de l'application
    et aux images de partage. Le jour où le vrai logo arrive : changer ces valeurs (ou ce fichier),
    puis lancer « npm run icones » à la racine pour régénérer les fichiers d'icônes. */
@@ -6,10 +6,10 @@
 import { CHARTE } from './charte.mjs';
 
 export const MARQUE = {
-  nom: 'Saint Stack Academy',
-  nomCourt: 'Saint Stack',
+  nom: 'MeredianStack',
+  nomCourt: 'MeredianStack',
   /** Lettres du monogramme. */
-  lettres: 'SS',
+  lettres: 'MS',
   /** Fond du carré (bleu nuit de la charte) et couleur des lettres. */
   fond: CHARTE.nuit,
   texte: '#FFFFFF',

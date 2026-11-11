@@ -125,7 +125,7 @@ export default async function diaporama(d) {
     await d.ressources(s, [
       ['book-open', 'Documentation officielle', 'docs.docker.com', 'https://docs.docker.com/get-started/'],
       ['play', 'Play with Docker', 'Un environnement Docker gratuit en ligne', 'https://labs.play-with-docker.com/'],
-      ['graduation-cap', 'Cours Saint Stack Academy', 'Docker, images et conteneurs', null],
+      ['graduation-cap', 'Cours MeredianStack', 'Docker, images et conteneurs', null],
     ], 'Écris le Dockerfile d’une petite API Node, puis un compose.yaml qui la lance avec PostgreSQL. Arrête tout, relance : les données doivent toujours être là.');
   }
 

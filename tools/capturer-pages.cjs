@@ -28,8 +28,8 @@ function trouver(rep) {
   const nav = await puppeteer.launch({ executablePath: navigateur, headless: 'shell', userDataDir: profil, args: ['--hide-scrollbars'] });
   try {
     for (const t of travaux) {
-      // Seuls le site local et les maquettes fournies (dossier saint-stack-charte-unipro/maquette) sont acceptés.
-      if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url) && !/^file:\/\/\/.*\/saint-stack-charte-unipro\/maquette\/[A-Za-z0-9]+\.html$/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
+      // Seuls le site local et les maquettes fournies (dossier meredianstack-charte-unipro\/charte-unipro\/maquette) sont acceptés.
+      if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url) && !/^file:\/\/\/.*\/meredianstack-charte-unipro\/maquette\/[A-Za-z0-9]+\.html$/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
       const page = await nav.newPage();
       try {
       await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);

@@ -171,7 +171,7 @@ function OngletSecurite({ u }: { u: Utilisateur }) {
     const d = await api('/moi/donnees');
     const url = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' }));
     const a = document.createElement('a');
-    a.href = url; a.download = 'mes-donnees-saint-stack-academy.json';
+    a.href = url; a.download = 'mes-donnees-meredianstack.json';
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
   }

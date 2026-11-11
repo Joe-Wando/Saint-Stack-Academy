@@ -125,7 +125,7 @@ export default async function diaporama(d) {
     await d.ressources(s, [
       ['book-open', 'cppreference.com', 'La référence du langage C', 'https://en.cppreference.com/w/c'],
       ['play', 'OnlineGDB', 'Compiler en ligne, sans installer', 'https://www.onlinegdb.com/online_c_compiler'],
-      ['graduation-cap', 'Cours Saint Stack Academy', 'Langage C : premier programme, variables et types', null],
+      ['graduation-cap', 'Cours MeredianStack', 'Langage C : premier programme, variables et types', null],
     ], 'Écris un programme qui lit 5 notes, affiche la moyenne, la meilleure note et le nombre d’admis (note ≥ 10). Refuse toute note hors de 0 à 20.');
   }
 

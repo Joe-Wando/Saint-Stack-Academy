@@ -6,7 +6,7 @@ export default function PiedDePage() {
     <footer className="pied">
       <div className="pied-in">
         <div className="pied-presentation">
-          <span className="pied-nom">Saint Stack <span className="brand-academy">Academy</span></span>
+          <span className="pied-nom">Meredian<span className="brand-academy">Stack</span></span>
           <p>Des cours d’informatique gratuits, de la L1 aux métiers, pour apprendre à ton rythme.</p>
         </div>
         <nav className="pied-colonne" aria-label="Apprendre">
@@ -23,7 +23,7 @@ export default function PiedDePage() {
           <Link href="/marques">Marques</Link>
         </nav>
       </div>
-      <p className="pied-copyright">© 2026 Saint Stack Academy</p>
+      <p className="pied-copyright">© 2026 MeredianStack</p>
     </footer>
   );
 }

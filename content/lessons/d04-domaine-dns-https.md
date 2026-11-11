@@ -159,7 +159,7 @@ Sans acheter de domaine, réponds sur ta feuille :
 1. Si tu as un domaine, ou avec un domaine gratuit de test, relie-le à l'un de tes sites, avec la racine **et** `www`, en HTTPS.
 2. Vérifie avec `dig` et `curl -I`, et capture le statut du certificat.
 3. Provoque un contenu mixte (une image en `http://`), observe l'avertissement dans la console, puis corrige.
-4. Prépare l'architecture de mise en ligne de la plateforme Saint Stack Academy : quel domaine, quel sous-domaine pour l'API, quel hébergeur pour chaque partie, et quels enregistrements DNS. Rédige-la en 6 lignes.
+4. Prépare l'architecture de mise en ligne de la plateforme MeredianStack : quel domaine, quel sous-domaine pour l'API, quel hébergeur pour chaque partie, et quels enregistrements DNS. Rédige-la en 6 lignes.
 
 ## Correction
 
@@ -179,10 +179,10 @@ Dans le dépôt, le fichier `CNAME` contient `monsite.sn`. Côté Netlify, il fa
 Question 3 : `dig +short github.com A` renvoie une ou plusieurs adresses IP, qui varient selon ta région. `dig +short www.github.com` montre un CNAME vers `github.com.`.
 
 Exercice autonome, question 4, une proposition :
-- le domaine `saintstack.sn` (ou `.dev`) ;
+- le domaine `meredianstack.sn` (ou `.dev`) ;
 - le front-end Next.js sur Vercel, à l'adresse racine et `www` ;
-- l'API NestJS, la base et les photos sur un VPS avec Docker Compose, derrière Caddy qui gère le HTTPS automatique, à l'adresse `api.saintstack.sn` (un enregistrement A vers l'IP du VPS) ;
-- la variable `NEXT_PUBLIC_API_URL=https://api.saintstack.sn/api` ;
+- l'API NestJS, la base et les photos sur un VPS avec Docker Compose, derrière Caddy qui gère le HTTPS automatique, à l'adresse `api.meredianstack.sn` (un enregistrement A vers l'IP du VPS) ;
+- la variable `NEXT_PUBLIC_API_URL=https://api.meredianstack.sn/api` ;
 - le MX de la messagerie conservé ;
 - le renouvellement automatique du domaine activé.
 

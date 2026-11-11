@@ -74,7 +74,7 @@ export default function AccueilPublic() {
             </div>
             <figure className="bandeau-accueil-photo">
               <PhotoFondateur className="photo-fondateur-hero" taille={280} priority sizes="(max-width: 700px) 200px, 280px" />
-              <figcaption>{CONTACT.fondateur}, fondateur</figcaption>
+              <figcaption><strong>{CONTACT.fondateur}</strong><span>{CONTACT.titre}</span></figcaption>
             </figure>
           </div>
         </section>
@@ -127,7 +127,7 @@ export default function AccueilPublic() {
             <div className="carte-enseignant-texte">
               <p className="eyebrow">Qui enseigne ?</p>
               <h2 id="t-enseignant">{CONTACT.fondateur}</h2>
-              <p>Développeur full-stack à Dakar. J’ai créé Saint Stack Academy pour que chaque étudiant en informatique trouve des cours clairs, gratuits et proches des métiers.</p>
+              <p>Développeur et data analyst à Dakar. J’ai créé MeredianStack pour que chaque étudiant en informatique trouve des cours clairs, gratuits et proches des métiers.</p>
             </div>
             <Link href="/contact" className="btn">Me contacter</Link>
           </section>

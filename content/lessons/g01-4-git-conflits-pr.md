@@ -65,9 +65,9 @@ Git a écrit les deux versions dans le fichier, entourées de marqueurs :
 
 ```html
 <<<<<<< HEAD
-<h1>Bienvenue chez Saint Stack</h1>
+<h1>Bienvenue chez MeredianStack</h1>
 =======
-<h1>Saint Stack, apprendre ensemble</h1>
+<h1>MeredianStack, apprendre ensemble</h1>
 >>>>>>> feature/titre
 ```
 
@@ -163,13 +163,13 @@ Ainsi, plus personne, même pas toi, ne peut pousser directement sur `main`.
 mkdir conflit && cd conflit && git init
 echo "<h1>Bienvenue</h1>" > index.html && git add . && git commit -m "feat: titre"
 git switch -c feature/titre
-echo "<h1>Saint Stack, apprendre ensemble</h1>" > index.html && git commit -am "feat: nouveau titre"
+echo "<h1>MeredianStack, apprendre ensemble</h1>" > index.html && git commit -am "feat: nouveau titre"
 git switch main
-echo "<h1>Bienvenue chez Saint Stack</h1>" > index.html && git commit -am "feat: titre complet"
+echo "<h1>Bienvenue chez MeredianStack</h1>" > index.html && git commit -am "feat: titre complet"
 git merge feature/titre      # CONFLICT
 git status                   # both modified: index.html
 cat index.html               # les marqueurs
-# on édite : on garde « <h1>Saint Stack, bienvenue</h1> » et on retire les marqueurs
+# on édite : on garde « <h1>MeredianStack, bienvenue</h1> » et on retire les marqueurs
 git add index.html && git commit
 git log --oneline --graph
 ```

@@ -25,7 +25,7 @@ function Mentions() {
         <ul className="liste-marques">{donnees.organismes.map((m) => <li key={m.nom}>{m.marque}</li>)}</ul>
       )}
       <p>
-        Ces logos indiquent uniquement l’organisme auprès duquel chaque certification se passe. Saint Stack Academy ne délivre pas
+        Ces logos indiquent uniquement l’organisme auprès duquel chaque certification se passe. MeredianStack ne délivre pas
         ces certifications, n’est partenaire d’aucun de ces organismes et n’est pas soutenue par eux. Pour toute demande de retrait
         d’un logo, utilisez la <Link href="/contact">page Contact</Link>.
       </p>
@@ -44,9 +44,9 @@ export default function PageMarques() {
         <article className="card texte-long">
           <p className="eyebrow">Marques</p>
           <h1>Marques et logos</h1>
-          <p>Les noms et logos de technologies affichés sur Saint Stack Academy servent uniquement à indiquer le sujet des cours.</p>
+          <p>Les noms et logos de technologies affichés sur MeredianStack servent uniquement à indiquer le sujet des cours.</p>
           <Mentions />
-          <p><strong>Saint Stack Academy n’est affiliée à aucun de ces éditeurs ni soutenue par eux.</strong></p>
+          <p><strong>MeredianStack n’est affiliée à aucun de ces éditeurs ni soutenue par eux.</strong></p>
           <h2>Demande de retrait</h2>
           <p>
             Si vous représentez l’un de ces éditeurs ou organismes et souhaitez le retrait d’un nom ou d’un logo, écrivez-nous depuis

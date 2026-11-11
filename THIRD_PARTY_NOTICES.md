@@ -1,6 +1,6 @@
 # Composants tiers et licences
 
-Saint Stack Academy utilise les composants tiers ci-dessous. Chacun reste sous sa propre licence.
+MeredianStack utilise les composants tiers ci-dessous. Chacun reste sous sa propre licence.
 
 ## lucide-react 1.61.0 (ISC)
 

@@ -76,7 +76,7 @@ boutique-api/
 # Chart.yaml
 apiVersion: v2
 name: boutique-api
-description: API de la boutique Saint Stack
+description: API de la boutique MeredianStack
 version: 0.1.0            # version du CHART (SemVer) : on l'incrémente à chaque modification du chart
 appVersion: "1.2.0"       # version de l'APPLICATION (l'image)
 ```
@@ -87,7 +87,7 @@ appVersion: "1.2.0"       # version de l'APPLICATION (l'image)
 # values.yaml
 replicaCount: 2
 image:
-  repository: ghcr.io/saint-stack/boutique-api
+  repository: ghcr.io/meredianstack/boutique-api
   tag: ""                       # vide : on prend appVersion
 service:
   port: 80
@@ -204,7 +204,7 @@ dependencies:
     condition: postgresql.enabled
 ```
 
-On télécharge les dépendances avec `helm dependency update`. **Publier** : `helm package ./boutique-api` produit `boutique-api-0.1.0.tgz`, qu'on pousse dans un registre OCI (`helm push boutique-api-0.1.0.tgz oci://ghcr.io/saint-stack/charts`).
+On télécharge les dépendances avec `helm dependency update`. **Publier** : `helm package ./boutique-api` produit `boutique-api-0.1.0.tgz`, qu'on pousse dans un registre OCI (`helm push boutique-api-0.1.0.tgz oci://ghcr.io/meredianstack/charts`).
 
 ## Démonstration
 

@@ -162,7 +162,7 @@ On veut tester la **logique** de `inscrire()` sans vraie base de données ni vra
 async function inscrire({ email }, depot, mailer) {
   if (await depot.trouverParEmail(email)) throw new Error('E-mail déjà utilisé');
   const u = await depot.creer({ email });
-  await mailer.envoyer(email, 'Bienvenue sur Saint Stack');
+  await mailer.envoyer(email, 'Bienvenue sur MeredianStack');
   return u;
 }
 ```

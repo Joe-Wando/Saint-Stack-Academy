@@ -8,8 +8,8 @@ export function metaPartage({ titre, description, chemin }: { titre: string; des
     title: titre,
     description,
     alternates: { canonical: chemin },
-    openGraph: { title: `${titre} · Saint Stack Academy`, description, url: chemin, siteName: 'Saint Stack Academy', locale: 'fr_FR', type: 'website' },
-    twitter: { card: 'summary_large_image', title: `${titre} · Saint Stack Academy`, description },
+    openGraph: { title: `${titre} · MeredianStack`, description, url: chemin, siteName: 'MeredianStack', locale: 'fr_FR', type: 'website' },
+    twitter: { card: 'summary_large_image', title: `${titre} · MeredianStack`, description },
   };
 }
 

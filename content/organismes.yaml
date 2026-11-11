@@ -2,7 +2,7 @@
 # À copier dans content/organismes.yaml.
 #
 # Décision d'Olivier (10 novembre 2026) : le logo identifie l'organisme qui délivre la certification.
-# Saint Stack Academy ne délivre pas ces certifications et n'est pas partenaire de ces organismes.
+# MeredianStack ne délivre pas ces certifications et n'est pas partenaire de ces organismes.
 #
 # logo : nom de fichier du paquet npm « simple-icons » (16.x), affiché dans sa couleur d'origine, non modifié.
 #        null = l'organisme n'a pas de logo disponible dans simple-icons : on affiche son nom seul.

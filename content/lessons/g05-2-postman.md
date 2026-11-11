@@ -90,8 +90,8 @@ Un **environnement** contient des variables qui changent selon le contexte :
 
 | Variable | Local | Test |
 |---|---|---|
-| `baseUrl` | `http://localhost:4000/api` | `https://api-test.saintstack.sn/api` |
-| `email` | `awa@test.sn` | `testeur@saintstack.sn` |
+| `baseUrl` | `http://localhost:4000/api` | `https://api-test.meredianstack.sn/api` |
+| `email` | `awa@test.sn` | `testeur@meredianstack.sn` |
 | `jeton` | (rempli automatiquement) | (rempli automatiquement) |
 
 On écrit ensuite `{{baseUrl}}/programme` dans l'URL.
@@ -159,7 +159,7 @@ Le *Collection Runner* exécute toute la collection dans l'ordre et affiche un r
 
 ```bash
 npm install -g newman
-newman run saint-stack.postman_collection.json -e local.postman_environment.json --reporters cli,junit
+newman run meredianstack.postman_collection.json -e local.postman_environment.json --reporters cli,junit
 ```
 
 Dans GitHub Actions (voir le cours « Intégration continue avec GitHub Actions, premier workflow ») :

@@ -152,7 +152,7 @@ pwd                           # /home/<toi>/atelier/site
 touch index.html css/style.css
 ls -l                         # index.html et le dossier css
 echo "<h1>Bonjour</h1>" > index.html
-echo "<p>Saint Stack</p>" >> index.html
+echo "<p>MeredianStack</p>" >> index.html
 cat index.html                # deux lignes
 cp index.html accueil.html
 mv accueil.html css/          # déplacé dans css

@@ -53,7 +53,7 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
   const pres = new pptxgen();
   pres.layout = 'LAYOUT_16x9';
   pres.theme = { headFontFace: 'Arial', bodyFontFace: 'Arial' };
-  pres.title = titre; pres.author = auteur; pres.company = 'Saint Stack Academy';
+  pres.title = titre; pres.author = auteur; pres.company = 'MeredianStack';
   const S = pres.shapes;
   let section = 'Ouverture';
   let visuel = null; // logo ou icône du sujet, pour le disque blanc
@@ -99,14 +99,14 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
 
   const api = {
     pres, S, C,
-    async couverture(t, sousTitre, role = 'Développeur full-stack · Saint Stack Academy') {
+    async couverture(t, sousTitre, role = 'Développeur et data analyst · MeredianStack') {
       pres.addSection({ title: 'Ouverture' });
       const s = pres.addSlide({ masterName: 'COUVERTURE', sectionTitle: 'Ouverture' });
       const tt = t.length > 24 ? 28 : t.length > 14 ? 34 : 40;
       s.addText(t, { x: 0.6, y: 0.75, w: 4.6, h: 1.1, fontSize: tt, bold: true, color: C.sombre, margin: 0, valign: 'bottom', isTextBox: true, fit: 'shrink' });
       const ts = sousTitre.length > 70 ? 14 : sousTitre.length > 40 ? 16 : 20;
       s.addText(sousTitre, { x: 0.6, y: 1.9, w: 4.6, h: 0.95, fontSize: ts, bold: true, color: C.principale, margin: 0, valign: 'top', isTextBox: true, fit: 'shrink' });
-      s.addText([{ text: auteur, options: { fontSize: 15, color: C.texte, breakLine: true } }, { text: role, options: { fontSize: 12, italic: true, color: C.doux, breakLine: true } }, { text: 'Saint Stack Academy', options: { fontSize: 12, bold: true, color: C.sombre } }],
+      s.addText([{ text: auteur, options: { fontSize: 15, color: C.texte, breakLine: true } }, { text: role, options: { fontSize: 12, italic: true, color: C.doux } }],
         { x: 0.6, y: 3.0, w: 4.6, h: 0.95, margin: 0, isTextBox: true });
       await decorGrand(s);
       points(s, 1.5, 4.55);
