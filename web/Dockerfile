@@ -4,9 +4,10 @@ FROM node:22-alpine AS build
 WORKDIR /repo
 # Outils du dépôt : pptxgenjs, sharp, simple-icons, lucide-static, gray-matter (versions épinglées)
 COPY package.json package-lock.json ./
-RUN npm ci
+# Cache des téléchargements npm : une réinstallation ne repasse pas par Internet
+RUN --mount=type=cache,target=/root/.npm npm ci --prefer-offline --no-audit --no-fund
 COPY web/package.json web/package-lock.json web/
-RUN cd web && npm ci
+RUN --mount=type=cache,target=/root/.npm cd web && npm ci --prefer-offline --no-audit --no-fund
 COPY content content
 COPY tools/diaporamas tools/diaporamas
 COPY web web
@@ -18,7 +19,8 @@ ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 # Un PowerPoint par cours public, aux couleurs de son sujet : web/public/diaporamas/<slug>.pptx
 RUN npm run diaporamas
-RUN cd web && npm run build
+# Cache de Next.js : seules les pages modifiées sont recompilées
+RUN --mount=type=cache,target=/repo/web/.next/cache cd web && npm run build
 
 FROM node:22-alpine
 WORKDIR /app

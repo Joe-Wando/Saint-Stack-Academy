@@ -45,3 +45,6 @@ Images/
 
 # PowerPoint générés au déploiement (npm run diaporamas), jamais versionnés
 web/public/diaporamas/
+
+# Photos de profil du développement local (npm run dev)
+.donnees/

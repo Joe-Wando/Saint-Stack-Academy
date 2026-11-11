@@ -3,6 +3,7 @@
   "private": true,
   "description": "Outils du dépôt : génération des illustrations et des diaporamas PowerPoint.",
   "scripts": {
+    "dev": "node tools/dev.mjs",
     "diaporamas": "node tools/diaporamas/generer.mjs",
     "illustrations": "node tools/illustrations.js",
     "icones": "node tools/generer-icones.mjs",
