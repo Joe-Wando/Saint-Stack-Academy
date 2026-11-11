@@ -28,7 +28,8 @@ function trouver(rep) {
   const nav = await puppeteer.launch({ executablePath: navigateur, headless: 'shell', userDataDir: profil, args: ['--hide-scrollbars'] });
   try {
     for (const t of travaux) {
-      if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
+      // Seuls le site local et les maquettes fournies (dossier saint-stack-charte-unipro/maquette) sont acceptés.
+      if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url) && !/^file:\/\/\/.*\/saint-stack-charte-unipro\/maquette\/[A-Za-z0-9]+\.html$/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
       const page = await nav.newPage();
       try {
       await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
@@ -68,6 +69,21 @@ function trouver(rep) {
       // Faire défiler jusqu'à un élément (sélecteur CSS), sous l'en-tête collant.
       if (t.element) await page.evaluate((sel) => { const e = document.querySelector(sel); if (e) window.scrollTo(0, e.getBoundingClientRect().top + window.scrollY - 90); }, t.element);
       await new Promise((r) => setTimeout(r, 400));
+      // Défilement horizontal de la page (téléphone) : largeur du document et élément le plus large.
+      if (t.debordement) {
+        const d = await page.evaluate(() => {
+          const w = document.documentElement.clientWidth;
+          let pire = null;
+          for (const e of document.querySelectorAll('body *')) {
+            const r = e.getBoundingClientRect();
+            if (r.right > w + 1 && getComputedStyle(e).position !== 'fixed' && !e.closest('.scroll, .schema-dessin, pre, table, .onglets, .nav')) {
+              if (!pire || r.right > pire.droite) pire = { droite: Math.round(r.right), el: `${e.tagName.toLowerCase()}.${String(e.className).split(' ').slice(0, 2).join('.')}` };
+            }
+          }
+          return { largeur: w, document: document.documentElement.scrollWidth, pire };
+        });
+        console.error(`[largeur] ${t.url} : page ${d.document} px pour ${d.largeur} px${d.pire ? ` · déborde : ${d.pire.el} (${d.pire.droite} px)` : ''}`);
+      }
       await page.screenshot({ path: t.sortie, fullPage: !!t.pleinePage });
       console.log(t.sortie);
       } catch (e) {
