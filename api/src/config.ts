@@ -25,6 +25,9 @@ export const config = {
   },
 };
 
-if (config.production && config.jwtSecret === 'change-moi-en-production') {
-  throw new Error('JWT_SECRET doit être défini en production.');
+// En production seulement (NODE_ENV=production) : un secret faible ou laissé à l'exemple bloque le démarrage.
+// En local (npm run dev, docker compose up sans compose.prod.yaml), rien ne change.
+const SECRETS_EXEMPLES = ['change-moi-en-production', 'change-moi-secret-de-48-caracteres-minimum', 'developpement-local'];
+if (config.production && (config.jwtSecret.length < 32 || SECRETS_EXEMPLES.includes(config.jwtSecret))) {
+  throw new Error('JWT_SECRET doit faire au moins 32 caractères et ne pas reprendre l’exemple (openssl rand -base64 48).');
 }

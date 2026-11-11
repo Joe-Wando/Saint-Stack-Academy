@@ -1,0 +1,60 @@
+# Production (VPS) : à utiliser AVEC compose.yaml
+#   docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+# Caddy reçoit tout le trafic (80 et 443, HTTPS automatique avec Let's Encrypt) :
+#   https://DOMAINE      -> web:3000
+#   https://DOMAINE/api  -> api:4000
+# L'API, le site et la base ne sont plus publiés sur la machine : seul Caddy les joint, sur le réseau interne.
+# En local, « docker compose up » (sans ce fichier) et « npm run dev » ne changent pas.
+
+x-journaux: &journaux
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAINE: ${DOMAINE:?Définir DOMAINE dans .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+      - api
+    <<: *journaux
+
+  db:
+    ports: !reset []
+    <<: *journaux
+
+  api:
+    ports: !reset []
+    environment:
+      NODE_ENV: production
+      WEB_URL: ${WEB_URL:?Définir WEB_URL dans .env}
+      CORS_ORIGIN: ${WEB_URL}
+    <<: *journaux
+
+  web:
+    ports: !reset []
+    build:
+      args:
+        # Intégrées au code du navigateur au moment de la construction : adresses publiques.
+        NEXT_PUBLIC_API_URL: ${API_URL:?Définir API_URL dans .env}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:?Définir NEXT_PUBLIC_SITE_URL dans .env}
+    environment:
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+    <<: *journaux
+
+volumes:
+  caddy_data:
+  caddy_config:
