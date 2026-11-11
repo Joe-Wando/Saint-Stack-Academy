@@ -53,12 +53,15 @@ Le **C** est l'un des langages les plus importants de l'informatique. Créé en 
 
 ## Installer un compilateur
 
-- **Linux** : `sudo apt install build-essential` installe `gcc`.
-- **Windows** : installe **MSYS2** puis le paquet `mingw-w64-ucrt-x86_64-gcc`, ou utilise WSL (Ubuntu dans Windows).
-- **macOS** : `xcode-select --install`.
+Dans ce cours, on utilise **Code::Blocks** : un éditeur et un compilateur réunis dans un seul logiciel, gratuit.
+
+- **Windows** : télécharge Code::Blocks sur [codeblocks.org](https://www.codeblocks.org/downloads/) et prends l'installateur dont le nom contient **« mingw »** : il contient déjà le compilateur `gcc`.
+- **Linux** : `sudo apt install codeblocks build-essential` installe Code::Blocks et `gcc`.
+- **macOS** : `xcode-select --install` installe `gcc`, puis Code::Blocks depuis le même site.
+- **Autres possibilités** : VS Code avec MSYS2 sous Windows (paquet `mingw-w64-ucrt-x86_64-gcc`), ou WSL (Ubuntu dans Windows).
 - **Sans rien installer** : un compilateur en ligne comme OnlineGDB ou Compiler Explorer suffit pour débuter.
 
-Vérifie l'installation avec `gcc --version`.
+Pour vérifier l'installation en ligne de commande : `gcc --version`.
 
 ## Le premier programme
 

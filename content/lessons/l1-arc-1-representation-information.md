@@ -147,7 +147,7 @@ Quand un texte affiche « Ã© » à la place de « é », c'est qu'un fichier �
 
 Une image numérique est une grille de **pixels**. En mode **RVB** (rouge, vert, bleu ; *RGB* en anglais), chaque pixel a trois composantes de 0 à 255, soit un octet chacune : 3 octets par pixel, et 2²⁴ ≈ 16,7 millions de couleurs.
 
-En CSS, la couleur `#534AB7` signifie : rouge 0x53 = 83, vert 0x4A = 74, bleu 0xB7 = 183. C'est le violet de MeredianStack.
+En CSS, la couleur `#1B2F52` signifie : rouge 0x1B = 27, vert 0x2F = 47, bleu 0x52 = 82. C'est le bleu nuit de MeredianStack.
 
 Une photo de 1920 × 1080 pixels, non compressée, pèse 1920 × 1080 × 3 ≈ 6,2 Mo. Les formats JPEG, PNG ou WebP la **compressent** pour réduire fortement ce poids.
 
@@ -165,7 +165,7 @@ print("é".encode("utf-8"))        # b'\xc3\xa9' : 2 octets
 print(10**12 / 1024**3)           # 931.32...
 ```
 
-Puis on ouvre un sélecteur de couleur en ligne et on retrouve `#534AB7`, soit (83, 74, 183).
+Puis on ouvre un sélecteur de couleur en ligne et on retrouve `#1B2F52`, soit (27, 47, 82).
 
 ## Exercice guidé
 
