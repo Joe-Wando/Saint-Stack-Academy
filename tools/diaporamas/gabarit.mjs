@@ -102,7 +102,7 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
     async couverture(t, sousTitre, role = 'Développeur et data analyst · MeredianStack') {
       pres.addSection({ title: 'Ouverture' });
       const s = pres.addSlide({ masterName: 'COUVERTURE', sectionTitle: 'Ouverture' });
-      const tt = t.length > 24 ? 28 : t.length > 14 ? 34 : 40;
+      const tt = t.length > 34 ? 26 : t.length > 24 ? 28 : t.length > 14 ? 34 : 40;
       s.addText(t, { x: 0.6, y: 0.75, w: 4.6, h: 1.1, fontSize: tt, bold: true, color: C.sombre, margin: 0, valign: 'bottom', isTextBox: true, fit: 'shrink' });
       const ts = sousTitre.length > 70 ? 14 : sousTitre.length > 40 ? 16 : 20;
       s.addText(sousTitre, { x: 0.6, y: 1.9, w: 4.6, h: 0.95, fontSize: ts, bold: true, color: C.principale, margin: 0, valign: 'top', isTextBox: true, fit: 'shrink' });

@@ -143,7 +143,12 @@ async function automatique(d, cours, sujet) {
   const fin = chaps.filter((c) => FIN.test(c.titre));
   const iconeCartes = sujet?.icone ?? 'book-open';
 
-  await d.couverture(sujet?.libelle ?? cours.titre, sujet ? cours.titre : (cours.objectifs?.[0] ?? ''));
+  // Titre du cours qui contient déjà le sujet (« Logique et ensembles » pour Logique) : il passe en grand,
+  // avec le domaine en sous-titre, au lieu de répéter le sujet deux fois.
+  const simple = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const redondant = sujet && cours.domaine && cours.titre.length <= 45 && simple(cours.titre).includes(simple(sujet.libelle));
+  if (redondant) await d.couverture(cours.titre, cours.domaine);
+  else await d.couverture(sujet?.libelle ?? cours.titre, sujet ? cours.titre : (cours.objectifs?.[0] ?? ''));
   d.plan([...principaux.map((c) => c.titre), ...(fin.length ? ['Mise en pratique'] : [])].slice(0, 14));
   if (cours.objectifs?.length) {
     const s = d.contenu('Objectifs du cours');
@@ -156,7 +161,9 @@ async function automatique(d, cours, sujet) {
     const vider = () => {
       if (!tampon.length) return;
       const s = d.contenu(titre);
-      d.texte(s, tampon, 0.6, 1.25, 7.4, 3.5, nbMots > 70 || nbLignes > 7 ? 13 : 14);
+      // Peu de texte : plus gros caractères, pour remplir la page au lieu de laisser deux lignes perdues en haut.
+      const taille = nbMots <= 30 && nbLignes <= 4 ? 18 : nbMots <= 55 && nbLignes <= 6 ? 16 : nbMots > 70 || nbLignes > 7 ? 13 : 14;
+      d.texte(s, tampon, 0.6, 1.25, 7.4, 3.5, taille);
       tampon = []; nbMots = 0; nbLignes = 0;
     };
     const ajouter = (runs, n, lignes = 1) => {
