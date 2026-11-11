@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import AdminCadre from '@/components/AdminCadre';
+import { CHARTE } from '@/lib/charte.mjs';
 import Avatar from '@/components/Avatar';
 import ReglagePhotoFondateur from '@/components/ReglagePhotoFondateur';
 import { api, NIVEAUX, Niveau } from '@/lib/api';
@@ -38,7 +39,7 @@ function Histogramme({ titre, donnees, unite }: { titre: string; donnees: { libe
             <XAxis dataKey="libelle" tick={{ fontSize: 11 }} interval="preserveStartEnd" />
             <YAxis allowDecimals={false} width={32} tick={{ fontSize: 11 }} />
             <Tooltip formatter={(v) => [`${Number(v ?? 0)} ${unite}`, '']} />
-            <Bar dataKey="nombre" fill="#534AB7" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="nombre" fill={CHARTE.bleu} radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

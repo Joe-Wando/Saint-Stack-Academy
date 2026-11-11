@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Charte « couleurs UNIPRO » (CHARTE.md) : formes, typographie et composants.
+   Chargée en dernier : elle l'emporte sur globals, v2, complement et ambiance.
+   Aucune couleur n'est codée ici : tout passe par les variables de lib/charte.mjs.
+   ========================================================================== */
+
+:root {
+  --rayon: 14px; --rayon-btn: 10px;
+  /* Pas d'ombre portée (sauf l'aperçu du mode Présenter). */
+  --ombre: none; --ombre-forte: none;
+  --conteneur: 1180px;
+}
+
+/* ---------- Typographie ---------- */
+body { background: var(--fond); color: var(--nuit); font-family: var(--police-texte), system-ui, sans-serif; font-size: 16px; line-height: 1.65; }
+h1, h2, h3, h4, .h-petit, .cc-titre, .t { font-family: var(--police-titre), sans-serif; font-weight: 800; color: var(--nuit); letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.12; }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.2; }
+h3 { font-size: 1.2rem; line-height: 1.3; }
+a { color: var(--bleu); }
+a:hover { color: var(--nuit); }
+.muted, .small.muted { color: var(--doux); }
+code, pre, kbd { font-family: var(--police-code), "JetBrains Mono", Consolas, monospace; }
+:focus-visible { outline: 3px solid var(--bleu); outline-offset: 2px; }
+
+/* Surtitre : « CHAPITRE 3 SUR 6 », « REPRENDRE »… en corail, majuscules. */
+.eyebrow, .chapitre-num, .cc-surtitre, .d-surtitre { font-family: var(--police-texte), sans-serif; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--corail); }
+/* Le soulignement « pinceau » prend le corail. */
+.souligne svg path { stroke: var(--corail); }
+
+/* ---------- Conteneur ---------- */
+.main, .page, .topbar-in, .pied-in { max-width: var(--conteneur); }
+.main { padding-left: 24px; padding-right: 24px; }
+
+/* ---------- En-tête ---------- */
+.topbar { background: var(--blanc); border-bottom: 3px solid var(--corail); box-shadow: none; }
+.topbar-in { min-height: 72px; height: auto; padding: 0 24px; gap: 24px; margin: 0 auto; display: flex; align-items: center; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--nuit); text-decoration: none; }
+.brand:hover { text-decoration: none; color: var(--nuit); }
+.logo { width: 36px; height: 36px; border-radius: 9px; background: var(--nuit) !important; color: #fff !important; font-size: 15px; font-family: var(--police-titre), sans-serif; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+.logo::after, .logo::before { display: none !important; }
+.brand-name { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 19px; color: var(--nuit); letter-spacing: -0.01em; white-space: nowrap; display: inline !important; }
+.brand-academy { color: var(--corail); }
+.topbar-menu { display: flex; align-items: center; flex: 1; gap: 24px; min-width: 0; }
+.topbar .nav { flex: 1; justify-content: flex-start; gap: 22px; height: auto; overflow: visible; margin-left: 12px; }
+.topbar .nav a, .lien-nav { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; color: #3A4A66; font-weight: 500; font-size: 15px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; text-decoration: none; white-space: nowrap; }
+.topbar .nav a:hover, .lien-nav:hover { color: var(--nuit); text-decoration: none; }
+.topbar .nav a[aria-current="page"], .lien-nav[aria-current="page"] { color: var(--nuit); font-weight: 700; border-bottom: 2px solid var(--corail); }
+.topbar-droite { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.menu-btn { display: none; width: 44px; height: 44px; margin-left: auto; border: 1px solid var(--bord); border-radius: var(--rayon-btn); background: var(--blanc); color: var(--nuit); align-items: center; justify-content: center; cursor: pointer; }
+.compte-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: none; border: 0; cursor: pointer; color: var(--nuit); font: inherit; font-weight: 700; padding: 0 4px; }
+.compte-btn .avatar { border: 2px solid var(--corail); }
+.compte-menu { border: 1px solid var(--bord); border-radius: var(--rayon); box-shadow: 0 8px 24px rgba(27, 47, 82, .12); }
+
+@media (max-width: 1023px) {
+  .topbar-in { flex-wrap: wrap; padding: 0 16px; gap: 12px; min-height: 64px; }
+  .menu-btn { display: inline-flex; }
+  .topbar-menu { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 4px; padding: 8px 0 16px; }
+  .topbar.menu-ouvert .topbar-menu { display: flex; }
+  .topbar .nav { flex-direction: column; gap: 0; margin: 0; }
+  .topbar .nav a, .topbar-droite .lien-nav { border-bottom: 1px solid var(--bord); padding: 0 4px; }
+  .topbar .nav a[aria-current="page"] { border-bottom: 2px solid var(--corail); }
+  .topbar-droite { margin: 8px 0 0; flex-direction: column; align-items: stretch; gap: 8px; }
+  .topbar-droite .btn { width: 100%; }
+}
+
+/* ---------- Pied de page ---------- */
+.pied-vague { display: none; }
+.pied { background: var(--nuit); color: var(--sur-sombre); margin-top: 64px; padding: 0; }
+.pied-in { margin: 0 auto; padding: 36px 24px 12px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.pied-presentation { flex: 1 1 280px; }
+.pied-presentation p { margin: 10px 0 0; font-size: 14px; line-height: 1.6; max-width: 340px; color: var(--sur-sombre); }
+.pied-nom { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 20px; color: #fff; }
+.pied .brand-academy { color: var(--corail-sur-sombre); }
+.pied-colonne { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.pied-colonne a { color: var(--sur-sombre); min-height: 32px; display: inline-flex; align-items: center; }
+.pied-colonne a:hover { color: #fff; }
+.pied-titre { color: #fff; font-weight: 700; margin-bottom: 4px; }
+.pied-copyright { max-width: var(--conteneur); margin: 0 auto; padding: 8px 24px 28px; font-size: 13px; color: var(--sur-sombre); }
+
+/* ---------- Boutons ---------- */
+.btn { min-height: 44px; padding: 0 18px; border-radius: var(--rayon-btn); font-family: var(--police-texte), sans-serif; font-weight: 700; font-size: 15px; background: var(--blanc); color: var(--nuit); border: 0; box-shadow: inset 0 0 0 1px var(--bord); text-decoration: none; }
+.btn:hover { color: var(--nuit); box-shadow: inset 0 0 0 1px var(--bleu); text-decoration: none; }
+/* Bouton principal corail : un seul par écran. */
+.btn.primary { background: var(--corail); color: #fff; box-shadow: none; border: 0; }
+.btn.primary:hover { background: var(--corail-fonce); color: #fff; box-shadow: none; }
+/* Bouton bleu plein (« Se connecter », « Suivant »). */
+.btn.bleu { background: var(--bleu); color: #fff; box-shadow: none; }
+.btn.bleu:hover { background: var(--nuit); color: #fff; }
+/* Contour sur fond sombre. */
+.btn.sur-sombre { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px var(--contour-sombre); }
+.btn.sur-sombre:hover { color: #fff; box-shadow: inset 0 0 0 1px #fff; }
+.btn.sm { min-height: 44px; padding: 0 14px; font-size: 14px; }
+.btn.danger { background: var(--alerte); color: #fff; box-shadow: none; }
+.btn.danger:hover { background: var(--attention-texte); color: #fff; }
+
+/* ---------- Cartes ---------- */
+.card, .certif, .cc, .bloc, .ue, .chiffre, .grande-carte, .reprendre, .dom-tete { background: var(--blanc); border: 1px solid var(--bord); border-radius: var(--rayon); box-shadow: none; }
+
+/* ---------- Carte de cours ---------- */
+.grille { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.cc { overflow: hidden; color: var(--nuit); text-decoration: none; transition: border-color .15s; }
+.cc:hover { border-color: var(--bleu); text-decoration: none; transform: none; box-shadow: none; }
+.cc-img { height: 150px; background: var(--bleu-clair); }
+.cc-img img { width: 100%; height: 150px; object-fit: cover; }
+.ruban-niveau { top: 10px; left: 10px; font-size: 12px; font-weight: 700; color: #fff; padding: 4px 10px; border-radius: 7px; letter-spacing: 0; text-transform: none; box-shadow: none; }
+.ruban-niveau.ruban-option { box-shadow: inset 0 -3px 0 var(--corail); }
+.cc .visuel-picto, .visuel-picto { width: 40px !important; height: 40px !important; right: 14px; bottom: -18px; background: var(--blanc); border: 1px solid var(--bord); box-shadow: none; }
+.cc-body { padding: 24px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
+.cc-titre { font-size: 18px; line-height: 1.25; }
+.cc-pied { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 13px; color: var(--doux); flex-wrap: wrap; }
+.cc-duree { display: inline-flex; align-items: center; gap: 6px; }
+.bar { height: 6px; background: var(--bleu-clair); }
+.bar span { background: var(--bar, var(--corail)); }
+
+/* ---------- Puces de filtre et onglets ---------- */
+.chipbtn { min-height: 36px; font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--blanc); border: 1px solid var(--bord); color: var(--nuit); }
+.chipbtn:hover { border-color: var(--bleu); }
+.chipbtn.on { background: var(--nuit); color: #fff; border-color: var(--nuit); }
+.onglet { min-height: 44px; color: var(--doux); font-weight: 700; }
+.onglet.on { color: var(--nuit); border-bottom-color: var(--corail); }
+.onglets { border-bottom-color: var(--bord); }
+
+/* ---------- Formulaires ---------- */
+.form label, label { font-weight: 700; color: var(--nuit); font-size: 14px; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea, .champ { min-height: 46px; border: 1px solid var(--bord); border-radius: var(--rayon-btn); background: var(--blanc); color: var(--nuit); font-family: var(--police-texte), sans-serif; font-size: 15px; padding: 0 14px; box-shadow: none; }
+textarea { padding: 12px 14px; }
+input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 2px solid var(--bleu-clair); }
+
+/* ---------- Bandeaux de page ---------- */
+.bandeau-sombre { background: var(--nuit); color: #fff; }
+.bandeau-sombre h1, .bandeau-sombre h2 { color: #fff; }
+.bandeau-sombre p { color: var(--sur-sombre); }
+.bandeau-sombre .eyebrow { color: var(--corail-sur-sombre); }
+
+/* ---------- Encadrés, statuts, étiquettes ---------- */
+.tag, .tag.dom { background: var(--bleu-clair); color: var(--nuit); font-weight: 700; }
+.encadre { background: var(--bleu-clair); border-radius: var(--rayon); }
+.conseil, .encadre.attention, .prose blockquote { background: var(--corail-clair); color: var(--attention-texte); border-radius: var(--rayon); }
+.conseil a { color: var(--attention-texte); }
+.statut { background: var(--bleu-clair); color: var(--nuit); border-radius: 999px; }
+.statut.en_cours { background: var(--corail-clair); color: var(--alerte); }
+.statut.termine, .statut.quiz, .succes { background: var(--succes-fond); color: var(--succes); }
+.error { color: var(--alerte); }
+.type-certif.badge, .cout.gratuit { background: var(--succes-fond); color: var(--succes); }
+.type-certif.certification { background: var(--alerte-fond); color: var(--alerte); }
+.type-certif.certificat { background: var(--bleu-clair); color: var(--nuit); }
+
+/* ---------- Texte des cours ---------- */
+.prose { font-size: 17px; line-height: 1.75; }
+/* Liens soulignés : ils ne se distinguent pas par la couleur seule. */
+.prose a, .texte-long a, .conseil a, .card p a, .encadre a { color: var(--bleu); text-decoration: underline; text-underline-offset: 2px; }
+.prose code { background: var(--bleu-clair); color: var(--nuit); font-size: .9em; }
+.prose pre { background: var(--nuit); color: #E8EEF7; border-radius: var(--rayon); font-size: 15px; }
+
+/* ---------- Divers ---------- */
+.avatar { background: var(--nuit); }
+.lvl { border-radius: 999px; }
+.pastille-dom { border-radius: 50%; }
+.section-head h2, .titre-section { font-size: clamp(1.5rem, 2.6vw, 2rem); }

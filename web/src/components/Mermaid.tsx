@@ -1,11 +1,12 @@
 'use client';
 
+import { CHARTE } from '@/lib/charte.mjs';
 import { Component, type CSSProperties, type ReactNode, useEffect, useState } from 'react';
 
-/** Thème des schémas : traits violets (contraste 7:1 sur le blanc), fonds clairs, police du site. */
+/** Thème des schémas : traits bleus de la charte (contraste 8,8:1 sur le blanc), fonds clairs, police du site. */
 const THEME = {
-  primaryColor: '#EEEDFE', primaryTextColor: '#1D1B2E', primaryBorderColor: '#534AB7', lineColor: '#534AB7',
-  secondaryColor: '#E1F5EE', tertiaryColor: '#F7F7FA', fontFamily: 'Manrope, sans-serif',
+  primaryColor: CHARTE['bleu-clair'], primaryTextColor: CHARTE.nuit, primaryBorderColor: CHARTE.bleu, lineColor: CHARTE.bleu,
+  secondaryColor: CHARTE['bleu-clair'], tertiaryColor: CHARTE.fond, fontFamily: 'Manrope, sans-serif',
 };
 
 type MermaidApi = typeof import('mermaid').default;

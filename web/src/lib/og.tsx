@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { ImageResponse } from 'next/og';
+import { CHARTE } from './charte.mjs';
 import { MARQUE } from './marque.mjs';
 import { LOGOS, TRACES_ICONES } from './pictos-donnees';
 
@@ -10,9 +11,9 @@ export const TAILLE_OG = { width: 1200, height: 630 };
 export const TYPE_OG = 'image/png';
 export const ALT_DEFAUT = 'Saint Stack Academy : apprends l’informatique à ton rythme, de la L1 aux métiers';
 
-const ENCRE = '#211F4D';
-const FOND = '#F7F7FA';
-const DOUX = '#5B5A72';
+const ENCRE = CHARTE.nuit;
+const FOND = CHARTE.fond;
+const DOUX = CHARTE.doux;
 
 /** Dossier web/assets (copié dans l'image Docker à côté de server.js). */
 const assets = (...p: string[]) => path.join(process.cwd(), 'assets', ...p);
@@ -63,19 +64,19 @@ function pastilleSujet(sujet: { logo: string | null; icone: string } | null | un
   return svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${corps}</svg>`);
 }
 
-/** Image par défaut : fond #211F4D, blobs, monogramme, nom, promesse et deux personnages. Aucun logo de technologie. */
+/** Image par défaut : fond bleu nuit, blobs, monogramme, nom, promesse et deux personnages. Aucun logo de technologie. */
 export async function imageDefaut() {
   const personnages = svgDataUri(await readFile(assets('og', 'personnages.svg'), 'utf8'));
   return new ImageResponse(
     (
       <div style={{ display: 'flex', width: '100%', height: '100%', background: ENCRE, position: 'relative', fontFamily: 'Manrope' }}>
-        <div style={{ position: 'absolute', left: -120, top: -160, width: 460, height: 460, borderRadius: 460, background: '#2C2A63' }} />
-        <div style={{ position: 'absolute', left: 520, top: 470, width: 300, height: 300, borderRadius: 300, background: '#2C2A63' }} />
+        <div style={{ position: 'absolute', left: -120, top: -160, width: 460, height: 460, borderRadius: 460, background: '#24395F' }} />
+        <div style={{ position: 'absolute', left: 520, top: 470, width: 300, height: 300, borderRadius: 300, background: '#24395F' }} />
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 0 0 84px', width: 720 }}>
           <Monogramme cote={96} />
-          <div style={{ display: 'flex', marginTop: 40, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 72, lineHeight: 1.05, color: '#fff' }}>Saint Stack Academy</div>
-          <div style={{ display: 'flex', marginTop: 24, fontSize: 34, lineHeight: 1.35, color: '#D9D6F5' }}>Apprends l’informatique à ton rythme, de la L1 aux métiers</div>
-          <div style={{ display: 'flex', marginTop: 34, width: 120, height: 8, borderRadius: 8, background: '#F2C14E' }} />
+          <div style={{ display: 'flex', marginTop: 40, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 72, lineHeight: 1.05, color: '#fff', flexWrap: 'wrap' }}>Saint Stack<span style={{ marginLeft: 20, color: CHARTE['corail-sur-sombre'] }}>Academy</span></div>
+          <div style={{ display: 'flex', marginTop: 24, fontSize: 34, lineHeight: 1.35, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme, de la L1 aux métiers</div>
+          <div style={{ display: 'flex', marginTop: 34, width: 120, height: 8, borderRadius: 8, background: CHARTE.corail }} />
         </div>
         <img src={personnages} width={414} height={468} style={{ position: 'absolute', right: 60, bottom: 40 }} alt="" />
       </div>
@@ -111,7 +112,7 @@ export async function imageGabarit(g: Gabarit) {
           {(g.sousTitre || pastille) && (
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: 26 }}>
               {pastille && (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 76, height: 76, borderRadius: 76, background: '#fff', border: '2px solid #E3E2EC', marginRight: 22 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 76, height: 76, borderRadius: 76, background: '#fff', border: `2px solid ${CHARTE.bord}`, marginRight: 22 }}>
                   <img src={pastille} width={42} height={42} alt="" />
                 </div>
               )}
@@ -123,8 +124,8 @@ export async function imageGabarit(g: Gabarit) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', height: 100, padding: '0 72px', background: ENCRE }}>
           <Monogramme cote={54} />
-          <div style={{ display: 'flex', marginLeft: 20, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 32, color: '#fff' }}>Saint Stack Academy</div>
-          <div style={{ display: 'flex', marginLeft: 'auto', fontSize: 24, color: '#BEBBE6' }}>Apprends l’informatique à ton rythme</div>
+          <div style={{ display: 'flex', marginLeft: 20, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 32, color: '#fff' }}>Saint Stack<span style={{ marginLeft: 9, color: CHARTE['corail-sur-sombre'] }}>Academy</span></div>
+          <div style={{ display: 'flex', marginLeft: 'auto', fontSize: 24, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme</div>
         </div>
       </div>
     ),

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { CSSProperties, JSX } from 'react';
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { pourcent } from '@/lib/api';
+import { CHARTE } from '@/lib/charte.mjs';
 import EtatVide from './EtatVide';
 import { ILLUS } from '@/lib/illustrations-pages';
 import { couleurUtilisateur, infoDomaine } from '@/lib/domaines';
@@ -21,7 +22,7 @@ export interface DonneesEvolution {
 
 const jour = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
 const date = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-const COULEUR = '#534AB7';
+const COULEUR = CHARTE.bleu;
 
 /** Macaron des badges de la plateforme : médaille pour un parcours terminé, sinon la récompense. Gris tant qu'il n'est pas atteint. */
 function MacaronJalon({ code, atteint, couleur }: { code: string; atteint: boolean; couleur: string }) {
@@ -72,7 +73,7 @@ export default function Evolution({ e, moi = true, niveau }: { e: DonneesEvoluti
                 <tbody>{semaines.map((s) => <tr key={s.semaine}><td>{date(s.semaine)}</td><td className="num">{s.chapitres}</td><td className="num">{s.termines}</td></tr>)}</tbody></table>
             )}>
             <BarChart data={semaines} margin={{ top: 8, right: 8, bottom: 20, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E6E5EE" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={CHARTE.bord} />
               <XAxis dataKey="libelle" tick={{ fontSize: 11 }} interval="preserveStartEnd" label={{ value: 'Semaine du', position: 'insideBottom', offset: -12, fontSize: 12 }} />
               <YAxis allowDecimals={false} width={36} tick={{ fontSize: 11 }} label={{ value: 'Chapitres', angle: -90, position: 'insideLeft', fontSize: 12 }} />
               <Tooltip formatter={(v) => { const n = Number(v ?? 0); return [`${n} chapitre${n > 1 ? 's' : ''}`, 'Lus']; }} labelFormatter={(l) => `Semaine du ${l}`} />
@@ -89,10 +90,10 @@ export default function Evolution({ e, moi = true, niveau }: { e: DonneesEvoluti
                   <tbody>{quiz.map((q) => <tr key={q.n}><td>{date(q.date)}</td><td>{q.titre}</td><td className="num">{q.score}/{q.total} ({q.pct} %)</td></tr>)}</tbody></table>
               )}>
               <LineChart data={quiz} margin={{ top: 8, right: 12, bottom: 20, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E6E5EE" />
+                <CartesianGrid strokeDasharray="3 3" stroke={CHARTE.bord} />
                 <XAxis dataKey="n" tick={{ fontSize: 11 }} label={{ value: 'Tentative', position: 'insideBottom', offset: -12, fontSize: 12 }} />
                 <YAxis domain={[0, 100]} width={40} tick={{ fontSize: 11 }} unit=" %" />
-                <ReferenceLine y={60} stroke="#B4570B" strokeDasharray="5 4" label={{ value: '60 %', position: 'right', fontSize: 11, fill: '#633806' }} />
+                <ReferenceLine y={60} stroke={CHARTE.corail} strokeDasharray="5 4" label={{ value: "60 %", position: "right", fontSize: 11, fill: CHARTE.alerte }} />
                 <Tooltip formatter={(v) => [`${Number(v ?? 0)} %`, 'Score']} labelFormatter={(n) => { const q = quiz[Number(n) - 1]; return q ? `${q.titre} · ${jour(q.date)}` : ''; }} />
                 <Line type="monotone" dataKey="pct" name="Score" stroke={COULEUR} strokeWidth={2.5} dot={{ r: 4 }} />
               </LineChart>

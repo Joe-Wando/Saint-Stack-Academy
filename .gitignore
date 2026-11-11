@@ -36,3 +36,9 @@ saint-stack-images.zip
 
 # Copie de mermaid faite avant chaque build (web/scripts/copier-mermaid.mjs)
 web/public/vendor/
+
+# Charte UNIPRO fournie (maquettes, gabarit des diaporamas), recopiée dans le projet
+saint-stack-charte-unipro/
+saint-stack-charte-unipro.zip
+saint-stack-images/
+Images/

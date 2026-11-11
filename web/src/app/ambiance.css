@@ -1,16 +1,15 @@
 /* ==========================================================================
-   Ambiance Saint Stack : le violet reste la couleur principale ;
-   l'encre (bleu nuit violacé), le ciel et le soleil sont des accents discrets.
-   Contrastes vérifiés : blanc sur encre 15,4:1 · violet sur papier 6,4:1 · encre sur soleil 12,1:1.
+   Ambiance Saint Stack (vagues, macarons, illustrations) : ses couleurs viennent de la charte
+   (lib/charte.mjs), via les anciens noms --encre, --ciel, --soleil ramenés ci-dessous.
    ========================================================================== */
 :root {
-  --encre: #211F4D;
-  --encre-2: #2C2A66;
-  --ciel: #3BA7DB;
-  --ciel-clair: #DDF0FB;
-  --soleil: #FCE38A;
-  --papier: #F8F6F1;
-  --fond: var(--papier);
+  /* Anciens noms de l'ambiance, ramenés sur la charte (lib/charte.mjs). */
+  --encre: var(--nuit);
+  --encre-2: var(--bleu);
+  --ciel: var(--corail);
+  --ciel-clair: var(--corail-clair);
+  --soleil: var(--corail);
+  --papier: var(--fond);
   --rayon: 18px;
   --ombre: 0 1px 2px rgba(33, 31, 77, .05), 0 6px 18px rgba(33, 31, 77, .05);
   --ombre-forte: 0 8px 18px rgba(33, 31, 77, .10), 0 18px 36px rgba(33, 31, 77, .10);
@@ -224,7 +223,7 @@ h1 { font-weight: 800; }
 /* Macarons des badges (phase 5) : couleur du niveau, icône Lucide blanche au centre. */
 .macaron-badge { position: relative; display: inline-grid; place-items: center; flex: none; }
 .macaron-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.macaron-badge .macaron-fond { fill: var(--macaron, #3C3489); }
+.macaron-badge .macaron-fond { fill: var(--macaron, var(--nuit)); }
 .macaron-badge .macaron-cercle { fill: none; stroke: #fff; stroke-width: 1.6; stroke-dasharray: 3 3; opacity: .7; }
 .macaron-badge > svg:last-child { position: relative; width: auto; height: auto; inset: auto; }
 .macaron-badge.eteint .macaron-fond { fill: #C9C7D6; }
@@ -244,14 +243,14 @@ h1 { font-weight: 800; }
 .schema-dessin { display: flex; justify-content: center; }
 .schema-dessin svg { max-width: 100%; height: auto; }
 .schema-source { margin-top: .6rem; font-size: .9rem; }
-.schema-source summary { cursor: pointer; color: var(--p, #534AB7); }
+.schema-source summary { cursor: pointer; color: var(--bleu); }
 .schema-code pre { margin: 0; }
 
 /* Page Marques (phase 8). */
 .liste-marques { padding-left: 1.2rem; display: grid; gap: .35rem; }
 /* Sur petit écran, un schéma large garde sa taille lisible et défile horizontalement. */
 .schema-dessin { overflow-x: auto; }
-.schema-dessin:focus-visible { outline: 2px solid #534AB7; outline-offset: 2px; }
+.schema-dessin:focus-visible { outline: 2px solid var(--bleu); outline-offset: 2px; }
 @media (max-width: 700px) {
   .schema-dessin { justify-content: flex-start; }
   .schema-dessin svg { max-width: none !important; width: var(--largeur, 100%) !important; flex: none; }

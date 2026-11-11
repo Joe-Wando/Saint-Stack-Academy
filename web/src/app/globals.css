@@ -1,13 +1,12 @@
 /* ==========================================================================
    Saint Stack Academy : thème « plateforme de cours »
-   Couleur principale #534AB7 (texte blanc : contraste 6,9:1, WCAG AA).
+   Les couleurs viennent de la charte (lib/charte.mjs, variables injectées dans <head>) :
+   les anciens noms (--p, --texte, --ligne…) pointent vers elles, sans aucune couleur codée ici.
    ========================================================================== */
 :root {
-  --p: #534AB7; --p-hover: #3C3489; --p-clair: #EEEDFE;
-  --fond: #F7F7FA; --carte: #FFFFFF; --texte: #1D1B2E; --doux: #5F5E6E; --ligne: #E6E5EE;
-  --succes: #0F6E56; --succes-fond: #E1F5EE;
-  --alerte: #633806; --alerte-fond: #FAEEDA;
-  --danger: #A32D1A; --gris: #F1F0F5;
+  --p: var(--bleu); --p-hover: var(--nuit); --p-clair: var(--bleu-clair);
+  --carte: var(--blanc); --texte: var(--nuit); --ligne: var(--bord);
+  --danger: var(--alerte); --gris: #EEF2F8;
   --rayon: 14px; --rayon-btn: 10px;
   --ombre: 0 1px 2px rgba(29, 27, 46, .04), 0 2px 8px rgba(29, 27, 46, .04);
   --ombre-forte: 0 4px 10px rgba(29, 27, 46, .06), 0 12px 28px rgba(29, 27, 46, .10);

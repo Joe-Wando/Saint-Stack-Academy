@@ -1,6 +1,8 @@
 // Module pur (ni React ni Next) : partagé par le site et par tools/generer-diaporamas.mjs.
 // Il décrit les domaines et découpe un cours en chapitres et en diapositives.
 
+import { COULEURS_RUBANS } from './charte.mjs';
+
 /** Les domaines du programme, avec leurs couleurs et leur description. */
 export const DOMAINES = [
   // Fondamentaux de L1 et L2
@@ -14,7 +16,7 @@ export const DOMAINES = [
     description: 'Métiers, communication, anglais, bureautique, stage et soutenance.' },
   { cle: 'systemes', nom: 'Systèmes', noms: ['Systèmes', 'Systèmes et outils'], fond: '#E1F5EE', texte: '#085041', accent: '#0F6E56',
     description: 'Linux, réseaux, Windows Server, Active Directory et scripts : le socle de toute infrastructure.' },
-  { cle: 'devops', nom: 'DevOps', noms: ['DevOps'], fond: '#EEEDFE', texte: '#3C3489', accent: '#534AB7',
+  { cle: 'devops', nom: 'DevOps', noms: ['DevOps'], fond: '#E8EEF7', texte: '#1B2F52', accent: '#2B4C7E',
     description: 'Git, Docker, CI/CD, Kubernetes et supervision : livrer vite et de façon fiable.' },
   { cle: 'web', nom: 'Développement web', noms: ['Développement web'], fond: '#E6F1FB', texte: '#0C447C', accent: '#185FA5',
     description: 'React, Tailwind, Next.js, API et maquettes : construire des applications web modernes.' },
@@ -151,17 +153,18 @@ export function plan(cours) {
 }
 
 /* ==========================================================================
-   Couleurs des niveaux : cartes, bannières, images de partage et avatars par défaut.
-   Texte blanc sur chaque couleur (contraste vérifié, de 5,2:1 à 10,3:1).
+   Couleurs des niveaux : rubans, bandeaux de licence, images de partage et avatars par défaut.
+   Elles viennent de la charte (lib/charte.mjs) : texte blanc, contraste supérieur à 4,5:1.
+   Une option de L3 garde le bleu nuit, avec un liseré corail (voir `liseré`).
    ========================================================================== */
 export const COULEURS_NIVEAUX = {
-  L1: '#0F7B5F',
-  L2: '#185FA5',
-  L3: '#534AB7',                        // tronc commun de L3
-  'big-data-ia': '#A04D08',
-  'reseaux-systemes-cloud': '#0E6A84',
-  'developpement-logiciel': '#9D2E5C',
-  parcours: '#3C3489',                  // cours hors licence, et utilisateur sans niveau
+  L1: COULEURS_RUBANS.L1,
+  L2: COULEURS_RUBANS.L2,
+  L3: COULEURS_RUBANS.L3,                       // tronc commun de L3
+  'big-data-ia': COULEURS_RUBANS.option,
+  'reseaux-systemes-cloud': COULEURS_RUBANS.option,
+  'developpement-logiciel': COULEURS_RUBANS.option,
+  parcours: COULEURS_RUBANS.horsLicence,       // cours hors licence, et utilisateur sans niveau
 };
 
 /** Noms courts des options de L3, pour les rubans. */
@@ -179,12 +182,12 @@ export function niveauCours(licence) {
   const l = Array.isArray(licence) ? licence[0] : null;
   if (!l) return { cle: 'parcours', libelle: 'Parcours', couleur: COULEURS_NIVEAUX.parcours };
   if (l.option && COULEURS_NIVEAUX[l.option]) {
-    return { cle: l.option, libelle: `${l.niveau} · ${OPTIONS_COURTES[l.option] ?? l.option}`, couleur: COULEURS_NIVEAUX[l.option] };
+    return { cle: l.option, libelle: `${l.niveau} · ${OPTIONS_COURTES[l.option] ?? l.option}`, couleur: COULEURS_NIVEAUX[l.option], option: true };
   }
   return { cle: l.niveau, libelle: `${l.niveau} · ${l.semestre}`, couleur: COULEURS_NIVEAUX[l.niveau] ?? COULEURS_NIVEAUX.parcours };
 }
 
-/** Couleur d'un utilisateur selon son niveau (avatar par défaut) : violet foncé s'il n'en a pas. */
+/** Couleur d'un utilisateur selon son niveau (avatar par défaut) : bleu nuit s'il n'en a pas. */
 export function couleurUtilisateur(niveau) {
   return COULEURS_NIVEAUX[niveau] ?? COULEURS_NIVEAUX.parcours;
 }
