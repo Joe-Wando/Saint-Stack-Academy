@@ -88,15 +88,18 @@ Des sites comme PCPartPicker vérifient automatiquement ces compatibilités.
 
 ## Le démarrage, étape par étape
 
-```text
-Appui sur le bouton
-   -> l'alimentation fournit le courant
-   -> POST : test du processeur, de la RAM, de la carte graphique
-   -> UEFI : détecte les disques, lit l'ordre de démarrage
-   -> chargeur d'amorçage (Windows Boot Manager ou GRUB)
-   -> noyau du système d'exploitation
-   -> écran de connexion
+```mermaid
+flowchart TB
+    accTitle: Le démarrage d'un PC, étape par étape
+    e1["Appui sur le bouton"] --> e2["l'alimentation fournit le courant"]
+    e2 --> e3["POST : test du processeur, de la RAM, de la carte graphique"]
+    e3 --> e4["UEFI : détecte les disques, lit l'ordre de démarrage"]
+    e4 --> e5["chargeur d'amorçage (Windows Boot Manager ou GRUB)"]
+    e5 --> e6["noyau du système d'exploitation"]
+    e6 --> e7["écran de connexion"]
 ```
+
+*Figure : les étapes du démarrage, de l'appui sur le bouton à l'écran de connexion.*
 
 - Le **POST** (*Power-On Self-Test*) vérifie le matériel minimal. En cas d'erreur, la carte mère émet des **bips** ou allume un **voyant de diagnostic** (CPU, DRAM, VGA, BOOT).
 - L'**UEFI** (anciennement BIOS) se configure en appuyant sur une touche au démarrage, souvent **Suppr**, **F2** ou **F10**. On y règle l'ordre de démarrage, la date, la virtualisation ou le *Secure Boot*.

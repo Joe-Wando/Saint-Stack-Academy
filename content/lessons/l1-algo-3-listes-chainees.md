@@ -49,12 +49,13 @@ Un tableau, c'est une rangée de cases **contiguës**, de taille fixe. Pour ins�
 
 Une **liste chaînée** est une suite de **maillons** dispersés en mémoire. Chaque maillon contient une **valeur** et l'**adresse du maillon suivant**. C'est comme une chasse au trésor : chaque indice indique où trouver le suivant. Pour ajouter un maillon, il suffit de modifier une ou deux adresses.
 
-```text
-tete
- |
- v
-[ 12 | o-]--> [ 7 | o-]--> [ 25 | o-]--> NULL
+```mermaid
+flowchart LR
+    accTitle: Une liste chaînée de trois maillons
+    tete(["tete"]) --> m12["12 | o"] --> m7["7 | o"] --> m25["25 | o"] --> fin(["NULL"])
 ```
+
+*Figure : tete désigne le premier maillon ; chaque maillon contient une valeur et l'adresse du suivant (o) ; le dernier pointe vers NULL.*
 
 ## Le maillon
 
@@ -163,10 +164,20 @@ int supprimer(Noeud **tete, int valeur) {
 }
 ```
 
-```text
-avant :  [12] --> [7] --> [25] --> NULL
-après :  [12] ----------> [25] --> NULL     (on supprime 7)
+```mermaid
+flowchart TB
+    accTitle: Suppression du maillon 7
+    subgraph avant["avant"]
+        direction LR
+        a12["12"] --> a7["7"] --> a25["25"] --> an(["NULL"])
+    end
+    subgraph apres["après (on supprime 7)"]
+        direction LR
+        b12["12"] --> b25["25"] --> bn(["NULL"])
+    end
 ```
+
+*Figure : avant et après la suppression de 7 : le maillon 12 pointe directement vers 25.*
 
 Deux cas à ne jamais oublier : la liste **vide**, et la suppression de la **tête**.
 

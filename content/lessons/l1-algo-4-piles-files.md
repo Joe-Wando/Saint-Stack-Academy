@@ -195,13 +195,14 @@ int defiler(File *f, int *x) {
 }
 ```
 
-```text
-capacité 5, après plusieurs opérations :
-indices   0    1    2    3    4
-        [ 40 | 50 |    | 20 | 30 ]
-                       ^debut
-ordre de sortie : 20, 30, 40, 50
+```mermaid
+flowchart LR
+    accTitle: Une file circulaire de capacité 5
+    i0["indice 0 : 40"] --- i1["indice 1 : 50"] --- i2["indice 2 : vide"] --- i3["indice 3 : 20"] --- i4["indice 4 : 30"]
+    debut(["debut"]) --> i3
 ```
+
+*Figure : une file circulaire de capacité 5, après plusieurs opérations. debut est à l'indice 3 ; l'ordre de sortie est 20, 30, 40, 50.*
 
 Quand l'indice atteint la fin du tableau, le modulo le ramène à 0 : on réutilise les cases libérées. Tu retrouves ici l'arithmétique modulaire du cours de mathématiques.
 

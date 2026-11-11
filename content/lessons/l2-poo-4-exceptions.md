@@ -87,19 +87,22 @@ Le bloc `finally` s'exécute **toujours**, qu'il y ait eu une exception ou non. 
 
 ## La hiérarchie des exceptions
 
-```text
-Throwable
- ├── Error                      erreurs graves de la JVM (OutOfMemoryError) : on ne les capture pas
- └── Exception
-      ├── IOException, SQLException...      exceptions VÉRIFIÉES
-      └── RuntimeException                  exceptions NON VÉRIFIÉES
-           ├── NullPointerException
-           ├── ArithmeticException
-           ├── ArrayIndexOutOfBoundsException
-           ├── IllegalArgumentException
-           │    └── NumberFormatException
-           └── IllegalStateException
+```mermaid
+flowchart TB
+    accTitle: La hiérarchie des exceptions en Java
+    T["Throwable"] --- E["Error<br/>erreurs graves de la JVM (OutOfMemoryError) : on ne les capture pas"]
+    T --- X["Exception"]
+    X --- V["IOException, SQLException...<br/>exceptions VÉRIFIÉES"]
+    X --- R["RuntimeException<br/>exceptions NON VÉRIFIÉES"]
+    R --- NPE["NullPointerException"]
+    R --- AE["ArithmeticException"]
+    R --- AIOOBE["ArrayIndexOutOfBoundsException"]
+    R --- IAE["IllegalArgumentException"]
+    IAE --- NFE["NumberFormatException"]
+    R --- ISE["IllegalStateException"]
 ```
+
+*Figure : la hiérarchie des exceptions. Chaque classe est reliée à sa classe mère, placée au-dessus d'elle.*
 
 - Les exceptions **vérifiées** (*checked*) représentent des problèmes **extérieurs** et prévisibles : fichier absent, réseau coupé. Le compilateur **oblige** à les capturer ou à les déclarer.
 - Les exceptions **non vérifiées** (*unchecked*, sous-classes de `RuntimeException`) signalent en général une **erreur de programmation** : un objet `null`, un indice hors du tableau. On les corrige dans le code plutôt que de les capturer.

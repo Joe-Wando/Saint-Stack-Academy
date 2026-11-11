@@ -52,22 +52,22 @@ Comprendre ce schéma, c'est savoir lire une fiche technique, choisir un ordinat
 
 ## L'architecture de von Neumann
 
-```text
-           +-------------------------------+
-           |          PROCESSEUR           |
-           |  Unité de contrôle  |  UAL    |
-           |        Registres              |
-           +---------------+---------------+
-                           | bus
-     +---------------------+---------------------+
-     |                     |                     |
- +---------+        +-------------+       +-------------+
- | MÉMOIRE |        |  ENTRÉES    |       |  SORTIES    |
- | (RAM)   |        | clavier,    |       | écran,      |
- | prog. + |        | souris,     |       | imprimante, |
- | données |        | réseau      |       | réseau      |
- +---------+        +-------------+       +-------------+
+```mermaid
+flowchart TB
+    accTitle: L'architecture de von Neumann
+    subgraph cpu["PROCESSEUR"]
+        direction LR
+        uc["Unité de contrôle"]
+        ual["UAL"]
+        reg["Registres"]
+    end
+    cpu --- bus(["bus"])
+    bus --- mem["MÉMOIRE (RAM)<br/>prog. + données"]
+    bus --- ent["ENTRÉES<br/>clavier, souris, réseau"]
+    bus --- sor["SORTIES<br/>écran, imprimante, réseau"]
 ```
+
+*Figure : l'architecture de von Neumann. Le processeur (unité de contrôle, UAL, registres) est relié par le bus à la mémoire, aux entrées et aux sorties.*
 
 - L'**unité de contrôle** lit l'instruction suivante et la décode.
 - L'**unité arithmétique et logique** (UAL) fait les calculs : additions, comparaisons, opérations logiques.

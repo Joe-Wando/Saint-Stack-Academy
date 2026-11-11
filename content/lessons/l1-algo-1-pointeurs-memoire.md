@@ -75,12 +75,13 @@ printf("%d\n", x);           /* 42 */
 
 Schéma de la mémoire :
 
-```text
-adresse     contenu      nom
-0x1000      42           x
-...
-0x2000      0x1000       p   (p "pointe" vers x)
+```mermaid
+flowchart LR
+    accTitle: Schéma de la mémoire, p pointe vers x
+    p["adresse 0x2000<br/>contenu 0x1000<br/>nom : p"] -- "p « pointe » vers x" --> x["adresse 0x1000<br/>contenu 42<br/>nom : x"]
 ```
+
+*Figure : la mémoire. La case p, à l'adresse 0x2000, contient 0x1000, l'adresse de x ; la case x contient 42. D'autres cases se trouvent entre les deux.*
 
 Le **type** du pointeur indique la taille de ce qu'on trouve à l'adresse : un `int *` désigne un `int`, un `char *` un `char`.
 

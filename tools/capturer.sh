@@ -22,8 +22,10 @@ if [ "${1:-}" = "--lighthouse" ]; then
   url="${2:?url}"; rapport="${3:?rapport json}"; forme="${4:-mobile}"; verifier "$url"
   cli="${5:?dossier lighthouse}/node_modules/lighthouse/cli/index.js"
   preset=(); [ "$forme" = desktop ] && preset=(--preset=desktop)
-  CHROME_PATH="$edge" node "$cli" "$url" "${preset[@]}" --quiet --output=json --output-path="$rapport" \
-    --chrome-flags="--headless=new --disable-gpu" 2>&1 | tail -5 || true
+  # Navigateur de test (chrome-headless-shell) installé à côté de lighthouse, sinon Edge.
+  navigateur=$(find "$5/navigateurs" -name chrome-headless-shell.exe 2>/dev/null | head -1)
+  CHROME_PATH="${navigateur:-$edge}" node "$cli" "$url" "${preset[@]}" --quiet --output=json --output-path="$rapport" \
+    --chrome-flags="--headless --disable-gpu" 2>&1 | tail -5 || true
   test -s "$rapport" && echo "$rapport"
   exit 0
 fi

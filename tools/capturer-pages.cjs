@@ -31,10 +31,20 @@ function trouver(rep) {
       if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
       const page = await nav.newPage();
       await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+      // Erreurs de la page (exceptions et console.error), pour comprendre une capture ratée.
+      if (t.erreurs) {
+        page.on('pageerror', (e) => console.error('[page]', t.url, e.message));
+        page.on('console', (m) => { if (m.type() === 'error') console.error('[console]', t.url, m.text().slice(0, 400)); });
+      }
       await page.setViewport({ width: t.largeur || 1366, height: t.hauteur || 900, deviceScaleFactor: 1 });
       if (t.session) {
         await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
         await page.evaluate((s) => localStorage.setItem('ssa-session', JSON.stringify(s)), t.session);
+      }
+      // Valeurs à écrire dans localStorage avant d'ouvrir la page (chapitre ouvert d'un cours, par exemple).
+      if (t.stockageLocal) {
+        if (!t.session) await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
+        await page.evaluate((o) => { for (const [k, v] of Object.entries(o)) localStorage.setItem(k, v); }, t.stockageLocal);
       }
       if (t.stockageSession) {
         if (!t.session) await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
@@ -43,6 +53,8 @@ function trouver(rep) {
       await page.goto(t.url, { waitUntil: 'networkidle2', timeout: 45000 }).catch((e) => console.error('Attente réseau :', t.url, e.message));
       // Attendre la fin des « Chargement… » des pages client.
       await page.waitForFunction(() => !/Chargement…/.test(document.body.innerText), { timeout: 15000 }).catch(() => {});
+      // Attendre un élément rendu plus tard (un schéma Mermaid, par exemple).
+      if (t.attendre) await page.waitForSelector(t.attendre, { timeout: 20000 }).catch(() => console.error('Élément absent :', t.attendre, t.url));
       // Maquette : CSS ajouté à la page avant la capture, sans toucher au site.
       if (t.css) await page.addStyleTag({ content: t.css });
       // Saisie dans un champ avant la capture : { selecteur, texte }.

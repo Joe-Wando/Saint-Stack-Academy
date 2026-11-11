@@ -33,3 +33,6 @@ saint-stack-images.zip
 
 # Réglages personnels de Claude Code
 .claude/settings.local.json
+
+# Copie de mermaid faite avant chaque build (web/scripts/copier-mermaid.mjs)
+web/public/vendor/

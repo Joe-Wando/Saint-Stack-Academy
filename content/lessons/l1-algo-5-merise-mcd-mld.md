@@ -83,17 +83,29 @@ On élimine les **données calculées** (l'âge, la moyenne) : elles se calculen
 
 Une **entité** représente un ensemble d'objets de même nature, décrits par les mêmes **attributs**. Chaque entité a un **identifiant** (souligné), dont la valeur est unique pour chaque **occurrence**.
 
-```text
-+----------------+     +----------------+     +----------------+
-| ETUDIANT       |     | COURS          |     | CLASSE         |
-|----------------|     |----------------|     |----------------|
-| _matricule_    |     | _code_cours_   |     | _code_classe_  |
-| nom_etu        |     | intitule       |     | libelle_classe |
-| prenom_etu     |     | credits        |     | niveau         |
-| date_naiss     |     +----------------+     +----------------+
-| email_etu      |
-+----------------+
+```mermaid
+classDiagram
+    accTitle: Les entités ETUDIANT, COURS et CLASSE
+    class ETUDIANT {
+        _matricule_
+        nom_etu
+        prenom_etu
+        date_naiss
+        email_etu
+    }
+    class COURS {
+        _code_cours_
+        intitule
+        credits
+    }
+    class CLASSE {
+        _code_classe_
+        libelle_classe
+        niveau
+    }
 ```
+
+*Figure : les entités ETUDIANT, COURS et CLASSE, avec leur identifiant (entre traits bas, souligné sur papier) en premier.*
 
 On n'identifie jamais par le nom : deux étudiants peuvent s'appeler « Moussa Diallo ».
 
@@ -115,10 +127,13 @@ Les **cardinalités** indiquent, pour une occurrence d'une entité, le **minimum
 
 Une association peut porter des **attributs** : la **note** ne dépend ni de l'étudiant seul, ni du cours seul, mais du **couple** (étudiant, cours). Elle appartient donc à l'association S'INSCRIRE.
 
-```text
-CLASSE (0,n) ---- APPARTENIR ---- (1,1) ETUDIANT (0,n) ---- S'INSCRIRE ---- (0,n) COURS
-                                                            | note |
+```mermaid
+flowchart LR
+    accTitle: Le MCD avec les associations APPARTENIR et S'INSCRIRE
+    CLASSE["CLASSE"] ---|"(0,n)"| APPARTENIR(["APPARTENIR"]) ---|"(1,1)"| ETUDIANT["ETUDIANT"] ---|"(0,n)"| INSCRIRE(["S'INSCRIRE<br/>note"]) ---|"(0,n)"| COURS["COURS"]
 ```
+
+*Figure : le MCD. Les entités sont des rectangles, les associations des formes arrondies ; chaque cardinalité est écrite sur le trait, du côté de son entité. L'attribut note appartient à S'INSCRIRE.*
 
 ## Étape 4 : du MCD au MLD
 

@@ -73,19 +73,27 @@ Il décrit le système **vu de l'extérieur** :
 
 Exemple pour une plateforme de cours :
 
-```text
-                +-------------------- Plateforme de cours -------------------+
-                |                                                            |
- [Apprenant] ---+--- (S'inscrire)                                            |
-       |        |                                                            |
-       +--------+--- (Suivre un cours) ----include----> (S'authentifier)     |
-       |        |                                                            |
-       +--------+--- (Passer un quiz)                                        |
-                |                                                            |
- [Admin] -------+--- (Publier un cours) ---include----> (S'authentifier)     |
-                |                                                            |
-                +------------------------------------------------------------+
+```mermaid
+flowchart LR
+    accTitle: Diagramme de cas d'utilisation de la plateforme de cours
+    apprenant["Apprenant"]
+    admin["Admin"]
+    subgraph plateforme["Plateforme de cours"]
+        inscrire(["S'inscrire"])
+        suivre(["Suivre un cours"])
+        quiz(["Passer un quiz"])
+        publier(["Publier un cours"])
+        auth(["S'authentifier"])
+    end
+    apprenant --- inscrire
+    apprenant --- suivre
+    apprenant --- quiz
+    admin --- publier
+    suivre -. "include" .-> auth
+    publier -. "include" .-> auth
 ```
+
+*Figure : les acteurs Apprenant et Admin, hors du cadre de la plateforme ; les cas d'utilisation, à l'intérieur ; Suivre un cours et Publier un cours incluent S'authentifier.*
 
 Chaque cas d'utilisation est ensuite détaillé dans une **fiche** : acteur, préconditions, scénario nominal (étapes numérotées), scénarios alternatifs (erreurs).
 
@@ -93,18 +101,19 @@ Chaque cas d'utilisation est ensuite détaillé dans une **fiche** : acteur, pr�
 
 Une **classe** est un modèle d'**objets** qui partagent les mêmes **attributs** (données) et les mêmes **méthodes** (comportements). Elle se dessine en trois compartiments :
 
-```text
-+-----------------------------+
-| Etudiant                    |
-+-----------------------------+
-| - matricule : String        |
-| - nom : String              |
-| - moyenne : double          |
-+-----------------------------+
-| + sInscrire(c : Cours)      |
-| + calculerMoyenne() : double|
-+-----------------------------+
+```mermaid
+classDiagram
+    accTitle: La classe Etudiant
+    class Etudiant {
+        -matricule : String
+        -nom : String
+        -moyenne : double
+        +sInscrire(c : Cours)
+        +calculerMoyenne() double
+    }
 ```
+
+*Figure : la classe Etudiant et ses trois compartiments : le nom, les attributs, puis les méthodes.*
 
 Les signes indiquent la **visibilité** : `-` privé (accessible seulement dans la classe), `+` public, `#` protégé.
 
@@ -129,18 +138,23 @@ Il montre, pour **un scénario**, les messages échangés au cours du **temps** 
 
 Scénario « se connecter » :
 
-```text
-Apprenant        Navigateur          API               Base de données
-   |  saisit e-mail   |                |                       |
-   |  et mot de passe |                |                       |
-   |----------------->|  POST /auth    |                       |
-   |                  |--------------->|  chercher l'utilisateur|
-   |                  |                |---------------------->|
-   |                  |                |<- - - - - - - - - - - |
-   |                  |                | vérifier le mot de passe haché
-   |                  |<- - jeton - - -|                       |
-   |<- tableau de bord|                |                       |
+```mermaid
+sequenceDiagram
+    accTitle: Diagramme de séquence du scénario se connecter
+    participant A as Apprenant
+    participant N as Navigateur
+    participant S as API
+    participant B as Base de données
+    A->>N: saisit e-mail et mot de passe
+    N->>S: POST /auth
+    S->>B: chercher l'utilisateur
+    B-->>S: réponse
+    Note right of S: vérifier le mot de passe haché
+    S-->>N: jeton
+    N-->>A: tableau de bord
 ```
+
+*Figure : le scénario « se connecter ». Le temps s'écoule de haut en bas ; les flèches pleines sont des appels, les flèches en pointillés des réponses.*
 
 ## Dessiner UML en texte avec Mermaid
 

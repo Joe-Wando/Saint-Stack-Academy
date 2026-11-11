@@ -238,3 +238,21 @@ h1 { font-weight: 800; }
 .logo-organisme:hover span:first-of-type, .logo-organisme:focus-visible span:first-of-type { text-decoration: underline; }
 .certif-mention { font-size: .78rem; line-height: 1.35; }
 .badge-texte .type-certif { justify-self: start; margin-bottom: .2rem; }
+
+/* Schémas Mermaid des cours (phase 7). */
+.schema { margin: 1.4rem 0 .4rem; padding: 1rem; background: #fff; border: 1px solid var(--ligne); border-radius: var(--rayon); overflow-x: auto; }
+.schema-dessin { display: flex; justify-content: center; }
+.schema-dessin svg { max-width: 100%; height: auto; }
+.schema-source { margin-top: .6rem; font-size: .9rem; }
+.schema-source summary { cursor: pointer; color: var(--p, #534AB7); }
+.schema-code pre { margin: 0; }
+
+/* Page Marques (phase 8). */
+.liste-marques { padding-left: 1.2rem; display: grid; gap: .35rem; }
+/* Sur petit écran, un schéma large garde sa taille lisible et défile horizontalement. */
+.schema-dessin { overflow-x: auto; }
+.schema-dessin:focus-visible { outline: 2px solid #534AB7; outline-offset: 2px; }
+@media (max-width: 700px) {
+  .schema-dessin { justify-content: flex-start; }
+  .schema-dessin svg { max-width: none !important; width: var(--largeur, 100%) !important; flex: none; }
+}
