@@ -158,3 +158,20 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 .lvl { border-radius: 999px; }
 .pastille-dom { border-radius: 50%; }
 .section-head h2, .titre-section { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+
+/* ---------- Cartes de certification (maquette Certifications) ---------- */
+.grille-certifs { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.certif { padding: 20px; gap: 10px; }
+.certif h3 { font-size: 19px; margin: 0; }
+.type-certif, .cout { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+.cout, .cout.payant, .cout.aide { background: var(--fond); color: var(--nuit); border: 1px solid var(--bord); }
+.certif-ue { font-size: 13px; color: var(--doux); border-top: 1px solid var(--bleu-clair); padding-top: 10px; }
+.certif-mention { font-size: 13px; color: var(--doux); }
+.logo-organisme { font-size: 14px; font-weight: 700; color: var(--nuit); min-height: 32px; }
+.logo-organisme span:first-of-type { color: var(--bleu); text-decoration: underline; text-underline-offset: 2px; }
+.certif-lien { min-height: 44px; }
+
+/* ---------- Macarons des badges de la plateforme ---------- */
+.macaron-badge .macaron-cercle { stroke: rgba(255, 255, 255, .7); }
+.macaron { color: var(--nuit); }
+.macaron-fond { fill: var(--corail-clair); }

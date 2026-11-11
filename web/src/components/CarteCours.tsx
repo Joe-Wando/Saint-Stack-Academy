@@ -15,7 +15,7 @@ export function statutCours(p?: Progression | null): { label: string; cls: strin
 
 /**
  * Carte entièrement cliquable vers un cours : visuel (illustration, ruban de niveau, pastille du sujet),
- * domaine, titre, sujet, durée, difficulté et statut.
+ * sujet en surtitre corail, titre, durée, difficulté et statut (s'il est commencé).
  * `horizontal` : l'illustration à gauche (étapes d'un parcours).
  */
 export default function CarteCours({ cours, prog, horizontal = false, anonyme = false }: { cours: ResumeCours; prog?: Progression | null; horizontal?: boolean; anonyme?: boolean }) {
@@ -25,12 +25,15 @@ export default function CarteCours({ cours, prog, horizontal = false, anonyme = 
     <Link href={anonyme ? `/inscription?suite=${encodeURIComponent(`/cours/${cours.slug}`)}` : `/cours/${cours.slug}`} className={`cc${horizontal ? ' cc-h' : ''}`} style={styleDomaine(cours.domaine)}>
       <VisuelCours domaine={cours.domaine} sujet={cours.sujet} licence={cours.licence} classeImage="cc-img" />
       <div className="cc-body">
-        <span className="tag dom">{dom.nom}{cours.visibilite === 'prive' ? ' · privé' : ''}</span>
+        {/* Surtitre corail : le sujet (ou le domaine), puis le titre et la durée (CHARTE.md § 4, carte de cours). */}
+        <span className="cc-surtitre">{cours.sujet?.libelle ?? dom.nom}{cours.visibilite === 'prive' ? ' · privé' : ''}</span>
         <span className="cc-titre">{cours.titre}</span>
-        {cours.sujet && <span className="cc-sujet">{cours.sujet.libelle}</span>}
         <div className="cc-pied">
-          <span>{dureeH(cours.duree)} · {capitale(cours.difficulte)}</span>
-          {anonyme ? <span className="statut">Commencer ce cours</span> : <span className={`statut ${st.cls}`}>{st.label}</span>}
+          <span className="cc-duree">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M12 7v5l3 2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+            {dureeH(cours.duree)} · {capitale(cours.difficulte)}
+          </span>
+          {anonyme ? null : st.cls !== 'a_faire' && <span className={`statut ${st.cls}`}>{st.label}</span>}
         </div>
       </div>
     </Link>

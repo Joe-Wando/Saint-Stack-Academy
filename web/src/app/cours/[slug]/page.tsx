@@ -150,7 +150,7 @@ function Contenu({ slug }: { slug: string }) {
             <h1>{cours.titre}</h1>
             {cours.sujet && (
               <p className="banniere-sujet">
-                <span className="ruban-niveau" style={{ background: niveau.couleur }}>{niveau.libelle}</span>
+                <span className={`ruban-niveau${niveau.option ? ' ruban-option' : ''}`} style={{ background: niveau.couleur }}>{niveau.libelle}</span>
                 <PictoSujet sujet={cours.sujet} domaine={cours.domaine} taille={30} />
                 <span>{cours.sujet.libelle}</span>
               </p>

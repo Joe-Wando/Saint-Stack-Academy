@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { api, deconnecter, enregistrerSession, session, Utilisateur } from '@/lib/api';
 import Avatar from './Avatar';
-import Monogramme from './Monogramme';
+import EnTete from './EnTete';
 import EnTetePublic from './EnTetePublic';
 import PiedDePage from './PiedDePage';
 
@@ -27,8 +27,9 @@ function MenuCompte({ u }: { u: Utilisateur }) {
   return (
     <div className="compte" ref={zone}>
       <button ref={bouton} className="compte-btn" aria-expanded={ouvert} aria-haspopup="true" onClick={() => setOuvert((o) => !o)}>
-        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} />
-        <span className="sr">Menu du compte de {u.nom}</span>
+        <Avatar nom={u.nom} photo={u.photo} niveau={u.niveau} taille={38} />
+        <span className="compte-prenom">{u.nom.split(' ')[0]}</span>
+        <span className="sr">, menu du compte de {u.nom}</span>
       </button>
       {ouvert && (
         <div className="compte-menu">
@@ -50,27 +51,18 @@ function EnTeteConnecte({ u }: { u: Utilisateur }) {
   const liens = [
     { href: '/accueil', label: 'Accueil' },
     { href: '/licence', label: 'Licence' },
-    { href: '/parcours', label: 'Parcours métiers' },
+    { href: '/parcours', label: 'Parcours' },
     { href: '/catalogue', label: 'Catalogue' },
     { href: '/certifications', label: 'Certifications' },
-    { href: '/contact', label: 'Contact' },
     ...(u.role === 'admin' ? [{ href: '/admin', label: 'Administration' }] : []),
   ];
   return (
-    <header className="topbar">
-      <div className="topbar-in">
-        <Link href="/accueil" className="brand" aria-label="Saint Stack Academy, accueil">
-          <Monogramme /><span className="brand-name">Saint Stack Academy</span>
-        </Link>
-        <nav className="nav" aria-label="Navigation principale">
-          {liens.map((l) => {
-            const actif = chemin === l.href || chemin.startsWith(l.href + '/');
-            return <Link key={l.href} href={l.href} aria-current={actif ? 'page' : undefined}>{l.label}</Link>;
-          })}
-        </nav>
+    <EnTete accueil="/accueil" liens={liens} droite={(
+      <>
+        <Link href="/contact" className="lien-nav" aria-current={chemin === '/contact' ? 'page' : undefined}>Contact</Link>
         <MenuCompte u={u} />
-      </div>
-    </header>
+      </>
+    )} />
   );
 }
 

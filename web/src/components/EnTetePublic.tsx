@@ -1,34 +1,25 @@
 'use client';
 
-import Monogramme from './Monogramme';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import EnTete from './EnTete';
 
-/** En-tête des pages sans connexion : logo, Licence, Parcours métiers, Contact, Se connecter, Créer un compte. */
+/** En-tête des pages sans connexion : Accueil, Licence, Parcours, Catalogue, Certifications ; à droite Contact et « Se connecter ». */
 export default function EnTetePublic() {
   const chemin = usePathname();
   const liens = [
+    { href: '/', label: 'Accueil' },
     { href: '/licence', label: 'Licence' },
-    { href: '/parcours', label: 'Parcours métiers' },
+    { href: '/parcours', label: 'Parcours' },
+    { href: '/catalogue', label: 'Catalogue' },
     { href: '/certifications', label: 'Certifications' },
-    { href: '/contact', label: 'Contact' },
   ];
   return (
-    <header className="topbar">
-      <div className="topbar-in">
-        <Link href="/" className="brand" aria-label="Saint Stack Academy, page d’accueil">
-          <Monogramme /><span className="brand-name">Saint Stack Academy</span>
-        </Link>
-        <nav className="nav nav-public" aria-label="Navigation principale">
-          {liens.map((l) => (
-            <Link key={l.href} href={l.href} aria-current={chemin === l.href || chemin.startsWith(l.href + '/') ? 'page' : undefined}>{l.label}</Link>
-          ))}
-        </nav>
-        <div className="actions-public">
-          <Link href="/connexion" className="btn">Se connecter</Link>
-          <Link href="/inscription" className="btn primary">Créer un compte</Link>
-        </div>
-      </div>
-    </header>
+    <EnTete accueil="/" liens={liens} droite={(
+      <>
+        <Link href="/contact" className="lien-nav" aria-current={chemin === '/contact' ? 'page' : undefined}>Contact</Link>
+        <Link href="/connexion" className="btn bleu">Se connecter</Link>
+      </>
+    )} />
   );
 }

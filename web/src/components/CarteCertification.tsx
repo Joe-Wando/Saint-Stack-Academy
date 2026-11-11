@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { Award, BadgeCheck, FileBadge, type LucideIcon } from 'lucide-react';
 import { ElementCertification, OrganismeCertif } from '@/lib/api';
-import { couleurUtilisateur } from '@/lib/domaines';
-import { Macaron } from './Decor';
 import LogoOrganisme, { mentionOrganismes } from './LogoOrganisme';
 
 export const TYPES_CERTIF: Record<ElementCertification['type'], { label: string; texte: string }> = {
@@ -37,21 +35,19 @@ export function libelleCout(cout: string) {
 }
 
 /** Carte d'une certification. `couleur` : couleur du niveau (ou de l'option de L3) pour le macaron. */
-export default function CarteCertification({ e, lienUe, couleur }: { e: ElementCertification; lienUe?: string | null; couleur?: string }) {
+export default function CarteCertification({ e, lienUe }: { e: ElementCertification; lienUe?: string | null; couleur?: string }) {
   const cout = libelleCout(e.cout);
   return (
     <article className="certif">
-      <div className="certif-tete">
-        <Macaron icone={ICONES_CERTIF[e.type] ?? Award} couleur={couleur ?? couleurUtilisateur(null)} taille={44} />
-        <div className="certif-etiquettes">
-          <span className={`type-certif ${e.type}`}>{TYPES_CERTIF[e.type]?.label ?? e.type}</span>
-          <span className={`cout ${cout.cls}`}>{cout.label}</span>
-          {e.facultatif && <span className="statut">Facultatif</span>}
-        </div>
+      {/* Carte de la charte : étiquettes, titre, organisme, mention, puis l'UE sous un filet (maquette Certifications). */}
+      <div className="certif-etiquettes">
+        <span className={`type-certif ${e.type}`}>{TYPES_CERTIF[e.type]?.label ?? e.type}</span>
+        <span className={`cout ${cout.cls}`}>{cout.label}</span>
+        {e.facultatif && <span className="statut">Facultatif</span>}
       </div>
       <h3>{e.nom}</h3>
       <OrganismesCertif organisme={e.organisme} organismes={e.organismes} type={e.type} />
-      {e.ue && <p className="small" style={{ margin: 0 }}>UE qui y prépare : {lienUe ? <Link href={lienUe}>{e.ue}</Link> : e.ue}</p>}
+      {e.ue && <p className="small certif-ue" style={{ margin: 0 }}>Prépare avec l’UE : {lienUe ? <Link href={lienUe}>{e.ue}</Link> : e.ue}</p>}
       {e.prepare && <p className="small" style={{ margin: 0 }}>Prépare à : <strong>{e.prepare}</strong></p>}
       {e.lien && <a className="btn sm certif-lien" href={e.lien} target="_blank" rel="noopener noreferrer">Voir sur le site officiel<span className="sr"> (nouvel onglet)</span></a>}
     </article>

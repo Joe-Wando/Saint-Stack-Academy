@@ -20,7 +20,7 @@ export default function VisuelCours({ domaine, sujet, licence, classeImage, tail
       <div className={classeImage}>
         <img src={illustration(domaine)} alt="" width={960} height={540} loading={prioritaire ? 'eager' : 'lazy'} />
       </div>
-      <span className="ruban-niveau" style={{ background: n.couleur }}>{n.libelle}</span>
+      <span className={`ruban-niveau${n.option ? ' ruban-option' : ''}`} style={{ background: n.couleur }}>{n.libelle}</span>
       <PictoSujet sujet={sujet} domaine={domaine} taille={taillePicto} className="visuel-picto" />
     </div>
   );
