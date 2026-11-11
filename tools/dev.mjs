@@ -5,7 +5,7 @@
 //   3. lance le site Next.js en mode développement (modifications visibles en 1 à 2 secondes) sur le port 3000.
 // Les secrets sont lus dans .env (jamais affichés, jamais commités).
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -21,6 +21,14 @@ const db = spawnSync('docker', ['compose', 'up', '-d', 'db'], { cwd: racine, std
 if (db.status !== 0) { console.error('[dev] Impossible de démarrer la base : Docker Desktop est-il lancé ?'); process.exit(1); }
 // Les conteneurs api et web libèrent les ports 3000 et 4000.
 spawnSync('docker', ['compose', 'stop', 'api', 'web'], { cwd: racine, stdio: 'ignore', shell: true });
+
+// PowerPoint : générés au déploiement et non versionnés ; en local, on les génère s'il en manque.
+const dossierPptx = join(racine, 'web', 'public', 'diaporamas');
+const nbPptx = existsSync(dossierPptx) ? readdirSync(dossierPptx).filter((f) => f.endsWith('.pptx')).length : 0;
+if (nbPptx < 100) {
+  console.log(`[dev] ${nbPptx} PowerPoint présents : génération de tous les diaporamas (environ 30 secondes)…`);
+  spawnSync('node', ['tools/diaporamas/generer.mjs'], { cwd: racine, stdio: 'inherit', shell: true });
+}
 
 const uploads = join(racine, '.donnees', 'uploads');
 mkdirSync(uploads, { recursive: true });
