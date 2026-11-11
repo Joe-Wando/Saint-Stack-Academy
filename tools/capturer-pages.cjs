@@ -30,6 +30,7 @@ function trouver(rep) {
     for (const t of travaux) {
       if (!/^http:\/\/localhost:3000(\/|$)/.test(t.url)) { console.error('Adresse refusée :', t.url); continue; }
       const page = await nav.newPage();
+      try {
       await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
       // Erreurs de la page (exceptions et console.error), pour comprendre une capture ratée.
       if (t.erreurs) {
@@ -50,7 +51,7 @@ function trouver(rep) {
         if (!t.session) await page.goto('http://localhost:3000/confidentialite', { waitUntil: 'domcontentloaded' });
         await page.evaluate((o) => { for (const [k, v] of Object.entries(o)) sessionStorage.setItem(k, v); }, t.stockageSession);
       }
-      await page.goto(t.url, { waitUntil: 'networkidle2', timeout: 45000 }).catch((e) => console.error('Attente réseau :', t.url, e.message));
+      await page.goto(t.url, { waitUntil: 'networkidle2', timeout: 20000 }).catch((e) => console.error('Attente réseau :', t.url, e.message));
       // Attendre la fin des « Chargement… » des pages client.
       await page.waitForFunction(() => !/Chargement…/.test(document.body.innerText), { timeout: 15000 }).catch(() => {});
       // Attendre un élément rendu plus tard (un schéma Mermaid, par exemple).
@@ -69,7 +70,11 @@ function trouver(rep) {
       await new Promise((r) => setTimeout(r, 400));
       await page.screenshot({ path: t.sortie, fullPage: !!t.pleinePage });
       console.log(t.sortie);
-      await page.close();
+      } catch (e) {
+        // Une page en échec n'empêche pas les captures suivantes.
+        console.error('Capture ratée :', t.url, e.message);
+      }
+      await page.close().catch(() => {});
     }
   } finally {
     await nav.close();

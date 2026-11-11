@@ -25,10 +25,11 @@ function Contenu({ code, connecte }: { code: string; connecte: boolean }) {
   return (
     <div style={styleDomaine(dom?.nom ?? '')}>
       <Link href="/parcours" className="small">← Parcours métiers</Link>
-      <section className="dom-tete parcours-tete">
+      {/* Bandeau bleu nuit de la charte (parcours). */}
+      <section className="dom-tete parcours-tete bandeau-sombre">
         <img src={illustrationParcours(p.code)} alt="" width={960} height={540} />
         <div className="dom-tete-corps">
-          <p className="eyebrow" style={{ color: 'inherit' }}>Parcours métier</p>
+          <p className="eyebrow">Parcours métier</p>
           <h1 className="h-dom">{p.titre}</h1>
           <p>{p.cours.length} étapes, dans l’ordre conseillé.</p>
           {session() && (

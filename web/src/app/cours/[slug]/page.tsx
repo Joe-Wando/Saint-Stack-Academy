@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Shell from '@/components/Shell';
-import { Vague } from '@/components/Decor';
 import Quiz from '@/components/Quiz';
 import Markdown from '@/components/Markdown';
 import PictoSujet from '@/components/PictoSujet';
 import VisuelCours from '@/components/VisuelCours';
 import { api, capitale, Cours, dureeH, Emplacement, Progression, STATUTS } from '@/lib/api';
 import { ancreUe } from '@/lib/licence';
-import { chapitres, estCorrection, infoDomaine, niveauCours, styleDomaine } from '@/lib/domaines';
+import { chapitres, estCorrection, infoDomaine, niveauCours } from '@/lib/domaines';
 
 type Etape = { type: 'objectifs' | 'section' | 'correction' | 'quiz'; titre: string; corps: string };
 
@@ -137,11 +136,12 @@ function Contenu({ slug }: { slug: string }) {
   const niveau = niveauCours(licence);
 
   return (
-    <div style={styleDomaine(cours.domaine)}>
+    <div>
+      {/* La page d'un cours garde les couleurs du site (charte), quel que soit le sujet. */}
       <header className="banniere">
         <div className="banniere-in">
           <div>
-            <Link href={`/catalogue#${dom.cle}`} className="retour">← {dom.nom}</Link>
+            <nav className="fil-ariane" aria-label="Fil d’Ariane"><Link href="/catalogue">Catalogue</Link><span aria-hidden="true">/</span><span>{dom.nom}</span></nav>
             {cours.emplacements.length > 0 && (
               <ul className="emplacements" aria-label="Où trouver ce cours">
                 {cours.emplacements.map((x, i) => { const l = lienEmplacement(x); return <li key={i}><Link href={l.href}>{l.texte}</Link></li>; })}
@@ -158,7 +158,7 @@ function Contenu({ slug }: { slug: string }) {
             <p className="meta" style={{ marginTop: 0 }}>{dureeH(cours.duree)} · {capitale(cours.difficulte)} · {n} chapitres{cours.visibilite === 'prive' ? ' · cours privé' : ''}</p>
             <div className="banniere-actions">
               <Link href={`/cours/${slug}/presenter`} className="btn primary">Présenter</Link>
-              <a href={`/diaporamas/${slug}.pptx`} download className="btn">Télécharger le PowerPoint</a>
+              {cours.visibilite !== 'prive' && <a href={`/diaporamas/${slug}.pptx`} download className="btn">Télécharger le PowerPoint</a>}
               {progChargee && <span className={`statut ${statut}`}>{STATUTS[statut]}</span>}
             </div>
           </div>
@@ -166,7 +166,6 @@ function Contenu({ slug }: { slug: string }) {
             <VisuelCours domaine={cours.domaine} sujet={cours.sujet} licence={licence} classeImage="banniere-img" taillePicto={52} prioritaire />
           </div>
         </div>
-        <Vague />
       </header>
 
       <div className="page page-cours">
