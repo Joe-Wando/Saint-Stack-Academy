@@ -39,14 +39,14 @@ function MenuCompte({ u }: { u: Utilisateur }) {
           </div>
           <Link href="/profil" onClick={() => setOuvert(false)}>Mon profil</Link>
           <Link href="/bienvenue" onClick={() => setOuvert(false)}>Revoir la visite</Link>
-          <button onClick={deconnecter}>Déconnexion</button>
+          <button onClick={() => deconnecter()}>Déconnexion</button>
         </div>
       )}
     </div>
   );
 }
 
-function EnTeteConnecte({ u }: { u: Utilisateur }) {
+export function EnTeteConnecte({ u }: { u: Utilisateur }) {
   const chemin = usePathname();
   const liens = [
     { href: '/accueil', label: 'Accueil' },

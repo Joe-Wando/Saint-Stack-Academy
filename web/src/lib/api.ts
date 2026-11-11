@@ -62,9 +62,30 @@ export function session(): Session | null {
 export function enregistrerSession(s: Session) {
   try { localStorage.setItem(CLE, JSON.stringify(s)); } catch { /* navigation privée */ }
 }
-export function deconnecter() {
+/**
+ * Ferme la session. Par défaut, retour à la page d'accueil du site (« / ») ;
+ * une session expirée en cours de route renvoie plutôt vers la connexion.
+ */
+export function deconnecter(destination: '/' | '/connexion' = '/') {
   try { localStorage.removeItem(CLE); } catch { /* rien */ }
-  window.location.href = '/connexion';
+  window.location.href = destination;
+}
+
+/**
+ * Session encore valable ? Vérifiée auprès de l'API, SANS renvoyer vers la connexion :
+ * une session expirée est simplement effacée (pages publiques comme l'accueil « / »).
+ */
+export async function sessionValide(): Promise<boolean> {
+  const s = session();
+  if (!s) return false;
+  try {
+    const r = await fetch(`${API}/auth/moi`, { headers: { authorization: `Bearer ${s.jeton}` } });
+    if (r.ok) return true;
+    if (r.status === 401) { try { localStorage.removeItem(CLE); } catch { /* rien */ } }
+    return false;
+  } catch {
+    return true; // API injoignable : on garde la session, la page connectée affichera l'erreur
+  }
 }
 
 /** Appel à l'API avec le jeton de session ; renvoie vers la connexion si la session a expiré. */
@@ -74,7 +95,7 @@ export async function api<T>(chemin: string, options: RequestInit = {}): Promise
     ...options,
     headers: { 'content-type': 'application/json', ...(s ? { authorization: `Bearer ${s.jeton}` } : {}), ...(options.headers ?? {}) },
   });
-  if (res.status === 401 && s) { deconnecter(); throw new Error('Session expirée.'); }
+  if (res.status === 401 && s) { deconnecter('/connexion'); throw new Error('Session expirée.'); }
   const corps = await res.json().catch(() => ({}));
   if (!res.ok) {
     const e = new Error(Array.isArray(corps.message) ? corps.message.join(' ') : corps.message ?? 'Erreur réseau.') as Error & { statut?: number };

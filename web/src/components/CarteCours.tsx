@@ -22,7 +22,7 @@ export default function CarteCours({ cours, prog, horizontal = false, anonyme = 
   const st = statutCours(prog);
   const dom = infoDomaine(cours.domaine);
   return (
-    <Link href={anonyme ? `/inscription?suite=${encodeURIComponent(`/cours/${cours.slug}`)}` : `/cours/${cours.slug}`} className={`cc${horizontal ? ' cc-h' : ''}`} style={styleDomaine(cours.domaine)}>
+    <Link href={anonyme ? `/connexion?suite=${encodeURIComponent(`/cours/${cours.slug}`)}` : `/cours/${cours.slug}`} className={`cc${horizontal ? ' cc-h' : ''}`} style={styleDomaine(cours.domaine)}>
       <VisuelCours domaine={cours.domaine} sujet={cours.sujet} licence={cours.licence} classeImage="cc-img" />
       <div className="cc-body">
         {/* Surtitre corail : le sujet (ou le domaine), puis le titre et la durée (CHARTE.md § 4, carte de cours). */}

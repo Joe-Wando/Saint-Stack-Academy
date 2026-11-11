@@ -1,6 +1,8 @@
+'use client';
+
 import Monogramme from './Monogramme';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { CONTACT } from '@/lib/contact';
 import PhotoFondateur from './PhotoFondateur';
 
@@ -40,4 +42,17 @@ export function parametre(nom: string) {
 /** Chemin de retour après connexion : seulement un chemin interne. */
 export function suiteSure(s: string) {
   return /^\/(?!\/)[\w\-/?=&#.%]*$/.test(s) ? s : '/accueil';
+}
+
+/**
+ * Lien vers `chemin` qui garde la page à rejoindre après la connexion ou l'inscription (paramètre « suite ») :
+ * on peut passer de la connexion à l'inscription et inversement sans perdre le cours choisi.
+ */
+export function useLienAvecSuite(chemin: '/connexion' | '/inscription') {
+  const [lien, setLien] = useState<string>(chemin);
+  useEffect(() => {
+    const suite = parametre('suite');
+    if (suite && suiteSure(suite) === suite) setLien(`${chemin}?suite=${encodeURIComponent(suite)}`);
+  }, [chemin]);
+  return lien;
 }

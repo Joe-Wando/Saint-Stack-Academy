@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
-import CadreAuth, { parametre, suiteSure } from '@/components/CadreAuth';
+import CadreAuth, { parametre, suiteSure, useLienAvecSuite } from '@/components/CadreAuth';
 import { api, memoriserSuite, Niveau } from '@/lib/api';
 import { CarteNiveaux, OptionsL3 } from '@/components/ChoixNiveau';
 
 export default function Inscription() {
   const [niveau, setNiveau] = useState<Niveau | ''>('');
+  const lienConnexion = useLienAvecSuite('/connexion');
   const [option, setOption] = useState('');
   const [mdp, setMdp] = useState('');
   const [erreur, setErreur] = useState('');
@@ -86,7 +87,7 @@ export default function Inscription() {
         {erreur && <p className="error" role="alert">{erreur}</p>}
         <button className="btn primary" disabled={envoi}>{envoi ? 'Un instant…' : 'Créer mon compte'}</button>
       </form>
-      <p className="muted small">Déjà inscrit ? <Link href="/connexion">Connecte-toi</Link></p>
+      <p className="muted small">Déjà inscrit ? <Link href={lienConnexion}>Connecte-toi</Link></p>
     </CadreAuth>
   );
 }

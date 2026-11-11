@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-import CadreAuth, { parametre, suiteSure } from '@/components/CadreAuth';
+import CadreAuth, { parametre, suiteSure, useLienAvecSuite } from '@/components/CadreAuth';
 import { api, enregistrerSession, reprendreSuite, Utilisateur } from '@/lib/api';
 
 export default function Connexion() {
   const router = useRouter();
   const [erreur, setErreur] = useState('');
+  const lienInscription = useLienAvecSuite('/inscription');
   const [nonVerifie, setNonVerifie] = useState('');
   const [info, setInfo] = useState('');
   const [envoi, setEnvoi] = useState(false);
@@ -49,7 +50,7 @@ export default function Connexion() {
         <button className="btn primary" disabled={envoi}>{envoi ? 'Un instant…' : 'Se connecter'}</button>
       </form>
       <p className="small"><Link href="/mot-de-passe-oublie">Mot de passe oublié ?</Link></p>
-      <p className="muted small">Pas encore de compte ? <Link href="/inscription">Crée-le gratuitement</Link></p>
+      <p className="muted small">Pas encore de compte ? <Link href={lienInscription}>Crée-le gratuitement</Link></p>
     </CadreAuth>
   );
 }

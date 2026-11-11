@@ -22,7 +22,7 @@ export default function ConfirmerEmail() {
     <CadreAuth titre={etat === 'ok' ? 'Adresse confirmée' : 'Lien invalide'}>
       <p className={etat === 'ok' ? 'succes' : 'error'} role={etat === 'ok' ? 'status' : 'alert'}>{message}</p>
       {etat === 'ok' && session()
-        ? <button className="btn primary" onClick={deconnecter}>Me reconnecter</button>
+        ? <button className="btn primary" onClick={() => deconnecter('/connexion')}>Me reconnecter</button>
         : <Link href="/connexion" className="btn primary">Aller à la connexion</Link>}
     </CadreAuth>
   );

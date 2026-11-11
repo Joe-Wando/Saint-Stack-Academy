@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Award, BookOpen, Map as Carte, Rocket } from 'lucide-react';
 import EnTetePublic from '@/components/EnTetePublic';
+import { EnTeteConnecte } from '@/components/Shell';
 import PiedDePage from '@/components/PiedDePage';
 import CarteCours from '@/components/CarteCours';
 import PhotoFondateur from '@/components/PhotoFondateur';
-import { api, Referentiel, ResumeCours, session } from '@/lib/api';
+import { api, Referentiel, ResumeCours, session, sessionValide, Utilisateur } from '@/lib/api';
 import { COULEURS_NIVEAUX } from '@/lib/domaines';
 import { CONTACT } from '@/lib/contact';
 
@@ -34,17 +34,20 @@ function coursDuReferentiel(r: Referentiel): ResumeCours[] {
   return [...new Map(tous.map((c) => [c.slug, c])).values()];
 }
 
-/** Page d'accueil publique (maquette Main.html). Un utilisateur connecté est redirigé vers /accueil. */
+/**
+ * Page d'accueil du site (maquette Main.html) : c'est toujours la première page, connecté ou non.
+ * Connecté : l'en-tête montre le compte et le bouton principal mène à ses cours.
+ * Une session expirée est effacée sans quitter la page.
+ */
 export default function AccueilPublic() {
-  const router = useRouter();
-  const [pret, setPret] = useState(false);
+  const [u, setU] = useState<Utilisateur | null>(null);
   const [ref, setRef] = useState<Referentiel | null>(null);
   useEffect(() => {
-    if (session()) { router.replace('/accueil'); return; }
-    setPret(true);
-    api<Referentiel>('/referentiel').then(setRef).catch(() => {});
-  }, [router]);
-  if (!pret) return null;
+    let actif = true;
+    if (session()) sessionValide().then((ok) => { if (actif && ok) setU(session()?.utilisateur ?? null); });
+    api<Referentiel>('/referentiel').then((r) => { if (actif) setRef(r); }).catch(() => {});
+    return () => { actif = false; };
+  }, []);
 
   const cours = ref ? coursDuReferentiel(ref) : [];
   // Cours populaires : les premiers cours de L1, un par domaine, trois au plus.
@@ -52,7 +55,7 @@ export default function AccueilPublic() {
 
   return (
     <>
-      <EnTetePublic />
+      {u ? <EnTeteConnecte u={u} /> : <EnTetePublic />}
       <main>
         <section className="bandeau-sombre bandeau-accueil">
           <div className="conteneur bandeau-accueil-in">
@@ -63,7 +66,9 @@ export default function AccueilPublic() {
                 {cours.length || 'Des'} cours, des exercices corrigés et des parcours pour devenir développeur web, ingénieur DevOps, data engineer ou administrateur systèmes.
               </p>
               <div className="bandeau-actions">
-                <Link href="/inscription" className="btn primary">Commencer gratuitement</Link>
+                {u
+                  ? <Link href="/accueil" className="btn primary">Continuer mes cours</Link>
+                  : <Link href="/inscription" className="btn primary">Commencer gratuitement</Link>}
                 <Link href="/catalogue" className="btn sur-sombre">Voir le catalogue</Link>
               </div>
             </div>
