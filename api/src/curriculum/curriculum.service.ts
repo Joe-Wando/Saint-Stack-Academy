@@ -128,13 +128,15 @@ export class CurriculumService implements OnModuleInit {
       : vide;
     // Organismes qui délivrent chaque élément : logo (ou nom seul) et site officiel.
     const { trouver, marques } = chargerOrganismes();
-    this.marquesOrganismes = marques;
     this.trouverOrganismes = trouver;
     const elements = [...(c.niveaux?.L1?.elements ?? []), ...(c.niveaux?.L2?.elements ?? []), ...Object.values(c.niveaux?.L3?.options ?? {}).flat()];
     for (const e of elements) {
       e.organismes = trouver(String(e.organisme ?? ''));
       if (!e.organismes.length) this.logger.warn(`Certification « ${e.nom} » : aucun organisme reconnu dans « ${e.organisme} » (content/organismes.yaml).`);
     }
+    // Page « Marques » : seulement les organismes réellement affichés avec un logo sur une carte de certification.
+    const affiches = new Set(elements.flatMap((e) => (e.organismes ?? []).filter((o) => o.logo).map((o) => o.nom)));
+    this.marquesOrganismes = marques.filter((m) => affiches.has(m.nom));
     this.certifs = c;
     return this.certifs;
   }

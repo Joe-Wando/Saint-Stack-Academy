@@ -27,6 +27,17 @@ export class CurriculumController {
     return this.curriculum.certifications();
   }
 
+  /** Mentions de marque (page « Marques ») : sujets affichés avec un logo, puis organismes de certification avec logo. Publique. */
+  @Get('marques')
+  marques() {
+    const tri = (a: string, b: string) => a.localeCompare(b, 'fr', { sensitivity: 'base' });
+    return {
+      // Une même mention peut couvrir plusieurs sujets (Python et ses bibliothèques, par exemple) : on la garde une fois.
+      sujets: [...new Map(this.curriculum.mentionsMarques().map((m) => [m.marque, m])).values()].sort((a, b) => tri(a.marque, b.marque)),
+      organismes: [...this.curriculum.mentionsOrganismes()].sort((a, b) => tri(a.marque, b.marque)),
+    };
+  }
+
   @Get('cours/:slug')
   @UseGuards(AuthGuard)
   cours(@Param('slug') slug: string, @Moi() u: Utilisateur) {

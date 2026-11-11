@@ -16,6 +16,7 @@ export default function PiedDePage() {
             <Link href="/certifications">Certifications</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/confidentialite">Confidentialité</Link>
+            <Link href="/marques">Marques</Link>
           </nav>
           <p className="small">© 2026 Saint Stack Academy · Apprendre l’informatique à son rythme, une notion à la fois.</p>
         </div>
