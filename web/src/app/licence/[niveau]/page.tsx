@@ -3,7 +3,7 @@
 import { COULEURS_NIVEAUX } from '@/lib/domaines';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
 import { ShellOuvert } from '@/components/Shell';
 import Onglets from '@/components/Onglets';
 import CarteCours, { CartePreparation } from '@/components/CarteCours';
@@ -62,7 +62,7 @@ function Contenu({ code, u }: { code: string; u: Utilisateur | null }) {
     <>
       <Link href="/licence" className="small">← Licence</Link>
       {/* Bandeau de la couleur du niveau (charte) ; une option de L3 ajoute le liseré corail. */}
-      <section className={`hero hero-illus bandeau-niveau${opt ? ' bandeau-option' : ''}`} style={{ background: COULEURS_NIVEAUX[niveau.code] ?? COULEURS_NIVEAUX.parcours }}>
+      <section className={`hero hero-illus bandeau-niveau${opt ? ' bandeau-option' : ''}`} style={{ '--bandeau': COULEURS_NIVEAUX[niveau.code] ?? COULEURS_NIVEAUX.parcours } as CSSProperties}>
         <div>
           <p className="eyebrow">{abrev}</p>
           <h1>{reste.join(' · ') || niveau.titre}</h1>

@@ -96,6 +96,7 @@ SOFTWARE.
 | Bricolage Grotesque | titres du site, images de partage | Copyright 2022 The Bricolage Grotesque Project Authors (https://github.com/ateliertriay/bricolage) |
 | Manrope | texte du site, images de partage | Copyright 2019 The Manrope Project Authors (https://github.com/sharanda/manrope) |
 | Caveat | annotations manuscrites du site | Copyright 2014 The Caveat Project Authors (https://github.com/googlefonts/caveat) |
+| JetBrains Mono | blocs de code du site | Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono) |
 
 Texte complet de la licence : https://openfontlicense.org/open-font-license-official-text/
-Les fichiers de licence de Bricolage Grotesque et de Manrope sont fournis avec les polices : `web/assets/fonts/OFL-BricolageGrotesque.txt` et `web/assets/fonts/OFL-Manrope.txt`. Sur le site, les trois polices sont auto-hébergées par `next/font`.
+Sur le site, les quatre polices sont hébergées avec l'application (`web/src/app/polices/`, fichiers @fontsource 5.3.0, avec leurs licences `LICENCE-*.txt`) et chargées par `next/font/local` : aucun appel à Google. Les images de partage utilisent `web/assets/fonts/` (licences `OFL-*.txt`).
