@@ -210,7 +210,7 @@ Ce compte reçoit automatiquement le rôle d'administrateur (menu « Administrat
 Tant que les e-mails ne sont pas configurés (étape 9), le lien de vérification s'affiche dans les journaux de l'API :
 
 ```bash
-docker compose -f compose.yaml -f compose.prod.yaml logs api | grep -i verification
+docker compose -f compose.yaml -f compose.prod.yaml logs api | grep "lien :"
 ```
 
 ## 9. Les e-mails avec Brevo
