@@ -39,6 +39,7 @@ code, pre, kbd { font-family: var(--police-code), "JetBrains Mono", Consolas, mo
 .brand:hover { text-decoration: none; color: var(--nuit); }
 .logo { width: 36px; height: 36px; border-radius: 9px; background: var(--nuit) !important; color: #fff !important; font-size: 15px; font-family: var(--police-titre), sans-serif; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
 .logo::after, .logo::before { display: none !important; }
+.logo-marque { display: block; flex: none; height: 36px; width: auto; }
 .brand-name { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 19px; color: var(--nuit); letter-spacing: -0.01em; white-space: nowrap; display: inline !important; }
 .brand-academy { color: var(--corail); }
 .topbar-menu { display: flex; align-items: center; flex: 1; gap: 24px; min-width: 0; }
@@ -285,6 +286,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 @media (max-width: 480px) {
   .brand-name .brand-academy { display: none; }
   .logo { width: 32px; height: 32px; border-radius: 8px; font-size: 13px; }
+  .logo-marque { height: 30px; }
   .brand-name { font-size: 17px; }
 }
 .cc-pied { border-top: 0; padding-top: 0; }

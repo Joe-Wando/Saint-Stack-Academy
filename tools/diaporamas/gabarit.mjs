@@ -18,6 +18,11 @@ const dossierPaquet = (nom) => dirname(exiger.resolve(`${nom}/package.json`));
 export const FIXE = { fond: 'F6F7F9', texte: '14213D', doux: '5B6475', blanc: 'FFFFFF', bord: 'E3E6EC', gris: 'BFC3CC', code: 'E6EDF7', lien: '1D4ED8' };
 const MIN_PT = 10; // aucun texte sous 10 pt
 
+/** Logo de MeredianStack, dans ses couleurs (fond transparent), généré par « npm run icones ». */
+const marque = (nom) => `image/png;base64,${readFileSync(join(racine, 'web', 'assets', 'marque', nom)).toString('base64')}`;
+const LOGO = { data: marque('logo.png'), ratio: 1269 / 666 };
+const EMBLEME = { data: marque('embleme.png'), ratio: 744 / 436 };
+
 // ---------- Images (icônes et logos rendus en PNG, mis en cache) ----------
 const cache = new Map();
 const png = async (svg, taille = 256) => {
@@ -60,7 +65,11 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
 
   pres.defineSlideMaster({
     title: 'CONTENU', background: { color: C.fond },
-    objects: [{ placeholder: { options: { name: 'titre', type: 'title', x: 0.6, y: 0.35, w: 7.4, h: 0.75, fontSize: 26, bold: true, color: C.sombre, align: 'left', valign: 'middle', margin: 0, fit: 'shrink' }, text: '' } }],
+    objects: [
+      { placeholder: { options: { name: 'titre', type: 'title', x: 0.6, y: 0.35, w: 7.4, h: 0.75, fontSize: 26, bold: true, color: C.sombre, align: 'left', valign: 'middle', margin: 0, fit: 'shrink' }, text: '' } },
+      // Emblème dans le modèle de page : enregistré une seule fois par fichier, pas une fois par page.
+      { image: { x: 0.6, y: 5.0, w: 0.36 * EMBLEME.ratio, h: 0.36, data: EMBLEME.data, altText: 'MeredianStack' } },
+    ],
     slideNumber: { x: 9.25, y: 5.2, w: 0.5, h: 0.3, fontSize: MIN_PT, color: 'FFFFFF' },
   });
   pres.defineSlideMaster({
@@ -79,7 +88,7 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
     s.addShape(S.ROUNDED_RECTANGLE, baton(8.25, 3.6, 1.6, 0.17, C.principale));
     s.addShape(S.ROUNDED_RECTANGLE, baton(8.75, 4.25, 1.3, 0.13, C.gris));
     s.addShape(S.ROUNDED_RECTANGLE, baton(8.5, 4.75, 1.0, 0.05, C.blanc));
-    points(s, 0.75, 5.1);
+    points(s, 1.4, 5.1);
   };
   const decorGrand = async (s) => {
     if (!visuel) {
@@ -109,7 +118,7 @@ export function creer({ titre, auteur = 'Olivier DIPO WANDO', couleurs, logo = n
       s.addText([{ text: auteur, options: { fontSize: 15, color: C.texte, breakLine: true } }, { text: role, options: { fontSize: 12, italic: true, color: C.doux } }],
         { x: 0.6, y: 3.0, w: 4.6, h: 0.95, margin: 0, isTextBox: true });
       await decorGrand(s);
-      points(s, 1.5, 4.55);
+      s.addImage({ data: LOGO.data, x: 0.6, y: 4.2, w: 0.9 * LOGO.ratio, h: 0.9, altText: 'Logo MeredianStack : Learn, Code, Build' });
     },
     plan(items) {
       const s = api.contenu('Plan du cours');

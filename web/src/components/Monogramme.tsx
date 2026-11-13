@@ -1,6 +1,5 @@
-import { MARQUE } from '@/lib/marque.mjs';
-
-/** Monogramme provisoire du site (carré violet « SS »). Ses valeurs viennent de lib/marque.mjs, seul endroit à changer. */
+/** Emblème de MeredianStack (M et chevrons), à côté du nom écrit en texte. Image générée par « npm run icones ». */
 export default function Monogramme() {
-  return <span className="logo" aria-hidden="true" style={{ background: MARQUE.fond, color: MARQUE.texte }}>{MARQUE.lettres}</span>;
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img className="logo-marque" src="/marque/embleme.png" alt="" width={61} height={36} />;
 }

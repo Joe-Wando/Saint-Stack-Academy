@@ -1,65 +1,62 @@
-// Génère le favicon et les icônes de l'application à partir du monogramme provisoire (web/src/lib/marque.mjs).
+// Génère, à partir du logo de MeredianStack (web/assets/marque/logo-source.png), toutes les images de la marque.
 // Usage : npm run icones
 //
+// Le fond blanc du logo devient transparent ; les couleurs du logo ne sont pas modifiées.
 // Sorties :
-//   web/src/app/icon.svg              icône vectorielle de l'onglet
+//   web/assets/marque/logo.png        logo complet (emblème, nom, slogan) : couverture des PowerPoint
+//   web/assets/marque/embleme.png     emblème (M et chevrons) : bas des pages des PowerPoint
+//   web/assets/marque/m.png           M seul : images de partage
+//   web/public/marque/embleme.png     emblème de l'en-tête et des pages de connexion (72 px de haut)
+//   web/src/app/icon.png              icône de l'onglet (M sur carré blanc arrondi)
 //   web/src/app/favicon.ico           16, 32 et 48 px
 //   web/src/app/apple-icon.png        180 × 180, fond opaque
 //   web/public/icons/icon-192.png     manifeste
 //   web/public/icons/icon-512.png     manifeste
 //   web/public/icons/icon-maskable-512.png   manifeste, motif dans la zone de sécurité (cercle de rayon 40 %)
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import opentype from 'opentype.js';
-import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
 import { MARQUE } from '../web/src/lib/marque.mjs';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const web = join(racine, 'web');
-const buf = readFileSync(join(web, 'assets/fonts/bricolage-grotesque-latin-800-normal.woff'));
-const police = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+const source = join(web, 'assets/marque/logo-source.png');
 
-/** Tracé des lettres, centré dans un carré de côté `cote`, hauteur des capitales = `hauteur`. */
-function lettres(cote, hauteur) {
-  const capitale = (police.tables.os2.sCapHeight || police.unitsPerEm * 0.7) / police.unitsPerEm;
-  const taille = hauteur / capitale;
-  const espacement = 0.02 * taille; // letter-spacing .02em, comme dans l'en-tête
-  // Glyphe par glyphe pour appliquer l'espacement.
-  let x = 0;
-  const morceaux = [];
-  for (const car of MARQUE.lettres) {
-    const g = police.charToGlyph(car);
-    morceaux.push({ g, x });
-    x += (g.advanceWidth / police.unitsPerEm) * taille + espacement;
+/** Zones du logo source (1536 × 1024), mesurées sur l'image. */
+const ZONES = {
+  logo: { left: 135, top: 177, width: 1269, height: 666 },
+  embleme: { left: 396, top: 177, width: 744, height: 436 },
+  m: { left: 561, top: 177, width: 415, height: 436 },
+};
+
+/** Fond blanc → transparent : chaque pixel est vu comme un mélange de sa couleur et du blanc. */
+async function sansFond(zone) {
+  const { data, info } = await sharp(source).extract(zone).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const sortie = Buffer.alloc(info.width * info.height * 4);
+  for (let p = 0, q = 0; p < data.length; p += 3, q += 4) {
+    const [r, g, b] = [data[p], data[p + 1], data[p + 2]];
+    let a = (255 - Math.min(r, g, b)) / 255;
+    if (a < 0.03) a = 0;
+    const net = (c) => (a ? Math.round(Math.min(255, Math.max(0, (c - 255 * (1 - a)) / a))) : 0);
+    sortie[q] = net(r); sortie[q + 1] = net(g); sortie[q + 2] = net(b); sortie[q + 3] = Math.round(a * 255);
   }
-  const chemins = morceaux.map(({ g, x: gx }) => g.getPath(gx, 0, taille));
-  const boites = chemins.map((p) => p.getBoundingBox());
-  const x1 = Math.min(...boites.map((b) => b.x1)), x2 = Math.max(...boites.map((b) => b.x2));
-  const y1 = Math.min(...boites.map((b) => b.y1)), y2 = Math.max(...boites.map((b) => b.y2));
-  const dx = (cote - (x2 - x1)) / 2 - x1, dy = (cote - (y2 - y1)) / 2 - y1;
-  const d = morceaux.map(({ g, x: gx }) => g.getPath(gx + dx, dy, taille).toPathData(2)).join('');
-  return { d, largeur: x2 - x1 };
+  return sharp(sortie, { raw: { width: info.width, height: info.height, channels: 4 } }).png().toBuffer();
 }
 
-/** SVG du monogramme. `forme` : 'arrondi' (coins transparents), 'plein' (fond opaque carré), 'masquable'. */
-function svg(cote, { forme = 'arrondi', hauteur = MARQUE.lettresHauteur } = {}) {
-  let h = hauteur * cote;
-  if (forme === 'masquable') {
-    // Zone de sécurité : cercle de rayon 40 % du côté. On fait tenir la boîte des lettres dedans.
-    const { largeur } = lettres(cote, h);
-    const diag = Math.hypot(largeur, h);
-    const max = 0.8 * cote * 0.86; // diamètre utile, avec une marge
-    if (diag > max) h *= max / diag;
-  }
-  const { d } = lettres(cote, h);
-  const r = forme === 'arrondi' ? (MARQUE.rayon * cote).toFixed(2) : 0;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${cote}" height="${cote}" viewBox="0 0 ${cote} ${cote}">`
-    + `<rect width="${cote}" height="${cote}" rx="${r}" fill="${MARQUE.fond}"/>`
-    + `<path d="${d}" fill="${MARQUE.texte}"/></svg>`;
-}
+const logo = await sansFond(ZONES.logo);
+const embleme = await sansFond(ZONES.embleme);
+const m = await sansFond(ZONES.m);
 
-const png = (code, cote) => new Resvg(code, { fitTo: { mode: 'width', value: cote } }).render().asPng();
+/** Carré blanc (coins arrondis ou non), avec le M centré occupant `part` du côté. */
+async function tuile(cote, { arrondi = true, part = 0.7 } = {}) {
+  const r = arrondi ? MARQUE.rayon * cote : 0;
+  const fond = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${cote}" height="${cote}"><rect width="${cote}" height="${cote}" rx="${r}" fill="#FFFFFF"/></svg>`);
+  const h = Math.round(cote * part);
+  const motif = await sharp(m).resize({ height: h, width: h, fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  const decal = Math.round((cote - h) / 2);
+  return sharp(fond).composite([{ input: motif, left: decal, top: decal }]).png().toBuffer();
+}
 
 /** Fichier .ico contenant des images PNG (format accepté par tous les navigateurs actuels). */
 function ico(images) {
@@ -78,12 +75,19 @@ function ico(images) {
 }
 
 const ecrire = (chemin, contenu) => { mkdirSync(dirname(chemin), { recursive: true }); writeFileSync(chemin, contenu); console.log('  ', chemin.slice(racine.length + 1), `${(contenu.length / 1024).toFixed(1)} Ko`); };
+const largeur = (img, l) => sharp(img).resize({ width: l }).png({ compressionLevel: 9 }).toBuffer();
+const hauteur = (img, h) => sharp(img).resize({ height: h }).png({ compressionLevel: 9 }).toBuffer();
 
-// Aux petites tailles, les lettres sont un peu agrandies pour rester lisibles.
-const petit = { hauteur: 0.4 };
-ecrire(join(web, 'src/app/icon.svg'), svg(64));
-ecrire(join(web, 'src/app/favicon.ico'), ico([16, 32, 48].map((c) => ({ cote: c, data: png(svg(c, petit), c) }))));
-ecrire(join(web, 'src/app/apple-icon.png'), png(svg(180, { forme: 'plein' }), 180));
-ecrire(join(web, 'public/icons/icon-192.png'), png(svg(192), 192));
-ecrire(join(web, 'public/icons/icon-512.png'), png(svg(512), 512));
-ecrire(join(web, 'public/icons/icon-maskable-512.png'), png(svg(512, { forme: 'masquable' }), 512));
+ecrire(join(web, 'assets/marque/logo.png'), await largeur(logo, 600));
+ecrire(join(web, 'assets/marque/embleme.png'), await hauteur(embleme, 120));
+ecrire(join(web, 'assets/marque/m.png'), await hauteur(m, 240));
+ecrire(join(web, 'public/marque/embleme.png'), await hauteur(embleme, 72));
+// Ancienne icône vectorielle du monogramme « MS » : remplacée par icon.png.
+if (existsSync(join(web, 'src/app/icon.svg'))) rmSync(join(web, 'src/app/icon.svg'));
+ecrire(join(web, 'src/app/icon.png'), await tuile(96));
+// Aux petites tailles, le M occupe plus de place pour rester lisible.
+ecrire(join(web, 'src/app/favicon.ico'), ico(await Promise.all([16, 32, 48].map(async (c) => ({ cote: c, data: await tuile(c, { part: 0.84 }) })))));
+ecrire(join(web, 'src/app/apple-icon.png'), await tuile(180, { arrondi: false }));
+ecrire(join(web, 'public/icons/icon-192.png'), await tuile(192));
+ecrire(join(web, 'public/icons/icon-512.png'), await tuile(512));
+ecrire(join(web, 'public/icons/icon-maskable-512.png'), await tuile(512, { arrondi: false, part: 0.5 }));

@@ -43,14 +43,17 @@ export async function apiServeur<T>(chemin: string): Promise<T | null> {
   }
 }
 
-/** Monogramme provisoire (valeurs de lib/marque.mjs). */
-function Monogramme({ cote }: { cote: number }) {
+/** M du logo (web/assets/marque/m.png, 415 × 436 à l'origine), lu une fois. */
+let mLogo: Promise<string> | null = null;
+const lireM = () => (mLogo ??= readFile(assets('marque', 'm.png')).then((b) => `data:image/png;base64,${b.toString('base64')}`));
+
+/** M du logo sur un carré blanc arrondi : le bleu nuit du M resterait invisible sur les fonds sombres. */
+function Monogramme({ cote, m }: { cote: number; m: string }) {
+  const h = Math.round(cote * 0.7);
   return (
-    <div style={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', width: cote, height: cote,
-      borderRadius: cote * MARQUE.rayon, background: MARQUE.fond, color: MARQUE.texte,
-      fontFamily: 'Bricolage', fontWeight: 800, fontSize: Math.round(cote * MARQUE.lettresHauteur * 1.45),
-    }}>{MARQUE.lettres}</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: cote, height: cote, borderRadius: cote * MARQUE.rayon, background: '#fff' }}>
+      <img src={m} height={h} width={Math.round((h * 415) / 436)} alt="" />
+    </div>
   );
 }
 
@@ -67,13 +70,14 @@ function pastilleSujet(sujet: { logo: string | null; icone: string } | null | un
 /** Image par défaut : fond bleu nuit, blobs, monogramme, nom, promesse et deux personnages. Aucun logo de technologie. */
 export async function imageDefaut() {
   const personnages = svgDataUri(await readFile(assets('og', 'personnages.svg'), 'utf8'));
+  const m = await lireM();
   return new ImageResponse(
     (
       <div style={{ display: 'flex', width: '100%', height: '100%', background: ENCRE, position: 'relative', fontFamily: 'Manrope' }}>
         <div style={{ position: 'absolute', left: -120, top: -160, width: 460, height: 460, borderRadius: 460, background: '#24395F' }} />
         <div style={{ position: 'absolute', left: 520, top: 470, width: 300, height: 300, borderRadius: 300, background: '#24395F' }} />
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 0 0 84px', width: 720 }}>
-          <Monogramme cote={96} />
+          <Monogramme cote={96} m={m} />
           <div style={{ display: 'flex', marginTop: 40, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 72, lineHeight: 1.05, color: '#fff', flexWrap: 'wrap' }}>Meredian<span style={{ color: CHARTE['corail-sur-sombre'] }}>Stack</span></div>
           <div style={{ display: 'flex', marginTop: 24, fontSize: 34, lineHeight: 1.35, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme, de la L1 aux métiers</div>
           <div style={{ display: 'flex', marginTop: 34, width: 120, height: 8, borderRadius: 8, background: CHARTE.corail }} />
@@ -102,6 +106,7 @@ export interface Gabarit {
 export async function imageGabarit(g: Gabarit) {
   const accent = g.accent ?? g.couleur;
   const pastille = g.sujet !== undefined ? pastilleSujet(g.sujet, accent) : null;
+  const m = await lireM();
   const taille = g.titre.length > 80 ? 50 : g.titre.length > 50 ? 58 : 68;
   return new ImageResponse(
     (
@@ -123,7 +128,7 @@ export async function imageGabarit(g: Gabarit) {
           {g.detail && <div style={{ display: 'flex', marginTop: 24, fontSize: 30, color: DOUX }}>{g.detail}</div>}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', height: 100, padding: '0 72px', background: ENCRE }}>
-          <Monogramme cote={54} />
+          <Monogramme cote={54} m={m} />
           <div style={{ display: 'flex', marginLeft: 20, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 32, color: '#fff' }}>Meredian<span style={{ color: CHARTE['corail-sur-sombre'] }}>Stack</span></div>
           <div style={{ display: 'flex', marginLeft: 'auto', fontSize: 24, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme</div>
         </div>
