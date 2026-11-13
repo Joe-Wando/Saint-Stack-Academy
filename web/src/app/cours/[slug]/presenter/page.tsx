@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { plugins } from '@/components/Markdown';
 import Shell from '@/components/Shell';
@@ -59,15 +59,91 @@ function Diapo({ d, cours, i, n }: { d: Diapositive; cours: Cours; i: number; n:
   );
 }
 
+// ---------- PowerPoint du cours, affiché depuis sa copie PDF ----------
+// npm run diaporamas génère web/public/diaporamas/<slug>.pptx, puis LibreOffice en fait <slug>.pdf
+// (web/Dockerfile, ou npm run diaporamas:pdf en local). pdf.js est copié dans public/vendor/pdfjs/.
+const PDFJS = '/vendor/pdfjs/pdf.min.mjs?v=4.10.38';
+const PDFJS_WORKER = '/vendor/pdfjs/pdf.worker.min.mjs?v=4.10.38';
+type Rendu = { promise: Promise<void>; cancel(): void };
+type PagePdfJs = {
+  getViewport(o: { scale: number }): { width: number; height: number };
+  render(o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }): Rendu;
+  getTextContent(): Promise<{ items: { str?: string }[] }>;
+};
+type DocPdf = { numPages: number; getPage(n: number): Promise<PagePdfJs>; destroy(): Promise<void> };
+
+/** Ouvre le PDF du cours ; null s'il n'existe pas (cours privé, ou PDF pas encore produit en local). */
+async function ouvrirPdf(slug: string): Promise<DocPdf | null> {
+  const url = `/diaporamas/${slug}.pdf`;
+  const r = await fetch(url, { method: 'HEAD' }).catch(() => null);
+  if (!r?.ok) return null;
+  const pdfjs = await import(/* webpackIgnore: true */ PDFJS);
+  pdfjs.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+  return pdfjs.getDocument({ url, isEvalSupported: false }).promise as Promise<DocPdf>;
+}
+
+/** Une page du PDF, dessinée à la largeur de la diapositive (et à la densité de l'écran). */
+function PagePdf({ doc, i }: { doc: DocPdf; i: number }) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  const [largeur, setLargeur] = useState(0);
+  const [texte, setTexte] = useState('');
+
+  useEffect(() => {
+    const parent = ref.current?.parentElement;
+    if (!parent) return;
+    const obs = new ResizeObserver(([e]) => setLargeur(Math.round(e.contentRect.width)));
+    obs.observe(parent);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let annule = false; let tache: Rendu | null = null;
+    (async () => {
+      const page = await doc.getPage(i + 1);
+      const c = ref.current;
+      if (annule || !c || !largeur) return;
+      const base = page.getViewport({ scale: 1 });
+      const vp = page.getViewport({ scale: (largeur * (window.devicePixelRatio || 1)) / base.width });
+      // Dessin hors écran puis copie : pas de page blanche entre deux diapositives.
+      const hors = document.createElement('canvas');
+      hors.width = Math.round(vp.width); hors.height = Math.round(vp.height);
+      tache = page.render({ canvasContext: hors.getContext('2d')!, viewport: vp });
+      try { await tache.promise; } catch { return; }
+      if (annule) return;
+      c.width = hors.width; c.height = hors.height;
+      c.getContext('2d')!.drawImage(hors, 0, 0);
+      // Texte de la page pour les lecteurs d'écran (l'image du canvas est décorative pour eux).
+      const t = await page.getTextContent();
+      if (!annule) setTexte(t.items.map((x) => x.str ?? '').join(' ').replace(/\s+/g, ' ').trim());
+      if (i + 1 < doc.numPages) doc.getPage(i + 2).catch(() => {}); // page suivante préparée
+    })();
+    return () => { annule = true; tache?.cancel(); };
+  }, [doc, i, largeur]);
+
+  return (
+    <>
+      <canvas ref={ref} className="diapo-pdf" aria-hidden="true" />
+      <p className="sr">{texte}</p>
+    </>
+  );
+}
+
 function Contenu({ slug }: { slug: string }) {
   const router = useRouter();
   const [cours, setCours] = useState<Cours | null>(null);
   const [erreur, setErreur] = useState('');
   const [i, setI] = useState(0);
+  // undefined : recherche du PDF en cours ; null : pas de PDF, affichage HTML de secours.
+  const [doc, setDoc] = useState<DocPdf | null | undefined>(undefined);
 
   useEffect(() => { api<Cours>(`/cours/${slug}`).then(setCours).catch((e) => setErreur(e.message)); }, [slug]);
+  useEffect(() => {
+    let d: DocPdf | null = null;
+    ouvrirPdf(slug).then((x) => { d = x; setDoc(x); }).catch(() => setDoc(null));
+    return () => { d?.destroy().catch(() => {}); };
+  }, [slug]);
   const diapos = useMemo(() => (cours ? plan(cours) : []), [cours]);
-  const n = diapos.length;
+  const n = doc ? doc.numPages : diapos.length;
   const aller = useCallback((j: number) => setI(Math.min(Math.max(j, 0), Math.max(n - 1, 0))), [n]);
 
   useEffect(() => {
@@ -91,7 +167,7 @@ function Contenu({ slug }: { slug: string }) {
   }
 
   if (erreur) return <div className="pres"><div className="pres-scene"><p>{erreur} <Link href="/catalogue" style={{ color: '#fff' }}>Retour au catalogue</Link></p></div></div>;
-  if (!cours || !n) return <div className="pres"><div className="pres-scene"><p>Chargement…</p></div></div>;
+  if (!cours || doc === undefined || !n) return <div className="pres"><div className="pres-scene"><p>Chargement…</p></div></div>;
 
   return (
     <div className="pres" style={styleDomaine(cours.domaine)}>
@@ -105,7 +181,7 @@ function Contenu({ slug }: { slug: string }) {
       </div>
       <div className="pres-scene">
         <div className="diapo" onClick={() => aller(i + 1)} role="region" aria-roledescription="diapositive" aria-label={`Diapositive ${i + 1} sur ${n}`}>
-          <Diapo d={diapos[i]} cours={cours} i={i} n={n} />
+          {doc ? <PagePdf doc={doc} i={i} /> : <Diapo d={diapos[i]} cours={cours} i={i} n={n} />}
         </div>
       </div>
     </div>

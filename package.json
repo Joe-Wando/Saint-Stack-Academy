@@ -6,6 +6,7 @@
     "dev": "node tools/dev.mjs",
     "verifier": "node tools/verifier-outils.mjs",
     "diaporamas": "node tools/diaporamas/generer.mjs",
+    "diaporamas:pdf": "node tools/diaporamas/pdf.mjs",
     "illustrations": "node tools/illustrations.js",
     "icones": "node tools/generer-icones.mjs",
     "pictos": "node tools/generer-pictos.mjs"

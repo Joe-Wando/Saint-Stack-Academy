@@ -62,7 +62,7 @@ L'admin dispose d'une section **Administration** (`/admin`) : tableau de bord, u
 3. Le quiz est dans l'en-tête. `reponse` est l'indice (à partir de 0) du bon choix. Les réponses ne sont jamais envoyées au navigateur.
 4. Une section `## Correction` est masquée jusqu'au clic de l'apprenant.
 5. Redémarre l'API pour recharger les cours : `docker compose restart api`.
-6. Régénère les diaporamas PowerPoint (`web/public/diaporamas/<slug>.pptx`, commités ; les cours privés n'en ont pas) : `npm install` puis `npm run diaporamas` à la racine. Pour un seul cours : `node tools/generer-diaporamas.mjs <slug>`.
+6. Régénère les diaporamas PowerPoint (`web/public/diaporamas/<slug>.pptx`, non commités ; les cours privés n'en ont pas) : `npm install` puis `npm run diaporamas` à la racine. Pour un seul cours : `node tools/diaporamas/generer.mjs <slug>`. Le mode « Présenter » affiche leur copie PDF : `npm run diaporamas:pdf` (LibreOffice dans Docker, une vingtaine de minutes en local ; faite automatiquement par `web/Dockerfile` en production). Sans PDF, « Présenter » affiche une version HTML du cours.
 
 La migration des anciens cours (champs `piste`, `semaine`, `date`) vers ce format est faite par `node tools/migrer-cours.mjs`, à partir de `placement-cours.json`. Elle est idempotente.
 

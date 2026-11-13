@@ -29,6 +29,14 @@ if (nbPptx < 100) {
   console.log(`[dev] ${nbPptx} PowerPoint présents : génération de tous les diaporamas (environ 30 secondes)…`);
   spawnSync('node', ['tools/diaporamas/generer.mjs'], { cwd: racine, stdio: 'inherit', shell: true });
 }
+// Copies PDF du mode « Présenter » : s'il en manque, conversion en arrière-plan (le site démarre sans attendre ;
+// en attendant, « Présenter » affiche la version HTML).
+const compter = (ext) => (existsSync(dossierPptx) ? readdirSync(dossierPptx).filter((f) => f.endsWith(ext)).length : 0);
+if (compter('.pdf') < compter('.pptx')) {
+  console.log('[dev] Conversion des PowerPoint en PDF pour le mode Présenter, en arrière-plan…');
+  const conv = spawn('node', ['tools/diaporamas/pdf.mjs'], { cwd: racine, shell: true });
+  conv.on('exit', (c) => console.log(c === 0 ? '[dev] PDF du mode Présenter prêts.' : '[dev] Conversion en PDF échouée : npm run diaporamas:pdf pour voir le détail.'));
+}
 
 const uploads = join(racine, '.donnees', 'uploads');
 mkdirSync(uploads, { recursive: true });

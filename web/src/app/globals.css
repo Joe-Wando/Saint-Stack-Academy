@@ -290,6 +290,7 @@ textarea:focus, .form input:focus { border-color: var(--p); }
   .pres-barre .quitter { margin-right: auto; }
 }
 .diapo { width: min(100%, calc((100vh - 120px) * 16 / 9)); aspect-ratio: 16 / 9; background: #fff; color: #1D1B2E; border-radius: .6cqw; container-type: inline-size; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 40px rgba(0, 0, 0, .45); user-select: none; }
+.diapo-pdf { display: block; width: 100%; height: 100%; }
 .d-in { position: absolute; inset: 0; padding: 4.2cqw 5cqw 5.5cqw; display: flex; flex-direction: column; }
 .d-surtitre { font-size: 1.25cqw; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-variant: small-caps; color: var(--dom-accent); margin: 0; }
 .d-titre { font-size: 3.1cqw; line-height: 1.15; margin: .5cqw 0 2cqw; color: #1D1B2E; overflow-wrap: anywhere; }

@@ -100,3 +100,15 @@ SOFTWARE.
 
 Texte complet de la licence : https://openfontlicense.org/open-font-license-official-text/
 Sur le site, les quatre polices sont hébergées avec l'application (`web/src/app/polices/`, fichiers @fontsource 5.3.0, avec leurs licences `LICENCE-*.txt`) et chargées par `next/font/local` : aucun appel à Google. Les images de partage utilisent `web/assets/fonts/` (licences `OFL-*.txt`).
+
+## pdf.js 4.10.38 (Apache 2.0)
+
+Affichage du PowerPoint de chaque cours dans le mode « Présenter » (à partir de sa copie PDF). Les fichiers `pdf.min.mjs` et `pdf.worker.min.mjs` du paquet `pdfjs-dist` sont copiés dans `web/public/vendor/pdfjs/` avant chaque build, avec leur licence.
+Source : https://github.com/mozilla/pdf.js
+
+Copyright Mozilla Foundation. Sous licence Apache 2.0 : https://www.apache.org/licenses/LICENSE-2.0 (texte complet dans `web/public/vendor/pdfjs/LICENSE`).
+
+## LibreOffice (MPL 2.0)
+
+Utilisé seulement pendant la construction (étape `pdf` de `web/Dockerfile`, et `npm run diaporamas:pdf` en local) pour convertir les PowerPoint en PDF. Il n'est ni livré ni exécuté par le site.
+Source : https://www.libreoffice.org
