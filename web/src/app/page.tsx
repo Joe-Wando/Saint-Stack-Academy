@@ -163,9 +163,9 @@ export default function AccueilPublic() {
           <section className="section-charte card carte-enseignant" aria-labelledby="t-enseignant">
             <PhotoFondateur className="photo-enseignant" taille={120} decorative />
             <div className="carte-enseignant-texte">
-              <p className="eyebrow">Qui enseigne ?</p>
+              <p className="eyebrow">Fondateur</p>
               <h2 id="t-enseignant">{CONTACT.fondateur}</h2>
-              <p>Développeur et data analyst à Dakar. J’ai créé MeredianStack pour que chaque étudiant en informatique trouve des cours clairs, gratuits et proches des métiers.</p>
+              <p>Développeur et data analyst, mais également juriste en droit public et RH. MeredianStack a été créé avec un objectif simple : aider chaque étudiant en informatique avec des cours clairs et proches des métiers.</p>
             </div>
             <Link href="/contact" className="btn">Me contacter</Link>
           </section>
