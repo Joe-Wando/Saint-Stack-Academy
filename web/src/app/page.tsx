@@ -12,6 +12,15 @@ import { COULEURS_NIVEAUX } from '@/lib/domaines';
 import { CONTACT } from '@/lib/contact';
 import { LOGOS } from '@/lib/pictos-donnees';
 
+/**
+ * Technologies de l'accueil (clés de content/sujets.yaml), choisies par Olivier le 14 novembre 2026 : celles qui ont
+ * plusieurs cours, puis les plus parlantes pour les étudiants et les recruteurs. Les autres restent dans le catalogue.
+ */
+const TECHNOS_ACCUEIL = [
+  'c', 'java', 'docker', 'linux', 'kubernetes', 'windows', 'airflow', 'bash', 'dbt', 'git', 'githubactions', 'nextjs', 'postgresql', 'powerbi',
+  'python', 'react', 'pandas', 'numpy', 'scikitlearn', 'spark', 'kafka', 'nosql', 'mysql', 'express', 'tailwind', 'ansible', 'jenkins', 'gitlab', 'figma', 'powershell',
+];
+
 const OFFRES = [
   { image: '/offres/cours.webp', titre: 'Des cours complets', texte: 'Chaque cours a ses chapitres, un exercice corrigé et un quiz.' },
   { image: '/offres/niveau.webp', titre: 'Les cours de ton niveau', texte: 'La licence L1, L2, L3 par semestre et par UE, avec trois options en L3.' },
@@ -50,14 +59,12 @@ export default function AccueilPublic() {
   }, []);
 
   const cours = ref ? coursDuReferentiel(ref) : [];
-  // Technologies enseignées : sujets avec un logo et au moins un cours public, du plus de cours au moins, 16 au plus.
-  const parSujet = new Map<string, { cle: string; libelle: string; logo: string; n: number }>();
+  // Technologies enseignées : les 30 de TECHNOS_ACCUEIL, dans cet ordre, si elles ont un logo et au moins un cours public.
+  const parSujet = new Map<string, { cle: string; libelle: string; logo: string }>();
   for (const c of cours) {
-    if (!c.sujet?.logo || !LOGOS[c.sujet.logo]) continue;
-    const e = parSujet.get(c.sujet.cle) ?? { cle: c.sujet.cle, libelle: c.sujet.libelle, logo: c.sujet.logo, n: 0 };
-    e.n++; parSujet.set(c.sujet.cle, e);
+    if (c.sujet?.logo && LOGOS[c.sujet.logo]) parSujet.set(c.sujet.cle, { cle: c.sujet.cle, libelle: c.sujet.libelle, logo: c.sujet.logo });
   }
-  const technologies = [...parSujet.values()].sort((a, b) => b.n - a.n || a.libelle.localeCompare(b.libelle, 'fr')).slice(0, 16);
+  const technologies = TECHNOS_ACCUEIL.map((cle) => parSujet.get(cle)).filter((t) => t !== undefined);
 
   // Cours populaires : les premiers cours de L1, un par domaine, trois au plus.
   const populaires = [...new Map(cours.filter((c) => c.licence?.[0]?.niveau === 'L1').map((c) => [c.domaine, c])).values()].slice(0, 3);
