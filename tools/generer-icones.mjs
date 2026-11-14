@@ -7,6 +7,7 @@
 //   web/assets/marque/embleme.png     emblème (M et chevrons) : bas des pages des PowerPoint
 //   web/assets/marque/m.png           M seul : images de partage
 //   web/public/marque/embleme.png     emblème de l'en-tête et des pages de connexion (72 px de haut)
+//   web/public/marque/logo.png        logo complet du haut de la page d'accueil (480 px de large)
 //   web/src/app/icon.png              icône de l'onglet (M sur carré blanc arrondi)
 //   web/src/app/favicon.ico           16, 32 et 48 px
 //   web/src/app/apple-icon.png        180 × 180, fond opaque
@@ -82,6 +83,7 @@ ecrire(join(web, 'assets/marque/logo.png'), await largeur(logo, 600));
 ecrire(join(web, 'assets/marque/embleme.png'), await hauteur(embleme, 120));
 ecrire(join(web, 'assets/marque/m.png'), await hauteur(m, 240));
 ecrire(join(web, 'public/marque/embleme.png'), await hauteur(embleme, 72));
+ecrire(join(web, 'public/marque/logo.png'), await largeur(logo, 480));
 // Ancienne icône vectorielle du monogramme « MS » : remplacée par icon.png.
 if (existsSync(join(web, 'src/app/icon.svg'))) rmSync(join(web, 'src/app/icon.svg'));
 ecrire(join(web, 'src/app/icon.png'), await tuile(96));

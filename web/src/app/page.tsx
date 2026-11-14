@@ -83,8 +83,11 @@ export default function AccueilPublic() {
               </div>
             </div>
             <figure className="bandeau-accueil-photo">
-              <PhotoFondateur className="photo-fondateur-hero" taille={280} priority sizes="(max-width: 700px) 200px, 280px" />
-              <figcaption><strong>{CONTACT.fondateur}</strong><span>{CONTACT.titre}</span></figcaption>
+              <span className="logo-hero">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/marque/logo.png" alt="MeredianStack : Learn, Code, Build" width={480} height={252} />
+              </span>
+              <figcaption><span className="fonde-par">Fondé par</span><strong>{CONTACT.fondateur}</strong><span>{CONTACT.titre}</span></figcaption>
             </figure>
           </div>
         </section>
