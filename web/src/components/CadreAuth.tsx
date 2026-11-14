@@ -6,9 +6,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { CONTACT } from '@/lib/contact';
 
 /** Pionniers de l'informatique : portraits du domaine public (Wikimedia Commons), recadrés dans web/public/pionniers/. */
+// Ada Lovelace en haut, au centre ; Charles Babbage et Alan Turing en dessous (sur téléphone, les trois sur une ligne).
 const PIONNIERS = [
-  { nom: 'Charles Babbage', role: 'La machine analytique, 1837', photo: '/pionniers/charles-babbage.webp' },
   { nom: 'Ada Lovelace', role: 'Le premier programme, 1843', photo: '/pionniers/ada-lovelace.webp' },
+  { nom: 'Charles Babbage', role: 'La machine analytique, 1837', photo: '/pionniers/charles-babbage.webp' },
   { nom: 'Alan Turing', role: 'La machine de Turing, 1936', photo: '/pionniers/alan-turing.webp' },
 ];
 
@@ -28,14 +29,9 @@ export default function CadreAuth({ titre, children }: { titre: string; children
           ))}
         </ul>
         <figure className="auth-citation">
-          <blockquote>« Une notion à la fois. Chaque chapitre compris est une victoire. »</blockquote>
+          <blockquote lang="en">« Think outside the box and build your future. »</blockquote>
           <figcaption>{CONTACT.fondateur}, {CONTACT.titre.toLowerCase()}, fondateur</figcaption>
         </figure>
-        <ul className="auth-puces">
-          <li>Cours gratuits</li>
-          <li>Exercices corrigés</li>
-          <li>Suivi de progression</li>
-        </ul>
       </aside>
       <div className="auth-col">
         <div className="auth-card">

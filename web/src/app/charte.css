@@ -329,16 +329,18 @@ main p a:not(.btn), main li a:not(.btn):not(.cc):not(.carte-techno), main td a, 
 .auth-puces li::before { background: var(--corail); }
 .auth-card .brand-name, .auth .brand-name { font-size: 19px; }
 /* Trois pionniers de l'informatique, chacun dans un cadre arrondi (portraits du domaine public, Wikimedia Commons). */
-.auth-pionniers { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px; }
+.auth-pionniers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 140px); justify-content: center; column-gap: 48px; row-gap: 12px; }
+.auth-pionniers li:first-child { grid-column: 1 / -1; justify-self: center; }
 .auth-pionniers li { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 140px; text-align: center; }
-.auth-art .auth-pionniers img { display: block; width: 140px; height: 140px; max-width: none; object-fit: cover; border-radius: 22px; border: 4px solid var(--corail); }
+.auth-art .auth-pionniers img { display: block; width: 140px; height: 140px; max-width: none; object-fit: cover; border-radius: 50%; border: 4px solid var(--ciel-sur-sombre); }
 .auth-pionniers .nom { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 15px; line-height: 1.2; color: #fff; }
 .auth-pionniers .role { font-size: 13px; line-height: 1.3; color: var(--sur-sombre); }
 @media (max-width: 860px) {
   .auth-art { padding-bottom: 1rem; }
-  .auth-pionniers { gap: 12px; }
+  .auth-pionniers { display: flex; justify-content: center; gap: 12px; }
+  .auth-pionniers li:nth-child(2) { order: -1; }
   .auth-pionniers li { width: 84px; gap: 4px; }
-  .auth-art .auth-pionniers img { width: 72px; height: 72px; border-width: 3px; border-radius: 16px; }
+  .auth-art .auth-pionniers img { width: 72px; height: 72px; border-width: 3px; }
   .auth-pionniers .nom { font-size: 12px; }
   .auth-pionniers .role { display: none; }
 }
