@@ -196,7 +196,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 .bandeau-accueil-photo { flex: 0 1 340px; display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 0; }
 .photo-fondateur-hero { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 6px solid var(--corail); }
 /* Logo complet sur un disque blanc : le bleu nuit du logo disparaîtrait sur le fond du bandeau. */
-.logo-hero { display: flex; align-items: center; justify-content: center; width: 280px; height: 280px; border-radius: 50%; background: #fff; border: 6px solid var(--corail); }
+.logo-hero { display: flex; align-items: center; justify-content: center; width: 280px; height: 280px; border-radius: 50%; background: #fff; border: 6px solid var(--ciel-sur-sombre); }
 .logo-hero img { display: block; width: 82%; height: auto; }
 .fonde-par { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
 .bandeau-accueil-photo figcaption { font-size: 15px; color: var(--sur-sombre); }
