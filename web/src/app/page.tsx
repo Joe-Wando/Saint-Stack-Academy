@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Award, BookOpen, Map as Carte, Rocket } from 'lucide-react';
 import EnTetePublic from '@/components/EnTetePublic';
 import { EnTeteConnecte } from '@/components/Shell';
 import PiedDePage from '@/components/PiedDePage';
@@ -14,10 +13,10 @@ import { CONTACT } from '@/lib/contact';
 import { LOGOS } from '@/lib/pictos-donnees';
 
 const OFFRES = [
-  { Icone: BookOpen, titre: 'Des cours complets', texte: 'Chaque cours a ses chapitres, un exercice corrigé et un quiz.' },
-  { Icone: Carte, titre: 'Les cours de ton niveau', texte: 'La licence L1, L2, L3 par semestre et par UE, avec trois options en L3.' },
-  { Icone: Rocket, titre: 'Des parcours métiers', texte: 'Web, DevOps, data, systèmes, et mettre ton site en ligne.' },
-  { Icone: Award, titre: 'Les certifications à viser', texte: 'Les badges gratuits et les certifications reconnues, niveau par niveau.' },
+  { image: '/offres/cours.webp', titre: 'Des cours complets', texte: 'Chaque cours a ses chapitres, un exercice corrigé et un quiz.' },
+  { image: '/offres/niveau.webp', titre: 'Les cours de ton niveau', texte: 'La licence L1, L2, L3 par semestre et par UE, avec trois options en L3.' },
+  { image: '/offres/parcours.webp', titre: 'Des parcours métiers', texte: 'Web, DevOps, data, systèmes, et mettre ton site en ligne.' },
+  { image: '/offres/certifications.webp', titre: 'Les certifications à viser', texte: 'Les badges gratuits et les certifications reconnues, niveau par niveau.' },
 ];
 
 const NIVEAUX = [
@@ -105,9 +104,10 @@ export default function AccueilPublic() {
           <section className="section-charte" aria-labelledby="t-offre">
             <h2 id="t-offre">Ce que tu trouveras ici</h2>
             <div className="grille-offres">
-              {OFFRES.map(({ Icone, titre, texte }) => (
+              {OFFRES.map(({ image, titre, texte }) => (
                 <div key={titre} className="card carte-offre">
-                  <span className="pastille-icone" aria-hidden="true"><Icone size={22} strokeWidth={2} /></span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="carte-offre-image" src={image} alt="" width={800} height={450} loading="lazy" />
                   <h3>{titre}</h3>
                   <p>{texte}</p>
                 </div>
