@@ -21,9 +21,9 @@ const OFFRES = [
 ];
 
 const NIVEAUX = [
-  { code: 'L1', titre: 'Les fondamentaux', texte: 'Langage C, architecture, mathématiques, web, réseaux.' },
-  { code: 'L2', titre: 'Construire des applications', texte: 'Java, Python, bases de données, front-end, back-end, cloud.' },
-  { code: 'L3', titre: 'Se spécialiser', texte: 'Big Data et IA, réseaux et cloud, ou développement logiciel.' },
+  { code: 'L1', titre: 'Les fondamentaux', texte: 'Langage C, architecture, mathématiques, web, réseaux.', image: '/niveaux/l1.webp' },
+  { code: 'L2', titre: 'Construire des applications', texte: 'Java, Python, bases de données, front-end, back-end, cloud.', image: '/niveaux/l2.webp' },
+  { code: 'L3', titre: 'Se spécialiser', texte: 'Big Data et IA, réseaux et cloud, ou développement logiciel.', image: '/niveaux/l3.webp' },
 ];
 
 /** Les cours du référentiel (sans doublon) : UE de licence et parcours. */
@@ -134,6 +134,8 @@ export default function AccueilPublic() {
             <div className="grille-niveaux">
               {NIVEAUX.map((n) => (
                 <Link key={n.code} href={`/licence/${n.code}`} className="card carte-niveau" style={{ borderTopColor: COULEURS_NIVEAUX[n.code] }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="carte-niveau-image" src={n.image} alt="" width={800} height={450} loading="lazy" />
                   <span className="carte-niveau-code" style={{ color: COULEURS_NIVEAUX[n.code] }}>{n.code}</span>
                   <span className="carte-niveau-titre">{n.titre}</span>
                   <span className="carte-niveau-texte">{n.texte}</span>

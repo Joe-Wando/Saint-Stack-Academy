@@ -207,8 +207,9 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 .carte-offre p { font-size: 15px; color: var(--doux); line-height: 1.6; margin: 0; }
 .pastille-icone { width: 44px; height: 44px; border-radius: 12px; background: var(--bleu-clair); color: var(--bleu); display: flex; align-items: center; justify-content: center; }
 .grille-niveaux { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 24px; }
-.carte-niveau { padding: 22px; display: flex; flex-direction: column; gap: 8px; border-top: 6px solid var(--nuit); color: var(--nuit); text-decoration: none; margin: 0; }
+.carte-niveau { padding: 22px; display: flex; flex-direction: column; gap: 8px; border-top: 6px solid var(--nuit); color: var(--nuit); text-decoration: none; margin: 0; overflow: hidden; }
 .carte-niveau:hover { border-color: var(--bleu); text-decoration: none; color: var(--nuit); }
+.carte-niveau-image { display: block; width: calc(100% + 44px); max-width: none; height: auto; aspect-ratio: 16 / 9; object-fit: cover; margin: -22px -22px 6px; }
 .carte-niveau-code { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 32px; }
 .carte-niveau-titre { font-weight: 700; font-size: 16px; }
 .carte-niveau-texte { font-size: 14px; color: var(--doux); line-height: 1.6; }
