@@ -84,7 +84,7 @@ export default function AccueilPublic() {
               <div className="bandeau-actions">
                 {u
                   ? <Link href="/accueil" className="btn primary">Continuer mes cours</Link>
-                  : <Link href="/inscription" className="btn primary">Commencer gratuitement</Link>}
+                  : <Link href="/inscription" className="btn primary">Commencer</Link>}
                 <Link href="/catalogue" className="btn sur-sombre">Voir le catalogue</Link>
               </div>
             </div>
@@ -103,7 +103,6 @@ export default function AccueilPublic() {
             <div><span className="chiffre-v">{cours.length || '–'}</span><span>cours</span></div>
             <div><span className="chiffre-v">3</span><span>niveaux de licence</span></div>
             <div><span className="chiffre-v">{ref?.parcours.length ?? '–'}</span><span>parcours métiers</span></div>
-            <div><span className="chiffre-v corail">0 FCFA</span><span>pour apprendre</span></div>
           </div>
         </section>
 
