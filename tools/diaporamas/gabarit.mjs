@@ -39,10 +39,18 @@ export async function icone(nom, couleur) {
   const svg = readFileSync(fichier, 'utf8').replace(/currentColor/g, `#${couleur}`).replace(/width="24"/, 'width="256"').replace(/height="24"/, 'height="256"');
   return png(svg, 256);
 }
+/** Logo simple-icons { title, hex, path }, ou repris d'une ancienne version (content/logos-supplementaires.json). */
+let supplements = null;
+export function trouverLogo(nom) {
+  const l = Object.values(exiger('simple-icons')).find((x) => x && x.slug === nom);
+  if (l) return l;
+  supplements ??= JSON.parse(readFileSync(join(racine, 'content', 'logos-supplementaires.json'), 'utf8'));
+  const s = supplements[nom];
+  return s ? { title: s.titre, hex: s.hex.replace('#', ''), path: s.trace } : null;
+}
 /** Logo simple-icons dans SA COULEUR D'ORIGINE (jamais recoloré). */
 export async function logoSujet(nom) {
-  const si = exiger('simple-icons');
-  const l = Object.values(si).find((x) => x && x.slug === nom);
+  const l = trouverLogo(nom);
   if (!l) return null;
   return { data: await png(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512"><path fill="#${l.hex}" d="${l.path}"/></svg>`, 512), hex: l.hex, titre: l.title };
 }

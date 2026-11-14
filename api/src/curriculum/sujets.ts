@@ -62,6 +62,9 @@ export function chargerSujets(slugs: string[]): { sujetDe: (slug: string) => Suj
   }
   const brut = parse(fs.readFileSync(f, 'utf8')) as FichierSujets;
   const logos = logosDisponibles();
+  // Logos retirés de simple-icons, repris de ses anciennes versions : content/logos-supplementaires.json.
+  const fSupp = path.join(config.contentDir, 'logos-supplementaires.json');
+  if (logos && fs.existsSync(fSupp)) for (const n of Object.keys(JSON.parse(fs.readFileSync(fSupp, 'utf8')) as object)) logos.add(n);
   const icones = iconesDisponibles();
   if (!logos) logger.warn('Paquet simple-icons introuvable : les logos ne sont pas vérifiés.');
   if (!icones) logger.warn('Paquet lucide introuvable : les icônes ne sont pas vérifiées.');

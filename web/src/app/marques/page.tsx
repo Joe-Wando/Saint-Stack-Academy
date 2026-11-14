@@ -53,7 +53,7 @@ export default function PageMarques() {
             la <Link href="/contact">page Contact</Link> (sujet « Autre »). Le logo est retiré rapidement.
           </p>
           <p className="small muted">
-            Logos : paquet simple-icons (licence CC0 1.0, qui couvre les fichiers et non les marques), affichés dans leur couleur
+            Logos : paquet simple-icons, et ses anciennes versions pour Java, Windows, PowerShell, Power BI et dbt (licence CC0 1.0, qui couvre les fichiers et non les marques), affichés dans leur couleur
             d’origine et sans modification. Détail des licences : fichier THIRD_PARTY_NOTICES.md du dépôt.
           </p>
         </article>

@@ -7,14 +7,16 @@
 # diaporama (facultatif) : couleurs du PowerPoint du sujet { principale, sombre, claire }. Absent : calculées
 #         à partir de la couleur du logo (tools/diaporamas/couleurs.mjs). Le logo, lui, garde toujours sa couleur.
 #
-# Règle des marques (décision d'Olivier, 10 novembre 2026) : un logo sert uniquement à dire « ce cours porte sur X ».
-# Pas de logo pour les éditeurs aux règles strictes (Oracle/Java, AWS, Microsoft, Red Hat, Atlassian, CNCF/Kubernetes,
-# Grafana) : icône générique à la place. Si un éditeur demande le retrait de son logo, on met logo: null ici, et c'est tout.
+# Règle des marques : un logo sert uniquement à dire « ce cours porte sur X ».
+# Décision d'Olivier du 14 novembre 2026 : logos aussi pour Java, MySQL, Kubernetes, Helm, Ansible, Windows, PowerShell
+# et Power BI (elle remplace celle du 10 novembre, qui les excluait). Les logos retirés de simple-icons (Java, Windows,
+# PowerShell, Power BI, dbt) viennent de ses anciennes versions : content/logos-supplementaires.json.
+# Si un éditeur demande le retrait de son logo, on met logo: null ici, et c'est tout.
 
 sujets:
   # Langages et frameworks
   c:            { libelle: "Langage C",            logo: c,            icone: code-xml,      marque: null }
-  java:         { libelle: "Java",                 logo: null,         icone: coffee,        marque: null }
+  java:         { libelle: "Java",                 logo: java,         icone: coffee,        marque: "Java est une marque d’Oracle et/ou de ses filiales." }
   python:       { libelle: "Python",               logo: python,       icone: code-xml,      marque: "Python et le logo Python sont des marques de la Python Software Foundation." }
   numpy:        { libelle: "NumPy",                logo: numpy,        icone: sigma,         marque: "NumPy est une marque de NumFOCUS." }
   pandas:       { libelle: "pandas",               logo: pandas,       icone: table-properties, marque: "pandas est une marque de NumFOCUS." }
@@ -27,25 +29,25 @@ sujets:
   # Données et bases de données
   sql:          { libelle: "SQL",                  logo: null,         icone: database,      marque: null }
   postgresql:   { libelle: "PostgreSQL",           logo: postgresql,   icone: database,      marque: "PostgreSQL est une marque de la PostgreSQL Community Association of Canada." }
-  mysql:        { libelle: "MySQL et Redis",       logo: null,         icone: database,      marque: null }
+  mysql:        { libelle: "MySQL et Redis",       logo: mysql,        icone: database,      marque: "MySQL est une marque d’Oracle et/ou de ses filiales." }
   nosql:        { libelle: "MongoDB et Redis",     logo: mongodb,      icone: database,      marque: "MongoDB est une marque de MongoDB, Inc." }
   modelisation: { libelle: "Modélisation",         logo: null,         icone: boxes,         marque: null }
   etl:          { libelle: "ETL",                  logo: null,         icone: workflow,      marque: null }
-  dbt:          { libelle: "dbt",                  logo: null,         icone: workflow,      marque: null }
+  dbt:          { libelle: "dbt",                  logo: dbt,          icone: workflow,      marque: "dbt est une marque de dbt Labs, Inc." }
   airflow:      { libelle: "Apache Airflow",       logo: apacheairflow, icone: workflow,     marque: "Apache Airflow, Airflow et Apache sont des marques de The Apache Software Foundation." }
   spark:        { libelle: "Apache Spark",         logo: apachespark,  icone: zap,           marque: "Apache Spark et Spark sont des marques de The Apache Software Foundation." }
   kafka:        { libelle: "Kafka, BigQuery, Snowflake", logo: apachekafka, icone: cloud,    marque: "Apache Kafka et Kafka sont des marques de The Apache Software Foundation." }
-  powerbi:      { libelle: "Power BI",             logo: null,         icone: chart-column,  marque: null }
+  powerbi:      { libelle: "Power BI",             logo: powerbi,      icone: chart-column,  marque: "Power BI est une marque de Microsoft Corporation." }
   # Versionnement, CI/CD, conteneurs
   git:          { libelle: "Git",                  logo: git,          icone: git-branch,    marque: "Git et le logo Git sont des marques de Software Freedom Conservancy.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
   githubactions: { libelle: "GitHub Actions",      logo: githubactions, icone: infinity,     marque: "GitHub est une marque de GitHub, Inc.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
   gitlab:       { libelle: "GitLab CI/CD",         logo: gitlab,       icone: infinity,      marque: "GitLab est une marque de GitLab Inc." }
   jenkins:      { libelle: "Jenkins",              logo: jenkins,      icone: infinity,      marque: "Jenkins est une marque de LF Charities Inc." }
   docker:       { libelle: "Docker",               logo: docker,       icone: container,     marque: "Docker et le logo Docker sont des marques de Docker, Inc.", diaporama: { principale: "#2496ED", sombre: "#0B3D6E", claire: "#E3F1FD" } }
-  kubernetes:   { libelle: "Kubernetes",           logo: null,         icone: ship-wheel,    marque: null }
-  helm:         { libelle: "Helm",                 logo: null,         icone: ship-wheel,    marque: null }
+  kubernetes:   { libelle: "Kubernetes",           logo: kubernetes,   icone: ship-wheel,    marque: "Kubernetes est une marque de The Linux Foundation." }
+  helm:         { libelle: "Helm",                 logo: helm,         icone: ship-wheel,    marque: "Helm est une marque de The Linux Foundation." }
   supervision:  { libelle: "Supervision",          logo: null,         icone: activity,      marque: null }
-  ansible:      { libelle: "Ansible",              logo: null,         icone: settings-2,    marque: null }
+  ansible:      { libelle: "Ansible",              logo: ansible,      icone: settings-2,    marque: "Ansible est une marque de Red Hat, Inc." }
   # Déploiement
   githubpages:  { libelle: "GitHub Pages",         logo: github,       icone: rocket,        marque: "GitHub et le logo GitHub sont des marques de GitHub, Inc.", diaporama: { principale: "#181717", sombre: "#0D1117", claire: "#F2F2F2" } }
   netlify:      { libelle: "Netlify",              logo: netlify,      icone: rocket,        marque: "Netlify est une marque de Netlify, Inc." }
@@ -55,8 +57,8 @@ sujets:
   linux:        { libelle: "Linux",                logo: linux,        icone: square-terminal, marque: "Linux® est la marque déposée de Linus Torvalds aux États-Unis et dans d'autres pays." }
   bash:         { libelle: "Bash",                 logo: gnubash,      icone: square-terminal, marque: null }
   reseaux:      { libelle: "Réseaux",              logo: null,         icone: network,       marque: null }
-  windows:      { libelle: "Windows Server",       logo: null,         icone: server,        marque: null }
-  powershell:   { libelle: "PowerShell",           logo: null,         icone: square-terminal, marque: null }
+  windows:      { libelle: "Windows Server",       logo: windows,      icone: server,        marque: "Windows est une marque de Microsoft Corporation." }
+  powershell:   { libelle: "PowerShell",           logo: powershell,   icone: square-terminal, marque: "PowerShell est une marque de Microsoft Corporation." }
   # Qualité et sécurité
   owasp:        { libelle: "OWASP",                logo: owasp,        icone: lock,          marque: "OWASP est une marque de la OWASP Foundation, Inc." }
   postman:      { libelle: "Postman",              logo: postman,      icone: test-tube,     marque: "Postman est une marque de Postman, Inc." }
@@ -74,7 +76,7 @@ sujets:
   listes:       { libelle: "Listes chaînées",      logo: null,         icone: list,          marque: null }
   piles:        { libelle: "Piles et files",       logo: null,         icone: layers,        marque: null }
   merise:       { libelle: "Merise",               logo: null,         icone: table-properties, marque: null }
-  uml:          { libelle: "UML",                  logo: null,         icone: shapes,        marque: null }
+  uml:          { libelle: "UML",                  logo: uml,          icone: shapes,        marque: "UML est une marque de l’Object Management Group." }
   logique:      { libelle: "Logique",              logo: null,         icone: sigma,         marque: null }
   maths:        { libelle: "Mathématiques",        logo: null,         icone: sigma,         marque: null }
   panorama:     { libelle: "Histoire",             logo: null,         icone: history,       marque: null }

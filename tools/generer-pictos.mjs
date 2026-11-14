@@ -25,11 +25,15 @@ const si = exiger('simple-icons');
 const parSlug = new Map(Object.values(si).filter((x) => x && x.slug).map((x) => [x.slug, x]));
 const versionPaquet = (p) => JSON.parse(readFileSync(join(web, 'node_modules', p, 'package.json'), 'utf8')).version;
 const versionSi = versionPaquet('simple-icons');
+// Logos retirés de simple-icons, repris de ses anciennes versions (même format, tracé et couleur d'origine).
+const supplements = JSON.parse(readFileSync(join(racine, 'content', 'logos-supplementaires.json'), 'utf8'));
 const logos = {};
 for (const n of [...nomsLogos].sort()) {
   const x = parSlug.get(n);
-  if (!x) { console.warn(`Logo absent de simple-icons ${versionSi} : ${n}`); continue; }
-  logos[n] = { titre: x.title, hex: `#${x.hex}`, trace: x.path };
+  if (x) { logos[n] = { titre: x.title, hex: `#${x.hex}`, trace: x.path }; continue; }
+  const s = supplements[n];
+  if (!s) { console.warn(`Logo absent de simple-icons ${versionSi} et de logos-supplementaires.json : ${n}`); continue; }
+  logos[n] = { titre: s.titre, hex: s.hex, trace: s.trace };
 }
 
 // lucide-react : nom kebab-case -> composant PascalCase, vérifié dans le paquet installé.

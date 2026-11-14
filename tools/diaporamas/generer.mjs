@@ -9,7 +9,7 @@ import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync, rmSync
 import { createRequire } from 'node:module';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { creer } from './gabarit.mjs';
+import { creer, trouverLogo } from './gabarit.mjs';
 import { couleursSujet } from './couleurs.mjs';
 
 const exiger = createRequire(import.meta.url);
@@ -35,8 +35,7 @@ function outilsDe(data, cle) {
   const principal = voir(cles);
   return principal.length ? { principal, enLigne: Array.isArray(data.outils) ? [] : voir(def?.en_ligne) } : null;
 }
-const si = exiger('simple-icons');
-const hexLogo = (nom) => Object.values(si).find((x) => x && x.slug === nom)?.hex ?? null;
+const hexLogo = (nom) => trouverLogo(nom)?.hex ?? null;
 
 // ---------- Texte Markdown en morceaux PowerPoint ----------
 const mots = (t) => t.split(/\s+/).filter(Boolean).length;

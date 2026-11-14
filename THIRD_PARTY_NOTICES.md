@@ -57,6 +57,7 @@ SOFTWARE.
 
 Logos des technologies (sujets des cours) et des organismes de certification, affichés dans leur couleur d'origine et sans modification.
 Source : https://github.com/simple-icons/simple-icons · Licence : https://creativecommons.org/publicdomain/zero/1.0/
+Logos retirés de la version actuelle, repris de versions plus anciennes (même licence) dans content/logos-supplementaires.json : Java (6.23.0), Windows, PowerShell et Power BI (10.4.0), dbt (13.21.0). Les logos restent des marques de leurs titulaires.
 
 **Important :** la licence CC0 1.0 couvre les **fichiers** du paquet (tracés SVG, données), **pas les marques** qu'ils représentent. Chaque logo reste une marque de son titulaire. Les mentions de marque sont listées sur la page « Marques » du site (/marques), générée depuis `content/sujets.yaml` et `content/organismes.yaml`. Pour retirer un logo, il suffit de mettre `logo: null` dans le fichier concerné.
 
