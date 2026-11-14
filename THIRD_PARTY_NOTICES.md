@@ -112,3 +112,10 @@ Copyright Mozilla Foundation. Sous licence Apache 2.0 : https://www.apache.org/l
 
 Utilisé seulement pendant la construction (étape `pdf` de `web/Dockerfile`, et `npm run diaporamas:pdf` en local) pour convertir les PowerPoint en PDF. Il n'est ni livré ni exécuté par le site.
 Source : https://www.libreoffice.org
+
+## Portraits des pionniers de l'informatique (domaine public)
+
+Page de connexion et d'inscription, `web/public/pionniers/` : portraits recadrés, tous dans le domaine public, issus de Wikimedia Commons.
+- Charles Babbage, photographie de 1860, auteur inconnu : https://commons.wikimedia.org/wiki/File:Charles_Babbage_-_1860.jpg
+- Ada Lovelace, aquarelle d'Alfred Edward Chalon, vers 1840 : https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg
+- Alan Turing, photographie d'Elliott & Fry, 1951 : https://commons.wikimedia.org/wiki/File:Alan_Turing_(1951).jpg

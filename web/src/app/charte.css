@@ -41,7 +41,7 @@ code, pre, kbd { font-family: var(--police-code), "JetBrains Mono", Consolas, mo
 .logo::after, .logo::before { display: none !important; }
 .logo-marque { display: block; flex: none; height: 36px; width: auto; }
 .brand-name { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 19px; color: var(--nuit); letter-spacing: -0.01em; white-space: nowrap; display: inline !important; }
-.brand-academy { color: var(--corail); }
+.brand-academy { color: var(--ciel); }
 .topbar-menu { display: flex; align-items: center; flex: 1; gap: 24px; min-width: 0; }
 .topbar .nav { flex: 1; justify-content: flex-start; gap: 22px; height: auto; overflow: visible; margin-left: 12px; }
 .topbar .nav a, .lien-nav { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; color: #3A4A66; font-weight: 500; font-size: 15px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; text-decoration: none; white-space: nowrap; }
@@ -72,7 +72,7 @@ code, pre, kbd { font-family: var(--police-code), "JetBrains Mono", Consolas, mo
 .pied-presentation { flex: 1 1 280px; }
 .pied-presentation p { margin: 10px 0 0; font-size: 14px; line-height: 1.6; max-width: 340px; color: var(--sur-sombre); }
 .pied-nom { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 20px; color: #fff; }
-.pied .brand-academy { color: var(--corail-sur-sombre); }
+.pied .brand-academy { color: var(--ciel-sur-sombre); }
 .pied-colonne { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
 .pied-colonne a { color: var(--sur-sombre); min-height: 32px; display: inline-flex; align-items: center; }
 .pied-colonne a:hover { color: #fff; }
@@ -285,6 +285,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); outline: 
 }
 @media (max-width: 480px) {
   .brand-name .brand-academy { display: none; }
+  .auth-card .brand-name .brand-academy { display: inline; }
   .logo { width: 32px; height: 32px; border-radius: 8px; font-size: 13px; }
   .logo-marque { height: 30px; }
   .brand-name { font-size: 17px; }
@@ -327,6 +328,20 @@ main p a:not(.btn), main li a:not(.btn):not(.cc):not(.carte-techno), main td a, 
 .auth-puces li { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .2); }
 .auth-puces li::before { background: var(--corail); }
 .auth-card .brand-name, .auth .brand-name { font-size: 19px; }
+/* Trois pionniers de l'informatique, chacun dans un cadre arrondi (portraits du domaine public, Wikimedia Commons). */
+.auth-pionniers { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px; }
+.auth-pionniers li { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 140px; text-align: center; }
+.auth-art .auth-pionniers img { display: block; width: 140px; height: 140px; max-width: none; object-fit: cover; border-radius: 22px; border: 4px solid var(--corail); }
+.auth-pionniers .nom { font-family: var(--police-titre), sans-serif; font-weight: 800; font-size: 15px; line-height: 1.2; color: #fff; }
+.auth-pionniers .role { font-size: 13px; line-height: 1.3; color: var(--sur-sombre); }
+@media (max-width: 860px) {
+  .auth-art { padding-bottom: 1rem; }
+  .auth-pionniers { gap: 12px; }
+  .auth-pionniers li { width: 84px; gap: 4px; }
+  .auth-art .auth-pionniers img { width: 72px; height: 72px; border-width: 3px; border-radius: 16px; }
+  .auth-pionniers .nom { font-size: 12px; }
+  .auth-pionniers .role { display: none; }
+}
 /* Accueil connecté (maquette Accueil) : « Reprendre » en surtitre corail, chiffres clés en bleu. */
 .bonjour h1 { margin: 6px 0 0; }
 .reprendre { border-left: 1px solid var(--bord) !important; padding: 24px; gap: 24px; align-items: center; }

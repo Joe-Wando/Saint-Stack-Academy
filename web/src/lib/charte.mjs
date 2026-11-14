@@ -17,7 +17,9 @@ export const CHARTE = {
   doux: '#4F5F7A',            // descriptions, métadonnées
   bord: '#D9E1EE',            // bordures des cartes, des champs et des puces
   'sur-sombre': '#C9D4E8',    // paragraphes sur bleu nuit
-  'corail-sur-sombre': '#F08A7E', // « Academy » et surtitres sur bleu nuit
+  'corail-sur-sombre': '#F08A7E', // surtitres sur bleu nuit
+  ciel: '#0284C7',            // « Stack » du nom, sur fond clair (contraste 4,1:1, texte en gras de grande taille)
+  'ciel-sur-sombre': '#38BDF8', // « Stack » du nom, sur bleu nuit
   'contour-sombre': '#8FA4C8',    // contour du bouton sur fond sombre
   succes: '#1F6B4A', 'succes-fond': '#E3F1EA',
   alerte: '#9A3328', 'alerte-fond': '#FCE8E4',

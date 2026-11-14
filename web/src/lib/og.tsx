@@ -78,7 +78,7 @@ export async function imageDefaut() {
         <div style={{ position: 'absolute', left: 520, top: 470, width: 300, height: 300, borderRadius: 300, background: '#24395F' }} />
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 0 0 84px', width: 720 }}>
           <Monogramme cote={96} m={m} />
-          <div style={{ display: 'flex', marginTop: 40, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 72, lineHeight: 1.05, color: '#fff', flexWrap: 'wrap' }}>Meredian<span style={{ color: CHARTE['corail-sur-sombre'] }}>Stack</span></div>
+          <div style={{ display: 'flex', marginTop: 40, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 72, lineHeight: 1.05, color: '#fff', flexWrap: 'wrap' }}>Meredian<span style={{ color: CHARTE['ciel-sur-sombre'] }}>Stack</span></div>
           <div style={{ display: 'flex', marginTop: 24, fontSize: 34, lineHeight: 1.35, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme, de la L1 aux métiers</div>
           <div style={{ display: 'flex', marginTop: 34, width: 120, height: 8, borderRadius: 8, background: CHARTE.corail }} />
         </div>
@@ -129,7 +129,7 @@ export async function imageGabarit(g: Gabarit) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', height: 100, padding: '0 72px', background: ENCRE }}>
           <Monogramme cote={54} m={m} />
-          <div style={{ display: 'flex', marginLeft: 20, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 32, color: '#fff' }}>Meredian<span style={{ color: CHARTE['corail-sur-sombre'] }}>Stack</span></div>
+          <div style={{ display: 'flex', marginLeft: 20, fontFamily: 'Bricolage', fontWeight: 800, fontSize: 32, color: '#fff' }}>Meredian<span style={{ color: CHARTE['ciel-sur-sombre'] }}>Stack</span></div>
           <div style={{ display: 'flex', marginLeft: 'auto', fontSize: 24, color: CHARTE['sur-sombre'] }}>Apprends l’informatique à ton rythme</div>
         </div>
       </div>

@@ -4,14 +4,29 @@ import Monogramme from './Monogramme';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';
 import { CONTACT } from '@/lib/contact';
-import PhotoFondateur from './PhotoFondateur';
 
-/** Écrans de compte : à gauche le portrait du fondateur et sa citation, à droite le formulaire. */
+/** Pionniers de l'informatique : portraits du domaine public (Wikimedia Commons), recadrés dans web/public/pionniers/. */
+const PIONNIERS = [
+  { nom: 'Charles Babbage', role: 'La machine analytique, 1837', photo: '/pionniers/charles-babbage.webp' },
+  { nom: 'Ada Lovelace', role: 'Le premier programme, 1843', photo: '/pionniers/ada-lovelace.webp' },
+  { nom: 'Alan Turing', role: 'La machine de Turing, 1936', photo: '/pionniers/alan-turing.webp' },
+];
+
+/** Écrans de compte : à gauche trois pionniers de l'informatique et la citation du fondateur, à droite le formulaire. */
 export default function CadreAuth({ titre, children }: { titre: string; children: ReactNode }) {
   return (
     <main className="auth">
       <aside className="auth-art">
-        <PhotoFondateur className="auth-photo" taille={280} sizes="(max-width: 860px) 96px, 280px" priority />
+        <ul className="auth-pionniers" aria-label="Pionniers de l’informatique">
+          {PIONNIERS.map((p) => (
+            <li key={p.nom}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.photo} alt="" width={140} height={140} />
+              <span className="nom">{p.nom}</span>
+              <span className="role">{p.role}</span>
+            </li>
+          ))}
+        </ul>
         <figure className="auth-citation">
           <blockquote>« Une notion à la fois. Chaque chapitre compris est une victoire. »</blockquote>
           <figcaption>{CONTACT.fondateur}, {CONTACT.titre.toLowerCase()}, fondateur</figcaption>
@@ -24,7 +39,7 @@ export default function CadreAuth({ titre, children }: { titre: string; children
       </aside>
       <div className="auth-col">
         <div className="auth-card">
-          <Link href="/" className="brand"><Monogramme />MeredianStack</Link>
+          <Link href="/" className="brand" aria-label="MeredianStack, page d’accueil"><Monogramme /><span className="brand-name">Meredian<span className="brand-academy">Stack</span></span></Link>
           <h1>{titre}</h1>
           {children}
         </div>
