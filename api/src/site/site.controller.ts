@@ -9,7 +9,7 @@ const PHOTO_FONDATEUR = 'photo_fondateur';
 
 /**
  * Réglages du site. La photo du fondateur (connexion, inscription, accueil, contact, bienvenue)
- * se change depuis l'administration ; sans réglage, le site affiche /olivier.jpg.
+ * se change depuis l'administration ; sans réglage, le site affiche /fondateur-2026.jpg.
  */
 @Controller()
 export class SiteController {

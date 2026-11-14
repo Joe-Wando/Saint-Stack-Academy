@@ -72,7 +72,7 @@ export default function ReglagePhotoFondateur() {
           {fichier && <button className="btn primary" onClick={enregistrer}>Mettre cette photo en ligne</button>}
           {fichier && <button className="btn" onClick={() => { setFichier(null); setApercu(null); if (champ.current) champ.current.value = ''; }}>Annuler</button>}
           {!fichier && perso && <button className="btn" onClick={origine}>Revenir à la photo d’origine</button>}
-          <span className="small muted">{perso ? 'Photo personnalisée en ligne.' : 'Photo d’origine (olivier.jpg) en ligne.'}</span>
+          <span className="small muted">{perso ? 'Photo personnalisée en ligne.' : 'Photo d’origine (fondateur-2026.jpg) en ligne.'}</span>
         </div>
       </div>
       {erreur && <p className="error" role="alert">{erreur}</p>}

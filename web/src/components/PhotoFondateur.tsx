@@ -15,7 +15,7 @@ export function lirePhotoFondateur(forcer = false) {
 }
 
 /**
- * Portrait du fondateur : la photo choisie dans l'administration, sinon /olivier.jpg.
+ * Portrait du fondateur : la photo choisie dans l'administration, sinon /fondateur-2026.jpg.
  * La photo personnalisée est servie par l'API (déjà recadrée et compressée) : next/image ne la retraite pas.
  */
 export default function PhotoFondateur({ taille, className, priority = false, sizes, decorative = false }: {

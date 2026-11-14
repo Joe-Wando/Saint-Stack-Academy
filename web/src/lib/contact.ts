@@ -4,7 +4,7 @@ export const CONTACT = {
   /** Titre du fondateur, repris sur Contact, l'accueil, la connexion et les PowerPoint. */
   titre: 'Développeur et data analyst',
   role: 'Développeur et data analyst · Fondateur et formateur de MeredianStack',
-  photo: '/olivier.jpg',
+  photo: '/fondateur-2026.jpg',
   telephoneAffiche: '+221 78 526 82 08',
   telephone: '+221785268208',
   whatsapp: 'https://wa.me/221785268208',
